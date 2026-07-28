@@ -82,7 +82,7 @@ function ProviderTestSlideOverPanel({
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+        className="absolute inset-0 bg-black/60 animate-in fade-in duration-200"
         onClick={onClose}
         aria-hidden
       />

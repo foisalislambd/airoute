@@ -350,7 +350,7 @@ export default function RequestLoggerDetail({
       aria-modal="true"
       aria-label="Request log detail"
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60" />
       <div
         className="relative bg-bg-primary border border-border rounded-xl w-full max-w-225 max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}

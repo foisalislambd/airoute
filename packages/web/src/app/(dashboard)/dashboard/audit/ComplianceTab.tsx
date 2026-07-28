@@ -388,7 +388,7 @@ export default function ComplianceTab() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <button
             aria-label={t("closeDetails")}
-            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/60"
             onClick={() => setSelectedEntry(null)}
           />
           <div className="relative w-full max-w-3xl rounded-xl border border-border bg-surface shadow-2xl">

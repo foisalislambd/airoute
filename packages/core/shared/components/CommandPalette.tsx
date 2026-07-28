@@ -256,7 +256,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-[60] flex items-start justify-center pt-[10vh] px-4">
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60"
         onClick={onClose}
         aria-hidden="true"
       />

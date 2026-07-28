@@ -786,7 +786,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
     <div className="flex flex-col gap-8">
       {/* Update Progress Overlay */}
       {showUpdateOverlay && (
-        <div className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[999] bg-black/60 flex items-center justify-center p-4">
           <div className="bg-bg-main border border-border rounded-2xl shadow-2xl max-w-md w-full p-6">
             <div className="flex items-center gap-3 mb-5">
               <span className="material-symbols-outlined text-primary text-[28px] animate-spin">

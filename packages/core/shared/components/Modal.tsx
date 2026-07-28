@@ -127,7 +127,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-gray-900/50 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-black/60"
         onClick={closeOnOverlay ? onClose : undefined}
         aria-hidden="true"
       />

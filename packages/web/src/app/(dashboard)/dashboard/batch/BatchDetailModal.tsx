@@ -176,7 +176,7 @@ export default function BatchDetailModal({ batch, files, onClose, onActionDone }
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60"
         onClick={onClose}
         aria-hidden="true"
       />

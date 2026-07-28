@@ -126,7 +126,7 @@ export default function DashboardLayout({ children }) {
       {sidebarOpen && (
         <button
           type="button"
-          className="fixed inset-0 z-40 bg-gray-900/60 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close navigation"
         />

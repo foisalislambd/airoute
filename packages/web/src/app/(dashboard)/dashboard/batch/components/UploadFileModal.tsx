@@ -100,7 +100,7 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
       {/* Overlay */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60"
         onClick={onClose}
         aria-hidden="true"
       />

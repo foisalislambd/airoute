@@ -54,7 +54,7 @@ export default function ProxyLogDetail({ log, onClose }) {
       aria-modal="true"
       aria-label="Proxy log detail"
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/60" />
       <div
         className="relative bg-bg-primary border border-border rounded-xl w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}

@@ -603,18 +603,18 @@ export default function Sidebar({
                     title={isPinned ? t("unpinSection") : t("pinSectionOpen")}
                     aria-label={isPinned ? t("unpinSection") : t("pinSectionOpen")}
                     className={cn(
-                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-colors",
+                      "flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors",
                       isPinned
                         ? "text-primary"
                         : "text-text-muted opacity-60 hover:bg-gray-100 hover:opacity-100 dark:hover:bg-gray-800"
                     )}
                   >
                     <span
-                      className="material-symbols-outlined text-[14px]"
+                      className="material-symbols-outlined text-[12px]"
                       style={isPinned ? { fontVariationSettings: "'FILL' 1" } : undefined}
                       aria-hidden="true"
                     >
-                      push_pin
+                      keep
                     </span>
                   </button>
                 </div>
@@ -751,7 +751,7 @@ export default function Sidebar({
       />
 
       {isDisconnected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
           <div className="text-center p-8">
             <div className="flex items-center justify-center size-16 rounded-full bg-red-500/20 text-red-500 mx-auto mb-4">
               <span className="material-symbols-outlined text-[32px]">power_off</span>

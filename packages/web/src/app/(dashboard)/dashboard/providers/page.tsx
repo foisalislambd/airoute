@@ -1794,7 +1794,7 @@ export default function ProvidersPage() {
           className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh]"
           onClick={() => setTestResults(null)}
         >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/60" />
           <div
             className="relative bg-bg-primary border border-border rounded-xl w-full max-w-[600px] max-h-[80vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
