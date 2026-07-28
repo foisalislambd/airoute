@@ -28,7 +28,7 @@ import { cleanupProviderModelsAfterConnectionDelete } from "@/lib/db/models";
 import {
   refreshConnectionRateLimits,
   enableRateLimitProtection,
-} from "@/../open-sse/services/rateLimitManager";
+} from "@omniroute/open-sse/services/rateLimitManager";
 
 function normalizeCodexLimitPolicy(
   incoming: unknown,

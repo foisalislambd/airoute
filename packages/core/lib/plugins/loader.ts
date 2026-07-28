@@ -14,7 +14,7 @@ import { rmSync } from "fs";
 import { join } from "path";
 import { tmpdir } from "os";
 import { randomUUID, createHash } from "crypto";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 import type { PluginManifestWithDefaults, Permission } from "./manifest";
 import type { Plugin, PluginContext, PluginResult } from "./index";
 

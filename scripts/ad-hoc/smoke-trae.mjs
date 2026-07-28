@@ -23,7 +23,7 @@ const cfg = Object.fromEntries(
     })
 );
 
-const { TraeExecutor } = await import("../../open-sse/executors/trae.ts");
+const { TraeExecutor } = await import("../../packages/open-sse/executors/trae.ts");
 const ex = new TraeExecutor();
 
 const credentials = {

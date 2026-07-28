@@ -1,6 +1,6 @@
 import { getDbInstance } from "./core";
-import type { TierConfig } from "../../../open-sse/services/tierTypes";
-import { validateTierConfig, DEFAULT_TIER_CONFIG } from "../../../open-sse/services/tierConfig";
+import type { TierConfig } from "@omniroute/open-sse/services/tierTypes";
+import { validateTierConfig, DEFAULT_TIER_CONFIG } from "@omniroute/open-sse/services/tierConfig";
 import { defaultLogger as log } from "@omniroute/open-sse/utils/logger";
 
 const TABLE = "tier_config";

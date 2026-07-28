@@ -1,5 +1,5 @@
-import { computeTarget } from "../../../../../../open-sse/services/compression/adaptiveCompression/computeTarget.ts";
-import type { ContextBudgetConfig } from "../../../../../../open-sse/services/compression/adaptiveCompression/types.ts";
+import { computeTarget } from "@omniroute/open-sse/services/compression/adaptiveCompression/computeTarget.ts";
+import type { ContextBudgetConfig } from "@omniroute/open-sse/services/compression/adaptiveCompression/types.ts";
 
 /**
  * Read-only label for the compression panel (design D-C1 transparency). Shows the active

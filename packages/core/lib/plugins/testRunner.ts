@@ -7,7 +7,7 @@
 import { loadPlugin, type LoadedPlugin } from "./loader";
 import type { PluginManifestWithDefaults } from "./manifest";
 import type { PluginContext } from "./hooks";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
 const log = logger("PLUGIN_TEST_RUNNER");
 

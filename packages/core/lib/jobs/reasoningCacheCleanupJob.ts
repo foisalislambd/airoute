@@ -1,4 +1,4 @@
-import { cleanupReasoningCache } from "../../../open-sse/services/reasoningCache.ts";
+import { cleanupReasoningCache } from "@omniroute/open-sse/services/reasoningCache.ts";
 
 const DEFAULT_INTERVAL_MS = 30 * 60 * 1000;
 

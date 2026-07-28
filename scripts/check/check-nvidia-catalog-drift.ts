@@ -1,5 +1,5 @@
-import { FREE_MODEL_BUDGETS } from "../../open-sse/config/freeModelCatalog.data.ts";
-import reviewedLiveIds from "../../open-sse/config/nvidiaHostedModels.snapshot.json" with { type: "json" };
+import { FREE_MODEL_BUDGETS } from "../../packages/open-sse/config/freeModelCatalog.data.ts";
+import reviewedLiveIds from "../../packages/open-sse/config/nvidiaHostedModels.snapshot.json" with { type: "json" };
 
 const NVIDIA_MODELS_URL = "https://integrate.api.nvidia.com/v1/models";
 

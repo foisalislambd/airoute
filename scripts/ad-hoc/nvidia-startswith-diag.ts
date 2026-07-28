@@ -105,8 +105,8 @@ async function partC() {
   line("PARTE C — probes de type-crash (resolveModelAlias + strip chatCore:3316 + parseModel)");
   hr();
 
-  const { resolveModelAlias } = await import("../../open-sse/services/modelDeprecation.ts");
-  const { parseModel } = await import("../../open-sse/services/model.ts");
+  const { resolveModelAlias } = await import("../../packages/open-sse/services/modelDeprecation.ts");
+  const { parseModel } = await import("../../packages/open-sse/services/model.ts");
 
   // Replica EXATA do trecho de chatCore.ts:3315-3320 (feature #1261), sem guard.
   function stripPrefixLikeChatCore(effectiveModel: any, provider: string, alias?: string) {

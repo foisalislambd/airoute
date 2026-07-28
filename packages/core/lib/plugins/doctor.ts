@@ -12,7 +12,7 @@ import { join } from "path";
 import { safeValidateManifest } from "./manifest";
 import { getPluginByName } from "../db/plugins";
 import { readFile } from "fs/promises";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
 const log = logger("PLUGIN_DOCTOR");
 

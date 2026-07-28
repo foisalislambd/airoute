@@ -18,17 +18,17 @@ import Toggle from "@/shared/components/Toggle";
 import {
   ENGINE_IDS,
   engineMeta,
-} from "../../../../../../open-sse/services/compression/engineCatalog.ts";
+} from "@omniroute/open-sse/services/compression/engineCatalog.ts";
 import {
   OUTPUT_STYLE_IDS,
   outputStyleMeta,
-} from "../../../../../../open-sse/services/compression/outputStyles/catalog.ts";
-import { deriveDefaultPlan } from "../../../../../../open-sse/services/compression/deriveDefaultPlan.ts";
+} from "@omniroute/open-sse/services/compression/outputStyles/catalog.ts";
+import { deriveDefaultPlan } from "@omniroute/open-sse/services/compression/deriveDefaultPlan.ts";
 import EngineGuidanceDetail from "./EngineGuidanceDetail";
 import {
   DEFAULT_CONTEXT_BUDGET,
   type ContextBudgetConfig,
-} from "../../../../../../open-sse/services/compression/adaptiveCompression/types.ts";
+} from "@omniroute/open-sse/services/compression/adaptiveCompression/types.ts";
 import { getAdaptiveTargetSummary } from "./adaptiveTargetLabel.ts";
 
 type CavemanIntensity = "lite" | "full" | "ultra";

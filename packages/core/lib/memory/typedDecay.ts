@@ -18,7 +18,7 @@
 
 import { MemoryType, type Memory } from "./types";
 import { listMemoriesForDecay, deleteMemory } from "./store";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
 const log = logger("MEMORY_TYPED_DECAY");
 

@@ -12,12 +12,12 @@
  * default cost cap / sample. There is NO safe default that calls a real model — the CLI errors
  * if --answer-model / --judge-model / --provider are missing, so a bare run never spends money.
  */
-import { runEval } from "../../open-sse/services/compression/eval/runner.ts";
-import { createExecutorModelClient } from "../../open-sse/services/compression/eval/executorModelClient.ts";
-import { formatReport } from "../../open-sse/services/compression/eval/report.ts";
-import { SEED_CORPUS } from "../../open-sse/services/compression/eval/seedCorpus.ts";
-import { getDefaultCompressionConfig } from "../../open-sse/services/compression/stats.ts";
-import type { CompressionConfig } from "../../open-sse/services/compression/types.ts";
+import { runEval } from "../../packages/open-sse/services/compression/eval/runner.ts";
+import { createExecutorModelClient } from "../../packages/open-sse/services/compression/eval/executorModelClient.ts";
+import { formatReport } from "../../packages/open-sse/services/compression/eval/report.ts";
+import { SEED_CORPUS } from "../../packages/open-sse/services/compression/eval/seedCorpus.ts";
+import { getDefaultCompressionConfig } from "../../packages/open-sse/services/compression/stats.ts";
+import type { CompressionConfig } from "../../packages/open-sse/services/compression/types.ts";
 
 function flag(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);

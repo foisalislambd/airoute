@@ -4,7 +4,7 @@
  * @module lib/gamification/events
  */
 
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
 const log = logger("GAMIFICATION");
 

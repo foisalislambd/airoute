@@ -18,7 +18,7 @@ import {
   benchmarkEngines,
   compareReports,
   formatBenchmarkTable,
-} from "../../open-sse/services/compression/harness/benchmark.ts";
+} from "../../packages/open-sse/services/compression/harness/benchmark.ts";
 
 async function main(): Promise<void> {
   const requested = process.argv.slice(2).filter((arg) => !arg.startsWith("-"));

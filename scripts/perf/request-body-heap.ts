@@ -43,7 +43,7 @@ const { buildAgentPayload, INCIDENT_SHAPE } = await import("./agentPayloadCorpus
 const realLog = console.log;
 console.log = () => {};
 const { cloneLogPayload } = await import("../../packages/core/lib/logPayloads.ts");
-const { cloneBoundedForLog } = await import("../../open-sse/utils/requestLogger.ts");
+const { cloneBoundedForLog } = await import("../../packages/open-sse/utils/requestLogger.ts");
 console.log = realLog;
 
 // ── CLI ──────────────────────────────────────────────────────────────────────

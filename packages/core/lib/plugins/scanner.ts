@@ -9,7 +9,7 @@
 
 import { readdir, stat, readFile } from "fs/promises";
 import { join } from "path";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 import { safeValidateManifest, type PluginManifestWithDefaults } from "./manifest";
 
 const log = logger("PLUGIN_SCANNER");

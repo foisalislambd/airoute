@@ -10,7 +10,7 @@
  * @module discovery
  */
 
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 import {
   upsertDiscoveryResult as dbUpsertDiscoveryResult,
   getDiscoveryResults as dbGetDiscoveryResults,

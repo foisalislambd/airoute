@@ -8,7 +8,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { getCachedSettings } from "@/lib/db/settings";
-import { handleMcpSSE } from "../../../../../open-sse/mcp-server/httpTransport";
+import { handleMcpSSE } from "@omniroute/open-sse/mcp-server/httpTransport";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 
 async function guardEnabled(): Promise<NextResponse | null> {

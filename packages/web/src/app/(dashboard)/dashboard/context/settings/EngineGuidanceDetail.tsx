@@ -11,7 +11,7 @@
 // button, badge, "cache impact" label) is translated.
 
 import { useTranslations } from "next-intl";
-import type { CacheImpact, EngineGuidance } from "../../../../../../open-sse/services/compression/engineCatalog.ts";
+import type { CacheImpact, EngineGuidance } from "@omniroute/open-sse/services/compression/engineCatalog.ts";
 
 const CACHE_IMPACT_LABEL: Record<CacheImpact, string> = {
   none: "None",

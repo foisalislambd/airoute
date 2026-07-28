@@ -10,7 +10,7 @@
 import { mkdir, cp, rm, rename, realpath, readFile } from "fs/promises";
 import { join, dirname, resolve, sep } from "path";
 import { randomUUID } from "crypto";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 import { getDefaultPluginDir, scanPluginDir } from "./scanner";
 import { loadPlugin, type LoadedPlugin } from "./loader";
 import { registerHook, unregisterHooks, emitHook, type HookHandler, type Plugin } from "./hooks";

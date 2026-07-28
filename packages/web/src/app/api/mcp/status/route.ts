@@ -9,7 +9,7 @@ import {
 import {
   getMcpHttpStatus,
   isMcpHttpTransportReady,
-} from "../../../../../open-sse/mcp-server/httpTransport";
+} from "@omniroute/open-sse/mcp-server/httpTransport";
 import { getCachedSettings } from "@/lib/db/settings";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 

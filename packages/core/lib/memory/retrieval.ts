@@ -1,8 +1,8 @@
 import { getDbInstance } from "../db/core";
 import { Memory, MemoryConfig } from "./types";
 import { MemoryConfigSchema } from "./schemas";
-import { logger } from "../../../open-sse/utils/logger.ts";
-import { sanitizeErrorMessage } from "../../../open-sse/utils/error.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
+import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error.ts";
 import { resolveEmbeddingSource, embed } from "./embedding";
 import { getVectorStore } from "./vectorStore";
 import { getMemorySettings } from "./settings";

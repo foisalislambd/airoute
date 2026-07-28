@@ -7,7 +7,7 @@
  */
 
 import { watch, type FSWatcher } from "fs";
-import { logger } from "../../../open-sse/utils/logger.ts";
+import { logger } from "@omniroute/open-sse/utils/logger.ts";
 
 const log = logger("PLUGIN_WATCHER");
 
