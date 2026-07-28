@@ -449,7 +449,7 @@ open-sse/
 | Subdir                | Purpose                                                                                                                                                                                        |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `docs/archive/`       | Archived/historical docs (e.g., `RFC-AUTO-ASSESSMENT-DRAFT.md` — superseded by EVALS)                                                                                                          |
-| `docs/i18n/`          | Localized doc translations (~42 locales)                                                                                                                                                       |
+| `docs/`               | English product documentation (multi-language via the website `/docs` UI)                                                                                                                                                       |
 | `docs/screenshots/`   | Image assets for guides                                                                                                                                                                        |
 | `_tasks/superpowers/` | Plans/specs from superpowers (`writing-plans`/`brainstorming`) + research — isolated, separately-versioned repo, gitignored by the main tree. See CLAUDE.md → "Planning & Research Artifacts". |
 

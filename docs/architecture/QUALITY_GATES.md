@@ -136,9 +136,11 @@ unnoticed until #8463 because:
 
 - `sync-ui-keys` only backfills keys that are **absent**, never ones that are **stale**;
 - `check-ui-keys-coverage` counts key _presence_, so a stale translation scores as covered;
-- `check-translation-drift` tracks the `docs/i18n/<locale>/**.md` documentation mirrors —
-  it never reads `src/i18n/messages/*.json`.
-
+- `check-translation-drift` historically tracked `docs/i18n/<locale>/**.md` mirrors.
+  Those mirrored locale trees are removed — product docs are English in-repo;
+  multi-language docs are served from the website `/docs` UI. UI string drift
+  continues to use `packages/core/i18n/messages/*.json`.
+- Older notes claimed it never reads message JSON — UI coverage gates do.
 **Diff-aware, not baseline-backed.** It compares `en.json` at the merge base against the
 working tree; for every key whose English value changed, any locale still holding an
 untouched translation is stale. This deliberately **freezes pre-existing debt** — a diff
