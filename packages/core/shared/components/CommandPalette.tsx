@@ -284,7 +284,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         aria-label={t("quickNavigationTitle")}
       >
         {/* Search field */}
-        <div className="flex items-center gap-3 border-b border-gray-200 px-4 py-3.5 dark:border-gray-800">
+        <div className="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4 dark:border-gray-800">
           <span
             className="material-symbols-outlined shrink-0 text-[22px] text-brand-500"
             aria-hidden="true"
@@ -294,7 +294,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
           <input
             ref={inputRef}
             type="text"
-            className="min-w-0 flex-1 appearance-none border-0 bg-transparent text-[16px] text-gray-900 outline-none ring-0 placeholder:text-gray-400 !shadow-none focus:!shadow-none focus:outline-none focus:ring-0 focus-visible:!shadow-none focus-visible:outline-none focus-visible:ring-0 dark:text-white dark:placeholder:text-gray-500"
+            className="min-w-0 flex-1 appearance-none border-0 bg-transparent text-[16px] leading-6 text-gray-900 outline-none ring-0 placeholder:text-gray-400 !shadow-none focus:!shadow-none focus:outline-none focus:ring-0 focus-visible:!shadow-none focus-visible:outline-none focus-visible:ring-0 dark:text-white dark:placeholder:text-gray-500"
             placeholder="Search pages, settings, tools…"
             value={query}
             onChange={(e) => {
@@ -309,24 +309,26 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
               filtered[selectedIndex] ? `command-palette-option-${filtered[selectedIndex].id}` : undefined
             }
           />
-          {query ? (
-            <button
-              type="button"
-              className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-              onClick={() => {
-                setQuery("");
-                setSelectedIndex(0);
-                inputRef.current?.focus();
-              }}
-              aria-label="Clear search"
-            >
-              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
-                close
-              </span>
-            </button>
-          ) : (
-            <Kbd>Esc</Kbd>
-          )}
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center">
+            {query ? (
+              <button
+                type="button"
+                className="inline-flex h-7 w-7 items-center justify-center rounded-md text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                onClick={() => {
+                  setQuery("");
+                  setSelectedIndex(0);
+                  inputRef.current?.focus();
+                }}
+                aria-label="Clear search"
+              >
+                <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+                  close
+                </span>
+              </button>
+            ) : (
+              <Kbd>Esc</Kbd>
+            )}
+          </div>
         </div>
 
         {/* Results */}
