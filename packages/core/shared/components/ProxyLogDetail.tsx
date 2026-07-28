@@ -60,7 +60,7 @@ export default function ProxyLogDetail({ log, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary rounded-t-xl">
           <div className="flex items-center gap-3">
             <span
               className="inline-block px-2.5 py-1 rounded text-xs font-bold uppercase"

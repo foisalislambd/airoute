@@ -616,7 +616,7 @@ export default function RequestTimeline({
         <div className="absolute left-0 right-0" style={{ height: contentHeight }}>
           {/* Time axis */}
           <div
-            className="absolute left-0 right-0 border-b border-border/50 bg-surface/90 backdrop-blur-sm z-5"
+            className="absolute left-0 right-0 border-b border-border bg-surface z-5"
             style={{ top: 0, height: AXIS_HEIGHT }}
           >
             {axisTicks.map((axisTick, i) => (

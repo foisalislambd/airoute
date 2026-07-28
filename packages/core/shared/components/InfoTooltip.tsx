@@ -20,7 +20,7 @@ export default function InfoTooltip({ text, className }: InfoTooltipProps) {
         role="tooltip"
         className={cn(
           "absolute bottom-full left-1/2 -translate-x-1/2 mb-2",
-          "px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900/95 rounded-md shadow-lg",
+          "px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900 rounded-md shadow-lg",
           "whitespace-nowrap pointer-events-none",
           "border border-white/10",
           "opacity-0 group-hover:opacity-100 transition-opacity duration-150",

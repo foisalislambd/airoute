@@ -238,11 +238,17 @@ export default function Header({
           )}
           {title && (
             <div className="min-w-0">
-              <h1 className="truncate text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+              <h1
+                className="truncate text-lg font-semibold tracking-tight text-gray-900 dark:text-white"
+                title={typeof title === "string" ? title : undefined}
+              >
                 {title}
               </h1>
               {description && (
-                <p className="mt-0.5 truncate text-xs text-gray-500 dark:text-gray-400">
+                <p
+                  className="mt-0.5 truncate text-xs text-gray-500 dark:text-gray-400"
+                  title={typeof description === "string" ? description : undefined}
+                >
                   {description}
                 </p>
               )}
@@ -253,7 +259,10 @@ export default function Header({
         {/* Mobile title */}
         <div className="min-w-0 flex-1 lg:hidden">
           {title && (
-            <h1 className="truncate text-base font-semibold text-gray-900 dark:text-white">
+            <h1
+              className="truncate text-base font-semibold text-gray-900 dark:text-white"
+              title={typeof title === "string" ? title : undefined}
+            >
               {title}
             </h1>
           )}

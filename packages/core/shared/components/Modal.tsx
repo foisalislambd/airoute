@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useId } from "react";
+import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { cn } from "@/shared/utils/cn";
+import { lockBodyScroll } from "@/shared/utils/bodyScrollLock";
 import Button, { type ButtonVariant } from "./Button";
 
 // #6265 — preset for content-heavy modals: caps height on the OUTERMOST dialog
@@ -65,16 +67,10 @@ export default function Modal({
     full: "max-w-4xl",
   };
 
-  // Lock body scroll when modal is open
+  // Lock body scroll when modal is open (ref-counted for nested overlays)
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!isOpen) return;
+    return lockBodyScroll();
   }, [isOpen]);
 
   // Handle escape key
@@ -96,8 +92,7 @@ export default function Modal({
     const focusableSelector =
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-    // Focus first focusable element
-    const firstFocusable = dialog.querySelector(focusableSelector);
+    const firstFocusable = dialog.querySelector(focusableSelector) as HTMLElement | null;
     if (firstFocusable) {
       setTimeout(() => firstFocusable.focus(), 50);
     }
@@ -105,7 +100,9 @@ export default function Modal({
     const handleTab = (e) => {
       if (e.key !== "Tab") return;
 
-      const focusable = [...dialog.querySelectorAll(focusableSelector)];
+      const focusable = Array.from(
+        dialog.querySelectorAll(focusableSelector)
+      ) as HTMLElement[];
       if (focusable.length === 0) return;
 
       const first = focusable[0];
@@ -126,7 +123,7 @@ export default function Modal({
 
   if (!isOpen) return null;
 
-  return (
+  const modal = (
     <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       {/* Overlay */}
       <div
@@ -205,6 +202,10 @@ export default function Modal({
       </div>
     </div>
   );
+
+  // Portal to body so transform/overflow ancestors (mobile drawer) cannot clip or re-root fixed UI.
+  if (typeof document === "undefined") return modal;
+  return createPortal(modal, document.body);
 }
 
 // Confirm Modal helper

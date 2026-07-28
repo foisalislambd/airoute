@@ -404,7 +404,7 @@ export default function Sidebar({
     const sharedProps = {
       onMouseEnter: (e: React.MouseEvent<HTMLElement>) => handleMouseEnter(e, item.id, item.label),
       onMouseLeave: handleMouseLeave,
-      title: collapsed ? item.label : undefined,
+      title: item.label,
       "aria-current": active ? ("page" as const) : undefined,
     };
 
@@ -520,7 +520,7 @@ export default function Sidebar({
               aria-label={tc("search")}
               icon="search"
               className="gap-0"
-              inputClassName="rounded-lg border-gray-200 bg-gray-50 py-2 text-sm dark:border-gray-800 dark:bg-white/5"
+              inputClassName="rounded-lg border-gray-200 bg-gray-50 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
             />
           </div>
         )}
@@ -533,7 +533,7 @@ export default function Sidebar({
           )}
         >
           {isSearching && displaySections.length === 0 && (
-            <p className="px-2 py-3 text-xs text-text-muted/60">{tc("noResults")}</p>
+            <p className="px-2 py-3 text-xs text-text-muted">{tc("noResults")}</p>
           )}
           {displaySections.map((section, idx) => {
             const sectionId = section.id as SidebarSectionId;
@@ -568,54 +568,55 @@ export default function Sidebar({
             // Expanded mode: collapsible section with pin
             return (
               <div key={section.id} className={isFirst ? "space-y-0.5" : "mt-2"}>
-                <div
-                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-surface/30 transition-colors cursor-pointer group/header"
-                  onClick={() => toggleSection(sectionId)}
-                  role="button"
-                  aria-expanded={isExpanded}
-                >
-                  {section.icon && (
-                    <span className="material-symbols-outlined text-[16px] text-text-muted/70 group-hover/header:text-text-muted shrink-0">
-                      {section.icon}
-                    </span>
-                  )}
-                  <span className="flex-1 text-xs font-semibold text-text-muted/80 uppercase tracking-wider group-hover/header:text-text-muted transition-colors">
-                    {section.title}
-                  </span>
-
-                  {/* Pin button — right side near chevron */}
+                <div className="group/header flex items-center gap-0.5">
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      togglePin(sectionId);
-                    }}
+                    type="button"
+                    className="flex min-h-9 min-w-0 flex-1 items-center gap-1.5 rounded-md px-2 py-1 text-start transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                    onClick={() => toggleSection(sectionId)}
+                    aria-expanded={isExpanded}
+                  >
+                    {section.icon && (
+                      <span
+                        className="material-symbols-outlined shrink-0 text-[16px] text-text-muted"
+                        aria-hidden="true"
+                      >
+                        {section.icon}
+                      </span>
+                    )}
+                    <span className="flex-1 truncate text-xs font-semibold uppercase tracking-wider text-text-muted">
+                      {section.title}
+                    </span>
+                    <span
+                      className={cn(
+                        "material-symbols-outlined shrink-0 text-[14px] text-text-muted transition-transform duration-200",
+                        isExpanded && "rotate-180"
+                      )}
+                      aria-hidden="true"
+                    >
+                      expand_more
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => togglePin(sectionId)}
                     title={isPinned ? t("unpinSection") : t("pinSectionOpen")}
+                    aria-label={isPinned ? t("unpinSection") : t("pinSectionOpen")}
                     className={cn(
-                      "p-0.5 rounded transition-all shrink-0",
+                      "flex h-9 w-9 shrink-0 items-center justify-center rounded-md transition-colors",
                       isPinned
-                        ? "text-primary opacity-100"
-                        : "text-text-muted/30 opacity-0 group-hover/header:opacity-100 hover:text-text-muted/70"
+                        ? "text-primary"
+                        : "text-text-muted opacity-60 hover:bg-gray-100 hover:opacity-100 dark:hover:bg-gray-800"
                     )}
                   >
                     <span
-                      className="material-symbols-outlined"
-                      style={{
-                        fontSize: "10px",
-                        ...(isPinned ? { fontVariationSettings: "'FILL' 1" } : {}),
-                      }}
+                      className="material-symbols-outlined text-[14px]"
+                      style={isPinned ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                      aria-hidden="true"
                     >
                       push_pin
                     </span>
                   </button>
-
-                  <span
-                    className={cn(
-                      "material-symbols-outlined text-[14px] text-text-muted/40 transition-all duration-200 group-hover/header:text-text-muted/70 shrink-0",
-                      isExpanded && "rotate-180"
-                    )}
-                  >
-                    expand_more
-                  </span>
                 </div>
 
                 {isExpanded && (
@@ -627,9 +628,9 @@ export default function Sidebar({
                         return (
                           <div key={child.id} className={separatorHidden ? "mt-0.5" : "mt-2"}>
                             {!separatorHidden && (
-                              <div className="flex items-center gap-1.5 px-2 py-0.5 mb-0.5">
+                              <div className="mb-0.5 flex items-center gap-1.5 px-2 py-0.5">
                                 <div className="h-px flex-1 bg-black/8 dark:bg-white/8" />
-                                <span className="text-[8px] font-semibold text-text-muted/40 uppercase tracking-widest">
+                                <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted">
                                   {child.title}
                                 </span>
                               </div>
@@ -678,27 +679,35 @@ export default function Sidebar({
           }}
         >
           <button
+            type="button"
             onClick={() => setShowRestartModal(true)}
             title={t("restart")}
+            aria-label={t("restart")}
             className={cn(
               "flex items-center justify-center gap-2 rounded-lg font-medium transition-all",
-              "text-amber-500 hover:bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40",
-              collapsed ? "p-2" : "flex-1 min-w-0 px-2 py-1.5 text-xs"
+              "border border-amber-500/20 text-amber-500 hover:border-amber-500/40 hover:bg-amber-500/10",
+              collapsed ? "h-9 w-9" : "min-h-9 flex-1 min-w-0 px-2 py-2 text-xs"
             )}
           >
-            <span className="material-symbols-outlined text-[16px]">restart_alt</span>
+            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+              restart_alt
+            </span>
             {!collapsed && <span className="truncate">{t("restart")}</span>}
           </button>
           <button
+            type="button"
             onClick={() => setShowShutdownModal(true)}
             title={t("shutdown")}
+            aria-label={t("shutdown")}
             className={cn(
               "flex items-center justify-center gap-2 rounded-lg font-medium transition-all",
-              "text-red-500 hover:bg-red-500/10 border border-red-500/20 hover:border-red-500/40",
-              collapsed ? "p-2" : "flex-1 min-w-0 px-2 py-1.5 text-xs"
+              "border border-red-500/20 text-red-500 hover:border-red-500/40 hover:bg-red-500/10",
+              collapsed ? "h-9 w-9" : "min-h-9 flex-1 min-w-0 px-2 py-2 text-xs"
             )}
           >
-            <span className="material-symbols-outlined text-[16px]">power_settings_new</span>
+            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+              power_settings_new
+            </span>
             {!collapsed && <span className="truncate">{t("shutdown")}</span>}
           </button>
         </div>

@@ -356,7 +356,7 @@ export default function RequestLoggerDetail({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary rounded-t-xl">
           <div className="flex items-center gap-3">
             <div className="flex flex-col">
               <div className="flex items-center gap-2">

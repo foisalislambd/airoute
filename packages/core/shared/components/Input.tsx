@@ -83,7 +83,7 @@ export default function Input({
       )}
       <div className="relative">
         {icon && (
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-muted">
+          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-text-muted">
             <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
               {icon}
             </span>
@@ -119,7 +119,7 @@ export default function Input({
             "transition disabled:cursor-not-allowed disabled:opacity-50",
             // iOS zoom fix
             "text-[16px] sm:text-sm",
-            icon && "pl-10",
+            icon && "ps-10",
             error ? "border-red-500 focus:border-red-500 focus:ring-red-500/20" : "",
             inputClassName
           )}

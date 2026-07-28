@@ -10,6 +10,7 @@ import {
   type SidebarItemDefinition,
   type SidebarSectionChild,
 } from "@/shared/constants/sidebarVisibility";
+import { lockBodyScroll } from "@/shared/utils/bodyScrollLock";
 
 function isSidebarGroup(
   child: SidebarSectionChild
@@ -57,6 +58,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations("sidebar");
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [hiddenItems, setHiddenItems] = useState<Set<string>>(new Set());
@@ -76,9 +78,36 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     return () => ctrl.abort();
   }, []);
 
+  useEffect(() => lockBodyScroll(), []);
+
   useEffect(() => {
     const id = setTimeout(() => inputRef.current?.focus(), 30);
     return () => clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    dialog.addEventListener("keydown", handleTab);
+    return () => dialog.removeEventListener("keydown", handleTab);
   }, []);
 
   const safeTranslate = useCallback(
@@ -232,6 +261,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         aria-hidden="true"
       />
       <div
+        ref={dialogRef}
         className="relative w-full max-w-3xl rounded-xl border border-gray-200 bg-white shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 dark:border-gray-700 dark:bg-gray-900"
         role="dialog"
         aria-modal="true"
@@ -256,18 +286,21 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
           />
           {query && (
             <button
-              className="text-text-muted hover:text-text transition-colors"
+              type="button"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-muted transition-colors hover:bg-gray-100 hover:text-text dark:hover:bg-gray-800"
               onClick={() => {
                 setQuery("");
                 setSelectedIndex(0);
+                inputRef.current?.focus();
               }}
-              tabIndex={-1}
               aria-label="Clear search"
             >
-              <span className="material-symbols-outlined text-[16px]">close</span>
+              <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+                close
+              </span>
             </button>
           )}
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-black/5 dark:bg-white/5 text-text-muted border border-black/10 dark:border-white/10 shrink-0">
+          <kbd className="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono bg-gray-100 dark:bg-gray-800 text-text-muted border border-gray-200 dark:border-gray-700 shrink-0">
             Esc
           </kbd>
         </div>
@@ -307,8 +340,8 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                           >
                             <button
                               className={`w-full flex items-center gap-3 ${
-                                subgroup.subgroupLabel ? "pl-10 pr-6" : "px-6"
-                              } py-2.5 text-left transition-colors ${
+                                subgroup.subgroupLabel ? "ps-10 pe-6" : "px-6"
+                              } py-2.5 text-start transition-colors ${
                                 flatIndex === selectedIndex
                                   ? "bg-accent/10 text-accent ring-1 ring-inset ring-accent/20"
                                   : "text-text hover:bg-black/5 dark:hover:bg-white/5"

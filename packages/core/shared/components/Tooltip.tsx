@@ -150,7 +150,7 @@ export default function Tooltip({
 
   const widthClass = multiline ? "max-w-xs whitespace-normal break-words" : "whitespace-nowrap";
   const baseTooltipClass =
-    "z-50 px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900/95 rounded-md shadow-lg pointer-events-none animate-in fade-in duration-150 motion-reduce:transition-none motion-reduce:animate-none border border-white/10";
+    "z-50 px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900 rounded-md shadow-lg pointer-events-none animate-in fade-in duration-150 motion-reduce:transition-none motion-reduce:animate-none border border-white/10";
 
   const portalEnabled = usePortal && typeof window !== "undefined";
 

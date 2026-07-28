@@ -73,7 +73,7 @@ Card.Section = function CardSection({ children, className, ...props }: CardSecti
     <div
       className={cn(
         "p-4 rounded-lg",
-        "bg-black/[0.02] dark:bg-white/[0.02]",
+        "bg-gray-50 dark:bg-gray-800/80",
         "border border-border",
         className
       )}

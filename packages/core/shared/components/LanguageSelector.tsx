@@ -64,38 +64,50 @@ export default function LanguageSelector() {
 
   return (
     <div ref={ref} className="relative">
-      {/* Trigger button */}
       <button
+        type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-medium text-text-main hover:bg-surface-hover transition-all border border-transparent hover:border-border"
+        className="flex h-10 items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-200 dark:hover:bg-gray-800"
         title={currentLang.name}
+        aria-label={currentLang.name}
+        aria-expanded={open}
+        aria-haspopup="listbox"
       >
         <CountryFlag emoji={currentLang.flag} alt={currentLang.name} />
         <span className="text-xs font-semibold tracking-wide">{currentLang.label}</span>
         <span
           className={`material-symbols-outlined text-[14px] text-text-muted transition-transform ${open ? "rotate-180" : ""}`}
+          aria-hidden="true"
         >
           expand_more
         </span>
       </button>
 
-      {/* Dropdown */}
       {open && (
-        <div className="absolute end-0 top-full mt-1 w-56 max-h-80 rounded-xl border border-gray-200 bg-white shadow-xl z-50 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150 dark:border-gray-700 dark:bg-gray-900">
+        <div
+          role="listbox"
+          aria-label={currentLang.name}
+          className="absolute end-0 top-full z-50 mt-1 max-h-80 w-56 overflow-y-auto rounded-xl border border-gray-200 bg-white shadow-xl animate-in fade-in slide-in-from-top-1 duration-150 dark:border-gray-700 dark:bg-gray-900"
+        >
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
+              type="button"
+              role="option"
+              aria-selected={lang.code === locale}
               onClick={() => handleSelect(lang.code)}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition-colors ${
+              className={`flex w-full items-center gap-2.5 px-3 py-2.5 text-sm transition-colors ${
                 lang.code === locale
-                  ? "bg-primary/10 text-primary font-semibold"
-                  : "text-text-main hover:bg-surface-hover"
+                  ? "bg-brand-50 font-semibold text-brand-600 dark:bg-brand-500/15 dark:text-brand-300"
+                  : "text-gray-800 hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-800"
               }`}
             >
               <CountryFlag emoji={lang.flag} alt={lang.name} />
               <span className="flex-1 text-start">{lang.name}</span>
               {lang.code === locale && (
-                <span className="material-symbols-outlined text-[16px] text-primary">check</span>
+                <span className="material-symbols-outlined text-[16px] text-brand-500" aria-hidden="true">
+                  check
+                </span>
               )}
             </button>
           ))}

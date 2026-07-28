@@ -15,6 +15,7 @@ import {
 } from "@/shared/utils/dashboardCsrf";
 import { installBasePathFetch } from "@/shared/utils/basePathFetch";
 import { cn } from "@/shared/utils/cn";
+import { lockBodyScroll } from "@/shared/utils/bodyScrollLock";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebar-collapsed";
 const SIDEBAR_WIDTH_EXPANDED = 260;
@@ -87,10 +88,8 @@ export default function DashboardLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = sidebarOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    if (!sidebarOpen) return;
+    return lockBodyScroll();
   }, [sidebarOpen]);
 
   const handleToggleCollapse = () => {
@@ -137,7 +136,7 @@ export default function DashboardLayout({ children }) {
       <div
         className={cn(
           "fixed inset-y-0 start-0 z-50 h-dvh transform transition-transform duration-300 ease-in-out lg:hidden",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          sidebarOpen ? "translate-x-0" : "ltr:-translate-x-full rtl:translate-x-full"
         )}
       >
         <Sidebar
