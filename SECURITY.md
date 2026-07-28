@@ -5,7 +5,7 @@
 If you discover a security vulnerability in AIRoute, please report it responsibly:
 
 1. **DO NOT** open a public GitHub issue
-2. Use [GitHub Security Advisories](https://github.com/diegosouzapw/AIRoute/security/advisories/new)
+2. Use [GitHub Security Advisories](https://github.com/foisalislambd/airoute/security/advisories/new)
 3. Include: description, reproduction steps, and potential impact
 
 ## Response Timeline
@@ -186,7 +186,7 @@ docker run -d \
   -e JWT_SECRET="$(openssl rand -base64 48)" \
   -e API_KEY_SECRET="$(openssl rand -hex 32)" \
   -e STORAGE_ENCRYPTION_KEY="$(openssl rand -hex 32)" \
-  diegosouzapw/airoute:latest
+  ghcr.io/foisalislambd/airoute:latest
 ```
 
 ---

@@ -1,0 +1,59 @@
+name: Bug report
+description: Something is broken or behaves incorrectly
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please search existing issues first.
+        **Security issues:** use [Security Advisories](https://github.com/foisalislambd/airoute/security/advisories/new), not this form.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One or two sentences describing the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps someone else can follow.
+      placeholder: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Node version, AIRoute commit/version, how you run it (dev / docker).
+      placeholder: |
+        - OS:
+        - Node:
+        - Commit:
+        - Run mode:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / screenshots
+      description: Paste relevant logs. Redact API keys and tokens.
+    validations:
+      required: false

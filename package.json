@@ -3,6 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "description": "AIRoute — local AI gateway (web + streaming engine + core)",
+  "license": "MIT",
+  "author": "foisalislambd",
+  "homepage": "https://github.com/foisalislambd/airoute#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foisalislambd/airoute.git"
+  },
+  "bugs": {
+    "url": "https://github.com/foisalislambd/airoute/issues"
+  },
+  "keywords": [
+    "ai",
+    "gateway",
+    "openai-compatible",
+    "llm",
+    "routing",
+    "proxy",
+    "local-first"
+  ],
   "workspaces": [
     "packages/web",
     "packages/open-sse",

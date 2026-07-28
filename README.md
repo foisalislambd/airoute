@@ -69,7 +69,7 @@ npm run dev
 ### Run from source
 
 ```bash
-git clone <your-fork-url> airoute
+git clone https://github.com/foisalislambd/airoute.git
 cd airoute
 npm install
 npm run dev
@@ -171,6 +171,18 @@ See [STRUCTURE.md](STRUCTURE.md) for the monorepo map and layout rules.
 
 ---
 
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[Code of Conduct](CODE_OF_CONDUCT.md).
+
+- Bugs & features: [GitHub Issues](https://github.com/foisalislambd/airoute/issues)
+- Support: [SUPPORT.md](SUPPORT.md)
+- Security: [SECURITY.md](SECURITY.md)
+- Changelog: [CHANGELOG.md](CHANGELOG.md)
+
+---
+
 ## License
 
-See [LICENSE](LICENSE).
+[MIT](LICENSE) © 2026 [foisalislambd](https://github.com/foisalislambd)
