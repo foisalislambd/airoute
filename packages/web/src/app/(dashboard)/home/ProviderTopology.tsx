@@ -58,7 +58,7 @@ function ProviderNode({ data }: { data: ProviderNodeData }) {
 
   return (
     <div
-      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border-2 transition-all duration-300 bg-bg"
+      className="flex items-center gap-2 rounded-xl border-2 bg-white px-2.5 py-1.5 transition-all duration-300 dark:bg-gray-900"
       style={{
         borderColor: error ? RED : active ? color : healthy ? GREEN : "var(--color-border)",
         boxShadow: error
@@ -123,7 +123,7 @@ type RouterNodeData = { activeCount: number };
 
 function RouterNode({ data }: { data: RouterNodeData }) {
   return (
-    <div className="flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-primary bg-primary/8 shadow-lg min-w-[140px] justify-center">
+    <div className="flex min-w-[148px] items-center justify-center gap-2 rounded-xl border-2 border-brand-500 bg-white px-5 py-3 shadow-lg shadow-brand-500/15 dark:bg-gray-900">
       <Handle
         type="source"
         position={Position.Top}
@@ -149,12 +149,14 @@ function RouterNode({ data }: { data: RouterNodeData }) {
         className="!bg-transparent !border-0 !w-0 !h-0"
       />
 
-      <div className="flex items-center justify-center size-7 rounded-md bg-primary/15 shrink-0">
-        <span className="material-symbols-outlined text-primary text-[16px]">route</span>
+      <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-500 text-white">
+        <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+          route
+        </span>
       </div>
-      <span className="text-sm font-bold text-primary">AIRoute</span>
+      <span className="text-sm font-bold text-brand-600 dark:text-brand-300">AIRoute</span>
       {data.activeCount > 0 && (
-        <span className="ml-1 px-1.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-bold leading-none">
+        <span className="ml-0.5 rounded-full bg-brand-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
           {data.activeCount}
         </span>
       )}
@@ -331,15 +333,33 @@ export default function ProviderTopology({
   );
 
   const containerClass =
-    "h-[300px] w-full min-w-0 rounded-xl border border-border bg-bg-subtle/20 overflow-hidden sm:h-[420px]";
+    "h-[280px] w-full min-w-0 overflow-hidden rounded-xl border border-gray-200 bg-gray-50 dark:border-gray-800 dark:bg-gray-950/50 sm:h-[400px]";
 
   if (providers.length === 0) {
     return (
-      <div
-        className={`${containerClass} flex flex-col items-center justify-center gap-2 text-text-muted`}
-      >
-        <span className="material-symbols-outlined text-[32px]">device_hub</span>
-        <p className="text-sm">{t("providerTopologyEmpty")}</p>
+      <div className={`${containerClass} flex flex-col items-center justify-center gap-3 px-6 text-center`}>
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-gray-200 dark:bg-gray-900 dark:ring-gray-700">
+          <span className="material-symbols-outlined text-[28px] text-brand-500" aria-hidden="true">
+            hub
+          </span>
+        </div>
+        <div className="max-w-xs space-y-1">
+          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+            {t("providerTopologyEmpty")}
+          </p>
+          <p className="text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+            Connect a provider to see live routing topology on this map.
+          </p>
+        </div>
+        <a
+          href="/dashboard/providers"
+          className="mt-1 inline-flex items-center gap-1.5 rounded-lg bg-brand-500 px-3.5 py-2 text-xs font-semibold text-white shadow-sm shadow-brand-500/25 transition hover:bg-brand-600"
+        >
+          <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+            add
+          </span>
+          Add provider
+        </a>
       </div>
     );
   }
