@@ -6,7 +6,7 @@ import {
   resolveProxyForConnection,
   getProxyAssignments,
   getProxyById,
-} from "../../../../lib/localDb";
+} from "@/lib/localDb";
 import { clearDispatcherCache } from "@omniroute/open-sse/utils/proxyDispatcher";
 import { updateProxyConfigSchema } from "@/shared/validation/schemas";
 import { isValidationFailure, validateBody } from "@/shared/validation/helpers";

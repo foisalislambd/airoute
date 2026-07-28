@@ -115,7 +115,7 @@ function useProviderParamFilterConfig(providerId: string, t: Translate) {
       setAllowTextState(formatCommaList(cfg.allow));
       setAutoLearnState(cfg.autoLearn);
     } catch (err) {
-      notify.notify(t("paramFiltersLoadError", { error: errorMessage(err) }), "error");
+      notify.error(t("paramFiltersLoadError", { error: errorMessage(err) }));
     } finally {
       setLoading(false);
     }
@@ -136,9 +136,9 @@ function useProviderParamFilterConfig(providerId: string, t: Translate) {
       await putParamFilterConfig(providerId, body);
       setConfig(body);
       setDirty(false);
-      notify.notify(t("paramFiltersSaveSuccess"), "success");
+      notify.success(t("paramFiltersSaveSuccess"));
     } catch (err) {
-      notify.notify(t("paramFiltersSaveError", { error: errorMessage(err) }), "error");
+      notify.error(t("paramFiltersSaveError", { error: errorMessage(err) }));
     } finally {
       setSaving(false);
     }
@@ -153,9 +153,9 @@ function useProviderParamFilterConfig(providerId: string, t: Translate) {
       setAllowTextState("");
       setAutoLearnState(false);
       setDirty(false);
-      notify.notify(t("paramFiltersResetSuccess"), "success");
+      notify.success(t("paramFiltersResetSuccess"));
     } catch (err) {
-      notify.notify(t("paramFiltersResetError", { error: errorMessage(err) }), "error");
+      notify.error(t("paramFiltersResetError", { error: errorMessage(err) }));
     } finally {
       setSaving(false);
     }

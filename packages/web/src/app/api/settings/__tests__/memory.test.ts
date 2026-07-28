@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("../../../../shared/utils/apiAuth", () => ({
+vi.mock("@/shared/utils/apiAuth", () => ({
   isAuthenticated: vi.fn(),
 }));
 
-vi.mock("../../../../lib/localDb", () => ({
+vi.mock("@/lib/localDb", () => ({
   getSettings: vi.fn(),
   updateSettings: vi.fn(),
 }));
 
-vi.mock("../../../../lib/memory/settings", async () => {
-  const actual = await vi.importActual("../../../../lib/memory/settings");
+vi.mock("@/lib/memory/settings", async () => {
+  const actual = await vi.importActual("@/lib/memory/settings");
   return {
     ...actual,
     invalidateMemorySettingsCache: vi.fn(),
@@ -18,9 +18,9 @@ vi.mock("../../../../lib/memory/settings", async () => {
 });
 
 import { GET, PUT } from "../memory/route";
-import { isAuthenticated } from "../../../../shared/utils/apiAuth";
-import { getSettings, updateSettings } from "../../../../lib/localDb";
-import { invalidateMemorySettingsCache } from "../../../../lib/memory/settings";
+import { isAuthenticated } from "@/shared/utils/apiAuth";
+import { getSettings, updateSettings } from "@/lib/localDb";
+import { invalidateMemorySettingsCache } from "@/lib/memory/settings";
 
 function createRequest(method: "GET" | "PUT", body?: unknown) {
   return new Request("http://localhost/api/settings/memory", {
