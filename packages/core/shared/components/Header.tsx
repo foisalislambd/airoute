@@ -259,7 +259,7 @@ export default function Header({
         </div>
 
         {/* Right actions */}
-        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-2 md:gap-3">
           {onOpenCommandPalette && (
             <>
               <button
@@ -270,8 +270,8 @@ export default function Header({
                 aria-label={t("openQuickNavigation")}
               >
                 <span className="material-symbols-outlined text-[16px]">search</span>
-                <span className="text-xs">{t("quickNavigation")}</span>
-                <kbd className="hidden font-mono text-[10px] rounded border border-gray-200 bg-white px-1 py-0.5 dark:border-gray-700 dark:bg-gray-900 lg:inline-flex">
+                <span className="hidden text-xs lg:inline">{t("quickNavigation")}</span>
+                <kbd className="hidden font-mono text-[10px] rounded border border-gray-200 bg-white px-1 py-0.5 dark:border-gray-700 dark:bg-gray-900 xl:inline-flex">
                   {isMac ? "⌘K" : "Ctrl+K"}
                 </kbd>
               </button>
@@ -285,10 +285,14 @@ export default function Header({
               </button>
             </>
           )}
-          <LanguageSelector />
+          <div className="hidden sm:block">
+            <LanguageSelector />
+          </div>
           <ThemeToggle />
-          {!isE2EMode && <DegradationBadge />}
-          {!isE2EMode && <TokenHealthBadge />}
+          <div className="hidden md:contents">
+            {!isE2EMode && <DegradationBadge />}
+            {!isE2EMode && <TokenHealthBadge />}
+          </div>
           <button
             onClick={handleLogout}
             className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-red-500/40 hover:bg-red-50 hover:text-red-500 dark:border-gray-800 dark:hover:bg-white/5"

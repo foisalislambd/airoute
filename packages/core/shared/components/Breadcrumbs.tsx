@@ -1,14 +1,7 @@
 "use client";
 
 /**
- * Breadcrumbs — FASE-07 UX
- *
- * Dashboard breadcrumb navigation component. Automatically generates
- * breadcrumbs from the current path with friendly labels.
- * Uses usePathname() internally — no props needed.
- *
- * Usage:
- *   <Breadcrumbs />
+ * Breadcrumbs — ZenPanel-clean path trail for the dashboard shell.
  */
 
 import { usePathname } from "next/navigation";
@@ -106,11 +99,6 @@ const PATH_LABELS = {
   usage: "usage",
 };
 
-/**
- * Get a friendly label for a path segment.
- * @param {string} segment
- * @returns {string}
- */
 function getLabel(segment, t) {
   const key = PATH_LABELS[segment];
   return key ? t(key) : segment.charAt(0).toUpperCase() + segment.slice(1);
@@ -119,7 +107,7 @@ function getLabel(segment, t) {
 export default function Breadcrumbs() {
   const pathname = usePathname();
   const t = useTranslations("breadcrumbs");
-  if (!pathname || pathname === "/dashboard") return null;
+  if (!pathname || pathname === "/dashboard" || pathname === "/home") return null;
 
   const segments = pathname.split("/").filter(Boolean);
   const crumbs = segments.map((seg, idx) => ({
@@ -131,44 +119,23 @@ export default function Breadcrumbs() {
   return (
     <nav
       aria-label={t("ariaLabel")}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "6px",
-        fontSize: "13px",
-        color: "var(--text-secondary, #888)",
-        padding: "8px 0",
-        marginBottom: "8px",
-      }}
+      className="mb-4 flex flex-wrap items-center gap-1.5 text-xs sm:mb-5 sm:text-[13px]"
     >
       {crumbs.map((crumb, i) => (
-        <span key={crumb.href} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <span key={crumb.href} className="flex items-center gap-1.5">
           {i > 0 && (
-            <span style={{ opacity: 0.4, fontSize: "11px" }} aria-hidden="true">
-              ›
+            <span className="text-gray-300 dark:text-gray-600" aria-hidden>
+              /
             </span>
           )}
           {crumb.isLast ? (
-            <span
-              aria-current="page"
-              style={{ color: "var(--text-primary, #e0e0e0)", fontWeight: 500 }}
-            >
+            <span aria-current="page" className="font-medium text-gray-900 dark:text-white">
               {crumb.label}
             </span>
           ) : (
             <Link
               href={crumb.href}
-              style={{
-                color: "var(--text-secondary, #888)",
-                textDecoration: "none",
-                transition: "color 0.15s",
-              }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--accent, #818cf8)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary, #888)")
-              }
+              className="text-gray-500 transition hover:text-brand-600 dark:text-gray-400 dark:hover:text-brand-300"
             >
               {crumb.label}
             </Link>

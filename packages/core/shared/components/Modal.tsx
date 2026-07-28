@@ -127,10 +127,10 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+        className="absolute inset-0 bg-gray-900/50 backdrop-blur-[2px]"
         onClick={closeOnOverlay ? onClose : undefined}
         aria-hidden="true"
       />
@@ -142,9 +142,9 @@ export default function Modal({
         aria-modal="true"
         aria-labelledby={title ? titleId : undefined}
         className={cn(
-          "relative w-full bg-surface",
-          "border border-black/10 dark:border-white/10",
-          "rounded-card shadow-2xl",
+          "app-card relative w-full shadow-xl",
+          "max-h-[92dvh] overflow-hidden sm:max-h-[90vh]",
+          "rounded-t-2xl sm:rounded-xl",
           "animate-in fade-in zoom-in-95 duration-200",
           sizes[size],
           className
@@ -154,54 +154,29 @@ export default function Modal({
         {(title || showCloseButton) && (
           <div
             className={cn(
-              "flex items-center justify-between border-b border-black/5 dark:border-white/5",
-              compactHeader ? "px-4 py-2.5" : "p-6"
+              "flex items-center justify-between border-b border-gray-200 dark:border-gray-800",
+              compactHeader ? "px-4 py-2.5" : "px-5 py-4 sm:px-6"
             )}
           >
-            <div className="flex items-center min-w-0">
-              <div
+            {title ? (
+              <h2
+                id={titleId}
                 className={cn(
-                  "flex items-center gap-1.5 mr-3 shrink-0",
-                  compactHeader ? "" : "gap-2 mr-4"
+                  "min-w-0 truncate font-semibold text-gray-900 dark:text-white",
+                  compactHeader ? "text-sm" : "text-base sm:text-lg"
                 )}
-                aria-hidden="true"
               >
-                <div
-                  className={cn(
-                    "rounded-full bg-[#FF5F56]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-                <div
-                  className={cn(
-                    "rounded-full bg-[#FFBD2E]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-                <div
-                  className={cn(
-                    "rounded-full bg-[#27C93F]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-              </div>
-              {title && (
-                <h2
-                  id={titleId}
-                  className={cn(
-                    "font-semibold text-text-main truncate min-w-0",
-                    compactHeader ? "text-sm" : "text-lg"
-                  )}
-                >
-                  {title}
-                </h2>
-              )}
-            </div>
+                {title}
+              </h2>
+            ) : (
+              <span />
+            )}
             {showCloseButton && (
               <button
+                type="button"
                 onClick={onClose}
                 aria-label={t("close")}
-                className="p-1.5 rounded-lg text-text-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors shrink-0"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-100 dark:hover:bg-white/5"
               >
                 <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                   close
@@ -212,13 +187,18 @@ export default function Modal({
         )}
 
         {/* Body */}
-        <div className={bodyClassName ?? "p-6 max-h-[calc(80vh-140px)] overflow-y-auto"}>
+        <div
+          className={cn(
+            "app-scrollbar overflow-y-auto",
+            bodyClassName ?? "max-h-[calc(80vh-140px)] p-5 sm:p-6"
+          )}
+        >
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-6 border-t border-black/5 dark:border-white/5">
+          <div className="flex flex-col-reverse items-stretch justify-end gap-2 border-t border-gray-200 p-4 sm:flex-row sm:items-center sm:gap-3 sm:p-6 dark:border-gray-800">
             {footer}
           </div>
         )}

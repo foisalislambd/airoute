@@ -112,11 +112,11 @@ export default function Input({
             props.onBlur?.(e);
           }}
           className={cn(
-            "w-full py-2 px-3 text-sm text-text-main",
-            "bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-control",
-            "placeholder-text-muted/60",
-            "focus:ring-1 focus:ring-accent/30 focus:border-accent/50 focus:outline-none",
-            "transition-all shadow-inner disabled:opacity-50 disabled:cursor-not-allowed",
+            "h-11 w-full px-3 text-sm text-gray-900 dark:text-white",
+            "rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900",
+            "placeholder:text-gray-400",
+            "focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/20",
+            "transition disabled:cursor-not-allowed disabled:opacity-50",
             // iOS zoom fix
             "text-[16px] sm:text-sm",
             icon && "pl-10",

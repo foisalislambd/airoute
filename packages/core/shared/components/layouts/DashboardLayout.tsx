@@ -160,7 +160,7 @@ export default function DashboardLayout({ children }) {
           id="main-content"
           className="app-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden"
         >
-          <div className="app-content w-full px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+          <div className="app-content w-full px-3 py-4 sm:px-6 sm:py-6 lg:px-8">
             <div className="mx-auto flex h-full min-h-0 w-full max-w-[3840px] flex-col">
               <Breadcrumbs />
               <div className="min-h-0 flex-1">{children}</div>

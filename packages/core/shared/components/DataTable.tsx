@@ -101,13 +101,9 @@ export default function DataTable({
 
   return (
     <div
+      className="app-card app-table-wrap app-scrollbar"
       style={{
-        overflow: "auto",
         maxHeight,
-        borderRadius: "8px",
-        // Opaque surface so the body grid wallpaper never bleeds through the
-        // transparent even-rows / low-alpha zebra when the table renders card-less.
-        background: "var(--color-surface)",
       }}
     >
       <table
