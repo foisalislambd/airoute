@@ -606,15 +606,18 @@ export default function Sidebar({
                       "flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors",
                       isPinned
                         ? "text-primary"
-                        : "text-text-muted opacity-60 hover:bg-gray-100 hover:opacity-100 dark:hover:bg-gray-800"
+                        : "text-text-muted/70 hover:bg-gray-100 hover:text-text-muted dark:hover:bg-gray-800"
                     )}
                   >
                     <span
-                      className="material-symbols-outlined text-[12px]"
-                      style={isPinned ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                      className="material-symbols-outlined text-[16px] leading-none"
+                      style={{
+                        fontVariationSettings: isPinned ? "'FILL' 1" : "'FILL' 0",
+                        transform: "rotate(45deg)",
+                      }}
                       aria-hidden="true"
                     >
-                      keep
+                      push_pin
                     </span>
                   </button>
                 </div>
