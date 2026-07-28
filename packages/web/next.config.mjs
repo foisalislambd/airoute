@@ -10,8 +10,16 @@ const coreDir = path.resolve(__dirname, "../core");
 const openSseDir = path.resolve(__dirname, "../open-sse");
 const webAppDir = path.resolve(__dirname, "src/app");
 
-// Load root `.env` (no packages/web/.env symlink). Next also loads local env files.
-nextEnv.loadEnvConfig(repoRoot);
+// Load monorepo-root `.env` into this process. Next only auto-loads env files
+// from the package cwd (`packages/web`); without this, JWT_SECRET is missing
+// in route handlers until instrumentation restores a persisted fallback.
+const loaded = nextEnv.loadEnvConfig(repoRoot);
+for (const [key, value] of Object.entries(loaded.combinedEnv ?? {})) {
+  if (value == null || value === "") continue;
+  if (!process.env[key] || process.env[key].trim() === "") {
+    process.env[key] = value;
+  }
+}
 
 // next-intl request config lives in @airoute/core (no src/i18n symlink).
 const withNextIntl = createNextIntlPlugin("../core/i18n/request.ts");
