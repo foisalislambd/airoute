@@ -1,7 +1,11 @@
 // source.config.ts
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { defineDocs, defineConfig } from "fumadocs-mdx/config";
+var __dirname = path.dirname(fileURLToPath(import.meta.url));
+var docsDir = path.resolve(__dirname, "../../docs");
 var docs = defineDocs({
-  dir: "docs",
+  dir: docsDir,
   docs: {
     files: [
       "./architecture/**/*.md",

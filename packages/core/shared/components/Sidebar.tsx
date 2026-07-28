@@ -12,7 +12,6 @@ import {
   toggleExpandedSection,
 } from "@/shared/utils/sidebarExpansionState";
 import { APP_CONFIG } from "@/shared/constants/appConfig";
-import AIRouteLogo from "./AIRouteLogo";
 import Button from "./Button";
 import Input from "./Input";
 import { ConfirmModal } from "./Modal";
@@ -53,6 +52,10 @@ type SidebarProps = {
   collapsed?: boolean;
   onToggleCollapse?: () => void;
   isMacElectron?: boolean;
+  /** When true, sidebar is position:fixed (desktop ZenPanel shell). */
+  fixed?: boolean;
+  /** Pixel width for fixed / drawer shell. */
+  width?: number;
 };
 
 type HoveredItem = { id: string; label: string; x: number; y: number } | null;
@@ -79,6 +82,8 @@ export default function Sidebar({
   collapsed = false,
   onToggleCollapse,
   isMacElectron = false,
+  fixed = false,
+  width,
 }: SidebarProps) {
   const getIconStyle = (itemId: string): SidebarGlyphStyle => {
     const accent = getSidebarIconAccent(itemId);
@@ -381,26 +386,33 @@ export default function Sidebar({
   const renderNavLink = (item) => {
     const active = !item.external && activeHref === item.href;
     const className = cn(
-      "flex items-center gap-3 rounded-lg transition-all group",
-      collapsed ? "justify-center px-2 py-2.5" : "px-3 py-1.5",
-      active
-        ? "bg-primary/10 text-primary"
-        : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+      "app-nav-item group",
+      collapsed ? "justify-center px-0" : "",
+      active ? "app-nav-item-active" : "app-nav-item-idle"
     );
     const iconClassName = cn(
-      "material-symbols-outlined text-[18px] shrink-0",
-      active ? "fill-1" : "group-hover:text-primary transition-colors"
+      "material-symbols-outlined text-[22px] shrink-0",
+      active ? "fill-1 text-white" : "text-gray-500 group-hover:text-gray-700 dark:text-gray-400"
     );
     const content = (
       <>
-        <span className={iconClassName} style={getIconStyle(item.id)}>
+        <span className={iconClassName} style={active ? undefined : getIconStyle(item.id)}>
           {item.icon}
         </span>
         {!collapsed && (
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium">{item.label}</span>
+            <span className={cn("truncate text-[15px] font-medium", active && "text-white")}>
+              {item.label}
+            </span>
             {item.subtitle && (
-              <span className="truncate text-[10px] text-text-muted/60">{item.subtitle}</span>
+              <span
+                className={cn(
+                  "truncate text-[10px]",
+                  active ? "text-white/70" : "text-text-muted/60"
+                )}
+              >
+                {item.subtitle}
+              </span>
             )}
           </div>
         )}
@@ -409,6 +421,8 @@ export default function Sidebar({
     const sharedProps = {
       onMouseEnter: (e: React.MouseEvent<HTMLElement>) => handleMouseEnter(e, item.id, item.label),
       onMouseLeave: handleMouseLeave,
+      title: collapsed ? item.label : undefined,
+      "aria-current": active ? ("page" as const) : undefined,
     };
 
     if (item.external) {
@@ -441,90 +455,80 @@ export default function Sidebar({
     );
   };
 
+  const resolvedWidth = width ?? (collapsed ? 80 : 260);
+
   return (
     <>
       <aside
         ref={sidebarRef}
         className={cn(
-          "flex h-full min-h-0 flex-col border-r border-black/5 bg-sidebar transition-all duration-300 ease-in-out dark:border-white/5",
-          collapsed ? "w-16" : "w-[220px]"
+          "app-sidebar min-h-0",
+          fixed ? "app-sidebar-docked hidden lg:flex" : "flex h-full",
+          collapsed && "app-sidebar-collapsed"
         )}
-        style={{ paddingTop: isMacElectron ? "var(--desktop-safe-top)" : undefined }}
+        style={{
+          width: resolvedWidth,
+          paddingTop: isMacElectron ? "var(--desktop-safe-top)" : undefined,
+        }}
+        aria-label="AIRoute navigation"
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-3 focus:bg-primary focus:text-white focus:rounded-md focus:m-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:rounded-md focus:bg-primary focus:p-3 focus:text-white"
         >
           {t("skipToContent")}
         </a>
 
-        {(onToggleCollapse || !isMacElectron) && (
-          <div
-            className={cn(
-              "flex items-center gap-2 pb-2",
-              isMacElectron ? "pt-3" : "pt-5",
-              collapsed ? "px-3 justify-center" : "px-4"
-            )}
-            aria-hidden="true"
-          >
-            {!isMacElectron && (
-              <>
-                <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-              </>
-            )}
-            {!collapsed && <div className="flex-1" />}
-            {onToggleCollapse && (
-              <button
-                onClick={onToggleCollapse}
-                title={collapsed ? t("expandSidebar") : t("collapseSidebar")}
-                aria-expanded={!collapsed}
-                aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
-                className={cn(
-                  "rounded-md p-1 text-text-muted/50 transition-colors hover:bg-black/5 hover:text-text-muted dark:hover:bg-white/5",
-                  collapsed && !isMacElectron && "mt-2",
-                  isMacElectron && "ms-auto"
-                )}
-              >
-                <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
-                  {collapsed ? "chevron_right" : "chevron_left"}
-                </span>
-              </button>
-            )}
-          </div>
-        )}
-
-        <div className={cn("py-3", collapsed ? "px-2" : "px-4")}>
+        <div
+          className={cn(
+            "app-topbar flex items-center gap-2 px-3",
+            collapsed ? "justify-center" : "gap-3 px-4"
+          )}
+        >
           <Link
             href="/home"
             prefetch={false}
-            className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5")}
+            onClick={onClose}
+            className={cn(
+              "flex min-w-0 items-center gap-3",
+              collapsed ? "justify-center" : "flex-1"
+            )}
+            title={customAppName || APP_CONFIG.name}
           >
-            <div className="flex items-center justify-center size-8 rounded bg-linear-to-br from-[#E54D5E] to-[#C93D4E] shrink-0">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-brand-500 text-base font-bold text-white">
               {customLogo ? (
                 <img
                   src={customLogo}
                   alt={customAppName || APP_CONFIG.name}
-                  className="size-5 object-contain"
+                  className="size-6 object-contain"
                 />
               ) : (
-                <AIRouteLogo size={18} className="text-white" />
+                (customAppName || APP_CONFIG.name || "A").charAt(0).toUpperCase()
               )}
-            </div>
+            </span>
             {!collapsed && (
-              <div className="flex flex-col min-w-0">
-                <h1 className="text-sm font-semibold tracking-tight text-text-main truncate">
+              <div className="min-w-0">
+                <p className="truncate text-[15px] font-semibold text-gray-900 dark:text-white">
                   {customAppName || APP_CONFIG.name}
-                </h1>
-                <span className="text-[10px] text-text-muted">v{APP_CONFIG.version}</span>
+                </p>
+                <p className="truncate text-xs text-gray-500">v{APP_CONFIG.version}</p>
               </div>
             )}
           </Link>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-white/10 lg:hidden"
+              aria-label="Close menu"
+            >
+              <span className="material-symbols-outlined text-[20px]">close</span>
+            </button>
+          )}
         </div>
 
         {!collapsed && (
-          <div className="px-4 pb-2">
+          <div className="px-3 pb-2 pt-3">
             <Input
               type="search"
               value={searchQuery}
@@ -533,7 +537,7 @@ export default function Sidebar({
               aria-label={tc("search")}
               icon="search"
               className="gap-0"
-              inputClassName="py-1.5 text-xs"
+              inputClassName="rounded-lg border-gray-200 bg-gray-50 py-2 text-sm dark:border-gray-800 dark:bg-white/5"
             />
           </div>
         )}
@@ -541,7 +545,7 @@ export default function Sidebar({
         <nav
           aria-label={t("mainNavigation")}
           className={cn(
-            "min-h-0 flex-1 overflow-y-auto py-1 custom-scrollbar",
+            "no-scrollbar min-h-0 flex-1 overflow-y-auto py-3",
             collapsed ? "px-2 space-y-0.5" : "px-3"
           )}
         >
@@ -657,10 +661,31 @@ export default function Sidebar({
 
         {!isE2EMode && <CloudSyncStatus collapsed={collapsed} />}
 
+        {onToggleCollapse && !onClose && (
+          <div className={cn("shrink-0 px-2 pb-1", collapsed && "flex justify-center")}>
+            <button
+              type="button"
+              onClick={onToggleCollapse}
+              title={collapsed ? t("expandSidebar") : t("collapseSidebar")}
+              aria-expanded={!collapsed}
+              aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
+              className={cn(
+                "flex items-center gap-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-white/5",
+                collapsed ? "h-10 w-10 justify-center" : "mt-1 w-full px-3 py-2.5"
+              )}
+            >
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+                {collapsed ? "chevron_right" : "chevron_left"}
+              </span>
+              {!collapsed && <span>{t("collapseSidebar")}</span>}
+            </button>
+          </div>
+        )}
+
         <div
           className={cn(
             "shrink-0 border-t border-black/5 dark:border-white/5",
-            collapsed ? "p-2 flex flex-col gap-1" : "p-2 flex gap-2"
+            collapsed ? "flex flex-col gap-1 p-2" : "flex gap-2 p-2"
           )}
           style={{
             paddingBottom: isMacElectron ? "calc(0.5rem + var(--desktop-safe-bottom))" : undefined,

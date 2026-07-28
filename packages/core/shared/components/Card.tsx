@@ -35,10 +35,8 @@ export default function Card({
   return (
     <div
       className={cn(
-        "bg-surface",
-        "border border-border",
-        "rounded-card shadow-sm",
-        hover && "hover:shadow-md hover:border-primary/30 transition-all cursor-pointer",
+        "app-card",
+        hover && "hover:shadow-md hover:border-brand-300 transition-all cursor-pointer dark:hover:border-brand-500/40",
         paddings[padding],
         className
       )}

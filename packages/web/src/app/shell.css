@@ -1,0 +1,204 @@
+/* AIRoute app shell — visual system ported from ZenPanel template.
+   Named app-* (not admin-*) because AIRoute is a product gateway, not an admin CMS. */
+
+.app-shell {
+  font-family: var(--font-app-sans), ui-sans-serif, system-ui, sans-serif;
+  background-color: #f9fafb;
+}
+
+.dark .app-shell {
+  background-color: #0c111d;
+}
+
+.app-main {
+  height: 100dvh;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.dark .app-main {
+  background-color: #101828;
+}
+
+.app-content {
+  width: 100%;
+  max-width: 100%;
+}
+
+.app-topbar {
+  height: 4rem;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e4e7ec;
+}
+
+.dark .app-topbar {
+  border-bottom-color: #1d2939;
+}
+
+.app-card {
+  border-radius: 0.75rem;
+  border: 1px solid #e4e7ec;
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+}
+
+.dark .app-card {
+  border-color: #1d2939;
+  background-color: rgba(255, 255, 255, 0.03);
+  box-shadow: none;
+}
+
+.app-card-body {
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .app-card-body {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-card-body {
+    padding: 1.5rem;
+  }
+}
+
+.app-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.app-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: #d0d5dd;
+}
+
+.dark .app-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #344054;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.app-chip {
+  border-radius: 0.5rem;
+  border: 1px solid #e4e7ec;
+  background-color: #ffffff;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #344054;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.app-chip:hover:not(:disabled) {
+  border-color: #9cb9ff;
+  background-color: #ecf3ff;
+  color: #1d2939;
+}
+
+.app-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dark .app-shell .app-chip {
+  border-color: #344054;
+  background-color: #1d2939;
+  color: #e4e7ec;
+}
+
+.dark .app-shell .app-chip:hover:not(:disabled) {
+  border-color: #7592ff;
+  background-color: #344054;
+  color: #f9fafb;
+}
+
+.app-chip-pill {
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.6875rem;
+}
+
+/* App sidebar chrome */
+.app-sidebar {
+  display: flex;
+  height: 100dvh;
+  flex-direction: column;
+  border-right: 1px solid #e4e7ec;
+  background-color: #ffffff;
+  transition:
+    width 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.app-sidebar-docked {
+  position: fixed;
+  top: 0;
+  /* Logical property so RTL locales dock on the correct side */
+  inset-inline-start: 0;
+  z-index: 50;
+}
+
+.dark .app-sidebar {
+  border-right-color: #1d2939;
+  background-color: #101828;
+}
+
+.app-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+/* Collapsed rail: square hit target, no horizontal overflow at 80px */
+.app-sidebar-collapsed .app-nav-item {
+  justify-content: center;
+  padding-inline: 0;
+  width: 100%;
+}
+
+.app-nav-item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand-500) 40%, transparent);
+}
+
+.app-nav-item-active {
+  background-color: var(--color-brand-500);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-brand-500) 25%, transparent);
+}
+
+.app-nav-item-idle {
+  color: #475467;
+}
+
+.app-nav-item-idle:hover {
+  background-color: #f2f4f7;
+  color: #101828;
+}
+
+.dark .app-nav-item-idle {
+  color: #d0d5dd;
+}
+
+.dark .app-nav-item-idle:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}

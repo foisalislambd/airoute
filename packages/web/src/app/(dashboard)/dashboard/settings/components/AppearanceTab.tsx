@@ -101,6 +101,7 @@ export default function AppearanceTab() {
   };
 
   const presetThemes = [
+    { id: "brand", color: COLOR_THEMES.brand, label: "Brand" },
     { id: "coral", color: COLOR_THEMES.coral, label: t("themeCoral") },
     { id: "blue", color: COLOR_THEMES.blue, label: t("themeBlue") },
     { id: "red", color: COLOR_THEMES.red, label: t("themeRed") },

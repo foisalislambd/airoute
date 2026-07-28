@@ -14,8 +14,12 @@ import {
   prefetchDashboardCsrfToken,
 } from "@/shared/utils/dashboardCsrf";
 import { installBasePathFetch } from "@/shared/utils/basePathFetch";
+import { cn } from "@/shared/utils/cn";
 
 const SIDEBAR_COLLAPSED_KEY = "sidebar-collapsed";
+const SIDEBAR_WIDTH_EXPANDED = 260;
+const SIDEBAR_WIDTH_COLLAPSED = 80;
+const DESKTOP_BREAKPOINT = 1024;
 const isE2EMode = process.env.NEXT_PUBLIC_AIROUTE_E2E_MODE === "1";
 
 export default function DashboardLayout({ children }) {
@@ -48,8 +52,6 @@ export default function DashboardLayout({ children }) {
   }, [isMacElectron]);
 
   useInsertionEffect(() => {
-    // basePath rewrite must wrap native fetch first so CSRF's originalFetch
-    // chain (and bare `fetch("/api/...")` call sites) hit the subpath.
     const uninstallBasePathFetch = installBasePathFetch();
     const uninstallDashboardCsrfFetch = installDashboardCsrfFetch();
     void prefetchDashboardCsrfToken();
@@ -65,74 +67,109 @@ export default function DashboardLayout({ children }) {
         e.preventDefault();
         setCommandPaletteOpen((prev) => !prev);
       }
+      if (e.key === "Escape" && sidebarOpen) {
+        setSidebarOpen(false);
+      }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [sidebarOpen]);
+
+  // Close mobile drawer + unlock scroll when crossing into desktop width
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= DESKTOP_BREAKPOINT) {
+        setSidebarOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = sidebarOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebarOpen]);
 
   const handleToggleCollapse = () => {
     const next = !collapsed;
     setCollapsed(next);
-    localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(next));
+    try {
+      localStorage.setItem(SIDEBAR_COLLAPSED_KEY, String(next));
+    } catch {}
   };
 
+  const desktopSidebarWidth = collapsed ? SIDEBAR_WIDTH_COLLAPSED : SIDEBAR_WIDTH_EXPANDED;
+
   return (
-    // No bg-bg here: the body grid wallpaper (globals.css body::before) shows through
-    // this transparent wrapper into the content area. body's --color-bg is the base fill.
-    <div className="flex h-dvh min-h-0 w-full overflow-hidden">
+    <div className="app-shell app-main flex h-dvh w-full overflow-hidden">
       <Suspense fallback={null}>
         <NavigationProgress />
       </Suspense>
-      {/* Mobile sidebar overlay */}
+
+      {/* Desktop spacer — matches fixed sidebar width (ZenPanel shell) */}
+      <div
+        className="hidden shrink-0 transition-[width] duration-300 ease-in-out lg:block"
+        style={{ width: desktopSidebarWidth }}
+        aria-hidden
+      />
+
+      {/* Desktop sidebar (self-hides below lg via Sidebar fixed classes) */}
+      <Sidebar
+        collapsed={collapsed}
+        onToggleCollapse={handleToggleCollapse}
+        isMacElectron={isMacElectron}
+        fixed
+        width={desktopSidebarWidth}
+      />
+
+      {/* Mobile backdrop */}
       {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/20 lg:hidden"
+        <button
+          type="button"
+          className="fixed inset-0 z-40 bg-gray-900/60 backdrop-blur-[2px] lg:hidden"
           onClick={() => setSidebarOpen(false)}
+          aria-label="Close navigation"
         />
       )}
 
-      {/* Sidebar - Desktop: keep visibility independent from Tailwind hidden/lg:flex ordering. */}
-      <div className="dashboard-sidebar-desktop">
+      {/* Mobile sidebar drawer */}
+      <div
+        className={cn(
+          "fixed inset-y-0 start-0 z-50 h-dvh transform transition-transform duration-300 ease-in-out lg:hidden",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
         <Sidebar
-          collapsed={collapsed}
-          onToggleCollapse={handleToggleCollapse}
+          onClose={() => setSidebarOpen(false)}
           isMacElectron={isMacElectron}
+          fixed={false}
+          width={Math.min(320, SIDEBAR_WIDTH_EXPANDED)}
         />
       </div>
 
-      {/* Sidebar - Mobile: full viewport height with proper scroll containment */}
-      <div
-        className={`fixed inset-y-0 start-0 z-50 transform lg:hidden transition-transform duration-300 ease-in-out h-dvh overflow-y-auto ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
-        <Sidebar onClose={() => setSidebarOpen(false)} isMacElectron={isMacElectron} />
-      </div>
-
-      {/* Main content */}
-      <main
-        id="main-content"
-        className="relative flex min-h-0 flex-1 min-w-0 flex-col transition-colors duration-300"
-      >
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <Header
           onMenuClick={() => setSidebarOpen(true)}
           onOpenCommandPalette={() => setCommandPaletteOpen(true)}
         />
         {!isE2EMode && <MaintenanceBanner />}
-        <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden custom-scrollbar p-4 sm:p-6 lg:p-10">
-          {/* Fluid up to a 4K cap (3840px): content follows the viewport on large
-              monitors and only centers (side gutters) beyond ~4K, instead of the prior
-              1280px cap that left big empty margins on wide screens. */}
-          <div className="max-w-[3840px] mx-auto w-full h-full min-h-0 flex flex-col">
-            <Breadcrumbs />
-            <div className="flex-1 min-h-0">{children}</div>
+        <main
+          id="main-content"
+          className="app-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden"
+        >
+          <div className="app-content w-full px-4 py-5 sm:px-6 sm:py-6 lg:px-8">
+            <div className="mx-auto flex h-full min-h-0 w-full max-w-[3840px] flex-col">
+              <Breadcrumbs />
+              <div className="min-h-0 flex-1">{children}</div>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
 
-      {/* Global notification toast system */}
       <NotificationToast />
-
       <CommandPalette isOpen={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
     </div>
   );

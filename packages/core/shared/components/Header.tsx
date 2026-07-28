@@ -205,81 +205,99 @@ export default function Header({
 
   return (
     <header
-      className="sticky top-0 z-10 flex items-center justify-between border-b border-black/5 bg-bg px-8 py-4 dark:border-white/5"
+      className="app-topbar sticky top-0 z-30 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:bg-gray-900/95 dark:supports-[backdrop-filter]:bg-gray-900/80"
       style={{
-        paddingTop: isMacElectron ? "calc(1rem + var(--desktop-safe-top))" : undefined,
+        paddingTop: isMacElectron ? "calc(0px + var(--desktop-safe-top))" : undefined,
+        height: isMacElectron ? "calc(4rem + var(--desktop-safe-top))" : undefined,
       }}
     >
-      {/* Mobile menu button */}
-      <div className="flex items-center gap-3 lg:hidden">
+      <div className="flex h-full items-center gap-3 px-4 sm:gap-4 sm:px-6">
+        {/* Mobile menu button */}
         {showMenuButton && (
           <button
+            type="button"
             onClick={onMenuClick}
-            className="text-text-main hover:text-primary transition-colors"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 text-gray-600 transition hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/30 dark:border-gray-800 dark:text-gray-400 dark:hover:bg-white/5 lg:hidden"
+            aria-label="Open menu"
           >
-            <span className="material-symbols-outlined">menu</span>
+            <span className="material-symbols-outlined text-[22px]">menu</span>
           </button>
         )}
-      </div>
 
-      {/* Page title with icon - desktop */}
-      <div className="hidden lg:flex items-center gap-3">
-        {(icon || providerId) && (
-          <div className="flex items-center justify-center size-9 rounded-lg bg-primary/10 shrink-0">
-            {icon ? (
-              <span className="material-symbols-outlined text-primary text-[20px]">{icon}</span>
-            ) : (
-              providerId && <ProviderIcon providerId={providerId} size={22} type="color" />
-            )}
-          </div>
-        )}
-        {title && (
-          <div>
-            <h1 className="text-xl font-semibold text-text-main tracking-tight">{title}</h1>
-            {description && <p className="text-xs text-text-muted mt-0.5">{description}</p>}
-          </div>
-        )}
-      </div>
+        {/* Page title with icon - desktop */}
+        <div className="hidden min-w-0 flex-1 items-center gap-3 lg:flex">
+          {(icon || providerId) && (
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-300">
+              {icon ? (
+                <span className="material-symbols-outlined text-[20px]">{icon}</span>
+              ) : (
+                providerId && <ProviderIcon providerId={providerId} size={22} type="color" />
+              )}
+            </div>
+          )}
+          {title && (
+            <div className="min-w-0">
+              <h1 className="truncate text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
+                {title}
+              </h1>
+              {description && (
+                <p className="mt-0.5 truncate text-xs text-gray-500 dark:text-gray-400">
+                  {description}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
 
-      {/* Right actions */}
-      <div className="flex items-center gap-3 ml-auto">
-        {onOpenCommandPalette && (
-          <>
-            <button
-              type="button"
-              onClick={onOpenCommandPalette}
-              className="hidden md:inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-black/10 dark:border-white/10 bg-bg-subtle text-text-muted hover:text-text-main hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
-              title={t("quickNavigationTitle")}
-              aria-label={t("openQuickNavigation")}
-            >
-              <span className="material-symbols-outlined text-[16px]">search</span>
-              <span className="text-xs">{t("quickNavigation")}</span>
-              <kbd className="hidden lg:inline-flex font-mono text-[10px] px-1 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
-                {isMac ? "⌘K" : "Ctrl+K"}
-              </kbd>
-            </button>
-            <button
-              type="button"
-              onClick={onOpenCommandPalette}
-              className="md:hidden p-2 rounded-lg text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-              aria-label={t("openQuickNavigation")}
-            >
-              <span className="material-symbols-outlined">search</span>
-            </button>
-          </>
-        )}
-        <LanguageSelector />
-        <ThemeToggle />
-        {!isE2EMode && <DegradationBadge />}
-        {!isE2EMode && <TokenHealthBadge />}
-        <button
-          onClick={handleLogout}
-          className="flex items-center justify-center p-2 rounded-lg text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
-          title={t("logout")}
-          aria-label={t("logout")}
-        >
-          <span className="material-symbols-outlined">logout</span>
-        </button>
+        {/* Mobile title */}
+        <div className="min-w-0 flex-1 lg:hidden">
+          {title && (
+            <h1 className="truncate text-base font-semibold text-gray-900 dark:text-white">
+              {title}
+            </h1>
+          )}
+        </div>
+
+        {/* Right actions */}
+        <div className="ml-auto flex items-center gap-2 sm:gap-3">
+          {onOpenCommandPalette && (
+            <>
+              <button
+                type="button"
+                onClick={onOpenCommandPalette}
+                className="hidden h-10 items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-gray-500 transition hover:bg-white dark:border-gray-800 dark:bg-white/5 dark:hover:bg-white/10 md:inline-flex"
+                title={t("quickNavigationTitle")}
+                aria-label={t("openQuickNavigation")}
+              >
+                <span className="material-symbols-outlined text-[16px]">search</span>
+                <span className="text-xs">{t("quickNavigation")}</span>
+                <kbd className="hidden font-mono text-[10px] rounded border border-gray-200 bg-white px-1 py-0.5 dark:border-gray-700 dark:bg-gray-900 lg:inline-flex">
+                  {isMac ? "⌘K" : "Ctrl+K"}
+                </kbd>
+              </button>
+              <button
+                type="button"
+                onClick={onOpenCommandPalette}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 md:hidden dark:border-gray-800"
+                aria-label={t("openQuickNavigation")}
+              >
+                <span className="material-symbols-outlined">search</span>
+              </button>
+            </>
+          )}
+          <LanguageSelector />
+          <ThemeToggle />
+          {!isE2EMode && <DegradationBadge />}
+          {!isE2EMode && <TokenHealthBadge />}
+          <button
+            onClick={handleLogout}
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition hover:border-red-500/40 hover:bg-red-50 hover:text-red-500 dark:border-gray-800 dark:hover:bg-white/5"
+            title={t("logout")}
+            aria-label={t("logout")}
+          >
+            <span className="material-symbols-outlined">logout</span>
+          </button>
+        </div>
       </div>
     </header>
   );

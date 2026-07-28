@@ -1,30 +1,29 @@
 ---
 title: "Design System & Visual Identity"
-lastUpdated: 2026-07-11
+lastUpdated: 2026-07-28
 ---
 
 # AIRoute — Design System & Visual Identity
 
-> **Status:** reference — the standardization described here is **implemented** (phases 1–6: grid wallpaper, primitives, status-color centralization, mono token, DataTable token migration, focus-ring → accent, Checkbox/Textarea primitives, `cn()` → tailwind-merge, grid on every standalone screen, fluid 4K content shell, opaque data-table surfaces). This document is the canonical description of the dashboard's design tokens, components, and conventions; the phase framing below is kept as the rationale for each decision.
-> **Scope:** the AIRoute dashboard (`src/`) and the marketing site (`_mono_repo/airouteSite/`) share **one visual identity** — same graph-paper grid background (32px), same color tokens, standardized components.
+> **Status:** product UI is based on the **ZenPanel Next.js template** visual system (Outfit font, brand `#465fff`, gray neutrals, fixed sidebar shell). Classes use `app-*` naming — **not** `admin-*` — because AIRoute is a gateway product, not an admin CMS.
+> **Entrypoints:** `packages/web/src/app/globals.css` (tokens) + `packages/web/src/app/shell.css` (shell chrome) + `packages/core/shared/components/{layouts,Sidebar,Header,Button,Card}`.
 >
 > Practical notes for maintainers:
 >
-> - Several remaining hardcoded hex values are **intentional** (always-dark console terminal, ReactFlow SVG strokes) and must **NOT** be swept into tokens.
-> - A "bigger" grid on a running instance is a stale build, not code — the grid size is 32px, identical to the site.
-> - Dark-theme `--table-*` values are byte-identical to the pre-migration hardcoded rgba; light theme was fixed (it was buggy always-dark via dead `var()` fallbacks).
+> - Do **not** introduce `admin.css` / `Admin*` shell names.
+> - Prefer semantic tokens (`bg-surface`, `text-muted`, `bg-brand-500`) over raw hex in new UI.
+> - Graph-paper wallpaper is disabled; surfaces are clean ZenPanel-style.
 
 ---
 
 ## 1. Purpose
 
-The marketing site (`viral.airoute.online`, `why.airoute.online`, `airoute.online`) and the product dashboard should look like **one product**. The site already borrowed its palette from the dashboard — its `css/tokens.css` even says _"Palette mirrors the AIRoute dashboard (src/app/globals.css)"_. So the two are already ~80% aligned at the color level. What's missing on the dashboard:
+The dashboard chrome (sidebar, topbar, cards, buttons) follows the ZenPanel template layout and palette, adapted for AIRoute routes and features.
 
-1. The **graph-paper grid wallpaper** the site uses on every page.
-2. A handful of **shared design tokens** the site has but the dashboard lacks (radius scale, brand gradient, `surface-2`, mono font).
-3. **Component-level consistency** — a number of dashboard components bypass the theme tokens with hardcoded hex/rgba.
-
-This document is the analysis and the plan.
+1. **Brand primary** — `#465fff` (`brand-500`), mapped to `--color-primary` for existing utilities.
+2. **Shell CSS** — `shell.css` with `app-shell`, `app-topbar`, `app-card`, `app-nav-item-*`.
+3. **Font** — Outfit via `--font-app-sans`.
+4. **Layout** — fixed desktop sidebar + width spacer + sticky topbar (ZenPanel pattern).
 
 ---
 

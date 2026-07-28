@@ -14,6 +14,7 @@
    (e.g. Next.js route groups like "(dashboard)"). Explicit @source
    directives ensure all utility classes in route groups are included. */
 @source "../app/(dashboard)";
+@source "../../../core/shared";
 @source "../../node_modules/fumadocs-ui/dist/**/*.js";
 @source not "../../*.sqlite*";
 @source not "../../.claude*";
@@ -26,24 +27,34 @@
   --fd-sidebar-width: 220px;
 }
 
-/* OpenClaw × ClawHub Color Palette */
+/* ZenPanel-inspired product UI (gateway dashboard — not an admin CMS) */
 :root {
   --desktop-safe-top: 0px;
   --desktop-safe-bottom: 0px;
   color-scheme: light;
 
-  /* Primary - Coral Red (OpenClaw) */
-  --color-primary: #e54d5e;
-  --color-primary-hover: #c93d4e;
+  /* Brand (ZenPanel template) */
+  --color-brand-50: #ecf3ff;
+  --color-brand-100: #dde9ff;
+  --color-brand-300: #9cb9ff;
+  --color-brand-400: #7592ff;
+  --color-brand-500: #465fff;
+  --color-brand-600: #3641f5;
+  --color-brand-800: #252dae;
+  --color-brand-950: #161950;
 
-  /* Accent - Indigo/Violet (buttons, links, gradients) */
-  --color-accent: #6366f1;
-  --color-accent-hover: #8b5cf6;
-  --color-accent-light: #a855f7;
+  /* Primary maps to brand for existing bg-primary / text-primary utilities */
+  --color-primary: #465fff;
+  --color-primary-hover: #3641f5;
+
+  /* Accent */
+  --color-accent: #465fff;
+  --color-accent-hover: #3641f5;
+  --color-accent-light: #7592ff;
 
   /* Semantic */
-  --color-error: #ef4444;
-  --color-success: #22c55e;
+  --color-error: #f04438;
+  --color-success: #12b76a;
   --color-warning: #f59e0b;
 
   /* Traffic lights */
@@ -51,56 +62,50 @@
   --color-traffic-yellow: #ffbd2e;
   --color-traffic-green: #27c93f;
 
-  /* Light theme */
-  --color-bg: #f9f9fb;
-  --color-bg-alt: #f0f0f5;
-  --color-bg-primary: #f9f9fb;
-  --color-bg-subtle: #f0f0f5;
+  /* Light theme — ZenPanel neutrals */
+  --color-bg: #f9fafb;
+  --color-bg-alt: #f2f4f7;
+  --color-bg-primary: #f9fafb;
+  --color-bg-subtle: #f2f4f7;
   --color-surface: #ffffff;
   --color-card: #ffffff;
-  --color-sidebar: #f5f5fa;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-text-main: #1a1a2e;
-  --color-text-primary: #1a1a2e;
-  --color-text-muted: #71717a;
+  --color-sidebar: #ffffff;
+  --color-border: #e4e7ec;
+  --color-text-main: #101828;
+  --color-text-primary: #101828;
+  --color-text-muted: #667085;
 
   /* Fumadocs light theme */
-  --color-fd-background: #f9f9fb;
-  --color-fd-foreground: #1a1a2e;
-  --color-fd-muted: #f0f0f5;
-  --color-fd-muted-foreground: #71717a;
+  --color-fd-background: #f9fafb;
+  --color-fd-foreground: #101828;
+  --color-fd-muted: #f2f4f7;
+  --color-fd-muted-foreground: #667085;
   --color-fd-popover: #ffffff;
-  --color-fd-popover-foreground: #1a1a2e;
+  --color-fd-popover-foreground: #101828;
   --color-fd-card: #ffffff;
-  --color-fd-card-foreground: #1a1a2e;
-  --color-fd-border: rgba(0, 0, 0, 0.08);
-  --color-fd-primary: #e54d5e;
+  --color-fd-card-foreground: #101828;
+  --color-fd-border: #e4e7ec;
+  --color-fd-primary: #465fff;
   --color-fd-primary-foreground: #ffffff;
-  --color-fd-secondary: #f0f0f5;
-  --color-fd-secondary-foreground: #1a1a2e;
-  --color-fd-accent: rgba(229, 77, 94, 0.08);
-  --color-fd-accent-foreground: #1a1a2e;
-  --color-fd-ring: #e54d5e;
+  --color-fd-secondary: #f2f4f7;
+  --color-fd-secondary-foreground: #101828;
+  --color-fd-accent: rgba(70, 95, 255, 0.08);
+  --color-fd-accent-foreground: #101828;
+  --color-fd-ring: #465fff;
 
   /* Shadows */
-  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.015);
-  --shadow-warm: 0 2px 12px -2px rgba(229, 77, 94, 0.12);
-  --shadow-elevated: 0 12px 28px -4px rgba(20, 20, 40, 0.06);
+  --shadow-soft: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  --shadow-warm: 0 4px 12px color-mix(in srgb, var(--color-brand-500) 18%, transparent);
+  --shadow-elevated: 0 12px 28px -4px rgba(16, 24, 40, 0.08);
 
-  /* Graph-paper wallpaper grid — shared visual identity with the marketing site
-     (_mono_repo/airouteSite/css). Light theme values. Rendered by body::before.
-     Opacity tuned up from the site's 0.045 so the wallpaper is actually visible on
-     the dense dashboard (cards/chrome cover most of the viewport). */
-  --grid-line: rgba(0, 0, 0, 0.07);
+  --grid-line: transparent;
   --grid-size: 32px;
-  --section-alt: rgba(0, 0, 0, 0.022);
+  --section-alt: rgba(0, 0, 0, 0.02);
 
-  /* Identity tokens mirrored from the site. Definitions only in this phase —
-     components are repointed to them in a later phase. */
-  --surface-2: #f5f5fa;
-  --radius: 14px;
-  --radius-control: 9px;
-  --grad-brand: linear-gradient(135deg, var(--color-primary), var(--color-accent-light));
+  --surface-2: #f2f4f7;
+  --radius: 12px;
+  --radius-control: 8px;
+  --grad-brand: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-600));
 
   /* Data-table surfaces — theme-aware. The DARK values (in .dark below) exactly mirror
      the previous hardcoded rgba in DataTable.tsx so dark stays byte-identical; these
@@ -114,47 +119,45 @@
 }
 
 .dark {
-  /* Dark theme (ClawHub deep) */
+  /* Dark theme — ZenPanel neutrals */
   color-scheme: dark;
-  --color-bg: #0b0e14;
-  --color-bg-alt: #111520;
-  --color-bg-primary: #0b0e14;
-  --color-bg-subtle: #111520;
-  --color-surface: #161b22;
-  --color-card: #161b22;
-  --color-sidebar: #10141e;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-text-main: #e6e6ef;
-  --color-text-primary: #e6e6ef;
-  --color-text-muted: #a1a1aa;
+  --color-bg: #0c111d;
+  --color-bg-alt: #101828;
+  --color-bg-primary: #0c111d;
+  --color-bg-subtle: #1d2939;
+  --color-surface: rgba(255, 255, 255, 0.03);
+  --color-card: rgba(255, 255, 255, 0.03);
+  --color-sidebar: #101828;
+  --color-border: #1d2939;
+  --color-text-main: #f9fafb;
+  --color-text-primary: #f9fafb;
+  --color-text-muted: #98a2b3;
 
   /* Fumadocs theme mapping */
-  --color-fd-background: #0b0e14;
-  --color-fd-foreground: #e6e6ef;
-  --color-fd-muted: #111520;
-  --color-fd-muted-foreground: #a1a1aa;
-  --color-fd-popover: #161b22;
-  --color-fd-popover-foreground: #e6e6ef;
-  --color-fd-card: #161b22;
-  --color-fd-card-foreground: #e6e6ef;
-  --color-fd-border: rgba(255, 255, 255, 0.08);
-  --color-fd-primary: #e54d5e;
+  --color-fd-background: #0c111d;
+  --color-fd-foreground: #f9fafb;
+  --color-fd-muted: #101828;
+  --color-fd-muted-foreground: #98a2b3;
+  --color-fd-popover: #101828;
+  --color-fd-popover-foreground: #f9fafb;
+  --color-fd-card: #101828;
+  --color-fd-card-foreground: #f9fafb;
+  --color-fd-border: #1d2939;
+  --color-fd-primary: #465fff;
   --color-fd-primary-foreground: #ffffff;
-  --color-fd-secondary: #111520;
-  --color-fd-secondary-foreground: #e6e6ef;
-  --color-fd-accent: rgba(229, 77, 94, 0.12);
-  --color-fd-accent-foreground: #e6e6ef;
-  --color-fd-ring: #e54d5e;
+  --color-fd-secondary: #1d2939;
+  --color-fd-secondary-foreground: #f9fafb;
+  --color-fd-accent: rgba(70, 95, 255, 0.16);
+  --color-fd-accent-foreground: #f9fafb;
+  --color-fd-ring: #465fff;
 
-  /* Dark shadows */
-  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-warm: 0 2px 12px -2px rgba(229, 77, 94, 0.15);
-  --shadow-elevated: 0 12px 28px -4px rgba(0, 0, 0, 0.3);
+  --shadow-soft: none;
+  --shadow-warm: 0 4px 12px rgba(70, 95, 255, 0.2);
+  --shadow-elevated: 0 12px 28px -4px rgba(0, 0, 0, 0.35);
 
-  /* Graph-paper wallpaper grid — dark theme values (tuned up from 0.035 for visibility). */
-  --grid-line: rgba(255, 255, 255, 0.06);
-  --section-alt: rgba(255, 255, 255, 0.018);
-  --surface-2: #1c2230;
+  --grid-line: transparent;
+  --section-alt: rgba(255, 255, 255, 0.02);
+  --surface-2: #1d2939;
 
   /* Data-table surfaces — dark = the exact old hardcoded values (byte-identical). */
   --table-header-bg: rgba(15, 15, 25, 0.95);
@@ -190,28 +193,37 @@
   --color-text-primary: var(--color-text-primary);
   --color-text-muted: var(--color-text-muted);
 
+  /* Brand scale (Tailwind: bg-brand-500, text-brand-600, …) */
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-950: var(--color-brand-950);
+
   /* Static colors (for explicit light/dark usage) */
-  --color-bg-light: #f9f9fb;
-  --color-bg-dark: #0b0e14;
+  --color-bg-light: #f9fafb;
+  --color-bg-dark: #0c111d;
   --color-surface-light: #ffffff;
-  --color-surface-dark: #161b22;
-  --color-sidebar-light: #ededf2;
-  --color-sidebar-dark: #111520;
-  --color-border-light: #e2e2ea;
-  --color-border-dark: #2d333b;
-  --color-text-main-light: #1a1a2e;
-  --color-text-main-dark: #e6e6ef;
-  --color-text-muted-light: #71717a;
-  --color-text-muted-dark: #a1a1aa;
+  --color-surface-dark: #101828;
+  --color-sidebar-light: #ffffff;
+  --color-sidebar-dark: #101828;
+  --color-border-light: #e4e7ec;
+  --color-border-dark: #1d2939;
+  --color-text-main-light: #101828;
+  --color-text-main-dark: #f9fafb;
+  --color-text-muted-light: #667085;
+  --color-text-muted-dark: #98a2b3;
 
   /* Shadows */
   --shadow-soft: var(--shadow-soft);
   --shadow-warm: var(--shadow-warm);
   --shadow-elevated: var(--shadow-elevated);
 
-  /* Font - macOS system fonts */
-  --font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  /* Font — Outfit (app shell) with system fallback */
+  --font-sans: var(--font-app-sans), ui-sans-serif, system-ui, sans-serif;
   /* Monospace stack (parity with the site) — code blocks, IDs, endpoints, terminals */
   --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", monospace;
 
@@ -257,20 +269,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Graph-paper wallpaper grid — one fixed, full-viewport layer behind every screen
-   (dashboard, auth, error pages). A z-index:-1 ::before paints above body's own
-   background but below all in-flow content, so it shows through any transparent
-   wrapper without lowering text contrast. Mirrors the marketing site exactly. */
+/* Wallpaper layer disabled for ZenPanel-clean surfaces (--grid-line is transparent). */
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: var(--grid-size) var(--grid-size);
+  content: none;
 }
 
 body.electron-macos {
@@ -280,7 +281,7 @@ body.electron-macos {
 
 /* Selection — with fallback for browsers that don't support color-mix() */
 ::selection {
-  background-color: rgba(229, 77, 94, 0.22);
+  background-color: rgba(70, 95, 255, 0.22);
   background-color: color-mix(in srgb, var(--color-primary) 22%, transparent);
   color: var(--color-primary);
 }
@@ -335,11 +336,11 @@ body.electron-macos {
 
 /* Hero gradient */
 .bg-hero-gradient {
-  background: linear-gradient(180deg, #f0f0f5 0%, #f9f9fb 100%);
+  background: linear-gradient(180deg, #f2f4f7 0%, #f9fafb 100%);
 }
 
 .dark .bg-hero-gradient {
-  background: linear-gradient(180deg, #111520 0%, #0b0e14 100%);
+  background: linear-gradient(180deg, #101828 0%, #0c111d 100%);
 }
 
 /* Material Symbols */
@@ -412,15 +413,15 @@ button .material-symbols-outlined,
   0%,
   100% {
     box-shadow:
-      0 0 5px rgba(229, 77, 94, 0.3),
-      0 0 10px rgba(229, 77, 94, 0.2);
-    border-color: rgba(229, 77, 94, 0.5);
+      0 0 5px rgba(70, 95, 255, 0.3),
+      0 0 10px rgba(70, 95, 255, 0.2);
+    border-color: rgba(70, 95, 255, 0.5);
   }
   50% {
     box-shadow:
-      0 0 10px rgba(229, 77, 94, 0.5),
-      0 0 20px rgba(229, 77, 94, 0.3);
-    border-color: rgba(229, 77, 94, 0.8);
+      0 0 10px rgba(70, 95, 255, 0.5),
+      0 0 20px rgba(70, 95, 255, 0.3);
+    border-color: rgba(70, 95, 255, 0.8);
   }
 }
 
@@ -493,14 +494,7 @@ select option {
   --xy-controls-button-border-color: var(--color-border);
 }
 
-/* Desktop sidebar visibility must not depend on Tailwind's hidden/lg:flex cascade
-   (ordering/specificity can collapse it). Explicit class + 1024px media query. */
+/* Desktop sidebar host — unused after shell rewrite; keep for any leftover class refs */
 .dashboard-sidebar-desktop {
-  display: none;
-  min-height: 0;
-}
-@media (min-width: 1024px) {
-  .dashboard-sidebar-desktop {
-    display: flex;
-  }
+  display: contents;
 }
