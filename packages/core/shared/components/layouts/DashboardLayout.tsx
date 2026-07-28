@@ -109,21 +109,19 @@ export default function DashboardLayout({ children }) {
         <NavigationProgress />
       </Suspense>
 
-      {/* Desktop spacer — matches fixed sidebar width (ZenPanel shell) */}
+      {/* Desktop sidebar — in-flow so page content cannot paint underneath it */}
       <div
-        className="hidden shrink-0 transition-[width] duration-300 ease-in-out lg:block"
+        className="relative z-50 hidden h-dvh shrink-0 overflow-hidden transition-[width] duration-300 ease-in-out lg:block"
         style={{ width: desktopSidebarWidth }}
-        aria-hidden
-      />
-
-      {/* Desktop sidebar (self-hides below lg via Sidebar fixed classes) */}
-      <Sidebar
-        collapsed={collapsed}
-        onToggleCollapse={handleToggleCollapse}
-        isMacElectron={isMacElectron}
-        fixed
-        width={desktopSidebarWidth}
-      />
+      >
+        <Sidebar
+          collapsed={collapsed}
+          onToggleCollapse={handleToggleCollapse}
+          isMacElectron={isMacElectron}
+          fixed={false}
+          width={desktopSidebarWidth}
+        />
+      </div>
 
       {/* Mobile backdrop */}
       {sidebarOpen && (
@@ -150,7 +148,7 @@ export default function DashboardLayout({ children }) {
         />
       </div>
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+      <div className="relative z-0 flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <Header
           onMenuClick={() => setSidebarOpen(true)}
           onOpenCommandPalette={() => setCommandPaletteOpen(true)}

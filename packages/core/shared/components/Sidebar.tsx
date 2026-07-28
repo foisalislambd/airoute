@@ -446,8 +446,8 @@ export default function Sidebar({
       <aside
         ref={sidebarRef}
         className={cn(
-          "app-sidebar min-h-0",
-          fixed ? "app-sidebar-docked hidden lg:flex" : "flex h-full",
+          "app-sidebar h-full w-full min-h-0",
+          fixed ? "app-sidebar-docked hidden lg:flex" : "flex",
           collapsed && "app-sidebar-collapsed"
         )}
         style={{
