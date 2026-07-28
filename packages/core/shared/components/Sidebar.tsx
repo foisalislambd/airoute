@@ -211,13 +211,9 @@ export default function Sidebar({
 
   const resolveItem = (item: SidebarItemDefinition, hidden: Set<string>) => {
     if (hidden.has(item.id)) return null;
-    const subtitle = item.subtitleKey
-      ? getSidebarLabel(item.subtitleKey, item.subtitleFallback ?? "")
-      : item.subtitleFallback;
     return {
       ...item,
       label: getSidebarLabel(item.i18nKey, item.labelFallback ?? item.id),
-      subtitle: subtitle || undefined,
     };
   };
 
@@ -400,21 +396,9 @@ export default function Sidebar({
           {item.icon}
         </span>
         {!collapsed && (
-          <div className="flex min-w-0 flex-col">
-            <span className={cn("truncate text-[15px] font-medium", active && "text-white")}>
-              {item.label}
-            </span>
-            {item.subtitle && (
-              <span
-                className={cn(
-                  "truncate text-[10px]",
-                  active ? "text-white/70" : "text-text-muted/60"
-                )}
-              >
-                {item.subtitle}
-              </span>
-            )}
-          </div>
+          <span className={cn("min-w-0 truncate text-[15px] font-medium", active && "text-white")}>
+            {item.label}
+          </span>
         )}
       </>
     );
@@ -591,7 +575,7 @@ export default function Sidebar({
                   role="button"
                   aria-expanded={isExpanded}
                 >
-                  <span className="flex-1 text-[10px] font-semibold text-text-muted/60 uppercase tracking-wider group-hover/header:text-text-muted/90 transition-colors">
+                  <span className="flex-1 text-xs font-semibold text-text-muted/80 uppercase tracking-wider group-hover/header:text-text-muted transition-colors">
                     {section.title}
                   </span>
 
