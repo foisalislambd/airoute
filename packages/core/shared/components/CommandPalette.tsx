@@ -232,12 +232,12 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         aria-hidden="true"
       />
       <div
-        className="relative w-full max-w-3xl bg-surface border border-black/10 dark:border-white/10 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+        className="relative w-full max-w-3xl rounded-xl border border-gray-200 bg-white shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200 dark:border-gray-700 dark:bg-gray-900"
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"
       >
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-black/5 dark:border-white/5">
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <span className="material-symbols-outlined text-[20px] text-text-muted shrink-0">
             search
           </span>
@@ -280,7 +280,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
           >
             {grouped.map((group) => (
               <li key={group.sectionId} role="presentation">
-                <div className="sticky top-0 z-10 bg-surface/95 backdrop-blur-sm px-6 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-text-muted border-b border-black/5 dark:border-white/5">
+                <div className="sticky top-0 z-10 bg-white px-6 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-text-muted border-b border-gray-200 dark:bg-gray-900 dark:border-gray-800">
                   {group.sectionLabel}
                 </div>
                 <ul role="group" aria-label={group.sectionLabel}>

@@ -15,7 +15,6 @@ import { APP_CONFIG } from "@/shared/constants/appConfig";
 import Button from "./Button";
 import Input from "./Input";
 import { ConfirmModal } from "./Modal";
-import CloudSyncStatus from "./CloudSyncStatus";
 import { useTranslations } from "next-intl";
 import {
   HIDDEN_SIDEBAR_GROUP_LABELS_SETTING_KEY,
@@ -647,8 +646,6 @@ export default function Sidebar({
             );
           })}
         </nav>
-
-        {!isE2EMode && <CloudSyncStatus collapsed={collapsed} />}
 
         {onToggleCollapse && !onClose && (
           <div className={cn("shrink-0 px-2 pb-1", collapsed && "flex justify-center")}>

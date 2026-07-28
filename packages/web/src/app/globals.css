@@ -110,7 +110,7 @@
   /* Data-table surfaces — theme-aware. The DARK values (in .dark below) exactly mirror
      the previous hardcoded rgba in DataTable.tsx so dark stays byte-identical; these
      light values are the fix (the old code was always-dark via dead var fallbacks). */
-  --table-header-bg: rgba(249, 249, 251, 0.95);
+  --table-header-bg: #f2f4f7;
   --table-row-zebra: rgba(0, 0, 0, 0.02);
   --table-row-hover: rgba(0, 0, 0, 0.04);
   --table-cell-border: rgba(0, 0, 0, 0.04);
@@ -125,8 +125,8 @@
   --color-bg-alt: #101828;
   --color-bg-primary: #0c111d;
   --color-bg-subtle: #1d2939;
-  --color-surface: rgba(255, 255, 255, 0.03);
-  --color-card: rgba(255, 255, 255, 0.03);
+  --color-surface: #101828;
+  --color-card: #101828;
   --color-sidebar: #101828;
   --color-border: #1d2939;
   --color-text-main: #f9fafb;
@@ -160,7 +160,7 @@
   --surface-2: #1d2939;
 
   /* Data-table surfaces — dark = the exact old hardcoded values (byte-identical). */
-  --table-header-bg: rgba(15, 15, 25, 0.95);
+  --table-header-bg: #101828;
   --table-row-zebra: rgba(255, 255, 255, 0.02);
   --table-row-hover: rgba(255, 255, 255, 0.04);
   --table-cell-border: rgba(255, 255, 255, 0.04);

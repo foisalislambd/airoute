@@ -14,6 +14,7 @@ import ThemeToggle from "./ThemeToggle";
 import TokenHealthBadge from "./TokenHealthBadge";
 import DegradationBadge from "./DegradationBadge";
 import LanguageSelector from "./LanguageSelector";
+import CloudSyncStatus from "./CloudSyncStatus";
 import ProviderIcon from "./ProviderIcon";
 import { useTranslations } from "next-intl";
 import {
@@ -205,7 +206,7 @@ export default function Header({
 
   return (
     <header
-      className="app-topbar sticky top-0 z-30 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:bg-gray-900/95 dark:supports-[backdrop-filter]:bg-gray-900/80"
+      className="app-topbar sticky top-0 z-30 w-full bg-white dark:bg-gray-900"
       style={{
         paddingTop: isMacElectron ? "calc(0px + var(--desktop-safe-top))" : undefined,
         height: isMacElectron ? "calc(4rem + var(--desktop-safe-top))" : undefined,
@@ -265,7 +266,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={onOpenCommandPalette}
-                className="hidden h-10 items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-gray-500 transition hover:bg-white dark:border-gray-800 dark:bg-white/5 dark:hover:bg-white/10 md:inline-flex"
+                className="hidden h-10 items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-gray-500 transition hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-800 md:inline-flex"
                 title={t("quickNavigationTitle")}
                 aria-label={t("openQuickNavigation")}
               >
@@ -278,7 +279,7 @@ export default function Header({
               <button
                 type="button"
                 onClick={onOpenCommandPalette}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 md:hidden dark:border-gray-800"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 md:hidden dark:border-gray-800 dark:bg-gray-900"
                 aria-label={t("openQuickNavigation")}
               >
                 <span className="material-symbols-outlined">search</span>
@@ -288,6 +289,7 @@ export default function Header({
           <div className="hidden sm:block">
             <LanguageSelector />
           </div>
+          {!isE2EMode && <CloudSyncStatus variant="header" />}
           <ThemeToggle />
           <div className="hidden md:contents">
             {!isE2EMode && <DegradationBadge />}

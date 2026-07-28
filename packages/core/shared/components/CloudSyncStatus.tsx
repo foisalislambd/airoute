@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * CloudSyncStatus — Compact sync status indicator for the sidebar
+ * CloudSyncStatus — Compact sync status indicator for the header
  *
  * Shows cloud sync connection state with a small icon + label.
  * Fetches status from /api/sync/cloud periodically.
@@ -13,6 +13,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { cn } from "@/shared/utils/cn";
 
 // #6147 — user-facing labels renamed from "Cloud …" to "Remote Settings Sync"
 // wording (this feature syncs the operator's own settings to their own remote
@@ -26,12 +27,20 @@ const STATUS_CONFIG = {
   disabled: { icon: "cloud_off", color: "text-text-muted/50", labelKey: "disabled" },
 };
 
-export default function CloudSyncStatus({ collapsed = false }) {
+export default function CloudSyncStatus({
+  collapsed = false,
+  variant = "sidebar",
+}: {
+  collapsed?: boolean;
+  /** `header` = compact chip for the top bar; `sidebar` kept for callers. */
+  variant?: "header" | "sidebar";
+}) {
   const t = useTranslations("cloudSyncStatus");
   const [status, setStatus] = useState("disabled");
   const [lastSync, setLastSync] = useState(null);
   const mountedRef = useRef(true);
   const router = useRouter();
+  const isHeader = variant === "header";
 
   const poll = useCallback(async () => {
     try {
@@ -80,11 +89,18 @@ export default function CloudSyncStatus({ collapsed = false }) {
 
   const config = STATUS_CONFIG[status];
   const label = t(config.labelKey);
+  const showLabel = isHeader ? true : !collapsed;
 
   return (
     <button
+      type="button"
       onClick={() => router.push("/dashboard/endpoint")}
-      className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg hover:bg-white/5 transition-colors cursor-pointer w-full"
+      className={cn(
+        "flex items-center gap-2 text-xs transition-colors cursor-pointer",
+        isHeader
+          ? "h-10 rounded-lg border border-gray-200 bg-white px-2.5 text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-800"
+          : "w-full rounded-lg px-3 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800"
+      )}
       title={
         lastSync
           ? t("lastSync", {
@@ -98,9 +114,13 @@ export default function CloudSyncStatus({ collapsed = false }) {
       <span className={`material-symbols-outlined text-[16px] ${config.color}`} aria-hidden="true">
         {config.icon}
       </span>
-      {!collapsed && (
+      {showLabel && (
         <span
-          className={`truncate ${status === "connected" ? "text-green-500" : "text-text-muted"}`}
+          className={cn(
+            "truncate",
+            isHeader ? "hidden sm:inline" : "",
+            status === "connected" ? "text-green-500" : "text-text-muted"
+          )}
         >
           {label}
         </span>

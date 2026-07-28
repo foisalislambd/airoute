@@ -42,7 +42,7 @@ export function toToastText(value: unknown): string {
   return String(value);
 }
 
-const BG_DARK = "rgba(30, 30, 30, 0.95)";
+const BG_DARK = "#1e1e1e";
 
 const COLORS = {
   success: {
@@ -95,7 +95,6 @@ function Toast({ notification, onDismiss }) {
         borderRadius: "10px",
         backgroundColor: color.bg,
         border: `1px solid ${color.border}`,
-        backdropFilter: "blur(12px)",
         boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
         minWidth: "320px",
         maxWidth: "420px",
