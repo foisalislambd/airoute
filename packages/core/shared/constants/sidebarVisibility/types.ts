@@ -153,6 +153,8 @@ export interface SidebarSectionDefinition {
   id: SidebarSectionId;
   titleKey: string;
   titleFallback: string;
+  /** Material Symbols ligature shown beside the section title. */
+  icon?: string;
   children: readonly SidebarSectionChild[];
   showTitle?: boolean;
   visibility?: "always" | "debug";

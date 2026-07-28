@@ -570,11 +570,16 @@ export default function Sidebar({
             return (
               <div key={section.id} className={isFirst ? "space-y-0.5" : "mt-2"}>
                 <div
-                  className="flex items-center gap-0.5 px-2 py-1 rounded-md hover:bg-surface/30 transition-colors cursor-pointer group/header"
+                  className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-surface/30 transition-colors cursor-pointer group/header"
                   onClick={() => toggleSection(sectionId)}
                   role="button"
                   aria-expanded={isExpanded}
                 >
+                  {section.icon && (
+                    <span className="material-symbols-outlined text-[16px] text-text-muted/70 group-hover/header:text-text-muted shrink-0">
+                      {section.icon}
+                    </span>
+                  )}
                   <span className="flex-1 text-xs font-semibold text-text-muted/80 uppercase tracking-wider group-hover/header:text-text-muted transition-colors">
                     {section.title}
                   </span>
