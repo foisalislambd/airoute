@@ -26,11 +26,11 @@ npm run dev
 
 **Benefits in practice**
 
-- **Save money** — prefer free/cheap models first; fall back only when needed  
-- **Stay online** — multi-account + multi-provider combos survive outages and 429s  
-- **Ship faster** — drop-in OpenAI `/v1` API; no client rewrites  
-- **Stay private** — runs on your machine; SQLite data under `~/.airoute`  
-- **Stay in control** — API keys, scopes, IP filters, LOCAL_ONLY management routes  
+- **Save money** — prefer free/cheap models first; fall back only when needed
+- **Stay online** — multi-account + multi-provider combos survive outages and 429s
+- **Ship faster** — drop-in OpenAI `/v1` API; no client rewrites
+- **Stay private** — runs on your machine; SQLite data under `~/.airoute`
+- **Stay in control** — API keys, scopes, IP filters, LOCAL_ONLY management routes
 
 ---
 
@@ -48,14 +48,14 @@ npm run dev
 
 ### Core capabilities
 
-- **OpenAI-compatible API** — `/v1/chat/completions`, `/v1/responses`, `/v1/models`, embeddings, images, audio, search, and more  
-- **Combos** — chain providers/models/accounts with strategies like priority, round-robin, P2C, cost-optimized, reset-aware, auto, fusion  
-- **Auto routing** — prefixes like `auto/coding`, `auto/fast`, `auto/cheap` pick a fit without hand-tuning  
-- **Provider hub** — OAuth (Claude, Codex, Cursor, Kiro, …) + API keys + free providers  
-- **Resilience** — circuit breakers, cooldowns, model lockout, account fallback, sticky sessions  
-- **Compression & context** — prompt compression pipelines, context handoff between accounts  
-- **Ops dashboard** — providers, combos, analytics, health, translator playground, API keys  
-- **MCP / skills / memory** — optional agent tooling on top of the gateway  
+- **OpenAI-compatible API** — `/v1/chat/completions`, `/v1/responses`, `/v1/models`, embeddings, images, audio, search, and more
+- **Combos** — chain providers/models/accounts with strategies like priority, round-robin, P2C, cost-optimized, reset-aware, auto, fusion
+- **Auto routing** — prefixes like `auto/coding`, `auto/fast`, `auto/cheap` pick a fit without hand-tuning
+- **Provider hub** — OAuth (Claude, Codex, Cursor, Kiro, …) + API keys + free providers
+- **Resilience** — circuit breakers, cooldowns, model lockout, account fallback, sticky sessions
+- **Compression & context** — prompt compression pipelines, context handoff between accounts
+- **Ops dashboard** — providers, combos, analytics, health, translator playground, API keys
+- **MCP / skills / memory** — optional agent tooling on top of the gateway
 
 ---
 
@@ -63,7 +63,7 @@ npm run dev
 
 ### Requirements
 
-- Node.js **22.22+** or **24–26** (see `package.json` `engines`)  
+- Node.js **22.22+** or **24–26** (see `package.json` `engines`)
 - npm workspaces (this repo)
 
 ### Run from source
@@ -77,8 +77,8 @@ npm run dev
 
 Open **http://localhost:20128**
 
-1. Add a provider (free or OAuth / API key)  
-2. Create an API key in the dashboard  
+1. Add a provider (free or OAuth / API key)
+2. Create an API key in the dashboard
 3. Point your tool at AIRoute:
 
 ```bash
@@ -115,12 +115,12 @@ scripts/      Dev / build / ops helpers
 
 **Request path (simplified)**
 
-1. Client hits `/v1/...` with your AIRoute API key  
-2. Authz classifies the route and enforces scopes / locality  
-3. Model or combo is resolved (alias → combo → targets)  
-4. Request is translated to the upstream format  
-5. Executor calls the provider; failures trigger the next target  
-6. Response is translated back; usage is recorded  
+1. Client hits `/v1/...` with your AIRoute API key
+2. Authz classifies the route and enforces scopes / locality
+3. Model or combo is resolved (alias → combo → targets)
+4. Request is translated to the upstream format
+5. Executor calls the provider; failures trigger the next target
+6. Response is translated back; usage is recorded
 
 For deeper docs see [`docs/`](docs/README.md) — start with [Quick Start](docs/getting-started/QUICK-START.md) and [Architecture](docs/architecture/ARCHITECTURE.md).
 
@@ -128,16 +128,16 @@ For deeper docs see [`docs/`](docs/README.md) — start with [Quick Start](docs/
 
 ## Common workflows
 
-**IDE coding agent**  
+**IDE coding agent**
 Set base URL to `http://localhost:20128/v1` and use an AIRoute API key. Use a combo model name (or `auto/coding`) so failover is automatic.
 
-**Cheap daily use**  
+**Cheap daily use**
 Connect free providers first; build a combo with cost-optimized / fill-first strategy; keep a paid account as last resort.
 
-**Quota rotation**  
+**Quota rotation**
 Add multiple accounts for the same provider; use reset-aware or quota-share strategies so traffic spreads across windows.
 
-**Debugging**  
+**Debugging**
 Use the Translator playground and Live Monitor in the dashboard to inspect format conversion and streams.
 
 ---
@@ -157,9 +157,9 @@ CLI tooling lives under `bin/` (e.g. `bin/airoute.mjs` → serve, doctor, provid
 
 ## Security notes
 
-- Management routes that can spawn processes are **LOCAL_ONLY** (loopback / trusted LAN with stamped peer IP)  
-- Provider credentials can be encrypted at rest (`STORAGE_ENCRYPTION_KEY`)  
-- Prefer binding to localhost unless you intentionally expose the gateway  
+- Management routes that can spawn processes are **LOCAL_ONLY** (loopback / trusted LAN with stamped peer IP)
+- Provider credentials can be encrypted at rest (`STORAGE_ENCRYPTION_KEY`)
+- Prefer binding to localhost unless you intentionally expose the gateway
 
 See [SECURITY.md](SECURITY.md) for reporting and architecture details.
 

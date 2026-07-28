@@ -207,18 +207,18 @@ Schema lives in two migrations:
 
 All endpoints live under `src/app/api/skills/`. Management endpoints (`/api/skills`, `/api/skills/[id]`, `/api/skills/install`) require **management auth** via `requireManagementAuth()`. The marketplace/install flows use the lighter `isAuthenticated()` (session or API key).
 
-| Endpoint                          | Method | Purpose                                                                  |
-| --------------------------------- | ------ | ------------------------------------------------------------------------ | --- | ------------------------ | -------- | ------------------ |
-| `/api/skills`                     | GET    | List registered skills. Supports `?q=`, `?mode=on                        | off | auto`, `?source=skillsmp | skillssh | local`, pagination |
-| `/api/skills/[id]`                | PUT    | Update `enabled` or `mode`                                               |
-| `/api/skills/[id]`                | DELETE | Unregister by id                                                         |
-| `/api/skills/install`             | POST   | Install a custom skill (handler code + schema)                           |
-| `/api/skills/marketplace`         | GET    | Search the SkillsMP catalog (returns popular defaults when `q` is empty) |
-| `/api/skills/marketplace/install` | POST   | Install a SkillsMP skill (requires active provider = `skillsmp`)         |
-| `/api/skills/skillssh`            | GET    | Search the skills.sh catalog (`?q=&limit=`, capped at 100)               |
-| `/api/skills/skillssh/install`    | POST   | Install a skills.sh skill (requires active provider = `skillssh`)        |
-| `/api/skills/executions`          | GET    | Paginated execution history (`?apiKeyId=`)                               |
-| `/api/skills/executions`          | POST   | Execute a registered skill ad-hoc                                        |
+| Endpoint                          | Method | Purpose                                                                                          |
+| --------------------------------- | ------ | ------------------------------------------------------------------------------------------------ |
+| `/api/skills`                     | GET    | List registered skills. Supports `?q=`, `?mode=on\|off\|auto`, `?source=skillsmp\|skillssh\|local`, pagination |
+| `/api/skills/[id]`                | PUT    | Update `enabled` or `mode`                                                                       |
+| `/api/skills/[id]`                | DELETE | Unregister by id                                                                                 |
+| `/api/skills/install`             | POST   | Install a custom skill (handler code + schema)                                                   |
+| `/api/skills/marketplace`         | GET    | Search the SkillsMP catalog (returns popular defaults when `q` is empty)                         |
+| `/api/skills/marketplace/install` | POST   | Install a SkillsMP skill (requires active provider = `skillsmp`)                                 |
+| `/api/skills/skillssh`            | GET    | Search the skills.sh catalog (`?q=&limit=`, capped at 100)                                       |
+| `/api/skills/skillssh/install`    | POST   | Install a skills.sh skill (requires active provider = `skillssh`)                                |
+| `/api/skills/executions`          | GET    | Paginated execution history (`?apiKeyId=`)                                                       |
+| `/api/skills/executions`          | POST   | Execute a registered skill ad-hoc                                                                |
 
 The `POST /api/skills/executions` endpoint returns HTTP `503` with `{ error: "Skills execution is disabled..." }` when `settings.skillsEnabled === false` (`executor.ts:42-45`). Operators can flip the master switch from **Settings → AI**.
 

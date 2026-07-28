@@ -21,5 +21,5 @@ Machine status: `in_progress`
 
 Every WBS item must maintain: `id`, `acceptance_criterion`, `status`, `source_paths`, `test_paths`, `command`, `expected`, `observed`, `evidence_sha`, `updated_at`, and `pr_url`.
 
-PR: `https://github.com/diegosouzapw/AIRoute/pull/7002`  
+PR: `https://github.com/diegosouzapw/AIRoute/pull/7002`
 Issue: `https://github.com/diegosouzapw/AIRoute/issues/5980`

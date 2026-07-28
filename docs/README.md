@@ -52,7 +52,7 @@ Simple guides for using AIRoute — no technical background needed.
 
 Technical documentation for developers and contributors.
 
-## architecture/
+### architecture/
 
 How the system is put together — read these to understand the runtime, code layout, and resilience model.
 
@@ -65,7 +65,7 @@ How the system is put together — read these to understand the runtime, code la
 - [MONITORING_SECTIONS.md](architecture/MONITORING_SECTIONS.md) — monitoring/costs dashboard navigation.
 - [cluster-decisions.md](architecture/cluster-decisions.md) — optional sidecar/cluster profile decisions.
 
-## reference/
+### reference/
 
 Lookup material — API surface, environment variables, CLI flags, provider catalog.
 
@@ -78,7 +78,7 @@ Lookup material — API surface, environment variables, CLI flags, provider cata
 - [CLI-TOOLS.md](reference/CLI-TOOLS.md) — bundled CLI commands.
 - [FREE_TIERS.md](reference/FREE_TIERS.md) — free-tier LLM provider directory.
 
-## frameworks/
+### frameworks/
 
 Pluggable subsystems exposed to clients, agents, and operators.
 
@@ -106,7 +106,7 @@ Pluggable subsystems exposed to clients, agents, and operators.
 - [PLUGIN_SDK.md](frameworks/PLUGIN_SDK.md) — plugin SDK reference.
 - [PLUGIN_MARKETPLACE.md](frameworks/PLUGIN_MARKETPLACE.md) — plugin marketplace.
 
-## routing/
+### routing/
 
 Combo routing, scoring, and replay.
 
@@ -114,7 +114,7 @@ Combo routing, scoring, and replay.
 - [QUOTA_SHARE.md](routing/QUOTA_SHARE.md) — quota sharing engine.
 - [REASONING_REPLAY.md](routing/REASONING_REPLAY.md) — reasoning replay cache.
 
-## security/
+### security/
 
 Guardrails, compliance, stealth, and the mandatory patterns for handling public credentials and error messages.
 
@@ -130,7 +130,7 @@ Guardrails, compliance, stealth, and the mandatory patterns for handling public 
 - [SUPPLY_CHAIN.md](security/SUPPLY_CHAIN.md) — supply-chain gates (SLSA, SBOM, Trivy, osv-scanner, Scorecard).
 - [SOCKET_DEV_FINDINGS.md](security/SOCKET_DEV_FINDINGS.md) — supply-chain finding attestations.
 
-## compression/
+### compression/
 
 Prompt compression engines, rules, and language packs.
 
@@ -142,7 +142,7 @@ Prompt compression engines, rules, and language packs.
 - [CONTEXT_EDITING.md](compression/CONTEXT_EDITING.md) — delegated context editing (Anthropic).
 - [EXTENDING_COMPRESSION.md](compression/EXTENDING_COMPRESSION.md) — adding a custom compression engine.
 
-## providers/
+### providers/
 
 Provider-specific integration guides.
 
@@ -150,11 +150,11 @@ Provider-specific integration guides.
 - [AGENTROUTER.md](providers/AGENTROUTER.md) — AgentRouter setup.
 - [ZED-DOCKER.md](providers/ZED-DOCKER.md) — Zed IDE integration under Docker.
 
-## comparison/
+### comparison/
 
 - [AIROUTE_VS_ALTERNATIVES.md](comparison/AIROUTE_VS_ALTERNATIVES.md) — how AIRoute compares to alternatives.
 
-## ops/
+### ops/
 
 Release, deployment, proxies, tunnels, coverage, database, monitoring.
 
@@ -171,11 +171,11 @@ Release, deployment, proxies, tunnels, coverage, database, monitoring.
 - [PROXY_GUIDE.md](ops/PROXY_GUIDE.md) — upstream proxy configuration.
 - [TUNNELS_GUIDE.md](ops/TUNNELS_GUIDE.md) — Cloudflare tunnel and friends.
 
-## diagrams/
+### diagrams/
 
 Mermaid sources and exported SVG/PNG diagrams referenced from the docs above. See [diagrams/README.md](diagrams/README.md).
 
-## screenshots/
+### screenshots/
 
 Static screenshots used by the dashboard and the README. Not part of the doc body.
 

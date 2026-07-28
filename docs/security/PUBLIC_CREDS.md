@@ -14,7 +14,6 @@ lastUpdated: 2026-06-28
 
 ## Why this exists
 
-
 - [OAuth 2.0 for native apps (PKCE)](https://developers.google.com/identity/protocols/oauth2/native-app) — OAuth client_id / client_secret for installed apps are public; PKCE provides the actual security.
 - [Firebase API keys](https://firebase.google.com/docs/projects/api-keys) — Web client identifiers are public by design.
 

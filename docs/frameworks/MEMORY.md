@@ -128,7 +128,7 @@ Concretely:
 
 1. Run FTS5 search → ranked list `R_fts` (position 1..N).
 2. Run KNN vector search → ranked list `R_vec` (position 1..M).
-3. For each unique `memoryId`:  
+3. For each unique `memoryId`:
    `rrf_score = 1/(60 + fts_rank)` + `1/(60 + vec_rank)` (0 if not in list).
 4. Sort by `rrf_score` DESC, apply token budget walk.
 
