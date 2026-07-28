@@ -1,0 +1,17 @@
+{
+  "name": "@omniroute/open-sse",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AIRoute open-sse (compatible name @omniroute/open-sse)",
+  "main": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./*": "./*"
+  },
+  "dependencies": {
+    "@toon-format/toon": "^4.1.0",
+    "safe-regex": "^2.1.1",
+    "smol-toml": "1.7.1"
+  }
+}

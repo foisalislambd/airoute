@@ -1,0 +1,32 @@
+{
+  "common": {
+    "error": "Virhe: {message}",
+    "serverOffline": "AIRoute-palvelin on offline. Käynnistä komennolla: airoute serve",
+    "authRequired": "Todennus vaaditaan. Aseta AIROUTE_API_KEY tai suorita: airoute setup",
+    "rateLimited": "Pyyntöraja ylitetty. Yritä uudelleen {seconds}s kuluttua.",
+    "timeout": "Pyyntö aikakatkaistiin {ms}ms jälkeen.",
+    "success": "Valmis.",
+    "yes": "kyllä",
+    "no": "ei",
+    "confirm": "Oletko varma? (kyllä/ei)",
+    "dryRun": "[simulointi] tekisi: {action}",
+    "cancelled": "Peruutettu.",
+    "jsonOpt": "Tulosta JSON-muodossa",
+    "yesOpt": "Ohita vahvistuspyyntö"
+  },
+  "program": {
+    "description": "AIRoute — Älykäs AI-reititin automaattisella fallbackilla",
+    "version": "Tulosta versio ja poistu",
+    "output": "Tulostusmuoto (table, json, jsonl, csv)",
+    "quiet": "Piilota epäolennaiset tulosteet",
+    "no_color": "Poista väritulostus käytöstä",
+    "timeout": "HTTP-pyyntöjen aikakatkaisu millisekunteina",
+    "api_key": "API-avain AIRoute-palvelimelle",
+    "base_url": "AIRoute-palvelimen perus-URL",
+    "context": "Palvelimen konteksti/profiili tälle komennolle",
+    "lang": "Aseta CLI-näyttökieli (ohittaa AIROUTE_LANG)"
+  },
+  "redis": {
+    "description": "Käynnistä paikallinen Redis-säiliö yhdellä napsautuksella (Podman tai Docker) AIRoute-välimuistia ja kiintiöiden seurantaa varten"
+  }
+}

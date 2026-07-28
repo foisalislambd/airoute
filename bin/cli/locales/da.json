@@ -1,0 +1,32 @@
+{
+  "common": {
+    "error": "Fejl: {message}",
+    "serverOffline": "AIRoute-serveren er offline. Start med: airoute serve",
+    "authRequired": "Godkendelse kræves. Sæt AIROUTE_API_KEY eller kør: airoute setup",
+    "rateLimited": "Anmodningsgrænse overskredet. Prøv igen om {seconds}s.",
+    "timeout": "Anmodningen timed ud efter {ms}ms.",
+    "success": "Færdig.",
+    "yes": "ja",
+    "no": "nej",
+    "confirm": "Er du sikker? (ja/nej)",
+    "dryRun": "[simulering] ville: {action}",
+    "cancelled": "Annulleret.",
+    "jsonOpt": "Output som JSON",
+    "yesOpt": "Spring bekræftelse over"
+  },
+  "program": {
+    "description": "AIRoute — Smart AI-router med automatisk fallback",
+    "version": "Vis version og afslut",
+    "output": "Outputformat (table, json, jsonl, csv)",
+    "quiet": "Undertryk ikke-essentielt output",
+    "no_color": "Deaktiver farvet output",
+    "timeout": "HTTP-anmodnings timeout i millisekunder",
+    "api_key": "API-nøgle til AIRoute-serveren",
+    "base_url": "AIRoute-serverens basis-URL",
+    "context": "Server-kontekst/profil til denne kommando",
+    "lang": "Angiv CLI-visningssprog (tilsidesætter AIROUTE_LANG)"
+  },
+  "redis": {
+    "description": "Start en lokal Redis-container med ét klik (Podman eller Docker) til AIRoute-caching og kvoteovervågning"
+  }
+}
