@@ -87,18 +87,50 @@ export function parseJsonValueAt(text: string, start: number): unknown {
   throw new Error("npm pack --json output was truncated or malformed.");
 }
 
-/**
- * Locate the `npm pack --json` report.
- * Prefers a top-level array/object that has a `files` array (the pack report),
- * skipping incidental `[` characters inside earlier notice text.
- */
-export function parseNpmPackReport(output: string): {
+export type NpmPackReport = {
   filename?: string;
   entryCount?: number;
   size?: number;
   unpackedSize?: number;
   files: Array<{ path: string; size?: number; mode?: number }>;
-} {
+};
+
+/**
+ * Normalize npm pack --json shapes:
+ * - npm ≤11: `[{ name, files, filename, ... }]`
+ * - npm ≥12: `{ "<pkg>": { name, files, filename, ... } }`
+ */
+export function extractPackReport(parsed: unknown): NpmPackReport | null {
+  if (!parsed || typeof parsed !== "object") return null;
+
+  if (Array.isArray(parsed)) {
+    const first = parsed[0];
+    if (first && typeof first === "object" && Array.isArray((first as NpmPackReport).files)) {
+      return first as NpmPackReport;
+    }
+    return null;
+  }
+
+  const record = parsed as Record<string, unknown>;
+  if (Array.isArray(record.files)) {
+    return record as NpmPackReport;
+  }
+
+  for (const value of Object.values(record)) {
+    if (value && typeof value === "object" && Array.isArray((value as NpmPackReport).files)) {
+      return value as NpmPackReport;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Locate the `npm pack --json` report.
+ * Prefers a top-level array/object that has a `files` array (the pack report),
+ * skipping incidental `[` characters inside earlier notice text.
+ */
+export function parseNpmPackReport(output: string): NpmPackReport {
   const text = stripNpmCliNoise(output);
   if (!text) {
     throw new Error("npm pack --dry-run --json produced empty output.");
@@ -128,10 +160,8 @@ export function parseNpmPackReport(output: string): {
     seen.add(start);
     try {
       const parsed = parseJsonValueAt(text, start);
-      const report = Array.isArray(parsed) ? parsed[0] : parsed;
-      if (report && typeof report === "object" && Array.isArray((report as any).files)) {
-        return report as any;
-      }
+      const report = extractPackReport(parsed);
+      if (report) return report;
     } catch (err: any) {
       errors.push(String(err?.message || err));
     }
