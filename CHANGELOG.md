@@ -7,6 +7,12 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.6] — 2026-08-01
+
+### Changed
+
+- npm publish via Trusted Publisher (OIDC); no `NPM_TOKEN` / EOTP in CI
+
 ## [1.0.5] — 2026-08-01
 
 ### Fixed
