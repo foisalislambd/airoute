@@ -5,7 +5,11 @@ name: Release
 # [skip release] in commit → nothing published.
 # If v<version> tag already exists → skip (already released).
 #
-# Secrets: NPM_TOKEN, DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
+# Secrets: DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
+# npmjs: Trusted Publisher (OIDC) — no NPM_TOKEN.
+#   npmjs.com → airoute → Settings → Trusted Publisher → GitHub Actions:
+#   user=foisalislambd  repo=airoute  workflow=release.yml  (filename only)
+#   Allowed actions: npm publish
 
 on:
   push:
@@ -106,6 +110,9 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
 
+      # Trusted Publisher (OIDC) needs npm ≥ 11.5.1; Node 22 ships older npm.
+      - run: npm install -g npm@latest
+
       - run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Version check
@@ -137,13 +144,13 @@ jobs:
           npm run build:release
           npm run check:pack-artifact
 
+      # OIDC Trusted Publisher — do NOT set NODE_AUTH_TOKEN (token path → EOTP).
       - name: Publish npmjs
         if: steps.ver.outputs.skip != 'true'
         env:
           VERSION: ${{ needs.release.outputs.version }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --provenance --access public --tag latest
+          npm publish --access public --tag latest
           echo "npmjs airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Publish GitHub Packages
