@@ -1,25 +1,19 @@
 name: Publish Docker
 
 # Publishes `airoute` images to:
-#   1) docker.io/<DOCKERHUB_USERNAME>/airoute
+#   1) docker.io/<owner>/airoute
 #   2) ghcr.io/<owner>/airoute
 #
-# Tags: :VERSION, :VERSION-web, and :latest / :latest-web when this is the
-# highest stable semver. Push to main publishes :main only (never :latest).
+# Driven by the Release workflow via workflow_dispatch (and manual re-runs).
+# Not hooked to push/main — Release owns versioned publishes so each tag
+# builds once. Image namespace uses github.repository_owner (not secrets).
 #
 # Secrets: DOCKERHUB_USERNAME, DOCKERHUB_TOKEN. GHCR uses GITHUB_TOKEN.
 
 on:
-  push:
-    branches: [main]
-    tags: ["v*"]
-    paths-ignore:
-      - "**.md"
-      - "docs/**"
-  # Note: do NOT listen for `release` here. The Release workflow creates the
-  # GitHub Release with GITHUB_TOKEN (which would not re-trigger anyway) and
-  # then explicitly `workflow_dispatch`es this file — keeping a single publish
-  # path avoids double builds if a PAT is later used for releases.
+  # Note: do NOT listen for `release` or `push` here. The Release workflow
+  # creates the tag/Release with GITHUB_TOKEN (which would not re-trigger
+  # anyway) and then explicitly `workflow_dispatch`es this file.
   workflow_dispatch:
     inputs:
       version:
@@ -85,14 +79,10 @@ jobs:
 
           case "$EVENT_NAME" in
             workflow_dispatch) VERSION="${INPUT_VERSION#v}" ;;
-            push)
-              if [ "$REF_TYPE" = "tag" ]; then
-                VERSION="${REF_NAME#v}"
-              else
-                VERSION="main"
-              fi
+            *)
+              echo "Publish Docker only runs via workflow_dispatch (from Release)." >&2
+              exit 1
               ;;
-            *) VERSION="${REF_NAME#v}" ;;
           esac
 
           if ! printf '%s' "$VERSION" | grep -qE '^[A-Za-z0-9._-]+$'; then
@@ -101,19 +91,10 @@ jobs:
           fi
 
           PROMOTE="false"
-          if [ "$VERSION" = "main" ]; then
+          if printf '%s' "$VERSION" | grep -qE -- '-(rc|alpha|beta|pre|next)'; then
             PROMOTE="false"
-          elif printf '%s' "$VERSION" | grep -qE -- '-(rc|alpha|beta|pre|next)'; then
-            PROMOTE="false"
-          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "${PROMOTE_INPUT}" = "true" ]; then
-              PROMOTE="true"
-            else
-              PROMOTE="false"
-            fi
-          else
-            git fetch --tags --quiet || true
-            PROMOTE=$(git tag -l 'v[0-9]*' | bash scripts/ci/should-promote-latest.sh "$VERSION")
+          elif [ "${PROMOTE_INPUT}" = "true" ]; then
+            PROMOTE="true"
           fi
 
           SKIP="false"

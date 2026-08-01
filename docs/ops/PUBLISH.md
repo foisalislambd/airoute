@@ -17,25 +17,48 @@ Starts at **`1.0.0`**. Patch rolls at 9, then minor, then major:
 1.0.0 → 1.0.1 → … → 1.0.9 → 1.1.0 → … → 1.9.9 → 2.0.0 → …
 ```
 
-## One-click release (recommended)
+## Auto-release on `main` (default)
 
-1. Add secrets: `NPM_TOKEN`, `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN`
-2. GitHub → **Actions** → **Release** → **Run workflow**
-   - `mode: auto` (default) — picks next version
-   - first run (no `v*` tags yet) → **`1.0.0`**
-3. The workflow will:
-   - bump `package.json` (+ workspaces)
-   - commit `chore(release): X.Y.Z`
-   - create tag **`vX.Y.Z`**
-   - create **GitHub Release**
-   - dispatch **npm** + **Docker** publish (all 4 registries)
+Every push to **`main`** runs **Release**:
+
+1. Bump version (`package.json` + workspaces)
+2. Commit `chore(release): X.Y.Z` (includes `[skip release]` so it does not loop)
+3. Create tag **`vX.Y.Z`** + **GitHub Release**
+4. Dispatch **npm** + **Docker** publish (all 4 registries)
+
+First release (no `v*` tags yet) → **`1.0.0`**.
+
+### Skip a release
+
+Put one of these in the commit message (any line):
+
+- `[skip release]`
+- `[no release]`
+
+Example:
+
+```bash
+git commit -m "docs: tweak README
+
+[skip release]"
+```
+
+Pure `**.md` / `docs/**` pushes are also ignored (no version bump).
+
+### Manual release
+
+GitHub → **Actions** → **Release** → **Run workflow**
+
+- `mode: auto` (default) — next version
+- `mode: current` — tag whatever is in `package.json`
+- `mode: explicit` — set `version` (e.g. `1.2.0`)
 
 ## Required GitHub secrets
 
 | Secret | Used by |
 | --- | --- |
 | `NPM_TOKEN` | npmjs publish |
-| `DOCKERHUB_USERNAME` | Docker Hub login + image namespace |
+| `DOCKERHUB_USERNAME` | Docker Hub login |
 | `DOCKERHUB_TOKEN` | Docker Hub login |
 
 `GITHUB_TOKEN` is automatic (GitHub Packages npm + GHCR + Release).
@@ -44,11 +67,11 @@ Starts at **`1.0.0`**. Patch rolls at 9, then minor, then major:
 
 | Workflow | Role |
 | --- | --- |
-| `release.yml` | Version bump + tag + GitHub Release + **dispatch** npm/Docker |
+| `release.yml` | Auto on `main` (+ manual): bump + tag + GitHub Release + **dispatch** npm/Docker |
 | `npm-publish.yml` | npmjs + GitHub Packages (`workflow_dispatch` only) |
-| `docker-publish.yml` | Docker Hub + GHCR (`workflow_dispatch` + push `main`/`v*`) |
+| `docker-publish.yml` | Docker Hub + GHCR (`workflow_dispatch` only) |
 
-Publish jobs are **not** hooked to the `release` event (GITHUB_TOKEN-created releases do not re-trigger workflows). The Release workflow always dispatches them explicitly so each version publishes exactly once.
+Publish jobs are **not** hooked to `push`/`release` events. Release always dispatches them so each version publishes exactly once.
 
 ## Install / pull
 

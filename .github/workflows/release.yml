@@ -1,16 +1,26 @@
 name: Release
 
-# Creates a GitHub Release + git tag (vX.Y.Z), which triggers:
-#   - npm-publish.yml  → npmjs + GitHub Packages
-#   - docker-publish.yml → Docker Hub + GHCR
+# Auto-release on every push to `main` (tag + GitHub Release + npm + Docker),
+# unless the commit message opts out.
+#
+# Skip (no release):
+#   - commit message contains `[skip release]` or `[no release]`
+#   - release-bot commits themselves (`chore(release): …`) — prevents loops
+#
+# Manual: Actions → Release → Run workflow (mode auto|current|explicit)
 #
 # Version scheme (roll at 9):
 #   1.0.0 → 1.0.1 → … → 1.0.9 → 1.1.0 → … → 1.9.9 → 2.0.0
 # First release is always 1.0.0 when no v* tags exist yet.
-#
-# Run: Actions → Release → Run workflow
 
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".github/workflows/docker-publish.yml"
+      - ".github/workflows/npm-publish.yml"
   workflow_dispatch:
     inputs:
       mode:
@@ -43,7 +53,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  gate:
+    name: Release gate
+    runs-on: ubuntu-latest
+    outputs:
+      should_release: ${{ steps.check.outputs.should_release }}
+      skip_reason: ${{ steps.check.outputs.skip_reason }}
+    steps:
+      - name: Decide whether to release
+        id: check
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          set -euo pipefail
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch — releasing."
+            exit 0
+          fi
+
+          MSG="${COMMIT_MSG:-}"
+
+          if printf '%s\n' "$MSG" | grep -qiE '\[[[:space:]]*skip[[:space:]]+release[[:space:]]*\]|\[[[:space:]]*no[[:space:]]+release[[:space:]]*\]'; then
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=commit message contains [skip release] / [no release]" >> "$GITHUB_OUTPUT"
+            echo "Skipping release (opt-out in commit message)."
+            exit 0
+          fi
+
+          # Release workflow pushes `chore(release): X.Y.Z` back to main — must not
+          # re-enter or we infinite-loop version bumps.
+          if printf '%s\n' "$MSG" | head -n1 | grep -qE '^chore\(release\):'; then
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+            echo "skip_reason=chore(release) bot commit" >> "$GITHUB_OUTPUT"
+            echo "Skipping release (release commit)."
+            exit 0
+          fi
+
+          echo "should_release=true" >> "$GITHUB_OUTPUT"
+          echo "skip_reason=" >> "$GITHUB_OUTPUT"
+          echo "Push to main — releasing."
+
   release:
+    name: Tag, GitHub Release, publish
+    needs: gate
+    if: needs.gate.outputs.should_release == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -60,12 +117,19 @@ jobs:
       - name: Resolve next version
         id: ver
         env:
-          MODE: ${{ inputs.mode }}
+          EVENT_NAME: ${{ github.event_name }}
+          MODE_INPUT: ${{ inputs.mode }}
           EXPLICIT: ${{ inputs.version }}
         run: |
           set -euo pipefail
           CURRENT=$(node -p "require('./package.json').version")
           TAGS=$(git tag -l 'v[0-9]*' | tr '\n' ',' )
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            MODE="${MODE_INPUT:-auto}"
+          else
+            MODE="auto"
+          fi
 
           case "$MODE" in
             explicit)
@@ -121,11 +185,10 @@ jobs:
           if git diff --cached --quiet; then
             echo "No version file changes to commit (already at $VERSION)"
           else
-            git commit -m "chore(release): ${VERSION}"
+            # chore(release): + [skip release] both stop the main-push gate from looping.
+            git commit -m "$(printf 'chore(release): %s\n\n[skip release]\n' "$VERSION")"
           fi
-          # Annotated tag on current HEAD (commit or previous HEAD if no bump commit).
           git tag -a "$TAG" -m "AIRoute ${VERSION}"
-          # Push branch first so the tag's commit is reachable, then the tag.
           git push origin "HEAD:${GITHUB_REF_NAME}"
           git push origin "$TAG"
 
@@ -134,38 +197,63 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.ver.outputs.tag }}
           VERSION: ${{ steps.ver.outputs.version }}
-          PRERELEASE: ${{ inputs.prerelease }}
+          EVENT_NAME: ${{ github.event_name }}
+          PRERELEASE_INPUT: ${{ inputs.prerelease }}
         run: |
           set -euo pipefail
           ARGS=( "$TAG" --title "AIRoute ${VERSION}" --generate-notes )
-          if [ "$PRERELEASE" = "true" ]; then
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$PRERELEASE_INPUT" = "true" ]; then
             ARGS+=( --prerelease )
           fi
           gh release create "${ARGS[@]}"
 
       - name: Dispatch npm + Docker publish
-        # GITHUB_TOKEN-created releases do not re-trigger other workflows, so we
+        # GITHUB_TOKEN pushes/tags do not re-trigger other workflows, so we
         # explicitly dispatch publish jobs against the new tag.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.ver.outputs.tag }}
           VERSION: ${{ steps.ver.outputs.version }}
-          IS_PRERELEASE: ${{ inputs.prerelease }}
+          EVENT_NAME: ${{ github.event_name }}
+          PRERELEASE_INPUT: ${{ inputs.prerelease }}
         run: |
           set -euo pipefail
           PROMOTE=true
-          if [ "$IS_PRERELEASE" = "true" ]; then
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$PRERELEASE_INPUT" = "true" ]; then
             PROMOTE=false
           fi
+
+          # Tag push can lag briefly before workflow_dispatch --ref sees it.
+          for _ in 1 2 3 4 5 6 7 8 9 10; do
+            if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+              break
+            fi
+            sleep 2
+          done
+          git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null
+
           gh workflow run npm-publish.yml --ref "$TAG" -f "version=$VERSION" -f tag=auto
           gh workflow run docker-publish.yml --ref "$TAG" \
             -f "version=$VERSION" \
             -f "promote_latest=$PROMOTE"
           {
-            echo "## 🚀 Release ${TAG} created"
+            echo "## Release ${TAG} created"
             echo ""
             echo "Dispatched publish workflows for \`${VERSION}\`:"
             echo "- **npmjs** \`airoute@${VERSION}\`"
             echo "- **GitHub Packages** \`@${{ github.repository_owner }}/airoute\`"
             echo "- **Docker Hub** + **GHCR** \`airoute:${VERSION}\` (+ \`-web\`)"
           } >> "$GITHUB_STEP_SUMMARY"
+
+  skipped:
+    name: Release skipped
+    needs: gate
+    if: needs.gate.outputs.should_release != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summarize skip
+        env:
+          REASON: ${{ needs.gate.outputs.skip_reason }}
+        run: |
+          echo "Release skipped: ${REASON:-unknown}" >> "$GITHUB_STEP_SUMMARY"
+          echo "Release skipped: ${REASON:-unknown}"
