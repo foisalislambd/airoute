@@ -42,6 +42,11 @@ const nextConfig = {
   distDir,
   compress: true,
   productionBrowserSourceMaps: false,
+  // Pre-existing TS debt is gated by `typecheck:core` / `check:dashboard-typecheck`,
+  // not `next build` (same as OmniRoute). Without this, Docker fails one error at a time.
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   transpilePackages: [
     "@omniroute/open-sse",
     "@airoute/core",

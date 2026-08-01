@@ -1,6 +1,7 @@
 import http from "http";
 import type { IncomingMessage, ServerResponse } from "http";
 import net from "net";
+import type { Duplex } from "stream";
 import { getRuntimePorts } from "@/lib/runtime/ports";
 import { getApiBridgeTimeoutConfig } from "@/shared/utils/runtimeTimeouts";
 
@@ -91,7 +92,7 @@ function proxyRequest(req: IncomingMessage, res: ServerResponse, dashboardPort: 
   req.pipe(targetReq);
 }
 
-function writeUpgradeProxyError(socket: net.Socket, status: number, body: string): void {
+function writeUpgradeProxyError(socket: Duplex, status: number, body: string): void {
   if (!socket.writable || socket.destroyed) return;
   const buffer = Buffer.from(body, "utf8");
   const response = [
@@ -109,7 +110,7 @@ function writeUpgradeProxyError(socket: net.Socket, status: number, body: string
 
 function proxyUpgrade(
   req: IncomingMessage,
-  socket: net.Socket,
+  socket: Duplex,
   head: Buffer,
   dashboardPort: number
 ) {

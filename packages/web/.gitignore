@@ -18,6 +18,8 @@
 /out/
 # fumadocs may create a local .source; canonical output is repo-root /.source
 .source/
+# Next sometimes mirrors absolute distDir paths as relative `home/...` under cwd
+/home/
 
 # production
 /build
