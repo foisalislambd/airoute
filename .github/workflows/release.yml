@@ -1,9 +1,14 @@
 name: Release
 
-# Push to main → tag + GitHub Release + npm + Docker from package.json version.
-# CI does NOT bump versions — humans/agents bump before push (see AGENTS.md).
+# Push to main → read package.json version → build → publish only if all builds OK.
+# Agents/maintainers bump versions before push (see AGENTS.md). CI never bumps.
 # [skip release] in commit → nothing published.
 # If v<version> tag already exists → skip (already released).
+#
+# Order (all-or-nothing):
+#   decide → (npm-build ∥ docker-build) → publish (npm + Docker) → tag + GitHub Release LAST
+# Any build failure cancels the rest of the run; nothing is tagged/released.
+# If publish fails mid-way, later steps stop (GitHub Release is always last).
 #
 # Secrets: DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
 # npmjs: Trusted Publisher (OIDC) — no NPM_TOKEN.
@@ -21,6 +26,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
   packages: write
   id-token: write
 
@@ -29,12 +35,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  release:
+  decide:
     runs-on: ubuntu-latest
     outputs:
       go: ${{ steps.decide.outputs.go }}
       version: ${{ steps.decide.outputs.version }}
       tag: ${{ steps.decide.outputs.tag }}
+      sha: ${{ steps.decide.outputs.sha }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -45,6 +52,7 @@ jobs:
         env:
           EVENT: ${{ github.event_name }}
           MSG: ${{ github.event.head_commit.message }}
+          SHA: ${{ github.sha }}
         run: |
           set -euo pipefail
 
@@ -53,6 +61,7 @@ jobs:
               echo "go=false" >> "$GITHUB_OUTPUT"
               echo "version=" >> "$GITHUB_OUTPUT"
               echo "tag=" >> "$GITHUB_OUTPUT"
+              echo "sha=" >> "$GITHUB_OUTPUT"
               echo "Skipped: [skip release]"
               exit 0
             fi
@@ -69,6 +78,7 @@ jobs:
             echo "go=false" >> "$GITHUB_OUTPUT"
             echo "version=$VERSION" >> "$GITHUB_OUTPUT"
             echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+            echo "sha=$SHA" >> "$GITHUB_OUTPUT"
             echo "Tag $TAG already exists — skip publish."
             exit 0
           fi
@@ -76,33 +86,19 @@ jobs:
           echo "go=true" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "Will release $TAG (from package.json, no CI bump)"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Will build $TAG from $SHA; publish only if all builds succeed"
 
-      - name: Tag + GitHub Release
-        if: steps.decide.outputs.go == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.decide.outputs.tag }}
-          VERSION: ${{ steps.decide.outputs.version }}
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "$TAG" -m "AIRoute ${VERSION}"
-          git push origin "$TAG"
-          gh release create "$TAG" --title "AIRoute ${VERSION}" --generate-notes
-          echo "GitHub Release ${TAG}" >> "$GITHUB_STEP_SUMMARY"
-
-  npm:
-    needs: release
-    if: needs.release.outputs.go == 'true'
+  npm-build:
+    needs: decide
+    if: needs.decide.outputs.go == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          ref: refs/tags/${{ needs.release.outputs.tag }}
+          ref: ${{ needs.decide.outputs.sha }}
 
       - uses: actions/setup-node@v7
         with:
@@ -110,30 +106,14 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: npm
 
-      # Trusted Publisher (OIDC) needs npm ≥ 11.5.1; Node 22 ships older npm.
       - run: npm install -g npm@latest
-
       - run: npm ci --ignore-scripts --no-audit --no-fund
 
-      - name: Version check
-        id: ver
-        env:
-          VERSION: ${{ needs.release.outputs.version }}
-        run: |
-          set -euo pipefail
-          SKIP=false
-          if [ "$(npm view "airoute@${VERSION}" version 2>/dev/null || true)" = "$VERSION" ]; then
-            SKIP=true
-          fi
-          O=$(printf '%s' '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')
-          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
-          echo "gh=@${O}/airoute" >> "$GITHUB_OUTPUT"
-
       - env:
-          VERSION: ${{ needs.release.outputs.version }}
+          VERSION: ${{ needs.decide.outputs.version }}
         run: npm version "$VERSION" --no-git-tag-version --allow-same-version
 
-      - name: Build
+      - name: Build + pack
         env:
           JWT_SECRET: ci-build-secret-with-sufficient-length-for-validation
           AIROUTE_USE_TURBOPACK: "0"
@@ -141,41 +121,32 @@ jobs:
           AIROUTE_BUILD_MEMORY_MB: "8192"
           OMNIROUTE_BUILD_MEMORY_MB: "8192"
         run: |
+          set -euo pipefail
           npm run build:release
           npm run check:pack-artifact
+          npm pack --ignore-scripts
+          ls -la airoute-*.tgz
 
-      # OIDC Trusted Publisher — do NOT set NODE_AUTH_TOKEN (token path → EOTP).
-      - name: Publish npmjs
-        if: steps.ver.outputs.skip != 'true'
-        env:
-          VERSION: ${{ needs.release.outputs.version }}
-        run: |
-          npm publish --access public --tag latest
-          echo "npmjs airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: npm-tarball
+          path: airoute-*.tgz
+          if-no-files-found: error
+          retention-days: 1
 
-      - name: Publish GitHub Packages
+      - name: Cancel run on failure
+        if: failure()
         env:
-          VERSION: ${{ needs.release.outputs.version }}
-          NAME: ${{ steps.ver.outputs.gh }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          O=$(printf '%s' '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')
-          printf '%s\n' \
-            "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" \
-            "@${O}:registry=https://npm.pkg.github.com" > .npmrc
-          npm pkg set "name=${NAME}"
-          npm publish --registry=https://npm.pkg.github.com --access public --tag latest \
-            || echo "GH Packages skipped/failed for ${NAME}@${VERSION}"
-          echo "GitHub Packages ${NAME}@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh run cancel "${{ github.run_id }}" --repo "${{ github.repository }}" || true
 
   docker-build:
-    needs: release
-    if: needs.release.outputs.go == 'true'
+    needs: decide
+    if: needs.decide.outputs.go == 'true'
     name: docker-${{ matrix.arch }}
     runs-on: ${{ matrix.runner }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - platform: linux/amd64
@@ -187,7 +158,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          ref: refs/tags/${{ needs.release.outputs.tag }}
+          ref: ${{ needs.decide.outputs.sha }}
 
       - id: img
         env:
@@ -254,15 +225,74 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  docker-publish:
-    needs: [release, docker-build]
-    if: needs.release.outputs.go == 'true'
+      - name: Cancel run on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh run cancel "${{ github.run_id }}" --repo "${{ github.repository }}" || true
+
+  publish:
+    needs: [decide, npm-build, docker-build]
+    if: needs.decide.outputs.go == 'true' && needs.npm-build.result == 'success' && needs.docker-build.result == 'success'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: ${{ needs.decide.outputs.sha }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          # Do NOT set registry-url here: setup-node would write
+          # `:_authToken=${NODE_AUTH_TOKEN}` and an empty token breaks OIDC.
+
+      - run: npm install -g npm@latest
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: npm-tarball
+          path: /tmp/npm
+
+      - name: Publish npmjs
+        env:
+          VERSION: ${{ needs.decide.outputs.version }}
+        run: |
+          set -euo pipefail
+          TGZ=$(ls /tmp/npm/airoute-*.tgz | head -n1)
+          test -f "$TGZ"
+          if [ "$(npm view "airoute@${VERSION}" version 2>/dev/null || true)" = "$VERSION" ]; then
+            echo "airoute@${VERSION} already on npmjs — skip"
+          else
+            npm publish "$TGZ" --access public --tag latest
+            echo "npmjs airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Publish GitHub Packages
+        env:
+          VERSION: ${{ needs.decide.outputs.version }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          O=$(printf '%s' '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')
+          TGZ=$(ls /tmp/npm/airoute-*.tgz | head -n1)
+          test -f "$TGZ"
+          rm -rf /tmp/ghpkg
+          mkdir -p /tmp/ghpkg
+          tar -xzf "$TGZ" -C /tmp/ghpkg
+          cd /tmp/ghpkg/package
+          npm pkg set "name=@${O}/airoute"
+          # .npmrc must live next to the package being published.
+          printf '%s\n' \
+            "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" \
+            "@${O}:registry=https://npm.pkg.github.com" > .npmrc
+          npm publish --registry=https://npm.pkg.github.com --access public --tag latest
+          echo "GitHub Packages @${O}/airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+
       - id: img
         env:
           OWNER: ${{ github.repository_owner }}
-          VERSION: ${{ needs.release.outputs.version }}
+          VERSION: ${{ needs.decide.outputs.version }}
         run: |
           O=$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')
           echo "hub=${O}/airoute" >> "$GITHUB_OUTPUT"
@@ -292,7 +322,7 @@ jobs:
           path: /tmp/d/web
           merge-multiple: true
 
-      - name: Create manifests
+      - name: Docker manifests
         env:
           HUB: ${{ steps.img.outputs.hub }}
           GHCR: ${{ steps.img.outputs.ghcr }}
@@ -314,3 +344,18 @@ jobs:
           mk "$GHCR" "" /tmp/d/base
           mk "$GHCR" "-web" /tmp/d/web
           echo "Docker ${HUB}:${VERSION} (+ -web, :latest) → Hub + GHCR" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Tag + GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.decide.outputs.tag }}
+          VERSION: ${{ needs.decide.outputs.version }}
+          SHA: ${{ needs.decide.outputs.sha }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$TAG" "$SHA" -m "AIRoute ${VERSION}"
+          git push origin "$TAG"
+          gh release create "$TAG" --target "$SHA" --title "AIRoute ${VERSION}" --generate-notes
+          echo "GitHub Release ${TAG} (last step)" >> "$GITHUB_STEP_SUMMARY"

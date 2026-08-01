@@ -41,17 +41,13 @@ That updates:
 - `CHANGELOG.md`
 
 3. Commit the version files with the rest of the work (or a follow-up commit).  
-   Push to `main` → Release workflow tags `v$NEXT` and publishes npm + Docker.
+   Push to `main` → Release workflow builds npm + Docker; **only if all succeed** it publishes, then creates the git tag + GitHub Release **last**.
 
 ### Do **not** bump when
 
 - User said not to release / docs-only / CI-only / WIP  
-- Commit should use `[skip release]` (no tag/npm/Docker even if version changed)
+- Commit should use `[skip release]` (no publish/tag even if version changed)
 
-### Skip publish without bumping
+### Laptop builds
 
-Put this in the commit message:
-
-```
-[skip release]
-```
+Do **not** run `npm run build`, `build:release`, or full `check:pack-artifact` on weak laptops (Next.js build can hang). Prefer CI for release builds; local `check:pack-policy` is fine.
