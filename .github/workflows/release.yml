@@ -1,8 +1,9 @@
 name: Release
 
-# Push to main → version + tag + GitHub Release + npm + Docker (one workflow).
-# Commit message with [skip release] → exit early (nothing published).
-# Manual: Actions → Release → Run workflow (optional version input).
+# Push to main → tag + GitHub Release + npm + Docker from package.json version.
+# CI does NOT bump versions — humans/agents bump before push (see AGENTS.md).
+# [skip release] in commit → nothing published.
+# If v<version> tag already exists → skip (already released).
 #
 # Secrets: NPM_TOKEN, DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
 
@@ -13,11 +14,6 @@ on:
       - "**.md"
       - "docs/**"
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Empty = auto next version, or e.g. 1.2.0"
-        required: false
-        type: string
 
 permissions:
   contents: write
@@ -29,114 +25,70 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # ── 1) Version, tag, GitHub Release ─────────────────────────────────────
   release:
     runs-on: ubuntu-latest
     outputs:
-      go: ${{ steps.gate.outputs.go }}
-      version: ${{ steps.ver.outputs.version }}
-      tag: ${{ steps.ver.outputs.tag }}
+      go: ${{ steps.decide.outputs.go }}
+      version: ${{ steps.decide.outputs.version }}
+      tag: ${{ steps.decide.outputs.tag }}
     steps:
-      - name: Gate
-        id: gate
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Decide
+        id: decide
         env:
           EVENT: ${{ github.event_name }}
           MSG: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
-          if [ "$EVENT" = "workflow_dispatch" ]; then
-            echo "go=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          if printf '%s\n' "${MSG:-}" | grep -qiE '\[skip[[:space:]]+release\]'; then
-            echo "go=false" >> "$GITHUB_OUTPUT"
-            echo "Skipped: [skip release] — no tag/npm/Docker."
-            exit 0
-          fi
-          if printf '%s\n' "${MSG:-}" | head -n1 | grep -qE '^chore\(release\):'; then
-            echo "go=false" >> "$GITHUB_OUTPUT"
-            echo "Skipped: release bot commit."
-            exit 0
-          fi
-          echo "go=true" >> "$GITHUB_OUTPUT"
 
-      - if: steps.gate.outputs.go == 'true'
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - if: steps.gate.outputs.go == 'true'
-        uses: actions/setup-node@v7
-        with:
-          node-version: "22"
-
-      - name: Version
-        if: steps.gate.outputs.go == 'true'
-        id: ver
-        env:
-          EVENT: ${{ github.event_name }}
-          EXPLICIT: ${{ inputs.version }}
-        run: |
-          set -euo pipefail
-          CURRENT=$(node -p "require('./package.json').version")
-          TAGS=$(git tag -l 'v[0-9]*' | tr '\n' ',' )
-
-          if [ "$EVENT" = "workflow_dispatch" ] && [ -n "${EXPLICIT:-}" ]; then
-            VERSION="${EXPLICIT#v}"
-            if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-              echo "Invalid version: $EXPLICIT" >&2
-              exit 1
+          if [ "$EVENT" != "workflow_dispatch" ]; then
+            if printf '%s\n' "${MSG:-}" | grep -qiE '\[skip[[:space:]]+release\]'; then
+              echo "go=false" >> "$GITHUB_OUTPUT"
+              echo "version=" >> "$GITHUB_OUTPUT"
+              echo "tag=" >> "$GITHUB_OUTPUT"
+              echo "Skipped: [skip release]"
+              exit 0
             fi
-          else
-            VERSION=$(node scripts/release/next-version.mjs resolve "$CURRENT" "$TAGS")
           fi
 
-          TAG="v${VERSION}"
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "Tag $TAG already exists" >&2
+          VERSION=$(node -p "require('./package.json').version")
+          if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "Invalid package.json version: $VERSION" >&2
             exit 1
           fi
+          TAG="v${VERSION}"
+
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "go=false" >> "$GITHUB_OUTPUT"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+            echo "Tag $TAG already exists — skip publish."
+            exit 0
+          fi
+
+          echo "go=true" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          echo "$CURRENT → $VERSION"
+          echo "Will release $TAG (from package.json, no CI bump)"
 
-      - name: Bump + changelog
-        if: steps.gate.outputs.go == 'true'
+      - name: Tag + GitHub Release
+        if: steps.decide.outputs.go == 'true'
         env:
-          VERSION: ${{ steps.ver.outputs.version }}
-        run: |
-          node scripts/release/bump-version.mjs "$VERSION"
-          node scripts/release/stamp-changelog.mjs "$VERSION"
-
-      - name: Commit, tag, push
-        if: steps.gate.outputs.go == 'true'
-        env:
-          VERSION: ${{ steps.ver.outputs.version }}
-          TAG: ${{ steps.ver.outputs.tag }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.decide.outputs.tag }}
+          VERSION: ${{ steps.decide.outputs.version }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json package-lock.json packages/*/package.json CHANGELOG.md || true
-          if ! git diff --cached --quiet; then
-            git commit -m "$(printf 'chore(release): %s\n\n[skip release]\n' "$VERSION")"
-          fi
           git tag -a "$TAG" -m "AIRoute ${VERSION}"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
           git push origin "$TAG"
-
-      - name: GitHub Release
-        if: steps.gate.outputs.go == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.ver.outputs.tag }}
-          VERSION: ${{ steps.ver.outputs.version }}
-        run: |
           gh release create "$TAG" --title "AIRoute ${VERSION}" --generate-notes
           echo "GitHub Release ${TAG}" >> "$GITHUB_STEP_SUMMARY"
 
-  # ── 2) npm (npmjs + GitHub Packages) ────────────────────────────────────
   npm:
     needs: release
     if: needs.release.outputs.go == 'true'
@@ -210,7 +162,6 @@ jobs:
             || echo "GH Packages skipped/failed for ${NAME}@${VERSION}"
           echo "GitHub Packages ${NAME}@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
 
-  # ── 3) Docker digests (amd64 + arm64) ───────────────────────────────────
   docker-build:
     needs: release
     if: needs.release.outputs.go == 'true'
@@ -296,7 +247,6 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  # ── 4) Docker multi-arch manifests ──────────────────────────────────────
   docker-publish:
     needs: [release, docker-build]
     if: needs.release.outputs.go == 'true'
