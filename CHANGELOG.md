@@ -7,6 +7,8 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] — 2026-08-01
+
 ### Added
 
 - Open-source community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
