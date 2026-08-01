@@ -16,7 +16,7 @@ airoute/
 └── package.json   # npm workspaces root
 ```
 
-**Brand:** AIRoute · **Data dir:** `~/.airoute` (override with `DATA_DIR`)
+**Brand:** AIRoute · **Data dir:** `~/.airoute` (override with `DATA_DIR`) · **npm:** `npm i -g airoute`
 
 ## Layout rules
 

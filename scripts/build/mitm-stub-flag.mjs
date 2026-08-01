@@ -14,7 +14,7 @@
  * is now opt-in via OMNIROUTE_MITM_STUB=1, set by the Dockerfile.
  */
 export function shouldStubMitmManager(env = process.env) {
-  return env.OMNIROUTE_MITM_STUB === "1";
+  return env.AIROUTE_MITM_STUB === "1" || env.OMNIROUTE_MITM_STUB === "1";
 }
 
 /** Turbopack resolveAlias fragment for @/mitm/manager, derived from the env. */

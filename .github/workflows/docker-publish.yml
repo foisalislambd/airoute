@@ -1,0 +1,329 @@
+name: Publish Docker
+
+# Publishes `airoute` images to:
+#   1) docker.io/<DOCKERHUB_USERNAME>/airoute
+#   2) ghcr.io/<owner>/airoute
+#
+# Tags: :VERSION, :VERSION-web, and :latest / :latest-web when this is the
+# highest stable semver. Push to main publishes :main only (never :latest).
+#
+# Secrets: DOCKERHUB_USERNAME, DOCKERHUB_TOKEN. GHCR uses GITHUB_TOKEN.
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+  # Note: do NOT listen for `release` here. The Release workflow creates the
+  # GitHub Release with GITHUB_TOKEN (which would not re-trigger anyway) and
+  # then explicitly `workflow_dispatch`es this file — keeping a single publish
+  # path avoids double builds if a PAT is later used for releases.
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag to build (e.g. 1.0.0)"
+        required: true
+        type: string
+      promote_latest:
+        description: "Also tag :latest (only if highest semver)"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: Resolve Docker release metadata
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      promote_latest: ${{ steps.meta.outputs.promote_latest }}
+      skip: ${{ steps.meta.outputs.skip }}
+      hub_image: ${{ steps.meta.outputs.hub_image }}
+      ghcr_image: ${{ steps.meta.outputs.ghcr_image }}
+    steps:
+      - name: Resolve tag ref
+        id: tagref
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          RAW: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          V="${RAW#v}"
+          echo "ref=refs/tags/v${V}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ steps.tagref.outputs.ref }}
+
+      - name: Resolve version / latest / skip
+        id: meta
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          INPUT_VERSION: ${{ inputs.version }}
+          PROMOTE_INPUT: ${{ inputs.promote_latest }}
+          HUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+
+          OWNER_LC="$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')"
+          HUB_NS="${HUB_USER:-$OWNER_LC}"
+          HUB_IMAGE="${HUB_NS}/airoute"
+          GHCR_IMAGE="ghcr.io/${OWNER_LC}/airoute"
+
+          case "$EVENT_NAME" in
+            workflow_dispatch) VERSION="${INPUT_VERSION#v}" ;;
+            push)
+              if [ "$REF_TYPE" = "tag" ]; then
+                VERSION="${REF_NAME#v}"
+              else
+                VERSION="main"
+              fi
+              ;;
+            *) VERSION="${REF_NAME#v}" ;;
+          esac
+
+          if ! printf '%s' "$VERSION" | grep -qE '^[A-Za-z0-9._-]+$'; then
+            echo "Refusing unsafe VERSION: $VERSION" >&2
+            exit 1
+          fi
+
+          PROMOTE="false"
+          if [ "$VERSION" = "main" ]; then
+            PROMOTE="false"
+          elif printf '%s' "$VERSION" | grep -qE -- '-(rc|alpha|beta|pre|next)'; then
+            PROMOTE="false"
+          elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            # Boolean inputs arrive as the strings "true" / "false".
+            if [ "${PROMOTE_INPUT}" = "true" ]; then
+              PROMOTE="true"
+            else
+              PROMOTE="false"
+            fi
+          else
+            git fetch --tags --quiet || true
+            PROMOTE=$(git tag -l 'v[0-9]*' | bash scripts/ci/should-promote-latest.sh "$VERSION")
+          fi
+
+          SKIP="false"
+          if [ "$VERSION" != "main" ] && [ -n "${HUB_USER:-}" ]; then
+            if docker manifest inspect "${HUB_IMAGE}:${VERSION}" >/dev/null 2>&1; then
+              echo "Image ${HUB_IMAGE}:${VERSION} already on Docker Hub — skip rebuild."
+              SKIP="true"
+            fi
+          fi
+
+          {
+            echo "version=$VERSION"
+            echo "promote_latest=$PROMOTE"
+            echo "skip=$SKIP"
+            echo "hub_image=$HUB_IMAGE"
+            echo "ghcr_image=$GHCR_IMAGE"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Publishing $HUB_IMAGE:$VERSION + $GHCR_IMAGE:$VERSION (promote_latest=$PROMOTE skip=$SKIP)"
+
+  build:
+    name: Build (${{ matrix.platform }})
+    needs: prepare
+    if: needs.prepare.outputs.skip != 'true'
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04
+            arch: amd64
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+            arch: arm64
+    env:
+      IMAGE_NAME: ${{ needs.prepare.outputs.hub_image }}
+      GHCR_IMAGE_NAME: ${{ needs.prepare.outputs.ghcr_image }}
+    steps:
+      - name: Resolve tag ref
+        id: tagref
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          RAW: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          V="${RAW#v}"
+          echo "ref=refs/tags/v${V}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ steps.tagref.outputs.ref }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push base digest
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: runner-base
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+          tags: |
+            ${{ env.IMAGE_NAME }}
+            ${{ env.GHCR_IMAGE_NAME }}
+          cache-from: type=gha,scope=docker-${{ matrix.arch }}
+          cache-to: type=gha,scope=docker-${{ matrix.arch }},mode=max
+          build-args: |
+            AIROUTE_BUILD_MEMORY_MB=8192
+
+      - name: Build and push web digest
+        id: build-web
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: runner-web
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
+          tags: |
+            ${{ env.IMAGE_NAME }}
+            ${{ env.GHCR_IMAGE_NAME }}
+          cache-from: type=gha,scope=docker-web-${{ matrix.arch }}
+          cache-to: type=gha,scope=docker-web-${{ matrix.arch }},mode=max
+          build-args: |
+            AIROUTE_BUILD_MEMORY_MB=8192
+
+      - name: Export digests
+        env:
+          DIGEST_BASE: ${{ steps.build.outputs.digest }}
+          DIGEST_WEB: ${{ steps.build-web.outputs.digest }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/digests/base /tmp/digests/web
+          touch "/tmp/digests/base/${DIGEST_BASE#sha256:}"
+          touch "/tmp/digests/web/${DIGEST_WEB#sha256:}"
+
+      - name: Upload base digests
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-base-${{ matrix.arch }}
+          path: /tmp/digests/base/*
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload web digests
+        uses: actions/upload-artifact@v4
+        with:
+          name: digests-web-${{ matrix.arch }}
+          path: /tmp/digests/web/*
+          if-no-files-found: error
+          retention-days: 1
+
+  merge:
+    name: Publish multi-arch manifests
+    needs: [prepare, build]
+    if: needs.prepare.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE_NAME: ${{ needs.prepare.outputs.hub_image }}
+      GHCR_IMAGE_NAME: ${{ needs.prepare.outputs.ghcr_image }}
+      VERSION: ${{ needs.prepare.outputs.version }}
+      PROMOTE_LATEST: ${{ needs.prepare.outputs.promote_latest }}
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download base digests
+        uses: actions/download-artifact@v4
+        with:
+          pattern: digests-base-*
+          path: /tmp/digests/base
+          merge-multiple: true
+
+      - name: Download web digests
+        uses: actions/download-artifact@v4
+        with:
+          pattern: digests-web-*
+          path: /tmp/digests/web
+          merge-multiple: true
+
+      - name: Create manifests (Hub + GHCR)
+        run: |
+          set -euo pipefail
+
+          create_manifest() {
+            local image="$1" suffix="$2" dir="$3"
+            local tags=(-t "${image}:${VERSION}${suffix}")
+            if [ "$PROMOTE_LATEST" = "true" ]; then
+              tags+=(-t "${image}:latest${suffix}")
+            fi
+            local refs=()
+            while IFS= read -r digest_file; do
+              refs+=("${image}@sha256:$(basename "$digest_file")")
+            done < <(find "$dir" -type f | sort)
+            if [ "${#refs[@]}" -eq 0 ]; then
+              echo "No digests in $dir" >&2
+              exit 1
+            fi
+            docker buildx imagetools create "${tags[@]}" "${refs[@]}"
+          }
+
+          create_manifest "${IMAGE_NAME}" "" /tmp/digests/base
+          create_manifest "${IMAGE_NAME}" "-web" /tmp/digests/web
+          create_manifest "${GHCR_IMAGE_NAME}" "" /tmp/digests/base
+          create_manifest "${GHCR_IMAGE_NAME}" "-web" /tmp/digests/web
+
+          {
+            echo "## 🐳 airoute Docker published"
+            echo ""
+            echo "- Docker Hub: \`${IMAGE_NAME}:${VERSION}\` (+ \`${VERSION}-web\`)"
+            echo "- GHCR: \`${GHCR_IMAGE_NAME}:${VERSION}\` (+ \`${VERSION}-web\`)"
+            if [ "$PROMOTE_LATEST" = "true" ]; then
+              echo "- Also tagged \`:latest\` / \`:latest-web\`"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Inspect image
+        if: needs.prepare.outputs.version != 'main'
+        run: docker buildx imagetools inspect "${IMAGE_NAME}:${VERSION}"

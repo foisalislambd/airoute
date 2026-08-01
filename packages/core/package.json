@@ -1,6 +1,6 @@
 {
   "name": "@airoute/core",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "AIRoute core — db, shared, domain, sse auth, models",

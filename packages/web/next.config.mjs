@@ -28,8 +28,20 @@ const withMDX = createMDX({
   outDir: path.resolve(repoRoot, ".source"),
 });
 
+// Emit under the monorepo root so build-next-isolated / prepublish can find
+// `.build/next/standalone/server.js` the same way OmniRoute does.
+const distDir = process.env.NEXT_DIST_DIR
+  ? path.isAbsolute(process.env.NEXT_DIST_DIR)
+    ? process.env.NEXT_DIST_DIR
+    : path.resolve(repoRoot, process.env.NEXT_DIST_DIR)
+  : path.resolve(repoRoot, ".build/next");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
+  distDir,
+  compress: true,
+  productionBrowserSourceMaps: false,
   transpilePackages: [
     "@omniroute/open-sse",
     "@airoute/core",
@@ -38,6 +50,38 @@ const nextConfig = {
   ],
   experimental: {
     externalDir: true,
+    serverActions: {
+      bodySizeLimit: process.env.OMNIROUTE_SERVER_ACTIONS_BODY_LIMIT || "50mb",
+    },
+    proxyClientMaxBodySize: process.env.NEXT_PROXY_BODY_LIMIT || "512mb",
+    optimizePackageImports: [
+      "@lobehub/icons",
+      "lucide-react",
+      "material-symbols",
+      "next-intl",
+    ],
+  },
+  outputFileTracingRoot: repoRoot,
+  outputFileTracingIncludes: {
+    "/*": [
+      "../core/lib/db/migrations/**/*",
+      "../core/mitm/server.cjs",
+      "../open-sse/services/compression/engines/rtk/filters/**/*.json",
+      "../open-sse/services/compression/rules/**/*.json",
+      "../open-sse/lib/sha3_wasm_bg.wasm",
+      "../open-sse/lib/deepseek-pow-solver.cjs",
+      "../../node_modules/sql.js/dist/sql-wasm.wasm",
+    ],
+  },
+  outputFileTracingExcludes: {
+    "/*": [
+      "../../.git/**/*",
+      "../../coverage/**/*",
+      "../../test-results/**/*",
+      "../../playwright-report/**/*",
+      "../../tests/**/*",
+      "../../logs/**/*",
+    ],
   },
   serverExternalPackages: [
     "pino",

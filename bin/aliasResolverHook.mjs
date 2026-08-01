@@ -42,6 +42,10 @@ const EXTENSIONS = [".ts", ".tsx", ".js", ".mjs", ".cjs", ".json"];
  */
 const ALIAS_TABLE = [
   { prefix: "@/", target: "packages/core", exact: false },
+  { prefix: "@airoute/core/", target: "packages/core", exact: false },
+  { prefix: "@airoute/core", target: "packages/core", exact: true },
+  { prefix: "@airoute/open-sse/", target: "packages/open-sse", exact: false },
+  { prefix: "@airoute/open-sse", target: "packages/open-sse", exact: true },
   { prefix: "@omniroute/open-sse/", target: "packages/open-sse", exact: false },
   { prefix: "@omniroute/open-sse", target: "packages/open-sse", exact: true },
 ];

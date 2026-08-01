@@ -7,6 +7,14 @@
 Point Cursor, Claude Code, Codex, OpenCode, Continue, or any OpenAI SDK client at AIRoute. Connect free tiers, OAuth apps, and API keys once. AIRoute handles translation, failover, rate limits, and usage tracking for you.
 
 ```bash
+npm install -g airoute
+airoute
+# → http://localhost:20128
+```
+
+Or run from source:
+
+```bash
 npm install
 npm run dev
 # → http://localhost:20128
@@ -61,10 +69,41 @@ npm run dev
 
 ## Quick start
 
+### Install from npm
+
+```bash
+npm install -g airoute
+airoute
+```
+
+Dashboard + OpenAI-compatible API: **http://localhost:20128**
+
+```bash
+airoute --version
+airoute stop
+airoute doctor
+```
+
+### Run with Docker
+
+```bash
+docker pull foisalislambd/airoute:latest
+docker run --rm -p 20128:20128 -v airoute-data:/app/data foisalislambd/airoute:latest
+```
+
+Or from this repo:
+
+```bash
+docker compose --profile base up -d --build
+```
+
+Publish targets (via GitHub Actions): npmjs, GitHub Packages, Docker Hub, GHCR — see [docs/ops/PUBLISH.md](docs/ops/PUBLISH.md).
+
+To cut a release (tag + GitHub Release + all publishes): **Actions → Release → Run workflow** (`mode: auto`). Versions go `1.0.0` → `1.0.9` → `1.1.0`.
+
 ### Requirements
 
 - Node.js **22.22+** or **24–26** (see `package.json` `engines`)
-- npm workspaces (this repo)
 
 ### Run from source
 

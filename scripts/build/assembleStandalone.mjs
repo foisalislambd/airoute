@@ -91,7 +91,16 @@ const NATIVE_ASSET_ENTRIES = [
     // builds → syncNativeAssetsToDir skips it gracefully. The runtime loader
     // (transparentSocket.ts) resolves it cwd-relative to this same dest.
     label: "TPROXY transparent-socket addon (Linux-only, opt-in)",
-    src: ["src", "mitm", "tproxy", "native", "build", "Release", "transparent.node"],
+    src: [
+      "packages",
+      "core",
+      "mitm",
+      "tproxy",
+      "native",
+      "build",
+      "Release",
+      "transparent.node",
+    ],
     dest: ["src", "mitm", "tproxy", "native", "build", "Release", "transparent.node"],
   },
 ];
@@ -114,8 +123,22 @@ const EXTRA_MODULE_ENTRIES = [
     dest: ["node_modules", "pino-pretty"],
   },
   { label: "split2", src: ["node_modules", "split2"], dest: ["node_modules", "split2"] },
-  { label: "migrations", src: ["src", "lib", "db", "migrations"], dest: ["migrations"] },
-  { label: "MITM server", src: ["src", "mitm", "server.cjs"], dest: ["src", "mitm", "server.cjs"] },
+  {
+    label: "migrations",
+    src: ["packages", "core", "lib", "db", "migrations"],
+    dest: ["migrations"],
+  },
+  {
+    label: "MITM server",
+    src: ["packages", "core", "mitm", "server.cjs"],
+    dest: ["src", "mitm", "server.cjs"],
+  },
+  {
+    // Prefer packages/web/public (monorepo); root public/ kept as fallback below.
+    label: "public directory (packages/web)",
+    src: ["packages", "web", "public"],
+    dest: ["public"],
+  },
   {
     label: "run-standalone script",
     src: ["scripts", "dev", "run-standalone.mjs"],
@@ -462,9 +485,17 @@ function copyStaticAndPublic({ distDir, relDistDir, projectRoot, resolvedOutDir 
     fsSync.cpSync(staticSrc, staticDest, { recursive: true, force: true });
   }
 
-  const publicSrc = path.join(projectRoot, "public");
-  if (fsSync.existsSync(publicSrc)) {
-    fsSync.cpSync(publicSrc, path.join(resolvedOutDir, "public"), { recursive: true, force: true });
+  const publicCandidates = [
+    path.join(projectRoot, "packages", "web", "public"),
+    path.join(projectRoot, "public"),
+  ];
+  for (const publicSrc of publicCandidates) {
+    if (!fsSync.existsSync(publicSrc)) continue;
+    fsSync.cpSync(publicSrc, path.join(resolvedOutDir, "public"), {
+      recursive: true,
+      force: true,
+    });
+    break;
   }
 }
 

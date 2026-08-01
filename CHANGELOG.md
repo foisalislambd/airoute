@@ -12,16 +12,29 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 - Open-source community files: `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`,
   `SUPPORT.md`, GitHub issue/PR templates
 - Root product `README.md` and monorepo `STRUCTURE.md`
+- npm publish wiring: root `bin`/`files`/`prepublishOnly`, standalone Next
+  build, and pack-artifact policy adapted for `packages/*`
+- Docker + multi-registry GitHub Actions: npmjs, GitHub Packages,
+  Docker Hub, and GHCR (`airoute`)
+- Auto Release workflow (`release.yml`) with roll-at-9 versioning
+  (`1.0.0` → `1.0.9` → `1.1.0`) and GitHub Release + tag creation
 
 ### Changed
 
 - Packages live under `packages/{web,open-sse,core}` (no convenience content
   symlinks under `packages/`)
 - Docs i18n mirrors removed from the repo; English docs remain in `docs/`
+- Public version line starts at **1.0.0**
 
 ### Security
 
 - See [SECURITY.md](SECURITY.md) for the reporting process
+
+## [1.0.0] — 2026-08-01
+
+### Added
+
+- First public release line for npm + Docker (Hub/GHCR) + GitHub Packages
 
 ## [0.1.0] — 2026-07-28
 
@@ -32,5 +45,6 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 - Local AI gateway: Next.js dashboard, open-sse streaming engine, core libs
 - OpenAI-compatible `/v1` surface, combo routing, provider connections
 
-[Unreleased]: https://github.com/foisalislambd/airoute/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/foisalislambd/airoute/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/foisalislambd/airoute/releases/tag/v1.0.0
 [0.1.0]: https://github.com/foisalislambd/airoute/releases/tag/v0.1.0

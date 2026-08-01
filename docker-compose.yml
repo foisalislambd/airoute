@@ -2,6 +2,11 @@
 #  AIRoute — Docker Compose
 # ──────────────────────────────────────────────────────────────────────
 #
+#  Published images (after CI release):
+#    docker.io/foisalislambd/airoute:latest
+#    ghcr.io/foisalislambd/airoute:latest
+#    … plus :VERSION / :VERSION-web / :latest-web
+#
 #  Profiles:
 #    base  → minimal image, no CLI tools
 #    web   → runner-web (+Chromium/Playwright) for web-cookie providers
@@ -20,9 +25,6 @@
 #    docker compose --profile cli --profile cliproxyapi up -d
 #    docker compose --profile base --profile memory up -d   # adds Qdrant sidecar
 #    docker compose --profile base --profile bifrost up -d  # adds Bifrost sidecar
-#
-#  See docs/architecture/cluster-decisions.md for the per-component rationale
-#  (Qdrant=opt-in, Bifrost=opt-in, Caddy=upstream LB, no Dragonfly/NATS/PG/Neo4j/MinIO).
 #
 #  Before first run, copy .env.example → .env and edit your secrets.
 # ──────────────────────────────────────────────────────────────────────

@@ -1,9 +1,9 @@
 /**
- * Shared policy for OmniRoute npm publish artifact hygiene.
+ * Shared policy for AIRoute npm publish artifact hygiene.
  *
  * The package publishes the standalone runtime under dist/ (Layer 1: renamed from app/).
  * This policy keeps local backups, QA scratch files, and development-only
- * directories out of the staged dist/ tree and out of the final tarball.
+ * dirs out of the staged dist/ tree and out of the final tarball.
  */
 
 const STAGING_FORBIDDEN_DIRECTORIES = [
@@ -35,14 +35,9 @@ export const APP_STAGING_ALLOWED_EXACT_PATHS: string[] = [
   ".env.example",
   "BUILD_SHA",
   "docs/openapi.yaml",
-  // #7065: imported by dist/server-ws.mjs; assembleStandalone copies it but without
-  // this bare entry the prepublish prune deleted it → every `omniroute` boot of the
-  // published 3.8.47 crashed with ERR_MODULE_NOT_FOUND (same class as tls-options/3.8.41).
   "head-response-guard.cjs",
   "http-method-guard.cjs",
   "open-sse/mcp-server/server.js",
-  // LLMLingua ONNX worker — esbuild'd standalone .js spawned via worker_threads
-  // (the Next.js bundler can't trace the computed Worker path). Kept like the MCP server.
   "open-sse/services/compression/engines/llmlingua/onnxWorker.js",
   "package.json",
   "peer-stamp.mjs",
@@ -52,10 +47,6 @@ export const APP_STAGING_ALLOWED_EXACT_PATHS: string[] = [
   "scripts/dev/tls-options.mjs",
   "server.js",
   "server-ws.mjs",
-  // #5452: dist/tls-options.mjs is copied by assembleStandalone (EXTRA_MODULE_ENTRIES)
-  // and imported by dist/server-ws.mjs for opt-in native HTTPS/TLS (#5361). Without
-  // this bare entry the prepublish prune (Step 10.7) deletes it → `omniroute serve`
-  // crashes with ERR_MODULE_NOT_FOUND (regressed in the published 3.8.41 tarball).
   "tls-options.mjs",
   "webdav-handler.mjs",
 ];
@@ -87,35 +78,26 @@ export const PACK_ARTIFACT_ROOT_ALLOWED_EXACT_PATHS: string[] = [
   "LICENSE",
   "README.md",
   "bin/aliasResolver.mjs",
-  // #7808: ESM loader hook split out of bin/aliasResolver.mjs to silence CodeQL
-  // js/incomplete-url-substring-sanitization (the old code built a
-  // `data:text/javascript,...` URL dynamically). Loaded via pathToFileURL() at
-  // runtime; shipped via package.json "files", so it must be allowed here.
   "bin/aliasResolverHook.mjs",
   "bin/mcp-server.mjs",
   "bin/nodeRuntimeSupport.mjs",
+  "bin/airoute.mjs",
   "bin/omniroute.mjs",
   "bin/reset-password.mjs",
-  // Operator incident-recovery / cold-start shell tooling (rollback, snapshot,
-  // restore, cold-start bench) shipped in bin/ for self-hosters — not imported by
-  // the runtime. Included via the package.json "files": ["bin/"] entry, so they
-  // must be allowed here. Each script is self-documenting via --help.
   "bin/_ops-common.sh",
   "bin/cold-start-bench.sh",
   "bin/restore-data.sh",
   "bin/restore-policies.sh",
   "bin/rollback.sh",
   "bin/snapshot-data.sh",
-  "open-sse/mcp-server/README.md",
-  "open-sse/mcp-server/audit.ts",
-  "open-sse/mcp-server/httpTransport.ts",
-  "open-sse/mcp-server/index.ts",
-  "open-sse/mcp-server/runtimeHeartbeat.ts",
-  "open-sse/mcp-server/scopeEnforcement.ts",
-  "open-sse/mcp-server/server.ts",
-  // Runtime polyfill eagerly imported by bin/omniroute.mjs (Node <22 compat);
-  // shipped via package.json "files", so it must be allowed in the tarball.
-  "open-sse/utils/setupPolyfill.ts",
+  "packages/open-sse/mcp-server/README.md",
+  "packages/open-sse/mcp-server/audit.ts",
+  "packages/open-sse/mcp-server/httpTransport.ts",
+  "packages/open-sse/mcp-server/index.ts",
+  "packages/open-sse/mcp-server/runtimeHeartbeat.ts",
+  "packages/open-sse/mcp-server/scopeEnforcement.ts",
+  "packages/open-sse/mcp-server/server.ts",
+  "packages/open-sse/utils/setupPolyfill.ts",
   "package.json",
   "scripts/build/build-next-isolated.mjs",
   "scripts/check/check-supported-node-runtime.ts",
@@ -123,36 +105,23 @@ export const PACK_ARTIFACT_ROOT_ALLOWED_EXACT_PATHS: string[] = [
   "scripts/build/postinstall.mjs",
   "scripts/build/postinstallSupport.mjs",
   "scripts/build/colocateOptionals.mjs",
-  // #7802: imported by scripts/build/postinstall.mjs to repair tls-client-node's
-  // native binary (chatgpt-web/claude-web/grok-web/lmarena/perplexity-web transport).
   "scripts/build/fixTlsClientNodeBinary.mjs",
-  // #5227: imported at runtime by bin/cli/commands/serve.mjs (heap auto-calibration).
   "scripts/build/runtime-env.mjs",
   "scripts/build/sync-env.mjs",
   "scripts/dev/responses-ws-proxy.mjs",
   "scripts/dev/sync-env.mjs",
-  // #5361: imported at runtime by bin/cli/commands/serve.mjs + the standalone
-  // server wrapper for opt-in native HTTPS/TLS serving (kept dependency-light).
   "scripts/dev/tls-options.mjs",
   "scripts/postinstall.mjs",
-  "src/shared/utils/nodeRuntimeSupport.ts",
+  "packages/core/shared/utils/nodeRuntimeSupport.ts",
 ];
 
 export const PACK_ARTIFACT_ROOT_ALLOWED_PATH_PREFIXES: string[] = [
   "@omniroute/opencode-plugin/",
   "@omniroute/opencode-provider/",
   "bin/cli/",
-  // Broad open-sse + src source dirs added to package.json "files" in v3.8.21
-  // to allow TypeScript-first imports from the published package.
-  "open-sse/",
-  "src/domain/",
-  "src/lib/",
-  "src/models/",
-  "src/mitm/",
-  "src/server/",
-  "src/shared/",
-  "src/sse/",
-  "src/types/",
+  // Monorepo source shipped for tsx CLI / MCP runtime imports.
+  "packages/open-sse/",
+  "packages/core/",
 ];
 
 export const PACK_ARTIFACT_REQUIRED_PATHS: string[] = [
@@ -164,17 +133,10 @@ export const PACK_ARTIFACT_REQUIRED_PATHS: string[] = [
   "dist/peer-stamp.mjs",
   "dist/main-server-timeouts.mjs",
   "dist/http-method-guard.cjs",
-  // #5452: regression guard — make check:pack-artifact fail loudly if the TLS
-  // opt-in sidecar (imported by dist/server-ws.mjs) ever vanishes from the tarball.
   "dist/tls-options.mjs",
-  // #7065: regression guard for the HEAD response guard (dist/server-ws.mjs import).
   "dist/head-response-guard.cjs",
   "dist/webdav-handler.mjs",
   "bin/cli/program.mjs",
-  // Direct imports of bin/omniroute.mjs — bin/cli/ is only an allowlist PREFIX, so a
-  // file vanishing from the tarball never fails the unexpected-paths check; only these
-  // required entries make its absence loud (#7065 class; derived + enforced by
-  // tests/unit/pack-artifact-entrypoint-closures.test.ts).
   "bin/cli/data-dir.mjs",
   "bin/cli/utils/ensureAndroidCacheDir.mjs",
   "bin/cli/utils/storageKeyProvision.mjs",
@@ -182,10 +144,7 @@ export const PACK_ARTIFACT_REQUIRED_PATHS: string[] = [
   "bin/mcp-server.mjs",
   "bin/nodeRuntimeSupport.mjs",
   "bin/omniroute.mjs",
-  // #7808: aliasResolver + its hook file. bin/omniroute.mjs imports
-  // bin/aliasResolver.mjs at startup, which in turn registers
-  // bin/aliasResolverHook.mjs as the ESM loader. Both must ship in the tarball
-  // or the CLI fails to boot — list them REQUIRED so a regression is loud.
+  "bin/airoute.mjs",
   "bin/aliasResolver.mjs",
   "bin/aliasResolverHook.mjs",
   "package.json",
@@ -195,7 +154,7 @@ export const PACK_ARTIFACT_REQUIRED_PATHS: string[] = [
   "scripts/build/colocateOptionals.mjs",
   "scripts/build/fixTlsClientNodeBinary.mjs",
   "scripts/build/runtime-env.mjs",
-  "src/shared/utils/nodeRuntimeSupport.ts",
+  "packages/core/shared/utils/nodeRuntimeSupport.ts",
 ];
 
 PACK_ARTIFACT_ALLOWED_EXACT_PATHS.push(...PACK_ARTIFACT_ROOT_ALLOWED_EXACT_PATHS);

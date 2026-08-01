@@ -40,6 +40,10 @@ import { fileURLToPath, pathToFileURL } from "node:url";
  */
 export const ALIAS_MAP = [
   { prefix: "@/", target: "packages/core", exact: false },
+  { prefix: "@airoute/core/", target: "packages/core", exact: false },
+  { prefix: "@airoute/core", target: "packages/core", exact: true },
+  { prefix: "@airoute/open-sse/", target: "packages/open-sse", exact: false },
+  { prefix: "@airoute/open-sse", target: "packages/open-sse", exact: true },
   { prefix: "@omniroute/open-sse/", target: "packages/open-sse", exact: false },
   { prefix: "@omniroute/open-sse", target: "packages/open-sse", exact: true },
 ];

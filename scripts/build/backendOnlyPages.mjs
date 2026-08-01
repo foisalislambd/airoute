@@ -135,8 +135,12 @@ function stubFor(file, appDir) {
  * @returns {{file:string, original:string}[]} stubbed files + their original contents.
  */
 export function stubDashboardPages(rootDir = process.cwd(), log = console) {
-  const appDir = path.join(rootDir, "src", "app");
-  if (!fs.existsSync(appDir)) {
+  const appDirCandidates = [
+    path.join(rootDir, "packages", "web", "src", "app"),
+    path.join(rootDir, "src", "app"),
+  ];
+  const appDir = appDirCandidates.find((candidate) => fs.existsSync(candidate));
+  if (!appDir) {
     log.warn?.("[backend-only] src/app not found — nothing to stub");
     return [];
   }

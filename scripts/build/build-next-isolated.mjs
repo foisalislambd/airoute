@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fs from "node:fs/promises";
-import { mkdirSync } from "node:fs";
+import { mkdirSync, existsSync as fsExistsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { spawn } from "node:child_process";
@@ -94,10 +94,12 @@ export function ensureWindowsBuildProfileDirs(env, mkdirImpl = mkdirSync) {
 function runNextBuild() {
   return new Promise((resolve) => {
     const nextBin = path.join(projectRoot, "node_modules", "next", "dist", "bin", "next");
+    const webDir = path.join(projectRoot, "packages", "web");
+    const buildCwd = fsExistsSync(webDir) ? webDir : projectRoot;
     const buildEnv = resolveNextBuildEnv(process.env);
     ensureWindowsBuildProfileDirs(buildEnv);
     const child = spawn(process.execPath, [nextBin, "build", resolveNextBuildBundlerFlag()], {
-      cwd: projectRoot,
+      cwd: buildCwd,
       stdio: "inherit",
       env: buildEnv,
     });
@@ -121,13 +123,51 @@ function runNextBuild() {
   });
 }
 
+/**
+ * Next.js monorepo standalone nests server.js under packages/web/ when
+ * outputFileTracingRoot is the repo root. Flatten so dist/server.js works
+ * like OmniRoute (bin/cli/commands/serve.mjs expects it at the bundle root).
+ */
+export async function flattenMonorepoStandalone(standaloneDir, fsImpl = fs) {
+  const nestedServer = path.join(standaloneDir, "packages", "web", "server.js");
+  const rootServer = path.join(standaloneDir, "server.js");
+  if (!(await exists(nestedServer)) || (await exists(rootServer))) return false;
+
+  const nestedDir = path.join(standaloneDir, "packages", "web");
+  const entries = await fsImpl.readdir(nestedDir);
+  for (const entry of entries) {
+    const src = path.join(nestedDir, entry);
+    const dest = path.join(standaloneDir, entry);
+    if (await exists(dest)) {
+      // Prefer nested package contents for package.json / server.js collisions.
+      await fsImpl.rm(dest, { recursive: true, force: true });
+    }
+    await movePath(src, dest, fsImpl);
+  }
+  // Drop empty packages/web shell if nothing remains under packages/
+  try {
+    await fsImpl.rm(path.join(standaloneDir, "packages", "web"), {
+      recursive: true,
+      force: true,
+    });
+  } catch {
+    /* ignore */
+  }
+  console.log(
+    "[build-next-isolated] Flattened monorepo standalone (packages/web → standalone root)"
+  );
+  return true;
+}
+
 export function resolveNextBuildBundlerFlag(baseEnv = process.env) {
   // Turbopack is the default production bundler (Next 16 stable). Benchmarked on
   // this codebase: 2-3x faster than the single-threaded webpack pass (17min -> 9min
   // on a 32-core box; ~20min -> 7min on ubuntu-latest), artifact validated
   // end-to-end (standalone smoke + e2e/package/electron CI jobs). Webpack stays as
   // the explicit escape hatch (=0) for bundler-compat regressions.
-  return baseEnv.OMNIROUTE_USE_TURBOPACK === "0" ? "--webpack" : "--turbopack";
+  return baseEnv.AIROUTE_USE_TURBOPACK === "0" || baseEnv.OMNIROUTE_USE_TURBOPACK === "0"
+    ? "--webpack"
+    : "--turbopack";
 }
 
 /**
@@ -186,7 +226,8 @@ export function resolveNextBuildEnv(baseEnv = process.env, platform = process.pl
     // headroom without risk. NOTE: heap size does NOT fix a poisoned scope — if the build
     // OOMs/livelocks far above this, check for worktrees/cruft leaking into the tsconfig
     // scope (run `npm run check:build-scope`), not for "more heap". See incident 2026-06-25.
-    const heapMb = Number(baseEnv.OMNIROUTE_BUILD_MEMORY_MB) || 8192;
+    const heapMb =
+      Number(baseEnv.AIROUTE_BUILD_MEMORY_MB || baseEnv.OMNIROUTE_BUILD_MEMORY_MB) || 8192;
     env.NODE_OPTIONS = `${env.NODE_OPTIONS || ""} --max-old-space-size=${heapMb}`.trim();
   }
 
@@ -282,6 +323,15 @@ export async function main() {
     const result = await runNextBuild();
     const standaloneDir = path.join(distDir, "standalone");
     if (result.code === 0 && (await exists(standaloneDir))) {
+      try {
+        await flattenMonorepoStandalone(standaloneDir);
+      } catch (flattenErr) {
+        console.warn(
+          "[build-next-isolated] Non-fatal error flattening monorepo standalone:",
+          flattenErr?.message
+        );
+      }
+
       try {
         await fs.cp(path.join(projectRoot, "docs"), path.join(standaloneDir, "docs"), {
           recursive: true,

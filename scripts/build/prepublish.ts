@@ -23,7 +23,7 @@ import {
   statSync,
   chmodSync,
 } from "node:fs";
-import { join, dirname } from "node:path";
+import { join, dirname, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { assembleStandalone } from "./assembleStandalone.mjs";
@@ -109,7 +109,7 @@ function removeEmptyDirectories(dir: string): boolean {
   return hasFiles;
 }
 
-console.log("🔨 OmniRoute — Building for npm publish...\n");
+console.log("🔨 AIRoute — Building for npm publish...\n");
 
 // ── Step 1: Clean previous dist/ directory ─────────────────
 if (existsSync(DIST_DIR)) {
@@ -169,7 +169,7 @@ if (existsSync(distServer)) {
 }
 
 // ── Step 8: Compile + copy MITM cert utilities ─────────────
-const mitmSrc = join(ROOT, "src", "mitm");
+const mitmSrc = join(ROOT, "packages", "core", "mitm");
 const mitmDest = join(DIST_DIR, "src", "mitm");
 if (existsSync(mitmSrc)) {
   console.log("  🔨 Compiling MITM utilities (TypeScript → JavaScript)...");
@@ -196,7 +196,7 @@ if (existsSync(mitmSrc)) {
       types: ["node"],
       baseUrl: ".",
       paths: {
-        "@/*": ["src/*"],
+        "@/*": ["packages/core/*"],
       },
     },
     include: [mitmSrc + "/**/*"],
@@ -227,7 +227,7 @@ if (existsSync(mitmSrc)) {
 }
 
 // ── Step 8.5: Bundle MCP server ────────────────────────────
-const mcpSrcFile = join(ROOT, "open-sse", "mcp-server", "server.ts");
+const mcpSrcFile = join(ROOT, "packages", "open-sse", "mcp-server", "server.ts");
 const mcpDestDir = join(DIST_DIR, "open-sse", "mcp-server");
 const mcpDestFile = join(mcpDestDir, "server.js");
 
@@ -239,7 +239,7 @@ if (existsSync(mcpSrcFile)) {
       NPX_BIN,
       [
         "esbuild",
-        "open-sse/mcp-server/server.ts",
+        "packages/open-sse/mcp-server/server.ts",
         "--bundle",
         "--platform=node",
         "--packages=external",
@@ -262,6 +262,7 @@ if (existsSync(mcpSrcFile)) {
 // dynamically imported at runtime, and the worker fail-opens if any is absent.
 const llmWorkerSrc = join(
   ROOT,
+  "packages",
   "open-sse",
   "services",
   "compression",
@@ -285,7 +286,7 @@ if (existsSync(llmWorkerSrc)) {
       NPX_BIN,
       [
         "esbuild",
-        "open-sse/services/compression/engines/llmlingua/onnxWorker.ts",
+        "packages/open-sse/services/compression/engines/llmlingua/onnxWorker.ts",
         "--bundle",
         "--platform=node",
         "--packages=external",
@@ -303,7 +304,11 @@ if (existsSync(llmWorkerSrc)) {
 }
 
 // ── Step 8.7: Bundle CLI Entrypoint ──────────────────────────
-const cliSrcFile = join(ROOT, "bin", "omniroute.ts");
+// Prefer airoute.ts when present; otherwise keep the committed airoute.mjs /
+// omniroute.mjs entry (no esbuild step needed).
+const cliSrcFile = existsSync(join(ROOT, "bin", "airoute.ts"))
+  ? join(ROOT, "bin", "airoute.ts")
+  : join(ROOT, "bin", "omniroute.ts");
 const cliDestFile = join(ROOT, "bin", "omniroute.mjs");
 
 if (existsSync(cliSrcFile)) {
@@ -313,7 +318,7 @@ if (existsSync(cliSrcFile)) {
       NPX_BIN,
       [
         "esbuild",
-        "bin/omniroute.ts",
+        relative(ROOT, cliSrcFile).replace(/\\/g, "/"),
         "--bundle",
         "--platform=node",
         "--packages=external",
@@ -329,13 +334,7 @@ if (existsSync(cliSrcFile)) {
   }
 }
 
-// ── Step 8.8: Build @omniroute/opencode-plugin ──────────────
-// The plugin ships bundled inside the omniroute npm package (see root
-// package.json "files": ["@omniroute/", ...]). Its built `dist/` MUST be
-// present in the publish tarball so `omniroute setup opencode` can copy it
-// into the user's OpenCode plugin dir. If the build fails we surface the
-// error — shipping without the plugin's dist breaks the documented install
-// flow for every downstream user.
+// ── Step 8.8: Build @omniroute/opencode-plugin (optional) ──────────────
 const opencodePluginSrc = join(ROOT, "@omniroute", "opencode-plugin");
 const opencodePluginDist = join(opencodePluginSrc, "dist", "index.js");
 const opencodePluginCjs = join(opencodePluginSrc, "dist", "index.cjs");
@@ -344,10 +343,6 @@ if (existsSync(opencodePluginSrc) && existsSync(join(opencodePluginSrc, "package
   if (!pluginAlreadyBuilt) {
     console.log("\n  🔨 Building @omniroute/opencode-plugin (tsup)...");
     try {
-      // The plugin is a standalone package (not an npm workspace), so the root
-      // install never populates its node_modules — and tsup with `dts: true`
-      // needs the plugin's own devDependencies (typescript, @opencode-ai/plugin
-      // types). Without this install a fresh CI publish fails at this step.
       if (!existsSync(join(opencodePluginSrc, "node_modules"))) {
         const NPM_BIN = process.platform === "win32" ? "npm.cmd" : "npm";
         execFileSync(NPM_BIN, ["install", "--no-audit", "--no-fund"], {
@@ -364,18 +359,11 @@ if (existsSync(opencodePluginSrc) && existsSync(join(opencodePluginSrc, "package
     } catch (err: any) {
       console.error("  ❌ Failed to build @omniroute/opencode-plugin:", err.message);
       console.error("     The published package would be missing the plugin dist.");
-      console.error(
-        "     Run `cd @omniroute/opencode-plugin && npm install && npm run build` to debug."
-      );
       process.exit(1);
     }
   } else {
     console.log("  ✅ @omniroute/opencode-plugin dist/ already present (skipping rebuild)");
   }
-  // Remove plugin node_modules after build — hard links created by npm install on Linux
-  // (CI runner) end up in the tarball as LINK entries, which npm registry rejects with
-  // E415 "Hard link is not allowed". The node_modules are only needed for the tsup build;
-  // they must not ship in the published package.
   const pluginNodeModules = join(opencodePluginSrc, "node_modules");
   if (existsSync(pluginNodeModules)) {
     rmSync(pluginNodeModules, { recursive: true, force: true });
@@ -386,7 +374,7 @@ if (existsSync(opencodePluginSrc) && existsSync(join(opencodePluginSrc, "package
 }
 
 // ── Step 9: Copy shared utilities needed at runtime ────────
-const sharedApiKey = join(ROOT, "src", "shared", "utils", "apiKey.js");
+const sharedApiKey = join(ROOT, "packages", "core", "shared", "utils", "apiKey.js");
 const sharedApiKeyDest = join(DIST_DIR, "src", "shared", "utils");
 if (existsSync(sharedApiKey)) {
   console.log("  📋 Copying shared utilities...");
@@ -429,7 +417,7 @@ if (existsSync(syncEnvSrc)) {
   cpSync(syncEnvSrc, join(scriptsDest, "sync-env.mjs"));
 }
 
-const migrationsSrc = join(ROOT, "src", "lib", "db", "migrations");
+const migrationsSrc = join(ROOT, "packages", "core", "lib", "db", "migrations");
 if (existsSync(migrationsSrc)) {
   const migrationsDest = join(DIST_DIR, "src", "lib", "db", "migrations");
   mkdirSync(join(DIST_DIR, "src", "lib", "db"), { recursive: true });
@@ -438,11 +426,20 @@ if (existsSync(migrationsSrc)) {
 
 const runtimeAssetDirs = [
   {
-    source: join(ROOT, "open-sse", "services", "compression", "engines", "rtk", "filters"),
+    source: join(
+      ROOT,
+      "packages",
+      "open-sse",
+      "services",
+      "compression",
+      "engines",
+      "rtk",
+      "filters"
+    ),
     destination: join(DIST_DIR, "open-sse", "services", "compression", "engines", "rtk", "filters"),
   },
   {
-    source: join(ROOT, "open-sse", "services", "compression", "rules"),
+    source: join(ROOT, "packages", "open-sse", "services", "compression", "rules"),
     destination: join(DIST_DIR, "open-sse", "services", "compression", "rules"),
   },
 ];

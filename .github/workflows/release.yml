@@ -1,0 +1,171 @@
+name: Release
+
+# Creates a GitHub Release + git tag (vX.Y.Z), which triggers:
+#   - npm-publish.yml  → npmjs + GitHub Packages
+#   - docker-publish.yml → Docker Hub + GHCR
+#
+# Version scheme (roll at 9):
+#   1.0.0 → 1.0.1 → … → 1.0.9 → 1.1.0 → … → 1.9.9 → 2.0.0
+# First release is always 1.0.0 when no v* tags exist yet.
+#
+# Run: Actions → Release → Run workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Version mode"
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - current
+          - explicit
+      version:
+        description: "Explicit version (only when mode=explicit), e.g. 1.0.0"
+        required: false
+        type: string
+      prerelease:
+        description: "Mark GitHub Release as pre-release"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  actions: write
+  packages: write
+  id-token: write
+
+concurrency:
+  group: airoute-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Resolve next version
+        id: ver
+        env:
+          MODE: ${{ inputs.mode }}
+          EXPLICIT: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          CURRENT=$(node -p "require('./package.json').version")
+          TAGS=$(git tag -l 'v[0-9]*' | tr '\n' ',' )
+
+          case "$MODE" in
+            explicit)
+              VERSION="${EXPLICIT#v}"
+              if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+                echo "Invalid explicit version: $EXPLICIT" >&2
+                exit 1
+              fi
+              ;;
+            current)
+              VERSION="$CURRENT"
+              if [ "$(node -p "Number('$VERSION'.split('.')[0]) < 1")" = "true" ]; then
+                VERSION="1.0.0"
+              fi
+              ;;
+            auto|*)
+              VERSION=$(node scripts/release/next-version.mjs resolve "$CURRENT" "$TAGS")
+              ;;
+          esac
+
+          TAG="v${VERSION}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists — aborting." >&2
+            exit 1
+          fi
+
+          {
+            echo "version=$VERSION"
+            echo "tag=$TAG"
+            echo "previous=$CURRENT"
+          } >> "$GITHUB_OUTPUT"
+          echo "Resolved release: $CURRENT → $VERSION ($TAG)"
+
+      - name: Bump package.json versions
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: node scripts/release/bump-version.mjs "$VERSION"
+
+      - name: Stamp CHANGELOG
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: node scripts/release/stamp-changelog.mjs "$VERSION"
+
+      - name: Commit, tag, push
+        env:
+          VERSION: ${{ steps.ver.outputs.version }}
+          TAG: ${{ steps.ver.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json packages/*/package.json CHANGELOG.md || true
+          if git diff --cached --quiet; then
+            echo "No version file changes to commit (already at $VERSION)"
+          else
+            git commit -m "chore(release): ${VERSION}"
+          fi
+          # Annotated tag on current HEAD (commit or previous HEAD if no bump commit).
+          git tag -a "$TAG" -m "AIRoute ${VERSION}"
+          # Push branch first so the tag's commit is reachable, then the tag.
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "$TAG"
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.ver.outputs.tag }}
+          VERSION: ${{ steps.ver.outputs.version }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+          ARGS=( "$TAG" --title "AIRoute ${VERSION}" --generate-notes )
+          if [ "$PRERELEASE" = "true" ]; then
+            ARGS+=( --prerelease )
+          fi
+          gh release create "${ARGS[@]}"
+
+      - name: Dispatch npm + Docker publish
+        # GITHUB_TOKEN-created releases do not re-trigger other workflows, so we
+        # explicitly dispatch publish jobs against the new tag.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ steps.ver.outputs.tag }}
+          VERSION: ${{ steps.ver.outputs.version }}
+          IS_PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+          PROMOTE=true
+          if [ "$IS_PRERELEASE" = "true" ]; then
+            PROMOTE=false
+          fi
+          gh workflow run npm-publish.yml --ref "$TAG" -f "version=$VERSION" -f tag=auto
+          gh workflow run docker-publish.yml --ref "$TAG" \
+            -f "version=$VERSION" \
+            -f "promote_latest=$PROMOTE"
+          {
+            echo "## 🚀 Release ${TAG} created"
+            echo ""
+            echo "Dispatched publish workflows for \`${VERSION}\`:"
+            echo "- **npmjs** \`airoute@${VERSION}\`"
+            echo "- **GitHub Packages** \`@${{ github.repository_owner }}/airoute\`"
+            echo "- **Docker Hub** + **GHCR** \`airoute:${VERSION}\` (+ \`-web\`)"
+          } >> "$GITHUB_STEP_SUMMARY"

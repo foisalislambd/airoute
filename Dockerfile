@@ -37,14 +37,16 @@ RUN --mount=type=cache,id=apt-cache,target=/var/cache/apt,sharing=locked \
 
 COPY package*.json ./
 # Workspace package manifests MUST be present before `npm ci` so npm materializes
-# the workspace and installs its *workspace-only* deps (e.g. safe-regex,
-# @toon-format/toon — declared in open-sse/package.json, not hoisted to root).
-# Without this, `npm ci` skips them and the application build fails with "Module not
-# found" (root cause of the v3.8.39 Docker build break). workspaces = ["open-sse"].
-COPY open-sse/package.json ./open-sse/package.json
+# the monorepo workspaces and installs workspace-only deps.
+COPY packages/web/package.json ./packages/web/package.json
+COPY packages/core/package.json ./packages/core/package.json
+COPY packages/open-sse/package.json ./packages/open-sse/package.json
 COPY scripts/build/postinstall.mjs ./scripts/build/postinstall.mjs
 COPY scripts/build/postinstallSupport.mjs ./scripts/build/postinstallSupport.mjs
 COPY scripts/build/native-binary-compat.mjs ./scripts/build/native-binary-compat.mjs
+COPY scripts/build/colocateOptionals.mjs ./scripts/build/colocateOptionals.mjs
+COPY scripts/build/fixTlsClientNodeBinary.mjs ./scripts/build/fixTlsClientNodeBinary.mjs
+COPY scripts/build/sync-env.mjs ./scripts/build/sync-env.mjs
 ENV NPM_CONFIG_LEGACY_PEER_DEPS=true
 # --ignore-scripts blocks broad dependency install/postinstall hooks, closing
 # the supply-chain attack surface where a transitive dep can run arbitrary code
@@ -85,36 +87,29 @@ RUN --mount=type=cache,id=npm-cache,target=/root/.npm \
   && (test -n "$(find node_modules/tls-client-node/bin -mindepth 1 -print -quit 2>/dev/null)" \
       || (echo "tls-client-node native binary missing after postinstall — GitHub API fetch likely rate-limited or failed (#7802)" >&2 && exit 1))
 
-# Build with Turbopack (stable in Next 16, the repo default). The v3.8.27-era
-# TurbopackInternalError panic ("entered unreachable code: there must be a path to a
-# root" in ImportTracer::get_traces) no longer reproduces on Next 16.2.9 — validated
-# 2026-07-05 with clean amd64 (12min14s, image smoke-tested: /api/monitoring/health
-# 200) and arm64 (qemu, exit 0, zero panic strings) builds. Turbopack cut the bare
-# build from 17min to 9min on the same 32-core box. Webpack stays available as the
-# escape hatch: `--build-arg`/-e AIROUTE_USE_TURBOPACK=0.
-# See docs/ops/QUALITY_GATE_PLAYBOOK.md Parte 6.
+# Build with Turbopack (stable in Next 16, the repo default). Webpack escape hatch:
+# `--build-arg`/-e AIROUTE_USE_TURBOPACK=0 (also sets OMNIROUTE_USE_TURBOPACK for
+# scripts/build/build-next-isolated.mjs).
 ENV AIROUTE_USE_TURBOPACK=1
+ENV OMNIROUTE_USE_TURBOPACK=1
 
 # Next.js basePath is fixed at build time; pass AIROUTE_BASE_PATH here when the
 # image should serve under a reverse-proxy subpath without a runtime patch.
 ARG AIROUTE_BASE_PATH=""
 ENV AIROUTE_BASE_PATH=$AIROUTE_BASE_PATH
+ENV OMNIROUTE_BASE_PATH=$AIROUTE_BASE_PATH
 
 # Docker containers cannot run the MITM/Agent-Bridge stack (no host DNS/cert
 # access), so keep @/mitm/manager on the graceful stub (#3390). This flag is
 # Docker-only: npm/Electron/VPS builds must bundle the REAL manager (#6344).
 ENV AIROUTE_MITM_STUB=1
+ENV OMNIROUTE_MITM_STUB=1
 
-# Raise the V8 heap ceiling for the build. The webpack production optimization
-# pass needs more than V8's default ceiling (~2 GB) for a codebase this size; a
-# memory-constrained Docker build otherwise dies with "FATAL ERROR: ... JavaScript
-# heap out of memory" during the builder stage (#4076). Turbopack's compile is
-# native (Rust) and less V8-heap-bound, but the prerender/export phase still runs
-# on V8, so keep the ceiling. NODE_OPTIONS propagates to the spawned `next build`
-# child (build-next-isolated.mjs → resolveNextBuildEnv spreads process.env).
-# Build-only; the runtime heap is set separately on the runner stage
-# (AIROUTE_MEMORY_MB). Override: `--build-arg AIROUTE_BUILD_MEMORY_MB=6144`.
+# Raise the V8 heap ceiling for the build. Override:
+# `--build-arg AIROUTE_BUILD_MEMORY_MB=6144`.
 ARG AIROUTE_BUILD_MEMORY_MB=4096
+ENV AIROUTE_BUILD_MEMORY_MB=$AIROUTE_BUILD_MEMORY_MB
+ENV OMNIROUTE_BUILD_MEMORY_MB=$AIROUTE_BUILD_MEMORY_MB
 ENV NODE_OPTIONS="--max-old-space-size=${AIROUTE_BUILD_MEMORY_MB}"
 
 COPY . ./
@@ -125,21 +120,17 @@ RUN --mount=type=cache,id=next-cache,target=/app/.build/next/cache \
 FROM base AS runner-base
 
 LABEL org.opencontainers.image.title="airoute" \
-  org.opencontainers.image.description="Unified AI proxy — route any LLM through one endpoint" \
-  org.opencontainers.image.url="https://airoute.online" \
-  org.opencontainers.image.source="https://github.com/diegosouzapw/AIRoute" \
+  org.opencontainers.image.description="AIRoute — local AI gateway (OpenAI-compatible)" \
+  org.opencontainers.image.url="https://github.com/foisalislambd/airoute" \
+  org.opencontainers.image.source="https://github.com/foisalislambd/airoute" \
   org.opencontainers.image.licenses="MIT"
 
 ENV NODE_ENV=production
 ENV PORT=20128
 ENV HOSTNAME=0.0.0.0
-# Runtime heap ceiling. 1024MB is enough for normal traffic but can be tight
-# for large fusion-combo panels (many models fanned out in parallel, each
-# response buffered in full — see open-sse/services/fusion.ts::FUSION_DEFAULTS
-# .maxPanel, issue #1905). Override at `docker run` time with
-# `-e AIROUTE_MEMORY_MB=2048` (or higher) if you raise fusionTuning.maxPanel
-# above the default cap.
+# Runtime heap ceiling. Override at `docker run` with `-e AIROUTE_MEMORY_MB=2048`.
 ENV AIROUTE_MEMORY_MB=1024
+ENV OMNIROUTE_MEMORY_MB=1024
 ENV NODE_OPTIONS="--max-old-space-size=${AIROUTE_MEMORY_MB}"
 
 # Data directory inside Docker — must match the volume mount in docker-compose.yml
@@ -162,6 +153,7 @@ COPY --from=builder /app/.build/next/standalone ./
 COPY --from=builder /app/node_modules/better-sqlite3 ./node_modules/better-sqlite3
 # migrations land at <standalone>/migrations via assembleStandalone; point the runtime at them.
 ENV AIROUTE_MIGRATIONS_DIR=/app/migrations
+ENV OMNIROUTE_MIGRATIONS_DIR=/app/migrations
 
 # Docker healthcheck script — not traced by Next.js standalone output, so copy
 # it explicitly. The HEALTHCHECK CMD references it as `node healthcheck.mjs`.

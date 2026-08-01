@@ -27,6 +27,9 @@ const ROOT = path.resolve(__dirname, "..", "..");
 // Resolve the build SHA: prefer the env var (set by build:release script), fall
 // back to running git rev-parse.
 function resolveBuildSha() {
+  if (process.env.AIROUTE_BUILD_SHA) {
+    return process.env.AIROUTE_BUILD_SHA.trim();
+  }
   if (process.env.OMNIROUTE_BUILD_SHA) {
     return process.env.OMNIROUTE_BUILD_SHA.trim();
   }
