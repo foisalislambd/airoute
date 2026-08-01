@@ -84,7 +84,7 @@
   },
   "type": "module",
   "bin": {
-    "airoute": "bin/omniroute.mjs",
+    "airoute": "bin/airoute.mjs",
     "airoute-reset-password": "bin/reset-password.mjs"
   },
   "files": [
