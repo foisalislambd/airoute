@@ -264,7 +264,8 @@ jobs:
           if [ "$(npm view "airoute@${VERSION}" version 2>/dev/null || true)" = "$VERSION" ]; then
             echo "airoute@${VERSION} already on npmjs — skip"
           else
-            npm publish "$TGZ" --access public --tag latest
+            # Tarball already built + check:pack-artifact'd; do not re-run prepublishOnly.
+            npm publish "$TGZ" --access public --tag latest --ignore-scripts
             echo "npmjs airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
           fi
 
@@ -286,7 +287,8 @@ jobs:
           printf '%s\n' \
             "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" \
             "@${O}:registry=https://npm.pkg.github.com" > .npmrc
-          npm publish --registry=https://npm.pkg.github.com --access public --tag latest
+          # Extracted tarball has no node_modules/tsx — skip prepublishOnly rebuild.
+          npm publish --registry=https://npm.pkg.github.com --access public --tag latest --ignore-scripts
           echo "GitHub Packages @${O}/airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
 
       - id: img
