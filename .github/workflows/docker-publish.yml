@@ -70,20 +70,18 @@ jobs:
           REF_TYPE: ${{ github.ref_type }}
           INPUT_VERSION: ${{ inputs.version }}
           PROMOTE_INPUT: ${{ inputs.promote_latest }}
+          # IMPORTANT: do NOT put secrets.DOCKERHUB_USERNAME into image names /
+          # job outputs. Secret values embedded in outputs are blanked when
+          # consumed by downstream jobs (hub_image would become empty).
           HUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
           OWNER: ${{ github.repository_owner }}
         run: |
           set -euo pipefail
 
           OWNER_LC="$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')"
-          HUB_NS="${HUB_USER:-$OWNER_LC}"
-          HUB_IMAGE="${HUB_NS}/airoute"
+          # Image namespace = GitHub owner (public). Login still uses DOCKERHUB_*.
+          HUB_IMAGE="${OWNER_LC}/airoute"
           GHCR_IMAGE="ghcr.io/${OWNER_LC}/airoute"
-
-          if [ -z "$HUB_IMAGE" ] || [ -z "$GHCR_IMAGE" ]; then
-            echo "Resolved empty image name(s)" >&2
-            exit 1
-          fi
 
           case "$EVENT_NAME" in
             workflow_dispatch) VERSION="${INPUT_VERSION#v}" ;;
@@ -108,7 +106,6 @@ jobs:
           elif printf '%s' "$VERSION" | grep -qE -- '-(rc|alpha|beta|pre|next)'; then
             PROMOTE="false"
           elif [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            # Boolean inputs arrive as the strings "true" / "false".
             if [ "${PROMOTE_INPUT}" = "true" ]; then
               PROMOTE="true"
             else
@@ -156,8 +153,9 @@ jobs:
             runner: ubuntu-24.04-arm
             arch: arm64
     env:
-      IMAGE_NAME: ${{ needs.prepare.outputs.hub_image }}
-      GHCR_IMAGE_NAME: ${{ needs.prepare.outputs.ghcr_image }}
+      # Recompute in this job too — never rely solely on secret-tainted outputs.
+      OWNER: ${{ github.repository_owner }}
+      VERSION: ${{ needs.prepare.outputs.version }}
     steps:
       - name: Resolve tag ref
         id: tagref
@@ -175,13 +173,17 @@ jobs:
           fetch-depth: 0
           ref: ${{ steps.tagref.outputs.ref }}
 
-      - name: Assert image names
+      - name: Resolve image names
+        id: images
+        env:
+          OWNER: ${{ github.repository_owner }}
         run: |
           set -euo pipefail
-          echo "IMAGE_NAME=${IMAGE_NAME:-<empty>}"
-          echo "GHCR_IMAGE_NAME=${GHCR_IMAGE_NAME:-<empty>}"
-          test -n "${IMAGE_NAME}" || { echo "hub image name is empty" >&2; exit 1; }
-          test -n "${GHCR_IMAGE_NAME}" || { echo "ghcr image name is empty" >&2; exit 1; }
+          OWNER_LC="$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')"
+          echo "hub=${OWNER_LC}/airoute" >> "$GITHUB_OUTPUT"
+          echo "ghcr=ghcr.io/${OWNER_LC}/airoute" >> "$GITHUB_OUTPUT"
+          echo "Hub=${OWNER_LC}/airoute"
+          echo "GHCR=ghcr.io/${OWNER_LC}/airoute"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -206,9 +208,7 @@ jobs:
           context: .
           target: runner-base
           platforms: ${{ matrix.platform }}
-          # Digest-only push: repository names go in outputs name= (NOT tags with :version).
-          # Empty name produces the misleading "tag is needed when pushing to registry".
-          outputs: type=image,"name=${{ env.IMAGE_NAME }},${{ env.GHCR_IMAGE_NAME }}",push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,"name=${{ steps.images.outputs.hub }},${{ steps.images.outputs.ghcr }}",push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=docker-${{ matrix.arch }}
           cache-to: type=gha,scope=docker-${{ matrix.arch }},mode=max
           build-args: |
@@ -221,7 +221,7 @@ jobs:
           context: .
           target: runner-web
           platforms: ${{ matrix.platform }}
-          outputs: type=image,"name=${{ env.IMAGE_NAME }},${{ env.GHCR_IMAGE_NAME }}",push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,"name=${{ steps.images.outputs.hub }},${{ steps.images.outputs.ghcr }}",push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=docker-web-${{ matrix.arch }}
           cache-to: type=gha,scope=docker-web-${{ matrix.arch }},mode=max
           build-args: |
@@ -266,11 +266,19 @@ jobs:
       contents: read
       packages: write
     env:
-      IMAGE_NAME: ${{ needs.prepare.outputs.hub_image }}
-      GHCR_IMAGE_NAME: ${{ needs.prepare.outputs.ghcr_image }}
       VERSION: ${{ needs.prepare.outputs.version }}
       PROMOTE_LATEST: ${{ needs.prepare.outputs.promote_latest }}
     steps:
+      - name: Resolve image names
+        id: images
+        env:
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          OWNER_LC="$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')"
+          echo "hub=${OWNER_LC}/airoute" >> "$GITHUB_OUTPUT"
+          echo "ghcr=ghcr.io/${OWNER_LC}/airoute" >> "$GITHUB_OUTPUT"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -302,6 +310,9 @@ jobs:
           merge-multiple: true
 
       - name: Create manifests (Hub + GHCR)
+        env:
+          IMAGE_NAME: ${{ steps.images.outputs.hub }}
+          GHCR_IMAGE_NAME: ${{ steps.images.outputs.ghcr }}
         run: |
           set -euo pipefail
 
@@ -339,4 +350,6 @@ jobs:
 
       - name: Inspect image
         if: needs.prepare.outputs.version != 'main'
+        env:
+          IMAGE_NAME: ${{ steps.images.outputs.hub }}
         run: docker buildx imagetools inspect "${IMAGE_NAME}:${VERSION}"
