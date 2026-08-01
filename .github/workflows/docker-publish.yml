@@ -57,7 +57,7 @@ jobs:
           echo "ref=refs/tags/v${V}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: ${{ steps.tagref.outputs.ref }}
@@ -79,6 +79,11 @@ jobs:
           HUB_NS="${HUB_USER:-$OWNER_LC}"
           HUB_IMAGE="${HUB_NS}/airoute"
           GHCR_IMAGE="ghcr.io/${OWNER_LC}/airoute"
+
+          if [ -z "$HUB_IMAGE" ] || [ -z "$GHCR_IMAGE" ]; then
+            echo "Resolved empty image name(s)" >&2
+            exit 1
+          fi
 
           case "$EVENT_NAME" in
             workflow_dispatch) VERSION="${INPUT_VERSION#v}" ;;
@@ -165,10 +170,18 @@ jobs:
           echo "ref=refs/tags/v${V}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           ref: ${{ steps.tagref.outputs.ref }}
+
+      - name: Assert image names
+        run: |
+          set -euo pipefail
+          echo "IMAGE_NAME=${IMAGE_NAME:-<empty>}"
+          echo "GHCR_IMAGE_NAME=${GHCR_IMAGE_NAME:-<empty>}"
+          test -n "${IMAGE_NAME}" || { echo "hub image name is empty" >&2; exit 1; }
+          test -n "${GHCR_IMAGE_NAME}" || { echo "ghcr image name is empty" >&2; exit 1; }
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -188,15 +201,14 @@ jobs:
 
       - name: Build and push base digest
         id: build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           target: runner-base
           platforms: ${{ matrix.platform }}
-          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-          tags: |
-            ${{ env.IMAGE_NAME }}
-            ${{ env.GHCR_IMAGE_NAME }}
+          # Digest-only push: repository names go in outputs name= (NOT tags with :version).
+          # Empty name produces the misleading "tag is needed when pushing to registry".
+          outputs: type=image,"name=${{ env.IMAGE_NAME }},${{ env.GHCR_IMAGE_NAME }}",push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=docker-${{ matrix.arch }}
           cache-to: type=gha,scope=docker-${{ matrix.arch }},mode=max
           build-args: |
@@ -204,15 +216,12 @@ jobs:
 
       - name: Build and push web digest
         id: build-web
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           target: runner-web
           platforms: ${{ matrix.platform }}
-          outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-          tags: |
-            ${{ env.IMAGE_NAME }}
-            ${{ env.GHCR_IMAGE_NAME }}
+          outputs: type=image,"name=${{ env.IMAGE_NAME }},${{ env.GHCR_IMAGE_NAME }}",push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=docker-web-${{ matrix.arch }}
           cache-to: type=gha,scope=docker-web-${{ matrix.arch }},mode=max
           build-args: |
@@ -224,6 +233,10 @@ jobs:
           DIGEST_WEB: ${{ steps.build-web.outputs.digest }}
         run: |
           set -euo pipefail
+          echo "base digest=${DIGEST_BASE}"
+          echo "web digest=${DIGEST_WEB}"
+          test -n "${DIGEST_BASE}" || { echo "missing base digest" >&2; exit 1; }
+          test -n "${DIGEST_WEB}" || { echo "missing web digest" >&2; exit 1; }
           mkdir -p /tmp/digests/base /tmp/digests/web
           touch "/tmp/digests/base/${DIGEST_BASE#sha256:}"
           touch "/tmp/digests/web/${DIGEST_WEB#sha256:}"
