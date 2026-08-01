@@ -24,7 +24,28 @@ import {
  */
 
 const projectRoot = process.cwd();
-const distDir = path.resolve(process.env.NEXT_DIST_DIR || ".build/next");
+const webDir = path.join(projectRoot, "packages", "web");
+const isMonorepoWeb = fsExistsSync(path.join(webDir, "next.config.mjs"));
+
+/** Relative distDir name Next accepts inside packages/web (no `..`, not absolute). */
+function webRelativeDistDir(env = process.env) {
+  const raw = env.NEXT_DIST_DIR;
+  if (raw && !path.isAbsolute(raw) && !raw.split(/[\\/]/).includes("..")) {
+    return raw;
+  }
+  return ".build/next";
+}
+
+/**
+ * Where `next build` (cwd=packages/web) actually writes output.
+ * Absolute repo-root paths are invalid for Next distDir in this monorepo layout.
+ */
+const nextDistDir = isMonorepoWeb
+  ? path.join(webDir, webRelativeDistDir())
+  : path.resolve(process.env.NEXT_DIST_DIR || ".build/next");
+
+/** Repo-root location expected by Dockerfile / prepublish / pack scripts. */
+const distDir = path.resolve(projectRoot, process.env.NEXT_DIST_DIR || ".build/next");
 const backupRoot = path.join(os.tmpdir(), `omniroute-build-isolated-${process.pid}-${Date.now()}`);
 
 export function getTransientBuildPaths(rootDir = projectRoot, env = process.env) {
@@ -235,25 +256,51 @@ export function resolveNextBuildEnv(baseEnv = process.env, platform = process.pl
 }
 
 async function resetStandaloneOutput(rootDir = projectRoot, fsImpl = fs) {
-  // Use the module-level distDir so NEXT_DIST_DIR is respected
-  const resolvedDistDir =
-    rootDir === projectRoot
-      ? distDir
-      : path.join(rootDir, process.env.NEXT_DIST_DIR || ".build/next");
-  const standaloneRoot = path.join(resolvedDistDir, "standalone");
-  if (!(await exists(standaloneRoot))) return;
+  // Clear both the Next project dist (packages/web/.build/next) and the mirrored
+  // repo-root copy so a partial previous build cannot confuse assemble/Docker.
+  const targets = [];
+  if (rootDir === projectRoot) {
+    targets.push(nextDistDir, distDir);
+  } else {
+    targets.push(
+      path.join(rootDir, "packages", "web", webRelativeDistDir()),
+      path.join(rootDir, process.env.NEXT_DIST_DIR || ".build/next")
+    );
+  }
 
-  const staleStandaloneBackup = path.join(backupRoot, "standalone-stale");
+  let i = 0;
+  for (const resolvedDistDir of [...new Set(targets.map((p) => path.resolve(p)))]) {
+    const standaloneRoot = path.join(resolvedDistDir, "standalone");
+    if (!(await exists(standaloneRoot))) continue;
+    const staleStandaloneBackup = path.join(backupRoot, `standalone-stale-${i++}`);
+    await movePath(standaloneRoot, staleStandaloneBackup, fsImpl);
+    console.log(
+      `[build-next-isolated] Moved stale standalone out of ${path.relative(rootDir, standaloneRoot) || standaloneRoot}`
+    );
+  }
+}
 
-  await movePath(standaloneRoot, staleStandaloneBackup, fsImpl);
-  console.log("[build-next-isolated] Moved stale standalone output out of the build path");
+/**
+ * Mirror packages/web/.build/next → repo-root .build/next so Dockerfile COPY
+ * and prepublish keep using /app/.build/next/standalone.
+ */
+async function mirrorDistDirToRepoRoot(fsImpl = fs) {
+  if (path.resolve(nextDistDir) === path.resolve(distDir)) return;
+  if (!(await exists(nextDistDir))) return;
+
+  await fsImpl.rm(distDir, { recursive: true, force: true });
+  await fsImpl.mkdir(path.dirname(distDir), { recursive: true });
+  await fsImpl.cp(nextDistDir, distDir, { recursive: true });
+  console.log(
+    `[build-next-isolated] Mirrored ${path.relative(projectRoot, nextDistDir)} → ${path.relative(projectRoot, distDir)}`
+  );
 }
 
 export async function pruneStandaloneArtifacts(rootDir = projectRoot, fsImpl = fs) {
   const resolvedDistDirForPrune =
     rootDir === projectRoot
-      ? distDir
-      : path.join(rootDir, process.env.NEXT_DIST_DIR || ".build/next");
+      ? nextDistDir
+      : path.join(rootDir, "packages", "web", webRelativeDistDir());
   const standaloneRoot = path.join(resolvedDistDirForPrune, "standalone");
   const pruneTargets = [path.join(standaloneRoot, "_tasks")];
 
@@ -321,8 +368,13 @@ export async function main() {
     await resetStandaloneOutput(projectRoot);
 
     const result = await runNextBuild();
-    const standaloneDir = path.join(distDir, "standalone");
-    if (result.code === 0 && (await exists(standaloneDir))) {
+    const standaloneDir = path.join(nextDistDir, "standalone");
+    if (result.code === 0 && !(await exists(standaloneDir))) {
+      console.error(
+        `[build-next-isolated] next build exited 0 but standalone output is missing at ${standaloneDir}`
+      );
+      process.exitCode = 1;
+    } else if (result.code === 0 && (await exists(standaloneDir))) {
       try {
         await flattenMonorepoStandalone(standaloneDir);
       } catch (flattenErr) {
@@ -374,16 +426,28 @@ export async function main() {
           "[build-next-isolated] Assembling standalone bundle (static + public + natives + extras)..."
         );
         assembleStandalone({
-          distDir,
+          distDir: nextDistDir,
           outDir: standaloneDir,
           projectRoot,
+          // Next bakes `./.build/next` relative to packages/web; natives still
+          // resolve from the repo-root node_modules via projectRoot.
+          relDistDir: webRelativeDistDir(),
           copyNatives: true,
         });
         const { spawnSync } = await import("node:child_process");
         const basePathWrite = spawnSync(
           process.execPath,
           [path.join(projectRoot, "scripts", "build", "write-build-base-path.mjs")],
-          { cwd: projectRoot, env: process.env, stdio: "inherit" }
+          {
+            cwd: projectRoot,
+            // write-build-base-path reads NEXT_DIST_DIR relative to repo root; point
+            // it at the web dist until we mirror (or at the mirror path after).
+            env: {
+              ...process.env,
+              NEXT_DIST_DIR: path.relative(projectRoot, nextDistDir),
+            },
+            stdio: "inherit",
+          }
         );
         if (basePathWrite.status !== 0) {
           console.warn(
@@ -393,8 +457,18 @@ export async function main() {
       } catch (assembleErr) {
         console.warn("[build-next-isolated] Non-fatal error assembling standalone:", assembleErr);
       }
+
+      try {
+        await mirrorDistDirToRepoRoot();
+      } catch (mirrorErr) {
+        console.error(
+          "[build-next-isolated] Failed to mirror distDir to repo root:",
+          mirrorErr?.message || mirrorErr
+        );
+        process.exitCode = 1;
+      }
     }
-    process.exitCode = result.code;
+    if (process.exitCode == null) process.exitCode = result.code;
   } catch (error) {
     console.error("[build-next-isolated] Build failed:", error);
     process.exitCode = 1;

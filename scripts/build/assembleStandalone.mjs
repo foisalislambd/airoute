@@ -674,6 +674,9 @@ export function syncRebuiltNativeModuleIntoHashedEntries(rootModuleDir, nodeModu
  * @param {string} opts.distDir                  - Next.js distDir (e.g. ".next" or ".build/next")
  * @param {string} opts.outDir                   - destination directory for the assembled bundle
  * @param {string} [opts.projectRoot]            - repo root; defaults to process.cwd()
+ * @param {string} [opts.relDistDir]             - override relative distDir inside the
+ *   standalone bundle (defaults to path.relative(projectRoot, distDir)). Use when
+ *   Next's project dir is packages/web but assemble reads natives from the repo root.
  * @param {boolean} [opts.sanitizePaths]         - replace build-machine abs paths with "." (default false)
  * @param {boolean} [opts.patchTurbopackChunks]  - strip hashed externals from .next/server js files (default false)
  * @param {boolean} [opts.copyNatives]           - copy native assets + extra modules (default true)
@@ -684,6 +687,7 @@ export function assembleStandalone({
   distDir,
   outDir,
   projectRoot = process.cwd(),
+  relDistDir: relDistDirOverride,
   sanitizePaths = false,
   patchTurbopackChunks: doPatchChunks = false,
   copyNatives = true,
@@ -692,11 +696,13 @@ export function assembleStandalone({
   if (!distDir) throw new Error("[assembleStandalone] distDir is required");
   if (!outDir) throw new Error("[assembleStandalone] outDir is required");
 
-  // The standalone bundle preserves the distDir path RELATIVE to projectRoot
+  // The standalone bundle preserves the distDir path RELATIVE to the Next project
   // (the server's baked config uses e.g. "./.build/next"), so output dest paths
   // for static / required-server-files / server chunks must use the relative
   // distDir appended to outDir — never the absolute build-machine distDir.
-  const relDistDir = path.isAbsolute(distDir) ? path.relative(projectRoot, distDir) : distDir;
+  const relDistDir =
+    relDistDirOverride ||
+    (path.isAbsolute(distDir) ? path.relative(projectRoot, distDir) : distDir);
 
   const standaloneDir = path.resolve(path.join(distDir, "standalone"));
   const resolvedOutDir = path.resolve(outDir);

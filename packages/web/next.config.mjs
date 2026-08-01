@@ -28,13 +28,19 @@ const withMDX = createMDX({
   outDir: path.resolve(repoRoot, ".source"),
 });
 
-// Emit under the monorepo root so build-next-isolated / prepublish can find
-// `.build/next/standalone/server.js` the same way OmniRoute does.
-const distDir = process.env.NEXT_DIST_DIR
-  ? path.isAbsolute(process.env.NEXT_DIST_DIR)
-    ? process.env.NEXT_DIST_DIR
-    : path.resolve(repoRoot, process.env.NEXT_DIST_DIR)
-  : path.resolve(repoRoot, ".build/next");
+// Next.js requires distDir to stay *inside* the project directory (packages/web).
+// Absolute paths like `/app/.build/next` are broken by `path.join(projectDir, distDir)`
+// on POSIX → `packages/web/app/.build/next` (and `/home/...` → `packages/web/home/...`).
+// `../.build/next` is also invalid per Next docs. Keep a project-local relative dir;
+// build-next-isolated mirrors it to the repo-root `.build/next` for Docker/prepublish.
+function resolveWebDistDir() {
+  const raw = process.env.NEXT_DIST_DIR;
+  if (raw && !path.isAbsolute(raw) && !raw.split(/[\\/]/).includes("..")) {
+    return raw;
+  }
+  return ".build/next";
+}
+const distDir = resolveWebDistDir();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

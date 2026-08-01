@@ -113,7 +113,7 @@ ENV OMNIROUTE_BUILD_MEMORY_MB=$AIROUTE_BUILD_MEMORY_MB
 ENV NODE_OPTIONS="--max-old-space-size=${AIROUTE_BUILD_MEMORY_MB}"
 
 COPY . ./
-RUN --mount=type=cache,id=next-cache,target=/app/.build/next/cache \
+RUN --mount=type=cache,id=next-cache,target=/app/packages/web/.build/next/cache \
   mkdir -p /app/data && npm run build
 
 # ── Runner base ────────────────────────────────────────────────────────────
