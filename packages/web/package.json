@@ -88,7 +88,7 @@
   },
   "optionalDependencies": {
     "@atjsh/llmlingua-2": "2.0.3",
-    "@huggingface/transformers": "3.5.2",
+    "@huggingface/transformers": "4.2.0",
     "@tensorflow/tfjs": "4.22.0",
     "better-sqlite3": "^13.0.1",
     "js-tiktoken": "^1.0.20",
