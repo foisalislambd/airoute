@@ -71,9 +71,10 @@ export function buildComboNameCollisionWarning(
 }
 
 /** Shape of the minimal combo record the boot-time scan needs. */
-export interface ComboLike {
-  name?: unknown;
-}
+export type ComboLike = {
+  readonly name?: unknown;
+  readonly [key: string]: unknown;
+};
 
 /**
  * Boot-time scan (see `src/instrumentation-node.ts`): enumerates existing
@@ -81,7 +82,7 @@ export interface ComboLike {
  * hard failure, since the shadowing pattern is intentional per #6940.
  */
 export function scanCombosForModelCollisions(
-  combos: readonly ComboLike[]
+  combos: ReadonlyArray<ComboLike>
 ): Array<{ comboName: string; providerId: string; modelId: string }> {
   const results: Array<{ comboName: string; providerId: string; modelId: string }> = [];
   for (const combo of combos) {
