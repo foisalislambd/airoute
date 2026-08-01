@@ -7,6 +7,14 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.5] — 2026-08-01
+
+### Fixed
+
+- npm `prepublishOnly`: stop running a doomed MITM `tsc` under the monorepo
+  layout (path aliases pull files outside `rootDir`); stage `packages/core/mitm`
+  into `dist/src/mitm/` instead so publish logs stay clean
+
 ## [1.0.4] — 2026-08-01
 
 ## [1.0.3] — 2026-08-01

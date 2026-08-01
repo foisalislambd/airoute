@@ -168,62 +168,21 @@ if (existsSync(distServer)) {
   }
 }
 
-// ── Step 8: Compile + copy MITM cert utilities ─────────────
+// ── Step 8: Stage MITM utilities ───────────────────────────
+// Do NOT run a scoped `tsc` over packages/core/mitm. Handlers import
+// `@/lib/...`, `@/shared/...`, and `@omniroute/open-sse/...`, which pull files
+// outside `rootDir` and fail under NodeNext (TS6059 / TS2835 / path aliases).
+// Upstream OmniRoute hits the same wall and falls back to copying sources;
+// we skip the doomed compile entirely. Runtime MITM resolves from shipped
+// `packages/core/mitm` (in the npm tarball) plus `dist/src/mitm/server.cjs`.
 const mitmSrc = join(ROOT, "packages", "core", "mitm");
 const mitmDest = join(DIST_DIR, "src", "mitm");
 if (existsSync(mitmSrc)) {
-  console.log("  🔨 Compiling MITM utilities (TypeScript → JavaScript)...");
-  mkdirSync(mitmDest, { recursive: true });
-
-  // Write a temporary tsconfig.json targeting the mitm directory
-  const mitmTsconfig = {
-    compilerOptions: {
-      target: "ES2022",
-      module: "NodeNext",
-      moduleResolution: "NodeNext",
-      outDir: mitmDest,
-      rootDir: mitmSrc,
-      strict: false,
-      noImplicitAny: false,
-      strictNullChecks: false,
-      noEmitOnError: true,
-      allowImportingTsExtensions: true,
-      rewriteRelativeImportExtensions: true,
-      ignoreDeprecations: "6.0",
-      resolveJsonModule: true,
-      esModuleInterop: true,
-      skipLibCheck: true,
-      types: ["node"],
-      baseUrl: ".",
-      paths: {
-        "@/*": ["packages/core/*"],
-      },
-    },
-    include: [mitmSrc + "/**/*"],
-  };
-  const tmpTsconfigPath = join(ROOT, "tsconfig.mitm.tmp.json");
-  writeFileSync(tmpTsconfigPath, JSON.stringify(mitmTsconfig, null, 2));
-
-  try {
-    execFileSync(NPX_BIN, ["tsc", "-p", "tsconfig.mitm.tmp.json"], {
-      cwd: ROOT,
-      stdio: "inherit",
-    });
-    const mitmServerSrc = join(mitmSrc, "server.cjs");
-    if (existsSync(mitmServerSrc)) {
-      cpSync(mitmServerSrc, join(mitmDest, "server.cjs"));
-    }
-    console.log("  ✅ MITM utilities compiled to dist/src/mitm/");
-  } catch (err: any) {
-    console.warn("  ⚠️  MITM compile warning (non-fatal):", err.message);
-    // Fallback: copy source files so at least they are present
-    cpSync(mitmSrc, mitmDest, { recursive: true });
-  } finally {
-    // Cleanup temp tsconfig
-    try {
-      rmSync(tmpTsconfigPath);
-    } catch {}
-  }
+  console.log("  📋 Staging MITM utilities to dist/src/mitm/...");
+  rmSync(mitmDest, { recursive: true, force: true });
+  mkdirSync(dirname(mitmDest), { recursive: true });
+  cpSync(mitmSrc, mitmDest, { recursive: true });
+  console.log("  ✅ MITM utilities staged to dist/src/mitm/");
 }
 
 // ── Step 8.5: Bundle MCP server ────────────────────────────
@@ -393,21 +352,6 @@ if (existsSync(openapiSpecSrc)) {
   const docsDest = join(DIST_DIR, "docs");
   mkdirSync(docsDest, { recursive: true });
   cpSync(openapiSpecSrc, join(docsDest, "openapi.yaml"));
-}
-
-const docsMarkdownSrc = join(ROOT, "docs");
-if (existsSync(docsMarkdownSrc)) {
-  const docsDest = join(DIST_DIR, "docs");
-  mkdirSync(docsDest, { recursive: true });
-  const mdFiles = readdirSync(docsMarkdownSrc).filter(
-    (f) => f.endsWith(".md") || f.endsWith(".mdx")
-  );
-  for (const mdFile of mdFiles) {
-    cpSync(join(docsMarkdownSrc, mdFile), join(docsDest, mdFile));
-  }
-  if (mdFiles.length > 0) {
-    console.log(`[prepublish] Copied ${mdFiles.length} docs markdown files to dist/docs/`);
-  }
 }
 
 const syncEnvSrc = join(ROOT, "scripts", "sync-env.mjs");
