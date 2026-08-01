@@ -24,7 +24,7 @@ npm run check:pack-artifact
 npm publish --access public
 ```
 
-Or cut a GitHub Release and let `.github/workflows/npm-publish.yml` publish to **npmjs + GitHub Packages**.
+Or push to `main` / run **Release** — `.github/workflows/release.yml` publishes npmjs + GitHub Packages (+ Docker) together.
 
 ## Useful scripts
 

@@ -1,17 +1,10 @@
 name: Release
 
-# Auto-release on every push to `main` (tag + GitHub Release + npm + Docker),
-# unless the commit message opts out.
+# Push to main → version + tag + GitHub Release + npm + Docker (one workflow).
+# Commit message with [skip release] → exit early (nothing published).
+# Manual: Actions → Release → Run workflow (optional version input).
 #
-# Skip (no release):
-#   - commit message contains `[skip release]` or `[no release]`
-#   - release-bot commits themselves (`chore(release): …`) — prevents loops
-#
-# Manual: Actions → Release → Run workflow (mode auto|current|explicit)
-#
-# Version scheme (roll at 9):
-#   1.0.0 → 1.0.1 → … → 1.0.9 → 1.1.0 → … → 1.9.9 → 2.0.0
-# First release is always 1.0.0 when no v* tags exist yet.
+# Secrets: NPM_TOKEN, DOCKERHUB_USERNAME, DOCKERHUB_TOKEN
 
 on:
   push:
@@ -19,32 +12,15 @@ on:
     paths-ignore:
       - "**.md"
       - "docs/**"
-      - ".github/workflows/docker-publish.yml"
-      - ".github/workflows/npm-publish.yml"
   workflow_dispatch:
     inputs:
-      mode:
-        description: "Version mode"
-        required: true
-        default: auto
-        type: choice
-        options:
-          - auto
-          - current
-          - explicit
       version:
-        description: "Explicit version (only when mode=explicit), e.g. 1.0.0"
+        description: "Empty = auto next version, or e.g. 1.2.0"
         required: false
         type: string
-      prerelease:
-        description: "Mark GitHub Release as pre-release"
-        required: false
-        type: boolean
-        default: false
 
 permissions:
   contents: write
-  actions: write
   packages: write
   id-token: write
 
@@ -53,127 +29,88 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  gate:
-    name: Release gate
+  # ── 1) Version, tag, GitHub Release ─────────────────────────────────────
+  release:
     runs-on: ubuntu-latest
     outputs:
-      should_release: ${{ steps.check.outputs.should_release }}
-      skip_reason: ${{ steps.check.outputs.skip_reason }}
+      go: ${{ steps.gate.outputs.go }}
+      version: ${{ steps.ver.outputs.version }}
+      tag: ${{ steps.ver.outputs.tag }}
     steps:
-      - name: Decide whether to release
-        id: check
+      - name: Gate
+        id: gate
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          EVENT: ${{ github.event_name }}
+          MSG: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
-
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            echo "should_release=true" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=" >> "$GITHUB_OUTPUT"
-            echo "Manual dispatch — releasing."
+          if [ "$EVENT" = "workflow_dispatch" ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-
-          MSG="${COMMIT_MSG:-}"
-
-          if printf '%s\n' "$MSG" | grep -qiE '\[[[:space:]]*skip[[:space:]]+release[[:space:]]*\]|\[[[:space:]]*no[[:space:]]+release[[:space:]]*\]'; then
-            echo "should_release=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=commit message contains [skip release] / [no release]" >> "$GITHUB_OUTPUT"
-            echo "Skipping release (opt-out in commit message)."
+          if printf '%s\n' "${MSG:-}" | grep -qiE '\[skip[[:space:]]+release\]'; then
+            echo "go=false" >> "$GITHUB_OUTPUT"
+            echo "Skipped: [skip release] — no tag/npm/Docker."
             exit 0
           fi
-
-          # Release workflow pushes `chore(release): X.Y.Z` back to main — must not
-          # re-enter or we infinite-loop version bumps.
-          if printf '%s\n' "$MSG" | head -n1 | grep -qE '^chore\(release\):'; then
-            echo "should_release=false" >> "$GITHUB_OUTPUT"
-            echo "skip_reason=chore(release) bot commit" >> "$GITHUB_OUTPUT"
-            echo "Skipping release (release commit)."
+          if printf '%s\n' "${MSG:-}" | head -n1 | grep -qE '^chore\(release\):'; then
+            echo "go=false" >> "$GITHUB_OUTPUT"
+            echo "Skipped: release bot commit."
             exit 0
           fi
+          echo "go=true" >> "$GITHUB_OUTPUT"
 
-          echo "should_release=true" >> "$GITHUB_OUTPUT"
-          echo "skip_reason=" >> "$GITHUB_OUTPUT"
-          echo "Push to main — releasing."
-
-  release:
-    name: Tag, GitHub Release, publish
-    needs: gate
-    if: needs.gate.outputs.should_release == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
+      - if: steps.gate.outputs.go == 'true'
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js
+      - if: steps.gate.outputs.go == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      - name: Resolve next version
+      - name: Version
+        if: steps.gate.outputs.go == 'true'
         id: ver
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          MODE_INPUT: ${{ inputs.mode }}
+          EVENT: ${{ github.event_name }}
           EXPLICIT: ${{ inputs.version }}
         run: |
           set -euo pipefail
           CURRENT=$(node -p "require('./package.json').version")
           TAGS=$(git tag -l 'v[0-9]*' | tr '\n' ',' )
 
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            MODE="${MODE_INPUT:-auto}"
+          if [ "$EVENT" = "workflow_dispatch" ] && [ -n "${EXPLICIT:-}" ]; then
+            VERSION="${EXPLICIT#v}"
+            if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "Invalid version: $EXPLICIT" >&2
+              exit 1
+            fi
           else
-            MODE="auto"
+            VERSION=$(node scripts/release/next-version.mjs resolve "$CURRENT" "$TAGS")
           fi
-
-          case "$MODE" in
-            explicit)
-              VERSION="${EXPLICIT#v}"
-              if ! printf '%s' "$VERSION" | grep -qE '^[0-9]+\.[0-9]+\.[0-9]+$'; then
-                echo "Invalid explicit version: $EXPLICIT" >&2
-                exit 1
-              fi
-              ;;
-            current)
-              VERSION="$CURRENT"
-              if [ "$(node -p "Number('$VERSION'.split('.')[0]) < 1")" = "true" ]; then
-                VERSION="1.0.0"
-              fi
-              ;;
-            auto|*)
-              VERSION=$(node scripts/release/next-version.mjs resolve "$CURRENT" "$TAGS")
-              ;;
-          esac
 
           TAG="v${VERSION}"
           if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "Tag $TAG already exists — aborting." >&2
+            echo "Tag $TAG already exists" >&2
             exit 1
           fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "$CURRENT → $VERSION"
 
-          {
-            echo "version=$VERSION"
-            echo "tag=$TAG"
-            echo "previous=$CURRENT"
-          } >> "$GITHUB_OUTPUT"
-          echo "Resolved release: $CURRENT → $VERSION ($TAG)"
-
-      - name: Bump package.json versions
+      - name: Bump + changelog
+        if: steps.gate.outputs.go == 'true'
         env:
           VERSION: ${{ steps.ver.outputs.version }}
-        run: node scripts/release/bump-version.mjs "$VERSION"
-
-      - name: Stamp CHANGELOG
-        env:
-          VERSION: ${{ steps.ver.outputs.version }}
-        run: node scripts/release/stamp-changelog.mjs "$VERSION"
+        run: |
+          node scripts/release/bump-version.mjs "$VERSION"
+          node scripts/release/stamp-changelog.mjs "$VERSION"
 
       - name: Commit, tag, push
+        if: steps.gate.outputs.go == 'true'
         env:
           VERSION: ${{ steps.ver.outputs.version }}
           TAG: ${{ steps.ver.outputs.tag }}
@@ -182,78 +119,241 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json package-lock.json packages/*/package.json CHANGELOG.md || true
-          if git diff --cached --quiet; then
-            echo "No version file changes to commit (already at $VERSION)"
-          else
-            # chore(release): + [skip release] both stop the main-push gate from looping.
+          if ! git diff --cached --quiet; then
             git commit -m "$(printf 'chore(release): %s\n\n[skip release]\n' "$VERSION")"
           fi
           git tag -a "$TAG" -m "AIRoute ${VERSION}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
           git push origin "$TAG"
 
-      - name: Create GitHub Release
+      - name: GitHub Release
+        if: steps.gate.outputs.go == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG: ${{ steps.ver.outputs.tag }}
           VERSION: ${{ steps.ver.outputs.version }}
-          EVENT_NAME: ${{ github.event_name }}
-          PRERELEASE_INPUT: ${{ inputs.prerelease }}
         run: |
-          set -euo pipefail
-          ARGS=( "$TAG" --title "AIRoute ${VERSION}" --generate-notes )
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$PRERELEASE_INPUT" = "true" ]; then
-            ARGS+=( --prerelease )
-          fi
-          gh release create "${ARGS[@]}"
+          gh release create "$TAG" --title "AIRoute ${VERSION}" --generate-notes
+          echo "GitHub Release ${TAG}" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Dispatch npm + Docker publish
-        # GITHUB_TOKEN pushes/tags do not re-trigger other workflows, so we
-        # explicitly dispatch publish jobs against the new tag.
+  # ── 2) npm (npmjs + GitHub Packages) ────────────────────────────────────
+  npm:
+    needs: release
+    if: needs.release.outputs.go == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: refs/tags/${{ needs.release.outputs.tag }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Version check
+        id: ver
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.ver.outputs.tag }}
-          VERSION: ${{ steps.ver.outputs.version }}
-          EVENT_NAME: ${{ github.event_name }}
-          PRERELEASE_INPUT: ${{ inputs.prerelease }}
+          VERSION: ${{ needs.release.outputs.version }}
         run: |
           set -euo pipefail
-          PROMOTE=true
-          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$PRERELEASE_INPUT" = "true" ]; then
-            PROMOTE=false
+          SKIP=false
+          if [ "$(npm view "airoute@${VERSION}" version 2>/dev/null || true)" = "$VERSION" ]; then
+            SKIP=true
           fi
+          O=$(printf '%s' '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')
+          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
+          echo "gh=@${O}/airoute" >> "$GITHUB_OUTPUT"
 
-          # Tag push can lag briefly before workflow_dispatch --ref sees it.
-          for _ in 1 2 3 4 5 6 7 8 9 10; do
-            if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
-              break
-            fi
-            sleep 2
-          done
-          git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null
+      - env:
+          VERSION: ${{ needs.release.outputs.version }}
+        run: npm version "$VERSION" --no-git-tag-version --allow-same-version
 
-          gh workflow run npm-publish.yml --ref "$TAG" -f "version=$VERSION" -f tag=auto
-          gh workflow run docker-publish.yml --ref "$TAG" \
-            -f "version=$VERSION" \
-            -f "promote_latest=$PROMOTE"
-          {
-            echo "## Release ${TAG} created"
-            echo ""
-            echo "Dispatched publish workflows for \`${VERSION}\`:"
-            echo "- **npmjs** \`airoute@${VERSION}\`"
-            echo "- **GitHub Packages** \`@${{ github.repository_owner }}/airoute\`"
-            echo "- **Docker Hub** + **GHCR** \`airoute:${VERSION}\` (+ \`-web\`)"
-          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Build
+        env:
+          JWT_SECRET: ci-build-secret-with-sufficient-length-for-validation
+          AIROUTE_USE_TURBOPACK: "0"
+          OMNIROUTE_USE_TURBOPACK: "0"
+          AIROUTE_BUILD_MEMORY_MB: "8192"
+          OMNIROUTE_BUILD_MEMORY_MB: "8192"
+        run: |
+          npm run build:release
+          npm run check:pack-artifact
 
-  skipped:
-    name: Release skipped
-    needs: gate
-    if: needs.gate.outputs.should_release != 'true'
+      - name: Publish npmjs
+        if: steps.ver.outputs.skip != 'true'
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm publish --provenance --access public --tag latest
+          echo "npmjs airoute@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish GitHub Packages
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+          NAME: ${{ steps.ver.outputs.gh }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          O=$(printf '%s' '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')
+          printf '%s\n' \
+            "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" \
+            "@${O}:registry=https://npm.pkg.github.com" > .npmrc
+          npm pkg set "name=${NAME}"
+          npm publish --registry=https://npm.pkg.github.com --access public --tag latest \
+            || echo "GH Packages skipped/failed for ${NAME}@${VERSION}"
+          echo "GitHub Packages ${NAME}@${VERSION}" >> "$GITHUB_STEP_SUMMARY"
+
+  # ── 3) Docker digests (amd64 + arm64) ───────────────────────────────────
+  docker-build:
+    needs: release
+    if: needs.release.outputs.go == 'true'
+    name: docker-${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04
+            arch: amd64
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+            arch: arm64
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: refs/tags/${{ needs.release.outputs.tag }}
+
+      - id: img
+        env:
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          O=$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')
+          echo "hub=${O}/airoute" >> "$GITHUB_OUTPUT"
+          echo "ghcr=ghcr.io/${O}/airoute" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: base
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          target: runner-base
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,"name=${{ steps.img.outputs.hub }},${{ steps.img.outputs.ghcr }}",push-by-digest=true,name-canonical=true,push=true
+          cache-from: type=gha,scope=docker-${{ matrix.arch }}
+          cache-to: type=gha,scope=docker-${{ matrix.arch }},mode=max
+          build-args: AIROUTE_BUILD_MEMORY_MB=8192
+
+      - id: web
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          target: runner-web
+          platforms: ${{ matrix.platform }}
+          outputs: type=image,"name=${{ steps.img.outputs.hub }},${{ steps.img.outputs.ghcr }}",push-by-digest=true,name-canonical=true,push=true
+          cache-from: type=gha,scope=docker-web-${{ matrix.arch }}
+          cache-to: type=gha,scope=docker-web-${{ matrix.arch }},mode=max
+          build-args: AIROUTE_BUILD_MEMORY_MB=8192
+
+      - name: Upload digests
+        env:
+          BASE: ${{ steps.base.outputs.digest }}
+          WEB: ${{ steps.web.outputs.digest }}
+        run: |
+          set -euo pipefail
+          test -n "$BASE" && test -n "$WEB"
+          mkdir -p /tmp/d/base /tmp/d/web
+          touch "/tmp/d/base/${BASE#sha256:}" "/tmp/d/web/${WEB#sha256:}"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: digests-base-${{ matrix.arch }}
+          path: /tmp/d/base/*
+          if-no-files-found: error
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: digests-web-${{ matrix.arch }}
+          path: /tmp/d/web/*
+          if-no-files-found: error
+          retention-days: 1
+
+  # ── 4) Docker multi-arch manifests ──────────────────────────────────────
+  docker-publish:
+    needs: [release, docker-build]
+    if: needs.release.outputs.go == 'true'
     runs-on: ubuntu-latest
     steps:
-      - name: Summarize skip
+      - id: img
         env:
-          REASON: ${{ needs.gate.outputs.skip_reason }}
+          OWNER: ${{ github.repository_owner }}
+          VERSION: ${{ needs.release.outputs.version }}
         run: |
-          echo "Release skipped: ${REASON:-unknown}" >> "$GITHUB_STEP_SUMMARY"
-          echo "Release skipped: ${REASON:-unknown}"
+          O=$(printf '%s' "$OWNER" | tr '[:upper:]' '[:lower:]')
+          echo "hub=${O}/airoute" >> "$GITHUB_OUTPUT"
+          echo "ghcr=ghcr.io/${O}/airoute" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: digests-base-*
+          path: /tmp/d/base
+          merge-multiple: true
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: digests-web-*
+          path: /tmp/d/web
+          merge-multiple: true
+
+      - name: Create manifests
+        env:
+          HUB: ${{ steps.img.outputs.hub }}
+          GHCR: ${{ steps.img.outputs.ghcr }}
+          VERSION: ${{ steps.img.outputs.version }}
+        run: |
+          set -euo pipefail
+          mk() {
+            local image="$1" suffix="$2" dir="$3"
+            local args=(-t "${image}:${VERSION}${suffix}" -t "${image}:latest${suffix}")
+            local refs=()
+            while IFS= read -r f; do
+              refs+=("${image}@sha256:$(basename "$f")")
+            done < <(find "$dir" -type f | sort)
+            [ "${#refs[@]}" -gt 0 ] || { echo "no digests in $dir" >&2; exit 1; }
+            docker buildx imagetools create "${args[@]}" "${refs[@]}"
+          }
+          mk "$HUB" "" /tmp/d/base
+          mk "$HUB" "-web" /tmp/d/web
+          mk "$GHCR" "" /tmp/d/base
+          mk "$GHCR" "-web" /tmp/d/web
+          echo "Docker ${HUB}:${VERSION} (+ -web, :latest) → Hub + GHCR" >> "$GITHUB_STEP_SUMMARY"
