@@ -150,7 +150,7 @@
     "ioredis": "^5.10.1",
     "jose": "^6.2.3",
     "js-yaml": "^5.2.2",
-    "jsdom": "^26.1.0",
+    "jsdom": "^30.0.1",
     "jsonc-parser": "^3.3.1",
     "lowdb": "^7.0.1",
     "lucide-react": "^1.21.0",
