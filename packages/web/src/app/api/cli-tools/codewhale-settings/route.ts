@@ -26,10 +26,19 @@ const TOOL_ID = "codewhale";
  * read/write that path as a legacy fallback.
  */
 const getPrimaryConfigPath = (): string =>
-  getCliPrimaryConfigPath(TOOL_ID) ?? path.join(process.env.HOME ?? "~", ".codewhale", "config.toml");
+  getCliPrimaryConfigPath(TOOL_ID) ??
+  path.join(
+    /* turbopackIgnore: true */ process.env.HOME ?? "~",
+    ".codewhale",
+    "config.toml"
+  );
 
 const getLegacyConfigPath = (): string =>
-  path.join(process.env.HOME ?? "~", ".deepseek", "config.toml");
+  path.join(
+    /* turbopackIgnore: true */ process.env.HOME ?? "~",
+    ".deepseek",
+    "config.toml"
+  );
 
 const getPrimaryConfigDir = () => path.dirname(getPrimaryConfigPath());
 
