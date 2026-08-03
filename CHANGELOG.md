@@ -7,6 +7,15 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.8] — 2026-08-03
+
+### Fixed
+
+- Adopt legacy OmniRoute `_omniroute_migrations` into `_airoute_migrations` on
+  boot so upgraded DBs no longer trip the mass-pending migration safety abort
+- Desktop instrumentation-hook failures no longer print a false Android/Termux
+  cache hint; the real cause (e.g. migration abort) is shown instead
+
 ## [1.0.7] — 2026-08-01
 
 ## [1.0.6] — 2026-08-01

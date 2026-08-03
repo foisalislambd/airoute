@@ -10,7 +10,7 @@ import { isTermux } from "../../../scripts/build/postinstallSupport.mjs";
 import {
   ensureAndroidCacheDir,
   isFatalInstrumentationHookFailure,
-  formatAndroidInstrumentationFailureHint,
+  formatInstrumentationFailureHint,
 } from "../utils/ensureAndroidCacheDir.mjs";
 import {
   resolveMaxOldSpaceMb,
@@ -71,8 +71,9 @@ export function registerServe(program) {
 let instrumentationFailureHintPrinted = false;
 
 /**
- * If child output looks like Next.js failed to load its instrumentation hook
- * on Android/Termux, print a clear operator-facing fix hint.
+ * If child output looks like Next.js failed to load its instrumentation hook,
+ * print a clear operator-facing fix hint (Android cache tip on Termux; real
+ * cause on desktop so migration/DB aborts are not mislabeled).
  * Exported for unit tests.
  *
  * @param {string} text
@@ -82,7 +83,9 @@ export function maybeReportInstrumentationHookFailure(text) {
   if (instrumentationFailureHintPrinted) return false;
   if (!isFatalInstrumentationHookFailure(text)) return false;
   instrumentationFailureHintPrinted = true;
-  process.stderr.write(formatAndroidInstrumentationFailureHint(process.env.XDG_CACHE_HOME));
+  process.stderr.write(
+    formatInstrumentationFailureHint(text, { cacheDir: process.env.XDG_CACHE_HOME })
+  );
   return true;
 }
 

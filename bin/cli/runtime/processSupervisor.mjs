@@ -12,7 +12,7 @@ import { buildNodeHeapArgs } from "../../../scripts/build/runtime-env.mjs";
 import { stopProcessGracefully } from "../../../packages/core/shared/platform/windowsProcess.ts";
 import {
   isFatalInstrumentationHookFailure,
-  formatAndroidInstrumentationFailureHint,
+  formatInstrumentationFailureHint,
 } from "../utils/ensureAndroidCacheDir.mjs";
 
 const CRASH_LOG_LINES = 50;
@@ -72,14 +72,15 @@ export class ServerSupervisor {
       if (this.crashLog.length > CRASH_LOG_LINES) {
         this.crashLog = this.crashLog.slice(-CRASH_LOG_LINES);
       }
-      // Surface Android/Termux instrumentation-hook failures even when --log is
-      // off (output is only buffered otherwise).
+      // Surface instrumentation-hook failures even when --log is off (output is
+      // only buffered otherwise). Android/Termux gets the cache-dir tip; desktop
+      // gets the real cause (e.g. migration abort) instead of a false Termux hint.
       if (!this.instrumentationFailureHintPrinted && isFatalInstrumentationHookFailure(text)) {
         this.instrumentationFailureHintPrinted = true;
         process.stderr.write(
-          formatAndroidInstrumentationFailureHint(
-            this.env?.XDG_CACHE_HOME || process.env.XDG_CACHE_HOME
-          )
+          formatInstrumentationFailureHint(text, {
+            cacheDir: this.env?.XDG_CACHE_HOME || process.env.XDG_CACHE_HOME,
+          })
         );
       }
     };

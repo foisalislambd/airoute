@@ -87,7 +87,7 @@ export function ensureAndroidCacheDir(options = {}) {
 /**
  * Detect Next.js instrumentation-hook failures that leave the server looking
  * "up" while requests get silent HTTP 500s (typical when the Android cache
- * probe failed before logging started).
+ * probe failed before logging started — also wraps other boot aborts).
  *
  * @param {string} text
  * @returns {boolean}
@@ -98,6 +98,46 @@ export function isFatalInstrumentationHookFailure(text) {
     /Unsupported platform:\s*android/i.test(text) ||
     /error occurred while loading instrumentation hook/i.test(text)
   );
+}
+
+/**
+ * True when the failure is specifically Next.js's Android cache-dir probe
+ * (or we are on Android/Termux and any instrumentation hook failed).
+ *
+ * @param {string} text
+ * @param {string} [platform]
+ * @param {NodeJS.ProcessEnv} [env]
+ * @returns {boolean}
+ */
+export function isAndroidCacheInstrumentationFailure(
+  text,
+  platform = process.platform,
+  env = process.env
+) {
+  if (!text) return false;
+  if (/Unsupported platform:\s*android/i.test(text)) return true;
+  return (
+    needsAndroidCacheDirPrep(platform, env) &&
+    /error occurred while loading instrumentation hook/i.test(text)
+  );
+}
+
+/**
+ * Pull a concise cause line out of Next.js instrumentation-hook error text
+ * (e.g. the MigrationSafetyAbortError message after the colon).
+ *
+ * @param {string} text
+ * @returns {string | null}
+ */
+export function extractInstrumentationHookCause(text) {
+  if (!text) return null;
+  const match = text.match(
+    /error occurred while loading instrumentation hook:\s*([^\n\r]+)/i
+  );
+  if (match?.[1]) return match[1].trim();
+  const android = text.match(/Unsupported platform:\s*android/i);
+  if (android) return android[0];
+  return null;
 }
 
 /**
@@ -119,4 +159,42 @@ export function formatAndroidInstrumentationFailureHint(cacheDir) {
     `    then restart: \x1b[36mairoute serve\x1b[0m\n` +
     `  See: docs/guides/TERMUX_GUIDE.md → Troubleshooting → Unsupported platform: android\n`
   );
+}
+
+/**
+ * Generic desktop hint: surface the real cause instead of a Termux cache tip.
+ *
+ * @param {string} [text] Raw child stderr/stdout that triggered detection
+ * @returns {string}
+ */
+export function formatGenericInstrumentationFailureHint(text) {
+  const cause = extractInstrumentationHookCause(text);
+  const causeLine = cause
+    ? `  Cause: \x1b[33m${cause}\x1b[0m\n`
+    : "";
+  return (
+    `\n\x1b[31m✖ Next.js instrumentation hook failed during startup.\x1b[0m\n` +
+    causeLine +
+    `  The server may appear "running" while requests return HTTP 500.\n` +
+    `  Re-run with \x1b[36mairoute serve --log\x1b[0m for the full stack, then fix the\n` +
+    `  underlying boot error (migrations, DB driver, missing native modules, etc.).\n`
+  );
+}
+
+/**
+ * Choose Android-cache vs generic instrumentation hint for operator-facing output.
+ *
+ * @param {string} text
+ * @param {object} [options]
+ * @param {string} [options.cacheDir]
+ * @param {string} [options.platform]
+ * @param {NodeJS.ProcessEnv} [options.env]
+ * @returns {string}
+ */
+export function formatInstrumentationFailureHint(text, options = {}) {
+  const { cacheDir, platform = process.platform, env = process.env } = options;
+  if (isAndroidCacheInstrumentationFailure(text, platform, env)) {
+    return formatAndroidInstrumentationFailureHint(cacheDir);
+  }
+  return formatGenericInstrumentationFailureHint(text);
 }

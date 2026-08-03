@@ -165,10 +165,75 @@ let memoizedSafetyAbort: MigrationSafetyAbortError | null = null;
 
 const fts5SupportCache = new WeakMap<SqliteAdapter, boolean>();
 
+const MIGRATIONS_TABLE = "_airoute_migrations";
+/** Pre-rebrand OmniRoute tracking table — still present on upgraded user DBs. */
+const LEGACY_MIGRATIONS_TABLE = "_omniroute_migrations";
+
+function hasTable(db: SqliteAdapter, tableName: string): boolean {
+  const row = db
+    .prepare("SELECT name FROM sqlite_master WHERE type IN ('table', 'view') AND name = ?")
+    .get(tableName) as { name?: string } | undefined;
+  return Boolean(row?.name);
+}
+
+function countTableRows(db: SqliteAdapter, tableName: string): number {
+  const row = db.prepare(`SELECT COUNT(*) AS c FROM "${tableName}"`).get() as
+    | { c?: number }
+    | undefined;
+  return typeof row?.c === "number" ? row.c : 0;
+}
+
+/**
+ * Adopt a legacy OmniRoute `_omniroute_migrations` table into `_airoute_migrations`.
+ *
+ * Without this, upgraded OmniRoute DBs look like a wiped tracking table (seed-only
+ * `_airoute_migrations` + hundreds of pending files) and trip MigrationSafetyAbortError.
+ *
+ * @returns true when the legacy table was renamed or merged away
+ */
+export function adoptLegacyMigrationsTable(db: SqliteAdapter): boolean {
+  if (!hasTable(db, LEGACY_MIGRATIONS_TABLE)) {
+    return false;
+  }
+
+  if (!hasTable(db, MIGRATIONS_TABLE)) {
+    db.exec(`ALTER TABLE "${LEGACY_MIGRATIONS_TABLE}" RENAME TO "${MIGRATIONS_TABLE}"`);
+    console.log(
+      `[Migration] Adopted legacy ${LEGACY_MIGRATIONS_TABLE} → ${MIGRATIONS_TABLE}`
+    );
+    return true;
+  }
+
+  const newCount = countTableRows(db, MIGRATIONS_TABLE);
+  const legacyCount = countTableRows(db, LEGACY_MIGRATIONS_TABLE);
+
+  if (newCount <= 1 && legacyCount > newCount) {
+    // Seed-only (or empty) new table beside a full legacy history — prefer legacy.
+    db.exec(`DROP TABLE "${MIGRATIONS_TABLE}"`);
+    db.exec(`ALTER TABLE "${LEGACY_MIGRATIONS_TABLE}" RENAME TO "${MIGRATIONS_TABLE}"`);
+    console.log(
+      `[Migration] Adopted legacy ${LEGACY_MIGRATIONS_TABLE} → ${MIGRATIONS_TABLE}`
+    );
+    return true;
+  }
+
+  // Both have real rows: merge legacy into the new table, then drop legacy.
+  db.exec(`
+    INSERT OR IGNORE INTO "${MIGRATIONS_TABLE}" (version, name, applied_at)
+    SELECT version, name, applied_at FROM "${LEGACY_MIGRATIONS_TABLE}"
+  `);
+  db.exec(`DROP TABLE "${LEGACY_MIGRATIONS_TABLE}"`);
+  console.log(
+    `[Migration] Adopted legacy ${LEGACY_MIGRATIONS_TABLE} → ${MIGRATIONS_TABLE}`
+  );
+  return true;
+}
+
 /**
  * Ensure the schema_migrations tracking table exists.
  */
 function ensureMigrationsTable(db: SqliteAdapter): void {
+  adoptLegacyMigrationsTable(db);
   db.exec(`
     CREATE TABLE IF NOT EXISTS _airoute_migrations (
       version TEXT PRIMARY KEY,
@@ -325,13 +390,6 @@ function getAppliedRecords(db: SqliteAdapter): Array<{ version: string; name: st
     version: string;
     name: string;
   }>;
-}
-
-function hasTable(db: SqliteAdapter, tableName: string): boolean {
-  const row = db
-    .prepare("SELECT name FROM sqlite_master WHERE type IN ('table', 'view') AND name = ?")
-    .get(tableName) as { name?: string } | undefined;
-  return Boolean(row?.name);
 }
 
 function hasColumn(db: SqliteAdapter, tableName: string, columnName: string): boolean {

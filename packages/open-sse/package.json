@@ -1,6 +1,6 @@
 {
   "name": "@omniroute/open-sse",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "private": true,
   "type": "module",
   "description": "AIRoute open-sse (compatible name @omniroute/open-sse)",

@@ -15,7 +15,7 @@ import {
 import path from "path";
 import fs from "fs";
 import { resolveWritableDataDir, getLegacyDotDataDir } from "../dataPaths";
-import { runMigrations } from "./migrationRunner";
+import { adoptLegacyMigrationsTable, runMigrations } from "./migrationRunner";
 import { runDbHealthCheck } from "./healthCheck";
 import { resetAllDbModuleState } from "./stateReset";
 import { parseStoredPayload } from "../logPayloads";
@@ -1191,6 +1191,9 @@ export function getDbInstance(): SqliteDatabase {
   ensureCallLogsColumns(db);
 
   // ── Versioned Migrations ──
+  // OmniRoute DBs still use `_omniroute_migrations` — adopt before seeding so we
+  // do not create a seed-only `_airoute_migrations` beside a full legacy history.
+  adoptLegacyMigrationsTable(db);
   // Auto-seed 001 as applied (the inline SCHEMA_SQL already created these tables)
   // then run any new migrations (002+)
   db.exec(`
