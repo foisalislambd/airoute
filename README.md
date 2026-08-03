@@ -12,6 +12,8 @@ airoute
 # → http://localhost:20128
 ```
 
+> **npm 11.16+:** you may see an `allow-scripts` advisory after install — scripts still run today. To silence it (and stay ready for npm 12), see [Troubleshooting → allow-scripts](docs/getting-started/TROUBLESHOOTING.md#allow-scripts-warnings-npm-1116).
+
 Or run from source:
 
 ```bash

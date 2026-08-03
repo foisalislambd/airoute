@@ -34,14 +34,39 @@ Common problems and solutions for AIRoute.
 
 ## npm install Warnings (ERESOLVE / peer / deprecated)
 
-When you run `npm install -g airoute`, you may see a wall of warnings like `npm warn ERESOLVE`, peer-dependency notices, and `deprecated` messages. **These are expected and harmless.** Your install succeeded if you see `added <N> packages` in the output.
+When you run `npm install -g airoute`, you may see `deprecated` notices (and on older releases, `ERESOLVE` peer warnings). **These are harmless.** Your install succeeded if you see `added <N> packages` in the output.
 
-The warnings come from stale peer-dependency ranges in third-party packages AIRoute doesn't control:
+As of 1.0.9, AIRoute pins npm `overrides` so the common peer mismatches no longer spam the install log:
 
-1. **`marked-terminal` wants `marked >=1 <16`, found `marked@18`** — works fine in practice; the upstream peer range is just stale.
-2. **`deprecated prebuild-install@7.1.3`** — the native-binary fetch helper. Only relevant later if a web-cookie provider reports a missing `tls-client-node` native binary (a separate issue, not caused by this warning).
+1. **`@emoji-mart/react` vs React 19** — pulled in transitively by `@lobehub/icons` → `@lobehub/ui`; override accepts the app's React 19.
+2. **`marked-terminal` vs `marked@18`** — upstream peer range is stale (`>=1 <16`); override uses the app's `marked`.
 
-**No action needed** — the warnings cannot be fully silenced without forking upstream packages.
+You may still see **`deprecated`** lines from transitive packages (`prebuild-install`, `intersection-observer`, `boolean`). Those come from upstream maintainers and cannot be removed until those packages update — they do not affect AIRoute.
+
+### `allow-scripts` warnings (npm 11.16+)
+
+After install you may also see:
+
+```text
+npm warn allow-scripts N packages have install scripts not yet covered by allowScripts
+```
+
+On **npm 11.16.x this is advisory only** — postinstall scripts (native modules, `airoute` postinstall) still run. On **npm 12+** unapproved scripts are skipped, which can break `better-sqlite3` / `sharp` / `keytar` / `tls-client-node`.
+
+**Global install (no project `package.json`):** approve once in your user npm config, then reinstall:
+
+```bash
+npm config set allow-scripts=airoute,keytar,tls-client-node,onnxruntime-node,sharp,core-js,@parcel/watcher,@swc/core,protobufjs,koffi,esbuild --location=user
+npm install -g airoute
+```
+
+Or pass the list at install time:
+
+```bash
+npm install -g airoute --allow-scripts=airoute,keytar,tls-client-node,onnxruntime-node,sharp,core-js,@parcel/watcher,@swc/core,protobufjs,koffi,esbuild
+```
+
+**Project install:** run `npm approve-scripts --all` in that project (writes `allowScripts` into its `package.json`).
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "airoute",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "AIRoute — local AI gateway (web + streaming engine + core)",
   "license": "MIT",
   "author": "foisalislambd",
@@ -80,6 +80,13 @@
       "@apidevtools/json-schema-ref-parser": {
         "js-yaml": "^4.2.0"
       }
+    },
+    "@emoji-mart/react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "marked-terminal": {
+      "marked": "$marked"
     }
   },
   "type": "module",

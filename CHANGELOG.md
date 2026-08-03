@@ -7,6 +7,15 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.9] — 2026-08-03
+
+### Fixed
+
+- Silence common `npm install -g` ERESOLVE peer warnings via overrides for
+  `@emoji-mart/react` (React 19) and `marked-terminal` (`marked@18`)
+- Document npm 11.16+ `allow-scripts` advisory (and the user-config fix for
+  global installs ahead of npm 12)
+
 ## [1.0.8] — 2026-08-03
 
 ### Fixed
