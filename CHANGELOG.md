@@ -15,6 +15,7 @@ and this project aims to follow [Semantic Versioning](https://semver.org/).
   `@emoji-mart/react` (React 19) and `marked-terminal` (`marked@18`)
 - Document npm 11.16+ `allow-scripts` advisory (and the user-config fix for
   global installs ahead of npm 12)
+- CLI startup banner spells **AIRoute** (was still the OmniRoute ASCII art)
 
 ## [1.0.8] — 2026-08-03
 
