@@ -1,0 +1,19 @@
+{
+  "name": "airoute",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Local-first OpenAI-compatible AI router",
+  "workspaces": [
+    "apps/panel",
+    "packages/sse"
+  ],
+  "scripts": {
+    "dev:panel": "npm run dev -w @airoute/panel",
+    "build:panel": "npm run build -w @airoute/panel",
+    "dev:server": "go run ./apps/server/cmd/airoute",
+    "dev:desktop": "go run ./apps/desktop/cmd/airoute-desktop"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

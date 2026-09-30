@@ -1,0 +1,11 @@
+{
+  "name": "@airoute/sse",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Parser for OpenAI-style server-sent chat streams",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "types": "./src/index.ts"
+}

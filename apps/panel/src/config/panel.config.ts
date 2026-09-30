@@ -1,0 +1,29 @@
+import type { LucideIcon } from "lucide-react";
+import { Activity, Boxes, KeyRound, LayoutDashboard, MessagesSquare } from "lucide-react";
+
+export const panelConfig = {
+  brand: {
+    name: "AIRoute",
+    letter: "A",
+  },
+};
+
+export type PanelNavItem = {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+  section: string;
+};
+
+export const panelNavItems: PanelNavItem[] = [
+  { name: "Overview", href: "/", icon: LayoutDashboard, section: "Router" },
+  { name: "Providers", href: "/providers", icon: Boxes, section: "Router" },
+  { name: "API keys", href: "/keys", icon: KeyRound, section: "Access" },
+  { name: "Playground", href: "/playground", icon: MessagesSquare, section: "Access" },
+  { name: "Activity", href: "/activity", icon: Activity, section: "Access" },
+];
+
+export function isNavActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}

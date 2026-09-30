@@ -1,0 +1,16 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+
+# local-first data
+*.db
+*.db-wal
+*.db-shm
+secret.key
+apps/server/data
+apps/desktop/data
+
+# go
+bin
+coverage.out
