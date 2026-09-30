@@ -2,7 +2,7 @@ import { MarkdownView } from "@/components/markdown-view";
 import { getProvider, listActiveModels, type Model } from "@/lib/api";
 import { providerIcon } from "@/lib/provider-icons";
 import { chatDeltaFromSSE, readSSE } from "@airoute/sse";
-import { ArrowUp, ChevronDown, Paperclip, Plus, Search, Square, X } from "lucide-react";
+import { ArrowUp, ChevronDown, PanelLeft, Paperclip, Plus, Search, Square, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -20,13 +20,38 @@ type ChatMessage = {
   format: "markdown" | "json"
 };
 
+type StoredChat = {
+  id: string
+  title: string
+  updatedAt: number
+  modelId: string
+  messages: ChatMessage[]
+};
+
+const CHATS_KEY = "airoute.playground.chats";
+const ACTIVE_KEY = "airoute.playground.active";
+const OPEN_KEY = "airoute.playground.history";
+
+function readChats(): StoredChat[] {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(CHATS_KEY) || "[]") as StoredChat[];
+    return Array.isArray(parsed) ? parsed.filter((chat) => chat && typeof chat.id === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function PlaygroundPage() {
   const [models, setModels] = useState<Model[]>([]);
   const [names, setNames] = useState<Record<string, string>>({});
-  const [modelId, setModelId] = useState("");
+  const [modelId, setModelId] = useState(() => readChats().find((chat) => chat.id === localStorage.getItem(ACTIVE_KEY))?.modelId ?? "");
   const [prompt, setPrompt] = useState("");
   const [files, setFiles] = useState<Attachment[]>([]);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => readChats().find((chat) => chat.id === localStorage.getItem(ACTIVE_KEY))?.messages ?? []);
+  const [chats, setChats] = useState<StoredChat[]>(readChats);
+  const [activeId, setActiveId] = useState(() => localStorage.getItem(ACTIVE_KEY) || "");
+  const [historyOpen, setHistoryOpen] = useState(() => localStorage.getItem(OPEN_KEY) !== "0");
+  const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState(false);
   const [loadError, setLoadError] = useState("");
   const scroller = useRef<HTMLDivElement>(null);
@@ -77,6 +102,33 @@ export default function PlaygroundPage() {
     el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
   }, [prompt]);
 
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ready || !activeId) return;
+    setChats((current) =>
+      current.map((chat) =>
+        chat.id === activeId ? { ...chat, title: chatTitle(messages), updatedAt: Date.now(), modelId, messages: forStorage(messages) } : chat,
+      ),
+    );
+  }, [messages, activeId, modelId, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    const timer = window.setTimeout(() => {
+      try {
+        localStorage.setItem(CHATS_KEY, JSON.stringify(chats));
+        localStorage.setItem(ACTIVE_KEY, activeId);
+        localStorage.setItem(OPEN_KEY, historyOpen ? "1" : "0");
+      } catch {
+        localStorage.setItem(CHATS_KEY, JSON.stringify(chats.slice(0, 8)));
+      }
+    }, 400);
+    return () => window.clearTimeout(timer);
+  }, [chats, activeId, historyOpen, ready]);
+
   const selected = models.find((model) => model.id === modelId);
   const kind = selected?.kind || "chat";
   const mediaKind = kind === "image" || kind === "video" || kind === "audio";
@@ -96,9 +148,41 @@ export default function PlaygroundPage() {
     abortRef.current?.abort();
   }
 
+  function beginChat() {
+    if (activeId && chats.some((chat) => chat.id === activeId)) return;
+    const id = activeId || newId();
+    if (!activeId) setActiveId(id);
+    setChats((current) => [{ id, title: chatTitle(messagesRef.current), updatedAt: Date.now(), modelId, messages: [] }, ...current.filter((chat) => chat.id !== id)].slice(0, 40));
+  }
+
+  function startNewChat() {
+    abortRef.current?.abort();
+    setActiveId("");
+    setMessages([]);
+    setPrompt("");
+    setFiles([]);
+  }
+
+  function openChat(chat: StoredChat) {
+    if (chat.id === activeId) return;
+    abortRef.current?.abort();
+    setActiveId(chat.id);
+    setMessages(chat.messages);
+    if (chat.modelId) setModelId(chat.modelId);
+    setPrompt("");
+    setFiles([]);
+    if (window.innerWidth < 640) setHistoryOpen(false);
+  }
+
+  function deleteChat(id: string) {
+    setChats((current) => current.filter((chat) => chat.id !== id));
+    if (id === activeId) startNewChat();
+  }
+
   async function send() {
     const text = prompt.trim();
     if (busy || !modelId || (!text && files.length === 0)) return;
+    beginChat();
     const attached = files;
     const user: ChatMessage = {
       id: newId(),
@@ -198,18 +282,50 @@ export default function PlaygroundPage() {
     setMessages((current) => current.map((item) => (item.id === id ? { ...item, ...change } : item)));
   }
 
+  const orderedChats = [...chats].sort((a, b) => b.updatedAt - a.updatedAt);
+
   return (
-    <div className="relative flex min-h-0 flex-1 flex-col bg-white dark:bg-gray-900">
-      <div className="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4 dark:border-gray-800">
+    <div className="relative flex min-h-0 flex-1 bg-white dark:bg-gray-900">
+      {historyOpen && <button type="button" aria-label="Close chat history" className="absolute inset-0 z-20 bg-gray-900/30 sm:hidden" onClick={() => setHistoryOpen(false)} />}
+      <aside className={`${historyOpen ? "flex" : "hidden"} absolute inset-y-0 left-0 z-30 w-64 flex-col border-r border-gray-200 bg-gray-50 sm:static dark:border-gray-800 dark:bg-gray-900`}>
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-gray-200 px-3 dark:border-gray-800">
+          <span className="text-sm font-medium text-gray-900 dark:text-white">Chats</span>
+          <button type="button" onClick={() => setHistoryOpen(false)} className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 hover:bg-gray-200/70 dark:hover:bg-white/10" aria-label="Hide chat history">
+            <PanelLeft className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="panel-scrollbar min-h-0 flex-1 overflow-y-auto p-2">
+          {orderedChats.length === 0 ? (
+            <p className="px-2 py-6 text-center text-xs text-gray-500">Send a message and it will show up here.</p>
+          ) : (
+            orderedChats.map((chat) => (
+              <div key={chat.id} className={`group mb-1 flex items-center rounded-lg ${chat.id === activeId ? "bg-white shadow-sm dark:bg-white/10" : "hover:bg-white/70 dark:hover:bg-white/5"}`}>
+                <button type="button" onClick={() => openChat(chat)} className="min-w-0 flex-1 truncate px-2.5 py-2 text-left text-sm text-gray-800 dark:text-gray-100">
+                  {chat.title || "New chat"}
+                </button>
+                <button type="button" onClick={() => deleteChat(chat.id)} className="mr-1 hidden h-7 w-7 shrink-0 items-center justify-center rounded-md text-gray-400 hover:bg-gray-100 hover:text-error-500 group-hover:flex dark:hover:bg-white/10" aria-label={`Delete ${chat.title}`}>
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </aside>
+      <div className="relative flex min-h-0 flex-1 flex-col">
+      <div className="flex h-14 shrink-0 items-center gap-2 border-b border-gray-200 px-3 dark:border-gray-800">
+        <button
+          type="button"
+          onClick={() => setHistoryOpen((current) => !current)}
+          aria-pressed={historyOpen}
+          aria-label={historyOpen ? "Hide chat history" : "Show chat history"}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/10"
+        >
+          <PanelLeft className="h-4 w-4" />
+        </button>
         <ModelMenu models={models} names={names} value={modelId} onChange={setModelId} />
         <button
           type="button"
-          onClick={() => {
-            abortRef.current?.abort();
-            setMessages([]);
-            setPrompt("");
-            setFiles([]);
-          }}
+          onClick={startNewChat}
           className="ml-auto inline-flex h-9 items-center gap-1.5 rounded-lg border border-gray-200 px-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-white/5"
         >
           <Plus className="h-4 w-4" />
@@ -331,6 +447,7 @@ export default function PlaygroundPage() {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }
@@ -343,10 +460,10 @@ function MessageBubble({ message, pending, onFormat }: { message: ChatMessage; p
           {message.files.length > 0 && (
             <div className="flex flex-wrap justify-end gap-2">
               {message.files.map((file) =>
-                file.mime.startsWith("image/") ? (
-                  <img key={file.url} src={file.url} alt="" className="h-20 w-20 rounded-xl object-cover" />
+                file.mime.startsWith("image/") && file.url ? (
+                  <img key={file.name + file.url} src={file.url} alt="" className="h-20 w-20 rounded-xl object-cover" />
                 ) : (
-                  <span key={file.url} className="rounded-xl bg-gray-100 px-3 py-2 text-xs text-gray-600 dark:bg-white/10 dark:text-gray-300">
+                  <span key={file.name + file.url} className="rounded-xl bg-gray-100 px-3 py-2 text-xs text-gray-600 dark:bg-white/10 dark:text-gray-300">
                     {file.name}
                   </span>
                 ),
@@ -554,4 +671,24 @@ function readFile(file: File) {
 
 function newId() {
   return crypto.randomUUID();
+}
+
+function chatTitle(messages: ChatMessage[]) {
+  const text = messages.find((message) => message.role === "user" && message.text.trim())?.text.trim() ?? "";
+  if (!text) return "New chat";
+  return text.length > 42 ? `${text.slice(0, 42)}…` : text;
+}
+
+function forStorage(messages: ChatMessage[]): ChatMessage[] {
+  return messages.map((message) => ({
+    ...message,
+    sendContent: typeof message.sendContent === "string" ? message.sendContent : message.text,
+    files: message.files.map((file) => ({
+      name: file.name,
+      mime: file.mime,
+      url: file.url.startsWith("data:") ? "" : file.url,
+      text: null,
+    })),
+    media: message.media.filter((item) => item.src.startsWith("http")),
+  }));
 }
