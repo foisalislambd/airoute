@@ -602,7 +602,12 @@ func routeBlockedMessage(requested string, route store.Route) string {
 }
 
 func validateBaseURL(raw string) error {
-	parsed, err := url.Parse(strings.TrimSpace(raw))
+	trimmed := strings.TrimRight(strings.TrimSpace(raw), "/")
+	switch trimmed {
+	case "auggie://cli/stdio", "devin://acp/stdio", "zcode://app-server/stdio", "codex-app-server://cli/websocket":
+		return nil
+	}
+	parsed, err := url.Parse(trimmed)
 	if err != nil || parsed.Host == "" || parsed.Scheme == "" || parsed.Hostname() == "" {
 		return errors.New("base URL must be an absolute URL")
 	}

@@ -12,7 +12,7 @@ import {
   type Model,
   type Provider,
 } from "@/lib/api";
-import { ArrowLeft, ExternalLink, Search } from "lucide-react";
+import { ArrowLeft, AudioLines, Braces, ExternalLink, Image, Search, Type, Video } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -220,7 +220,7 @@ export default function ProviderPage() {
       {notice && <p className="mb-4 text-sm text-success-600">{notice}</p>}
 
       <section className="panel-card panel-card-body">
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className={`grid gap-4 ${provider?.keyOptional ? "" : "lg:grid-cols-2"}`}>
           <label className="block text-sm">
             <span className="font-medium text-gray-700 dark:text-gray-200">Base URL</span>
             <input
@@ -229,9 +229,7 @@ export default function ProviderPage() {
               className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
             />
           </label>
-          {provider?.keyOptional ? (
-            <p className="flex items-end text-sm text-gray-600 dark:text-gray-300">No API key needed. Enable the provider and turn models on.</p>
-          ) : (
+          {provider?.keyOptional ? null : (
             <label className="block text-sm">
               <span className="font-medium text-gray-700 dark:text-gray-200">
                 {provider?.category === "Web Cookie" ? "Session cookie" : "API key"}
@@ -293,6 +291,7 @@ export default function ProviderPage() {
               <thead className="border-b border-gray-200 text-xs tracking-wide text-gray-500 uppercase dark:border-gray-800">
                 <tr>
                   <th className="px-4 py-3 font-medium">Model</th>
+                  <th className="px-4 py-3 font-medium">I/O</th>
                   <th className="px-4 py-3 font-medium">Context</th>
                   <th className="px-4 py-3 font-medium">Price / 1M</th>
                   <th className="px-4 py-3 font-medium">Active</th>
@@ -301,13 +300,13 @@ export default function ProviderPage() {
               <tbody>
                 {modelsLoading && models.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-6 text-sm text-gray-500">
+                    <td colSpan={5} className="px-4 py-6 text-sm text-gray-500">
                       Loading models…
                     </td>
                   </tr>
                 ) : models.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="px-4 py-6 text-sm text-gray-500">
+                    <td colSpan={5} className="px-4 py-6 text-sm text-gray-500">
                       {debounced ? "No models match that search." : "This provider has no models yet."}
                     </td>
                   </tr>
@@ -325,6 +324,9 @@ export default function ProviderPage() {
                       </p>
                       <p className="font-mono text-xs text-gray-500">{model.id}</p>
                       <p className="mt-1 max-w-md text-xs text-gray-500">{model.description}</p>
+                    </td>
+                    <td className="px-4 py-3">
+                      <Modalities inputs={model.inputs} outputs={model.outputs} />
                     </td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
                       {formatTokens(model.contextWindow)}
@@ -359,6 +361,42 @@ export default function ProviderPage() {
       </section>
     </div>
   );
+}
+
+const modalityMeta = {
+  text: { icon: Type, label: "Text" },
+  image: { icon: Image, label: "Image" },
+  audio: { icon: AudioLines, label: "Audio" },
+  video: { icon: Video, label: "Video" },
+  embedding: { icon: Braces, label: "Embedding" },
+} as const
+
+function Modalities({ inputs, outputs }: { inputs: string; outputs: string }) {
+  return (
+    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-300">
+      <ModalityIcons value={inputs} />
+      <span aria-hidden="true" className="text-gray-300 dark:text-gray-600">→</span>
+      <ModalityIcons value={outputs} />
+    </div>
+  )
+}
+
+function ModalityIcons({ value }: { value: string }) {
+  const names = (value || "text").split(",").filter(Boolean)
+  return (
+    <span className="inline-flex items-center gap-1">
+      {names.map((name) => {
+        const meta = modalityMeta[name as keyof typeof modalityMeta] ?? modalityMeta.text
+        const Icon = meta.icon
+        return (
+          <span key={name} title={meta.label} className="inline-flex">
+            <Icon className="h-3.5 w-3.5" />
+            <span className="sr-only">{meta.label}</span>
+          </span>
+        )
+      })}
+    </span>
+  )
 }
 
 function appendModels(current: Model[], next: Model[]) {

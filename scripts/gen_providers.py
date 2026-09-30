@@ -16,6 +16,12 @@ OUT = ROOT / "apps" / "server" / "internal" / "catalog" / "catalog_generated.go"
 
 URL_FIXES = {
     "google-ai-studio": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "auggie": "auggie://cli/stdio",
+    "devin-cli-agentic": "devin://acp/stdio",
+    "zcode": "zcode://app-server/stdio",
+    "codex-app-server": "codex-app-server://cli/websocket",
+    "mlx-gemma": "http://127.0.0.1:11435/v1",
+    "mlx-qwen": "http://127.0.0.1:11436/v1",
 }
 
 VIDEO_PARTS = (
@@ -57,7 +63,9 @@ EMBED_PARTS = ("embedding", "embed-", "rerank", "moderation")
 
 
 def usable_url(slug: str, raw: str) -> str:
-    raw = URL_FIXES.get(slug, raw or "").strip().rstrip("/")
+    if slug in URL_FIXES:
+        return URL_FIXES[slug]
+    raw = (raw or "").strip().rstrip("/")
     for suffix in ("/chat/completions", "/chat-completions", "/chat"):
         if raw.endswith(suffix):
             raw = raw[: -len(suffix)].rstrip("/")

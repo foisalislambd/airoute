@@ -7,6 +7,10 @@ func TestValidateBaseURL(t *testing.T) {
 		"https://api.openai.com/v1",
 		"http://127.0.0.1:8080/v1",
 		"http://localhost:8787/v1",
+		"auggie://cli/stdio",
+		"devin://acp/stdio",
+		"zcode://app-server/stdio",
+		"codex-app-server://cli/websocket",
 	}
 	for _, raw := range ok {
 		if err := validateBaseURL(raw); err != nil {
@@ -19,6 +23,8 @@ func TestValidateBaseURL(t *testing.T) {
 		"https://",
 		"not a url",
 		"http://example.com",
+		"auggie://evil.example",
+		"devin://acp/stdio/extra",
 	}
 	for _, raw := range bad {
 		if err := validateBaseURL(raw); err == nil {

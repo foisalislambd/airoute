@@ -29,6 +29,8 @@ export type Model = {
   knowledgeCutoff: string
   reasoning: boolean
   kind: string
+  inputs: string
+  outputs: string
   active: boolean
 }
 
@@ -184,6 +186,7 @@ export function listActivity() {
 }
 
 export function formatTokens(value: number) {
+  if (!value) return "—"
   if (value >= 1_000_000) {
     const millions = value / 1_000_000
     return `${Number(millions.toFixed(2))}M`

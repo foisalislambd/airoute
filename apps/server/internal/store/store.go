@@ -58,6 +58,8 @@ type Model struct {
 	KnowledgeCutoff     string  `json:"knowledgeCutoff"`
 	Reasoning           bool    `json:"reasoning"`
 	Kind                string  `json:"kind"`
+	Inputs              string  `json:"inputs"`
+	Outputs             string  `json:"outputs"`
 	Active              bool    `json:"active"`
 }
 
@@ -121,6 +123,10 @@ func Open(path string, key []byte) (*Store, error) {
 		return nil, err
 	}
 	if err := s.syncCatalog(); err != nil {
+		db.Close()
+		return nil, err
+	}
+	if err := s.refreshModalities(); err != nil {
 		db.Close()
 		return nil, err
 	}
@@ -190,6 +196,14 @@ CREATE TABLE IF NOT EXISTS request_logs (
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
 	}
+	_, err = s.db.Exec(`ALTER TABLE models ADD COLUMN inputs TEXT NOT NULL DEFAULT 'text'`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
+	_, err = s.db.Exec(`ALTER TABLE models ADD COLUMN outputs TEXT NOT NULL DEFAULT 'text'`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
 	_, err = s.db.Exec(`ALTER TABLE providers ADD COLUMN models_from_upstream INTEGER NOT NULL DEFAULT 0`)
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
@@ -216,7 +230,8 @@ VALUES (?, ?, ?, ?, ?, ?)
 ON CONFLICT(slug) DO UPDATE SET
   display_name = excluded.display_name,
   protocol = excluded.protocol,
-  key_optional = excluded.key_optional`,
+  key_optional = excluded.key_optional,
+  base_url = CASE WHEN providers.base_url = '' THEN excluded.base_url ELSE providers.base_url END`,
 			provider.Slug, provider.DisplayName, provider.Protocol, provider.DefaultBaseURL, optional, now); err != nil {
 			return err
 		}
@@ -241,12 +256,13 @@ ON CONFLICT(slug) DO UPDATE SET
 			if kind == "" {
 				kind = catalog.KindChat
 			}
+			inputs, outputs := catalog.Modalities(model.UpstreamID, kind)
 			if _, err := tx.Exec(`
 INSERT INTO models (
   id, provider_slug, upstream_id, display_name, description,
   context_window, max_output_tokens, input_usd_per_million, output_usd_per_million,
-  knowledge_cutoff, reasoning, kind, active
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+  knowledge_cutoff, reasoning, kind, inputs, outputs, active
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 ON CONFLICT(id) DO UPDATE SET
   display_name = excluded.display_name,
   description = excluded.description,
@@ -256,10 +272,12 @@ ON CONFLICT(id) DO UPDATE SET
   output_usd_per_million = excluded.output_usd_per_million,
   knowledge_cutoff = excluded.knowledge_cutoff,
   reasoning = excluded.reasoning,
-  kind = excluded.kind`,
+  kind = excluded.kind,
+  inputs = excluded.inputs,
+  outputs = excluded.outputs`,
 				id, provider.Slug, model.UpstreamID, model.DisplayName, model.Description,
 				model.ContextWindow, model.MaxOutputTokens, model.InputUSDPerMillion, model.OutputUSDPerMillion,
-				model.KnowledgeCutoff, reasoning, kind); err != nil {
+				model.KnowledgeCutoff, reasoning, kind, inputs, outputs); err != nil {
 				return err
 			}
 		}
@@ -277,6 +295,37 @@ ON CONFLICT(id) DO UPDATE SET
 		}
 	}
 	return tx.Commit()
+}
+
+func (s *Store) refreshModalities() error {
+	rows, err := s.db.Query(`SELECT id, upstream_id, kind FROM models`)
+	if err != nil {
+		return err
+	}
+	type row struct {
+		id, upstream, kind string
+	}
+	var items []row
+	for rows.Next() {
+		var item row
+		if err := rows.Scan(&item.id, &item.upstream, &item.kind); err != nil {
+			rows.Close()
+			return err
+		}
+		items = append(items, item)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
+	rows.Close()
+	for _, item := range items {
+		inputs, outputs := catalog.Modalities(item.upstream, item.kind)
+		if _, err := s.db.Exec(`UPDATE models SET inputs = ?, outputs = ? WHERE id = ?`, inputs, outputs, item.id); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (s *Store) ListProviders() ([]Provider, error) {
@@ -643,15 +692,16 @@ FROM models WHERE provider_slug = ?`, slug)
 				kind:        catalog.KindFromID(upstreamID),
 			}
 		}
+		inputs, outputs := catalog.Modalities(upstreamID, item.kind)
 		if _, err := tx.Exec(`
 INSERT INTO models (
   id, provider_slug, upstream_id, display_name, description,
   context_window, max_output_tokens, input_usd_per_million, output_usd_per_million,
-  knowledge_cutoff, reasoning, kind, active
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  knowledge_cutoff, reasoning, kind, inputs, outputs, active
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 			slug+"/"+upstreamID, slug, upstreamID, item.displayName, item.description,
 			item.context, item.maxOutput, item.inputPrice, item.outputPrice,
-			item.cutoff, item.reasoning, item.kind, item.active); err != nil {
+			item.cutoff, item.reasoning, item.kind, inputs, outputs, item.active); err != nil {
 			return 0, err
 		}
 	}
@@ -699,7 +749,7 @@ func (s *Store) ListModelsPage(slug, query string, limit, offset int) (ModelPage
 	}
 	rows, err := s.db.Query(`
 SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
-       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, inputs, outputs, active
 FROM models WHERE `+where+`
 ORDER BY input_usd_per_million DESC, display_name COLLATE NOCASE
 LIMIT ? OFFSET ?`, append(append([]any{}, args...), limit, offset)...)
@@ -727,7 +777,7 @@ func (s *Store) ListModels(slug string) ([]Model, error) {
 	}
 	rows, err := s.db.Query(`
 SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
-       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, inputs, outputs, active
 FROM models WHERE provider_slug = ?
 ORDER BY input_usd_per_million DESC, display_name`, slug)
 	if err != nil {
@@ -753,7 +803,7 @@ func (s *Store) SetModelActive(slug, upstreamID string, active bool) (Model, err
 func (s *Store) ListActiveModels() ([]Model, error) {
 	rows, err := s.db.Query(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.inputs, m.outputs, m.active
 FROM models m
 JOIN providers p ON p.slug = m.provider_slug
 WHERE m.active = 1 AND p.enabled = 1 AND (p.api_key_cipher != '' OR p.key_optional = 1)
@@ -771,14 +821,14 @@ func (s *Store) ResolveRoute(modelRef string) (Route, error) {
 	if strings.Contains(modelRef, "/") {
 		row = s.db.QueryRow(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active,
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.inputs, m.outputs, m.active,
        p.protocol, p.base_url, p.api_key_cipher, p.enabled
 FROM models m JOIN providers p ON p.slug = m.provider_slug
 WHERE m.id = ?`, modelRef)
 	} else {
 		row = s.db.QueryRow(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active,
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.inputs, m.outputs, m.active,
        p.protocol, p.base_url, p.api_key_cipher, p.enabled
 FROM models m JOIN providers p ON p.slug = m.provider_slug
 WHERE m.upstream_id = ?`, modelRef)
@@ -791,7 +841,7 @@ WHERE m.upstream_id = ?`, modelRef)
 		&route.Model.ID, &route.Model.ProviderSlug, &route.Model.UpstreamID, &route.Model.DisplayName,
 		&route.Model.Description, &route.Model.ContextWindow, &route.Model.MaxOutputTokens,
 		&route.Model.InputUSDPerMillion, &route.Model.OutputUSDPerMillion, &route.Model.KnowledgeCutoff,
-		&reasoning, &route.Model.Kind, &active, &route.Protocol, &route.BaseURL, &cipher, &enabled,
+		&reasoning, &route.Model.Kind, &route.Model.Inputs, &route.Model.Outputs, &active, &route.Protocol, &route.BaseURL, &cipher, &enabled,
 	)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Route{}, ErrNotFound
@@ -947,13 +997,13 @@ WHERE m.active = 1 AND p.enabled = 1 AND (p.api_key_cipher != '' OR p.key_option
 func (s *Store) getModel(slug, upstreamID string) (Model, error) {
 	row := s.db.QueryRow(`
 SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
-       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, inputs, outputs, active
 FROM models WHERE provider_slug = ? AND upstream_id = ?`, slug, upstreamID)
 	var item Model
 	var reasoning, active int
 	err := row.Scan(&item.ID, &item.ProviderSlug, &item.UpstreamID, &item.DisplayName, &item.Description,
 		&item.ContextWindow, &item.MaxOutputTokens, &item.InputUSDPerMillion, &item.OutputUSDPerMillion,
-		&item.KnowledgeCutoff, &reasoning, &item.Kind, &active)
+		&item.KnowledgeCutoff, &reasoning, &item.Kind, &item.Inputs, &item.Outputs, &active)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Model{}, ErrNotFound
 	}
@@ -995,7 +1045,7 @@ func scanModels(rows *sql.Rows) ([]Model, error) {
 		var reasoning, active int
 		if err := rows.Scan(&item.ID, &item.ProviderSlug, &item.UpstreamID, &item.DisplayName, &item.Description,
 			&item.ContextWindow, &item.MaxOutputTokens, &item.InputUSDPerMillion, &item.OutputUSDPerMillion,
-			&item.KnowledgeCutoff, &reasoning, &item.Kind, &active); err != nil {
+			&item.KnowledgeCutoff, &reasoning, &item.Kind, &item.Inputs, &item.Outputs, &active); err != nil {
 			return nil, err
 		}
 		item.Reasoning = reasoning == 1

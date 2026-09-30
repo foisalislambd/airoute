@@ -89,6 +89,43 @@ func UsesSessionCookie(slug string) bool {
 	}
 }
 
+// Modalities reports what a model accepts and what it returns.
+// Values are comma-separated: text, image, audio, video, embedding.
+func Modalities(id, kind string) (string, string) {
+	lowered := strings.ToLower(id)
+	switch kind {
+	case KindImage:
+		inputs := "text"
+		if strings.Contains(lowered, "edit") || strings.Contains(lowered, "i2i") || strings.Contains(lowered, "variation") {
+			inputs = "text,image"
+		}
+		return inputs, "image"
+	case KindVideo:
+		inputs := "text"
+		if strings.Contains(lowered, "i2v") || strings.Contains(lowered, "image") {
+			inputs = "text,image"
+		}
+		return inputs, "video"
+	case KindAudio:
+		if strings.Contains(lowered, "whisper") || strings.Contains(lowered, "transcri") {
+			return "audio", "text"
+		}
+		return "text", "audio"
+	case KindEmbedding:
+		return "text", "embedding"
+	default:
+		inputs := "text"
+		if strings.Contains(lowered, "vision") || strings.Contains(lowered, "gpt-4o") || strings.Contains(lowered, "-image") {
+			inputs = "text,image"
+		}
+		outputs := "text"
+		if strings.Contains(lowered, "image-preview") || strings.Contains(lowered, "-image") {
+			outputs = "text,image"
+		}
+		return inputs, outputs
+	}
+}
+
 func BySlug(slug string) (Provider, bool) {
 	for _, provider := range All() {
 		if provider.Slug == slug {
