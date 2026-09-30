@@ -143,7 +143,7 @@ export default function ProvidersPage() {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h2 className="truncate text-base font-semibold text-gray-900 dark:text-white">{provider.displayName}</h2>
-                    <Status ready={provider.enabled && provider.hasApiKey} />
+                    <Status ready={provider.enabled && (provider.hasApiKey || provider.keyOptional)} />
                   </div>
                   <p className="mt-1 line-clamp-2 min-h-10 text-sm leading-5 text-gray-500 dark:text-gray-400">
                     {provider.summary}
@@ -154,7 +154,9 @@ export default function ProvidersPage() {
                 <span className="truncate">
                   {provider.activeModels} active / {provider.totalModels} models
                 </span>
-                <span className="shrink-0">{provider.hasApiKey ? provider.apiKeyHint : "No API key"}</span>
+                <span className="shrink-0">
+                  {provider.hasApiKey ? provider.apiKeyHint : provider.keyOptional ? "No key needed" : "No API key"}
+                </span>
               </div>
             </Link>
           ))}

@@ -7,6 +7,7 @@ export type Provider = {
   summary: string
   category: string
   free: boolean
+  keyOptional: boolean
   hasApiKey: boolean
   apiKeyHint: string
   enabled: boolean
@@ -27,6 +28,7 @@ export type Model = {
   outputUsdPerMillion: number
   knowledgeCutoff: string
   reasoning: boolean
+  kind: string
   active: boolean
 }
 

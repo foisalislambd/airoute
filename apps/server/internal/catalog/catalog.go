@@ -12,6 +12,7 @@ type Model struct {
 	OutputUSDPerMillion float64
 	KnowledgeCutoff     string
 	Reasoning           bool
+	Kind                string
 }
 
 // Provider is a built-in provider definition. User secrets live in SQLite,
@@ -25,10 +26,30 @@ type Provider struct {
 	Summary        string
 	Category       string
 	Free           bool
+	KeyOptional    bool
+	AnonymousKey   string
 	Models         []Model
 }
 
-const ProtocolOpenAIChat = "openai_chat"
+const (
+	ProtocolOpenAIChat  = "openai_chat"
+	ProtocolAnthropic   = "anthropic_messages"
+	ProtocolGemini      = "gemini_generate"
+	ProtocolOllama      = "ollama_chat"
+	ProtocolCohere      = "cohere_chat"
+	ProtocolSearch      = "search"
+	ProtocolEmbedding   = "embedding"
+	ProtocolAudio       = "audio_speech"
+	ProtocolMedia       = "native_media"
+	ProtocolSDWebUI     = "sdwebui"
+	ProtocolUnsupported = "unsupported"
+	KindChat            = "chat"
+	KindImage           = "image"
+	KindVideo           = "video"
+	KindAudio           = "audio"
+	KindEmbedding       = "embedding"
+	KindSearch          = "search"
+)
 
 func All() []Provider {
 	return append([]Provider{OpenAI()}, generatedProviders()...)
@@ -63,6 +84,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 50,
 				KnowledgeCutoff:     "2026-04-30",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-6.1-sol",
@@ -74,6 +96,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 10,
 				KnowledgeCutoff:     "2026-04-30",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-6-luna",
@@ -85,6 +108,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 0.50,
 				KnowledgeCutoff:     "2026-05-18",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-5.6-sol",
@@ -96,6 +120,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 20,
 				KnowledgeCutoff:     "2026-02-16",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-5.6-terra",
@@ -107,6 +132,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 12,
 				KnowledgeCutoff:     "2026-02-16",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-5.6-luna",
@@ -118,6 +144,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 1.20,
 				KnowledgeCutoff:     "2026-02-16",
 				Reasoning:           true,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-4o",
@@ -129,6 +156,7 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 10,
 				KnowledgeCutoff:     "2023-10-01",
 				Reasoning:           false,
+				Kind:                KindChat,
 			},
 			{
 				UpstreamID:          "gpt-4o-mini",
@@ -140,6 +168,31 @@ func OpenAI() Provider {
 				OutputUSDPerMillion: 0.60,
 				KnowledgeCutoff:     "2023-10-01",
 				Reasoning:           false,
+				Kind:                KindChat,
+			},
+			{
+				UpstreamID:  "gpt-image-1",
+				DisplayName: "GPT Image 1",
+				Description: "OpenAI image generation.",
+				Kind:        KindImage,
+			},
+			{
+				UpstreamID:  "dall-e-3",
+				DisplayName: "DALL·E 3",
+				Description: "OpenAI image generation.",
+				Kind:        KindImage,
+			},
+			{
+				UpstreamID:  "dall-e-2",
+				DisplayName: "DALL·E 2",
+				Description: "OpenAI image generation.",
+				Kind:        KindImage,
+			},
+			{
+				UpstreamID:  "sora-2",
+				DisplayName: "Sora 2",
+				Description: "OpenAI video generation.",
+				Kind:        KindVideo,
 			},
 		},
 	}

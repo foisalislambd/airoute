@@ -70,6 +70,15 @@ func TestProviderKeyAndModelRoute(t *testing.T) {
 		t.Fatalf("frontier = %+v err=%v", frontier, err)
 	}
 
+	enabledOnly := true
+	withoutKey, err := s.UpdateProvider("opencode", ProviderUpdate{Enabled: &enabledOnly})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !withoutKey.Enabled || !withoutKey.KeyOptional || withoutKey.HasAPIKey {
+		t.Fatalf("opencode = %+v", withoutKey)
+	}
+
 	apiKey := "sk-live-secret-1234"
 	enabled := true
 	updated, err := s.UpdateProvider("openai", ProviderUpdate{APIKey: &apiKey, Enabled: &enabled})

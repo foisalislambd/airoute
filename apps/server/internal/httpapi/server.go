@@ -53,8 +53,11 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /api/models", s.listActiveModels)
 	mux.HandleFunc("GET /api/activity", s.activity)
 	mux.HandleFunc("POST /api/playground/chat", s.playground)
+	mux.HandleFunc("POST /api/playground/media", s.playgroundMedia)
 	mux.HandleFunc("GET /v1/models", s.gatewayModels)
 	mux.HandleFunc("POST /v1/chat/completions", s.gatewayChat)
+	mux.HandleFunc("POST /v1/images/generations", s.gatewayImages)
+	mux.HandleFunc("POST /v1/videos/generations", s.gatewayVideos)
 	mux.HandleFunc("/", s.spa)
 	return mux
 }
@@ -175,7 +178,9 @@ func (s *Server) testProvider(w http.ResponseWriter, r *http.Request) {
 	if body.APIKey != nil && strings.TrimSpace(*body.APIKey) != "" {
 		apiKey = strings.TrimSpace(*body.APIKey)
 	}
-	if apiKey == "" {
+	apiKey = providerCredential(slug, apiKey)
+	def, known := catalog.BySlug(slug)
+	if apiKey == "" && (!known || !def.KeyOptional) {
 		writeAPIError(w, http.StatusBadRequest, "add an API key first")
 		return
 	}
@@ -354,12 +359,25 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		s.failChat(w, source, keyID, meta.Model, http.StatusInternalServerError, "server_error", "internal_error", err.Error(), started)
 		return
 	}
-	if !route.Model.Active || !route.ProviderOn || route.APIKey == "" {
+	route.APIKey = providerCredential(route.Model.ProviderSlug, route.APIKey)
+	if !routeReady(route) {
 		message := routeBlockedMessage(meta.Model, route)
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusNotFound, "invalid_request_error", "model_not_found", message, started)
 		return
 	}
-	if route.Protocol != catalog.ProtocolOpenAIChat {
+	switch route.Protocol {
+	case catalog.ProtocolAnthropic, catalog.ProtocolGemini:
+		s.proxyNativeChat(w, r, source, keyID, route, body, started)
+		return
+	case catalog.ProtocolOllama, catalog.ProtocolCohere, catalog.ProtocolSearch, catalog.ProtocolEmbedding:
+		s.proxySpecial(w, r, source, keyID, route, body, started)
+		return
+	case catalog.ProtocolOpenAIChat:
+		if route.Model.Kind != "" && route.Model.Kind != catalog.KindChat {
+			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "wrong_endpoint", kindEndpointMessage(route.Model.Kind), started)
+			return
+		}
+	default:
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "unsupported_protocol", "This provider protocol is not supported yet.", started)
 		return
 	}
@@ -502,11 +520,34 @@ func upstreamErrorMessage(payload []byte) string {
 	return text
 }
 
+func providerCredential(slug, apiKey string) string {
+	if apiKey != "" {
+		return apiKey
+	}
+	provider, ok := catalog.BySlug(slug)
+	if ok {
+		return provider.AnonymousKey
+	}
+	return ""
+}
+
+func routeReady(route store.Route) bool {
+	if !route.Model.Active || !route.ProviderOn {
+		return false
+	}
+	return route.APIKey != "" || keyOptional(route)
+}
+
+func keyOptional(route store.Route) bool {
+	provider, ok := catalog.BySlug(route.Model.ProviderSlug)
+	return ok && provider.KeyOptional
+}
+
 func routeBlockedMessage(requested string, route store.Route) string {
 	if !route.Model.Active {
 		return "The model `" + requested + "` is not active. Turn it on from the provider page."
 	}
-	if route.APIKey == "" {
+	if route.APIKey == "" && !keyOptional(route) {
 		return "Save an API key for " + route.Model.ProviderSlug + " before calling this model."
 	}
 	return route.Model.ProviderSlug + " is disabled. Enable the provider before calling this model."

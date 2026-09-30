@@ -26,14 +26,27 @@ func NewClient() *Client {
 
 func (c *Client) ChatCompletions(ctx context.Context, baseURL, apiKey string, body []byte) (*http.Response, error) {
 	endpoint := strings.TrimRight(baseURL, "/") + "/chat/completions"
+	header := http.Header{}
+	if apiKey != "" {
+		header.Set("Authorization", "Bearer "+apiKey)
+	}
+	header.Set("Content-Type", "application/json")
+	header.Set("Accept", "application/json, text/event-stream")
+	return c.Send(ctx, http.MethodPost, endpoint, body, header)
+}
+
+// Send posts or gets with the caller's headers. The body is replayed on transport retry.
+func (c *Client) Send(ctx context.Context, method, endpoint string, body []byte, header http.Header) (*http.Response, error) {
 	return c.doRetry(ctx, func() (*http.Request, error) {
-		req, err := http.NewRequestWithContext(ctx, http.MethodPost, endpoint, bytes.NewReader(body))
+		var reader io.Reader
+		if body != nil {
+			reader = bytes.NewReader(body)
+		}
+		req, err := http.NewRequestWithContext(ctx, method, endpoint, reader)
 		if err != nil {
 			return nil, err
 		}
-		req.Header.Set("Authorization", "Bearer "+apiKey)
-		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("Accept", "application/json, text/event-stream")
+		req.Header = header.Clone()
 		return req, nil
 	})
 }
@@ -49,7 +62,9 @@ func (c *Client) Ping(ctx context.Context, baseURL, apiKey string) (int, error) 
 		if err != nil {
 			return nil, err
 		}
-		req.Header.Set("Authorization", "Bearer "+apiKey)
+		if apiKey != "" {
+			req.Header.Set("Authorization", "Bearer "+apiKey)
+		}
 		return req, nil
 	})
 	if err != nil {

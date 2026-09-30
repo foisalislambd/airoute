@@ -140,17 +140,21 @@ export default function ProviderPage() {
               className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
             />
           </label>
-          <label className="block text-sm">
-            <span className="font-medium text-gray-700 dark:text-gray-200">API key</span>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={(event) => setApiKey(event.target.value)}
-              placeholder={provider?.hasApiKey ? `Saved ${provider.apiKeyHint}` : "sk-..."}
-              autoComplete="off"
-              className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
-            />
-          </label>
+          {provider?.keyOptional ? (
+            <p className="flex items-end text-sm text-gray-600 dark:text-gray-300">No API key needed. Enable the provider and turn models on.</p>
+          ) : (
+            <label className="block text-sm">
+              <span className="font-medium text-gray-700 dark:text-gray-200">API key</span>
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(event) => setApiKey(event.target.value)}
+                placeholder={provider?.hasApiKey ? `Saved ${provider.apiKeyHint}` : "sk-..."}
+                autoComplete="off"
+                className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+              />
+            </label>
+          )}
         </div>
         <label className="mt-4 flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
           <input type="checkbox" checked={enabled} onChange={(event) => setEnabled(event.target.checked)} />
@@ -183,7 +187,14 @@ export default function ProviderPage() {
                 {models.map((model) => (
                   <tr key={model.id} className="border-b border-gray-100 last:border-0 dark:border-gray-800">
                     <td className="px-4 py-3">
-                      <p className="font-medium text-gray-900 dark:text-white">{model.displayName}</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {model.displayName}
+                        {model.kind && model.kind !== "chat" && (
+                          <span className="ml-2 align-middle rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium tracking-wide text-gray-500 uppercase dark:bg-white/10 dark:text-gray-300">
+                            {model.kind}
+                          </span>
+                        )}
+                      </p>
                       <p className="font-mono text-xs text-gray-500">{model.id}</p>
                       <p className="mt-1 max-w-md text-xs text-gray-500">{model.description}</p>
                     </td>

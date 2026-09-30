@@ -36,6 +36,7 @@ type Provider struct {
 	Summary      string `json:"summary"`
 	Category     string `json:"category"`
 	Free         bool   `json:"free"`
+	KeyOptional  bool   `json:"keyOptional"`
 	HasAPIKey    bool   `json:"hasApiKey"`
 	APIKeyHint   string `json:"apiKeyHint"`
 	Enabled      bool   `json:"enabled"`
@@ -56,6 +57,7 @@ type Model struct {
 	OutputUSDPerMillion float64 `json:"outputUsdPerMillion"`
 	KnowledgeCutoff     string  `json:"knowledgeCutoff"`
 	Reasoning           bool    `json:"reasoning"`
+	Kind                string  `json:"kind"`
 	Active              bool    `json:"active"`
 }
 
@@ -175,9 +177,20 @@ CREATE TABLE IF NOT EXISTS request_logs (
   latency_ms INTEGER NOT NULL,
   prompt_tokens INTEGER NOT NULL DEFAULT 0,
   completion_tokens INTEGER NOT NULL DEFAULT 0,
-  error_message TEXT NOT NULL DEFAULT ''
+	error_message TEXT NOT NULL DEFAULT ''
 );`)
-	return err
+	if err != nil {
+		return err
+	}
+	_, err = s.db.Exec(`ALTER TABLE models ADD COLUMN kind TEXT NOT NULL DEFAULT 'chat'`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
+	_, err = s.db.Exec(`ALTER TABLE providers ADD COLUMN key_optional INTEGER NOT NULL DEFAULT 0`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
+	return nil
 }
 
 func (s *Store) syncCatalog() error {
@@ -189,13 +202,18 @@ func (s *Store) syncCatalog() error {
 
 	now := time.Now().UTC().Format(time.RFC3339)
 	for _, provider := range catalog.All() {
+		optional := 0
+		if provider.KeyOptional {
+			optional = 1
+		}
 		if _, err := tx.Exec(`
-INSERT INTO providers (slug, display_name, protocol, base_url, updated_at)
-VALUES (?, ?, ?, ?, ?)
+INSERT INTO providers (slug, display_name, protocol, base_url, key_optional, updated_at)
+VALUES (?, ?, ?, ?, ?, ?)
 ON CONFLICT(slug) DO UPDATE SET
   display_name = excluded.display_name,
-  protocol = excluded.protocol`,
-			provider.Slug, provider.DisplayName, provider.Protocol, provider.DefaultBaseURL, now); err != nil {
+  protocol = excluded.protocol,
+  key_optional = excluded.key_optional`,
+			provider.Slug, provider.DisplayName, provider.Protocol, provider.DefaultBaseURL, optional, now); err != nil {
 			return err
 		}
 
@@ -207,12 +225,16 @@ ON CONFLICT(slug) DO UPDATE SET
 			if model.Reasoning {
 				reasoning = 1
 			}
+			kind := model.Kind
+			if kind == "" {
+				kind = catalog.KindChat
+			}
 			if _, err := tx.Exec(`
 INSERT INTO models (
   id, provider_slug, upstream_id, display_name, description,
   context_window, max_output_tokens, input_usd_per_million, output_usd_per_million,
-  knowledge_cutoff, reasoning, active
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+  knowledge_cutoff, reasoning, kind, active
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 ON CONFLICT(id) DO UPDATE SET
   display_name = excluded.display_name,
   description = excluded.description,
@@ -221,10 +243,11 @@ ON CONFLICT(id) DO UPDATE SET
   input_usd_per_million = excluded.input_usd_per_million,
   output_usd_per_million = excluded.output_usd_per_million,
   knowledge_cutoff = excluded.knowledge_cutoff,
-  reasoning = excluded.reasoning`,
+  reasoning = excluded.reasoning,
+  kind = excluded.kind`,
 				id, provider.Slug, model.UpstreamID, model.DisplayName, model.Description,
 				model.ContextWindow, model.MaxOutputTokens, model.InputUSDPerMillion, model.OutputUSDPerMillion,
-				model.KnowledgeCutoff, reasoning); err != nil {
+				model.KnowledgeCutoff, reasoning, kind); err != nil {
 				return err
 			}
 		}
@@ -312,8 +335,8 @@ FROM providers p
 WHERE ` + where + `
 ORDER BY
   CASE
-    WHEN p.enabled = 1 AND p.api_key_cipher <> '' THEN 0
-    WHEN p.api_key_cipher <> '' THEN 1
+    WHEN p.enabled = 1 AND (p.api_key_cipher <> '' OR p.key_optional = 1) THEN 0
+    WHEN p.api_key_cipher <> '' OR p.key_optional = 1 THEN 1
     ELSE 2
   END,
   p.display_name COLLATE NOCASE,
@@ -370,7 +393,7 @@ func providerFilterSlugs(query, category string) ([]string, bool) {
 }
 
 func (s *Store) categoryStats() ([]CategoryStat, error) {
-	rows, err := s.db.Query(`SELECT slug, enabled, api_key_cipher FROM providers`)
+	rows, err := s.db.Query(`SELECT slug, enabled, api_key_cipher, key_optional FROM providers`)
 	if err != nil {
 		return nil, err
 	}
@@ -382,11 +405,11 @@ func (s *Store) categoryStats() ([]CategoryStat, error) {
 	free := tally{}
 	for rows.Next() {
 		var slug, cipher string
-		var enabled int
-		if err := rows.Scan(&slug, &enabled, &cipher); err != nil {
+		var enabled, optional int
+		if err := rows.Scan(&slug, &enabled, &cipher, &optional); err != nil {
 			return nil, err
 		}
-		ready := enabled == 1 && cipher != ""
+		ready := enabled == 1 && (cipher != "" || optional == 1)
 		all.total++
 		if ready {
 			all.ready++
@@ -509,10 +532,7 @@ func (s *Store) UpdateProvider(slug string, update ProviderUpdate) (Provider, er
 		}
 	}
 
-	if enabled && !hasKey && update.APIKey == nil && !current.HasAPIKey {
-		return Provider{}, errors.New("add an API key before enabling this provider")
-	}
-	if enabled && update.APIKey != nil && !hasKey {
+	if enabled && !hasKey && !current.KeyOptional {
 		return Provider{}, errors.New("add an API key before enabling this provider")
 	}
 
@@ -554,7 +574,7 @@ func (s *Store) ListModels(slug string) ([]Model, error) {
 	}
 	rows, err := s.db.Query(`
 SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
-       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, active
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
 FROM models WHERE provider_slug = ?
 ORDER BY input_usd_per_million DESC, display_name`, slug)
 	if err != nil {
@@ -580,10 +600,10 @@ func (s *Store) SetModelActive(slug, upstreamID string, active bool) (Model, err
 func (s *Store) ListActiveModels() ([]Model, error) {
 	rows, err := s.db.Query(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.active
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active
 FROM models m
 JOIN providers p ON p.slug = m.provider_slug
-WHERE m.active = 1 AND p.enabled = 1 AND p.api_key_cipher != ''
+WHERE m.active = 1 AND p.enabled = 1 AND (p.api_key_cipher != '' OR p.key_optional = 1)
 ORDER BY m.display_name`)
 	if err != nil {
 		return nil, err
@@ -598,14 +618,14 @@ func (s *Store) ResolveRoute(modelRef string) (Route, error) {
 	if strings.Contains(modelRef, "/") {
 		row = s.db.QueryRow(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.active,
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active,
        p.protocol, p.base_url, p.api_key_cipher, p.enabled
 FROM models m JOIN providers p ON p.slug = m.provider_slug
 WHERE m.id = ?`, modelRef)
 	} else {
 		row = s.db.QueryRow(`
 SELECT m.id, m.provider_slug, m.upstream_id, m.display_name, m.description, m.context_window, m.max_output_tokens,
-       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.active,
+       m.input_usd_per_million, m.output_usd_per_million, m.knowledge_cutoff, m.reasoning, m.kind, m.active,
        p.protocol, p.base_url, p.api_key_cipher, p.enabled
 FROM models m JOIN providers p ON p.slug = m.provider_slug
 WHERE m.upstream_id = ?`, modelRef)
@@ -618,7 +638,7 @@ WHERE m.upstream_id = ?`, modelRef)
 		&route.Model.ID, &route.Model.ProviderSlug, &route.Model.UpstreamID, &route.Model.DisplayName,
 		&route.Model.Description, &route.Model.ContextWindow, &route.Model.MaxOutputTokens,
 		&route.Model.InputUSDPerMillion, &route.Model.OutputUSDPerMillion, &route.Model.KnowledgeCutoff,
-		&reasoning, &active, &route.Protocol, &route.BaseURL, &cipher, &enabled,
+		&reasoning, &route.Model.Kind, &active, &route.Protocol, &route.BaseURL, &cipher, &enabled,
 	)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Route{}, ErrNotFound
@@ -763,7 +783,7 @@ func (s *Store) Overview() (providers int, activeModels int, keys int, err error
 	err = s.db.QueryRow(`
 SELECT COUNT(*) FROM models m
 JOIN providers p ON p.slug = m.provider_slug
-WHERE m.active = 1 AND p.enabled = 1 AND p.api_key_cipher != ''`).Scan(&activeModels)
+WHERE m.active = 1 AND p.enabled = 1 AND (p.api_key_cipher != '' OR p.key_optional = 1)`).Scan(&activeModels)
 	if err != nil {
 		return
 	}
@@ -774,13 +794,13 @@ WHERE m.active = 1 AND p.enabled = 1 AND p.api_key_cipher != ''`).Scan(&activeMo
 func (s *Store) getModel(slug, upstreamID string) (Model, error) {
 	row := s.db.QueryRow(`
 SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
-       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, active
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
 FROM models WHERE provider_slug = ? AND upstream_id = ?`, slug, upstreamID)
 	var item Model
 	var reasoning, active int
 	err := row.Scan(&item.ID, &item.ProviderSlug, &item.UpstreamID, &item.DisplayName, &item.Description,
 		&item.ContextWindow, &item.MaxOutputTokens, &item.InputUSDPerMillion, &item.OutputUSDPerMillion,
-		&item.KnowledgeCutoff, &reasoning, &active)
+		&item.KnowledgeCutoff, &reasoning, &item.Kind, &active)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Model{}, ErrNotFound
 	}
@@ -808,6 +828,7 @@ func scanProvider(row scanner) (Provider, error) {
 		item.Summary = def.Summary
 		item.Category = def.Category
 		item.Free = def.Free
+		item.KeyOptional = def.KeyOptional
 	}
 	item.HasAPIKey = cipher != ""
 	item.Enabled = enabled == 1
@@ -821,7 +842,7 @@ func scanModels(rows *sql.Rows) ([]Model, error) {
 		var reasoning, active int
 		if err := rows.Scan(&item.ID, &item.ProviderSlug, &item.UpstreamID, &item.DisplayName, &item.Description,
 			&item.ContextWindow, &item.MaxOutputTokens, &item.InputUSDPerMillion, &item.OutputUSDPerMillion,
-			&item.KnowledgeCutoff, &reasoning, &active); err != nil {
+			&item.KnowledgeCutoff, &reasoning, &item.Kind, &active); err != nil {
 			return nil, err
 		}
 		item.Reasoning = reasoning == 1
