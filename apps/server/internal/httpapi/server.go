@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
 
@@ -76,13 +77,25 @@ func (s *Server) overview(w http.ResponseWriter, _ *http.Request) {
 	})
 }
 
-func (s *Server) listProviders(w http.ResponseWriter, _ *http.Request) {
-	items, err := s.Store.ListProviders()
+func (s *Server) listProviders(w http.ResponseWriter, r *http.Request) {
+	limit := 24
+	if raw := r.URL.Query().Get("limit"); raw != "" {
+		if n, err := strconv.Atoi(raw); err == nil && n > 0 {
+			limit = n
+		}
+	}
+	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
+	page, err := s.Store.ListProvidersPage(r.URL.Query().Get("q"), limit, offset)
 	if err != nil {
 		writeAPIError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"providers": items})
+	writeJSON(w, http.StatusOK, map[string]any{
+		"providers": page.Providers,
+		"total":     page.Total,
+		"limit":     page.Limit,
+		"offset":    page.Offset,
+	})
 }
 
 func (s *Server) getProvider(w http.ResponseWriter, r *http.Request) {

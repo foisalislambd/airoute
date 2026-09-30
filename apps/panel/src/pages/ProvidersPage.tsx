@@ -1,29 +1,76 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
 import { listProviders, type Provider } from "@/lib/api";
 import { Search } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
+const PAGE_SIZE = 18;
+
 export default function ProvidersPage() {
-  const [providers, setProviders] = useState<Provider[]>([]);
   const [query, setQuery] = useState("");
+  const [debounced, setDebounced] = useState("");
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [paging, setPaging] = useState(false);
   const [error, setError] = useState("");
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const generation = useRef(0);
 
   useEffect(() => {
-    listProviders()
-      .then((result) => setProviders(result.providers))
-      .catch((err: Error) => setError(err.message));
-  }, []);
+    const timer = window.setTimeout(() => setDebounced(query.trim()), 200);
+    return () => window.clearTimeout(timer);
+  }, [query]);
 
-  const visible = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    if (!needle) return providers;
-    return providers.filter((provider) =>
-      [provider.displayName, provider.slug, provider.summary].some((value) =>
-        value.toLowerCase().includes(needle),
-      ),
+  useEffect(() => {
+    const request = ++generation.current;
+    setLoading(true);
+    setPaging(false);
+    setError("");
+    listProviders({ q: debounced, limit: PAGE_SIZE, offset: 0 })
+      .then((page) => {
+        if (generation.current !== request) return;
+        setProviders(page.providers);
+        setTotal(page.total);
+      })
+      .catch((err: Error) => {
+        if (generation.current === request) setError(err.message);
+      })
+      .finally(() => {
+        if (generation.current === request) setLoading(false);
+      });
+  }, [debounced]);
+
+  useEffect(() => {
+    const node = bottomRef.current;
+    if (!node || loading || providers.length === 0 || providers.length >= total) return;
+    const root = node.closest("main");
+    const request = generation.current;
+    let started = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (started || !entries.some((entry) => entry.isIntersecting)) return;
+        started = true;
+        observer.disconnect();
+        setPaging(true);
+        listProviders({ q: debounced, limit: PAGE_SIZE, offset: providers.length })
+          .then((page) => {
+            if (generation.current !== request) return;
+            setProviders((current) => appendUnique(current, page.providers));
+            setTotal(page.total);
+          })
+          .catch((err: Error) => {
+            if (generation.current === request) setError(err.message);
+          })
+          .finally(() => {
+            if (generation.current === request) setPaging(false);
+          });
+      },
+      { root, rootMargin: "280px" },
     );
-  }, [providers, query]);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [debounced, loading, providers.length, total]);
 
   return (
     <div>
@@ -44,47 +91,57 @@ export default function ProvidersPage() {
         }
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
-      {query.trim() && (
+      {(debounced || total > 0) && (
         <p className="mb-4 text-sm text-gray-500">
-          {visible.length} of {providers.length}
+          {providers.length} of {total}
         </p>
       )}
-      {visible.length === 0 ? (
+      {loading && providers.length === 0 ? (
+        <div className="panel-card panel-card-body text-sm text-gray-500">Loading providers…</div>
+      ) : providers.length === 0 ? (
         <div className="panel-card panel-card-body text-sm text-gray-500">No providers match that search.</div>
       ) : (
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {visible.map((provider) => (
-          <Link
-            key={provider.slug}
-            to={`/providers/${provider.slug}`}
-            className="panel-card panel-card-body flex h-full flex-col transition hover:border-brand-300 dark:hover:border-brand-500/40"
-          >
-            <div className="flex items-start gap-3">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm font-semibold text-white dark:bg-white dark:text-gray-900">
-                {provider.displayName.slice(0, 2).toUpperCase()}
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <h2 className="truncate text-base font-semibold text-gray-900 dark:text-white">{provider.displayName}</h2>
-                  <Status ready={provider.enabled && provider.hasApiKey} />
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {providers.map((provider) => (
+            <Link
+              key={provider.slug}
+              to={`/providers/${provider.slug}`}
+              className="panel-card panel-card-body flex h-full flex-col transition hover:border-brand-300 dark:hover:border-brand-500/40"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm font-semibold text-white dark:bg-white dark:text-gray-900">
+                  {provider.displayName.slice(0, 2).toUpperCase()}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <h2 className="truncate text-base font-semibold text-gray-900 dark:text-white">{provider.displayName}</h2>
+                    <Status ready={provider.enabled && provider.hasApiKey} />
+                  </div>
+                  <p className="mt-1 line-clamp-2 min-h-10 text-sm leading-5 text-gray-500 dark:text-gray-400">
+                    {provider.summary}
+                  </p>
                 </div>
-                <p className="mt-1 line-clamp-2 min-h-10 text-sm leading-5 text-gray-500 dark:text-gray-400">
-                  {provider.summary}
-                </p>
               </div>
-            </div>
-            <div className="mt-4 flex items-center justify-between gap-3 text-xs text-gray-500">
-              <span className="truncate">
-                {provider.activeModels} active / {provider.totalModels} models
-              </span>
-              <span className="shrink-0">{provider.hasApiKey ? provider.apiKeyHint : "No API key"}</span>
-            </div>
-          </Link>
-        ))}
-      </div>
+              <div className="mt-4 flex items-center justify-between gap-3 text-xs text-gray-500">
+                <span className="truncate">
+                  {provider.activeModels} active / {provider.totalModels} models
+                </span>
+                <span className="shrink-0">{provider.hasApiKey ? provider.apiKeyHint : "No API key"}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
       )}
+      <div ref={bottomRef} className="h-8" />
+      {paging && <p className="pb-4 text-center text-sm text-gray-400">Loading more…</p>}
     </div>
   );
+}
+
+function appendUnique(current: Provider[], next: Provider[]) {
+  const seen = new Set(current.map((provider) => provider.slug));
+  const added = next.filter((provider) => !seen.has(provider.slug));
+  return added.length === 0 ? current : [...current, ...added];
 }
 
 function Status({ ready }: { ready: boolean }) {

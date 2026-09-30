@@ -79,8 +79,20 @@ export function getOverview() {
   return request<Overview>("/api/overview")
 }
 
-export function listProviders() {
-  return request<{ providers: Provider[] }>("/api/providers")
+export type ProviderPage = {
+  providers: Provider[]
+  total: number
+  limit: number
+  offset: number
+}
+
+export function listProviders(params?: { q?: string; limit?: number; offset?: number }) {
+  const search = new URLSearchParams()
+  if (params?.q) search.set("q", params.q)
+  if (params?.limit) search.set("limit", String(params.limit))
+  if (params?.offset) search.set("offset", String(params.offset))
+  const query = search.toString()
+  return request<ProviderPage>(`/api/providers${query ? `?${query}` : ""}`)
 }
 
 export function getProvider(slug: string) {

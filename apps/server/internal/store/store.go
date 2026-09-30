@@ -242,30 +242,102 @@ ON CONFLICT(id) DO UPDATE SET
 }
 
 func (s *Store) ListProviders() ([]Provider, error) {
-	rows, err := s.db.Query(`
+	page, err := s.ListProvidersPage("", 0, 0)
+	if err != nil {
+		return nil, err
+	}
+	return page.Providers, nil
+}
+
+type ProviderPage struct {
+	Providers []Provider
+	Total     int
+	Limit     int
+	Offset    int
+}
+
+func (s *Store) ListProvidersPage(query string, limit, offset int) (ProviderPage, error) {
+	unlimited := limit <= 0
+	if limit < 0 {
+		limit = 24
+	}
+	if limit > 60 {
+		limit = 60
+	}
+	if offset < 0 {
+		offset = 0
+	}
+	page := ProviderPage{Providers: []Provider{}, Limit: limit, Offset: offset}
+
+	where := "1 = 1"
+	args := []any{}
+	needle := strings.TrimSpace(query)
+	if needle != "" {
+		slugs := providerSearchSlugs(needle)
+		if len(slugs) == 0 {
+			return page, nil
+		}
+		where = "p.slug IN (" + placeholders(len(slugs)) + ")"
+		for _, slug := range slugs {
+			args = append(args, slug)
+		}
+	}
+
+	countArgs := append([]any{}, args...)
+	if err := s.db.QueryRow(`SELECT COUNT(*) FROM providers p WHERE `+where, countArgs...).Scan(&page.Total); err != nil {
+		return ProviderPage{}, err
+	}
+
+	listSQL := `
 SELECT p.slug, p.display_name, p.protocol, p.base_url, p.api_key_cipher, p.api_key_hint,
        p.enabled, p.updated_at,
        (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug),
        (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug AND m.active = 1)
 FROM providers p
-ORDER BY p.display_name`)
+WHERE ` + where + `
+ORDER BY
+  CASE
+    WHEN p.enabled = 1 AND p.api_key_cipher <> '' THEN 0
+    WHEN p.api_key_cipher <> '' THEN 1
+    ELSE 2
+  END,
+  p.display_name COLLATE NOCASE,
+  p.slug`
+	listArgs := args
+	if !unlimited {
+		listSQL += ` LIMIT ? OFFSET ?`
+		listArgs = append(append([]any{}, args...), limit, offset)
+	}
+	rows, err := s.db.Query(listSQL, listArgs...)
 	if err != nil {
-		return nil, err
+		return ProviderPage{}, err
 	}
 	defer rows.Close()
 
-	var out []Provider
 	for rows.Next() {
 		item, err := scanProvider(rows)
 		if err != nil {
-			return nil, err
+			return ProviderPage{}, err
 		}
-		out = append(out, item)
+		page.Providers = append(page.Providers, item)
 	}
-	if out == nil {
-		out = []Provider{}
+	if page.Providers == nil {
+		page.Providers = []Provider{}
 	}
-	return out, rows.Err()
+	return page, rows.Err()
+}
+
+func providerSearchSlugs(query string) []string {
+	needle := strings.ToLower(strings.TrimSpace(query))
+	var slugs []string
+	for _, provider := range catalog.All() {
+		if strings.Contains(strings.ToLower(provider.DisplayName), needle) ||
+			strings.Contains(strings.ToLower(provider.Slug), needle) ||
+			strings.Contains(strings.ToLower(provider.Summary), needle) {
+			slugs = append(slugs, provider.Slug)
+		}
+	}
+	return slugs
 }
 
 func (s *Store) GetProvider(slug string) (Provider, error) {
