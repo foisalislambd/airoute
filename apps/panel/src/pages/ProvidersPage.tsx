@@ -1,4 +1,5 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
+import { ProviderMark } from "@/components/provider-mark";
 import { listProviders, type Provider, type ProviderCategory } from "@/lib/api";
 import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -138,9 +139,7 @@ export default function ProvidersPage() {
               className="panel-card panel-card-body flex h-full flex-col transition hover:border-brand-300 dark:hover:border-brand-500/40"
             >
               <div className="flex items-start gap-3">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gray-900 text-sm font-semibold text-white dark:bg-white dark:text-gray-900">
-                  {provider.displayName.slice(0, 2).toUpperCase()}
-                </span>
+                <ProviderMark slug={provider.slug} name={provider.displayName} />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <h2 className="truncate text-base font-semibold text-gray-900 dark:text-white">{provider.displayName}</h2>
