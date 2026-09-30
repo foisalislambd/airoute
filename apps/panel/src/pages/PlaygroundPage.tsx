@@ -1,31 +1,81 @@
-import { PanelPageHeader } from "@/components/layout/panel-page-header";
-import { listActiveModels, type Model } from "@/lib/api";
+import { MarkdownView } from "@/components/markdown-view";
+import { getProvider, listActiveModels, type Model } from "@/lib/api";
+import { providerIcon } from "@/lib/provider-icons";
 import { chatDeltaFromSSE, readSSE } from "@airoute/sse";
-import { useEffect, useState, type FormEvent } from "react";
+import { ArrowUp, ChevronDown, Paperclip, Plus, Search, Square, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 type Attachment = { name: string; mime: string; url: string; text: string | null };
 type MediaItem = { type: string; src: string };
+type ChatMessage = {
+  id: string
+  role: "user" | "assistant"
+  text: string
+  sendContent: string | Array<Record<string, unknown>>
+  reasoning: string
+  media: MediaItem[]
+  files: Attachment[]
+  error: string
+  format: "markdown" | "json"
+};
 
 export default function PlaygroundPage() {
   const [models, setModels] = useState<Model[]>([]);
+  const [names, setNames] = useState<Record<string, string>>({});
   const [modelId, setModelId] = useState("");
-  const [prompt, setPrompt] = useState("Say hello in one sentence.");
+  const [prompt, setPrompt] = useState("");
   const [files, setFiles] = useState<Attachment[]>([]);
-  const [output, setOutput] = useState("");
-  const [reasoning, setReasoning] = useState("");
-  const [media, setMedia] = useState<MediaItem[]>([]);
-  const [error, setError] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [busy, setBusy] = useState(false);
+  const [loadError, setLoadError] = useState("");
+  const scroller = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const stick = useRef(true);
+  const abortRef = useRef<AbortController | null>(null);
+  const messagesRef = useRef(messages);
+  messagesRef.current = messages;
 
   useEffect(() => {
     listActiveModels()
       .then((result) => {
         setModels(result.models);
-        setModelId(result.models[0]?.id ?? "");
+        setModelId((current) => current || result.models[0]?.id || "");
       })
-      .catch((err: Error) => setError(err.message));
+      .catch((err: Error) => setLoadError(err.message));
   }, []);
+
+  useEffect(() => {
+    const slugs = [...new Set(models.map((model) => model.providerSlug))];
+    let cancel = false;
+    Promise.all(
+      slugs.map(async (slug) => {
+        try {
+          const provider = await getProvider(slug);
+          return [slug, provider.displayName] as const;
+        } catch {
+          return [slug, slug] as const;
+        }
+      }),
+    ).then((pairs) => {
+      if (!cancel) setNames(Object.fromEntries(pairs));
+    });
+    return () => {
+      cancel = true;
+    };
+  }, [models]);
+
+  useEffect(() => {
+    const el = scroller.current;
+    if (el && stick.current) el.scrollTop = el.scrollHeight;
+  }, [messages, busy]);
+
+  useEffect(() => {
+    const el = inputRef.current;
+    if (!el) return;
+    el.style.height = "0px";
+    el.style.height = `${Math.min(el.scrollHeight, 160)}px`;
+  }, [prompt]);
 
   const selected = models.find((model) => model.id === modelId);
   const kind = selected?.kind || "chat";
@@ -42,53 +92,81 @@ export default function PlaygroundPage() {
     setFiles((current) => [...current, ...next].slice(0, 8));
   }
 
-  async function send(event: FormEvent) {
-    event.preventDefault();
+  function stop() {
+    abortRef.current?.abort();
+  }
+
+  async function send() {
+    const text = prompt.trim();
+    if (busy || !modelId || (!text && files.length === 0)) return;
+    const attached = files;
+    const user: ChatMessage = {
+      id: newId(),
+      role: "user",
+      text,
+      sendContent: attached.length === 0 ? text : messageContent(text, attached),
+      reasoning: "",
+      media: [],
+      files: attached,
+      error: "",
+      format: "markdown",
+    };
+    const assistant: ChatMessage = {
+      id: newId(),
+      role: "assistant",
+      text: "",
+      sendContent: "",
+      reasoning: "",
+      media: [],
+      files: [],
+      error: "",
+      format: "markdown",
+    };
+    const history = [...messagesRef.current, user];
+    stick.current = true;
+    setMessages([...history, assistant]);
+    setPrompt("");
+    setFiles([]);
     setBusy(true);
-    setError("");
-    setOutput("");
-    setReasoning("");
-    setMedia([]);
+    const controller = new AbortController();
+    abortRef.current = controller;
     try {
       if (mediaKind) {
-        const image = files.find((file) => file.mime.startsWith("image/"))?.url ?? "";
-        const notes = files
+        const image = attached.find((file) => file.mime.startsWith("image/"))?.url ?? "";
+        const notes = attached
           .filter((file) => file.text)
           .map((file) => `File ${file.name}:\n${file.text}`)
           .join("\n\n");
         const response = await fetch("/api/playground/media", {
           method: "POST",
+          signal: controller.signal,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: modelId,
-            prompt: notes ? `${prompt}\n\n${notes}` : prompt,
-            image,
-          }),
+          body: JSON.stringify({ model: modelId, prompt: notes ? `${text}\n\n${notes}` : text, image }),
         });
         const data = (await response.json().catch(() => ({}))) as { error?: string; media?: MediaItem[] };
         if (!response.ok) throw new Error(data.error || response.statusText);
-        setMedia(data.media ?? []);
-        if ((data.media ?? []).length === 0) {
-          setOutput("The provider returned no image or video URL.");
-        }
+        const media = data.media ?? [];
+        patch(assistant.id, { media, text: media.length === 0 ? "The provider returned no image, video, or audio." : "" });
         return;
       }
 
-      const content = files.length === 0 ? prompt : messageContent(prompt, files);
       const response = await fetch("/api/playground/chat", {
         method: "POST",
+        signal: controller.signal,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: modelId,
           stream: true,
-          messages: [{ role: "user", content }],
+          messages: history
+            .filter((item) => !item.error && (item.role === "user" || item.text))
+            .map((item) => ({ role: item.role, content: item.role === "assistant" ? item.text : item.sendContent })),
         }),
       });
       if (!response.ok || !response.body) {
         const data = (await response.json().catch(() => ({}))) as { error?: string };
         throw new Error(data.error || response.statusText);
       }
-      let text = "";
+      let reply = "";
       let thought = "";
       for await (const message of readSSE(response.body)) {
         const delta = chatDeltaFromSSE(message.data);
@@ -96,134 +174,335 @@ export default function PlaygroundPage() {
         if (delta.done) break;
         if (delta.reasoning) {
           thought += delta.reasoning;
-          setReasoning(thought);
+          patch(assistant.id, { reasoning: thought });
         }
         if (delta.content) {
-          text += delta.content;
-          setOutput(text);
+          reply += delta.content;
+          patch(assistant.id, { text: reply, media: mediaInText(reply) });
         }
       }
-      setMedia(mediaInText(text));
+      if (!reply && !thought) patch(assistant.id, { text: "The model returned an empty reply." });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Request failed");
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setMessages((current) => current.filter((item) => item.id !== assistant.id || item.text || item.reasoning || item.media.length > 0));
+        return;
+      }
+      patch(assistant.id, { error: err instanceof Error ? err.message : "Request failed" });
     } finally {
+      if (abortRef.current === controller) abortRef.current = null;
       setBusy(false);
     }
   }
 
+  function patch(id: string, change: Partial<ChatMessage>) {
+    setMessages((current) => current.map((item) => (item.id === id ? { ...item, ...change } : item)));
+  }
+
   return (
-    <div>
-      <PanelPageHeader
-        title="Playground"
-        description="Chat, image, and video models run through the local router with the provider key stored on this machine."
-      />
-      {models.length === 0 ? (
-        <div className="panel-card panel-card-body text-sm text-gray-600 dark:text-gray-300">
-          No active models yet.{" "}
-          <Link to="/providers" className="font-medium text-brand-600">
-            Open a provider
-          </Link>{" "}
-          and turn a model on.
-        </div>
-      ) : (
-        <form onSubmit={send} className="grid gap-4 lg:grid-cols-[320px_1fr]">
-          <div className="panel-card panel-card-body space-y-3">
-            <label className="block text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-200">Model</span>
-              <select
-                value={modelId}
-                onChange={(event) => setModelId(event.target.value)}
-                className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm dark:border-gray-700 dark:bg-gray-900 dark:text-white"
-              >
-                {models.map((model) => (
-                  <option key={model.id} value={model.id}>
-                    {model.displayName}
-                    {model.kind && model.kind !== "chat" ? ` · ${model.kind}` : ""}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-200">Attach files</span>
+    <div className="flex min-h-0 flex-1 flex-col bg-white dark:bg-gray-900">
+      <div className="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4 dark:border-gray-800">
+        <ModelMenu models={models} names={names} value={modelId} onChange={setModelId} />
+        <button
+          type="button"
+          onClick={() => {
+            abortRef.current?.abort();
+            setMessages([]);
+            setPrompt("");
+            setFiles([]);
+          }}
+          className="ml-auto inline-flex h-9 items-center gap-1.5 rounded-lg border border-gray-200 px-3 text-sm text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-white/5"
+        >
+          <Plus className="h-4 w-4" />
+          New chat
+        </button>
+      </div>
+
+      <div
+        ref={scroller}
+        onScroll={(event) => {
+          const el = event.currentTarget;
+          stick.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+        }}
+        className="panel-scrollbar min-h-0 flex-1 overflow-y-auto"
+      >
+        {loadError ? (
+          <p className="px-6 py-8 text-sm text-error-500">{loadError}</p>
+        ) : models.length === 0 ? (
+          <div className="flex h-full items-center justify-center px-6 text-center text-sm text-gray-500">
+            <p>
+              No active models yet.{" "}
+              <Link to="/providers" className="font-medium text-brand-600">
+                Open a provider
+              </Link>{" "}
+              and turn a model on.
+            </p>
+          </div>
+        ) : messages.length === 0 ? (
+          <div className="flex h-full flex-col items-center justify-center px-6 text-center">
+            <p className="text-lg font-medium text-gray-900 dark:text-white">{selected ? selected.displayName : "Choose a model"}</p>
+            <p className="mt-1 text-sm text-gray-500">{selected ? names[selected.providerSlug] || selected.providerSlug : "Turn a model on, then send a message."}</p>
+          </div>
+        ) : (
+          <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-4 py-6">
+            {messages.map((message, index) => (
+              <MessageBubble
+                key={message.id}
+                message={message}
+                pending={busy && index === messages.length - 1 && !message.text && !message.error && message.media.length === 0}
+                onFormat={(format) => patch(message.id, { format })}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          void send();
+        }}
+        className="shrink-0 border-t border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900"
+      >
+        <div className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-white/5">
+          {files.length > 0 && (
+            <div className="mb-2 flex flex-wrap gap-2 px-1">
+              {files.map((file) => (
+                <button
+                  key={file.url}
+                  type="button"
+                  onClick={() => setFiles((current) => current.filter((item) => item.url !== file.url))}
+                  className="group relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
+                  title={`Remove ${file.name}`}
+                >
+                  {file.mime.startsWith("image/") ? (
+                    <img src={file.url} alt="" className="h-14 w-14 object-cover" />
+                  ) : (
+                    <span className="flex h-14 max-w-36 items-center px-2 text-left text-[11px] text-gray-600 dark:text-gray-300">{file.name}</span>
+                  )}
+                  <span className="absolute right-1 top-1 rounded-full bg-gray-900/70 p-0.5 text-white opacity-0 group-hover:opacity-100">
+                    <X className="h-3 w-3" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+          <textarea
+            value={prompt}
+            onChange={(event) => setPrompt(event.target.value)}
+            ref={inputRef}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                event.preventDefault();
+                void send();
+              }
+            }}
+            rows={1}
+            placeholder={mediaKind ? "Describe what to generate" : "Message"}
+            className="max-h-40 min-h-11 w-full resize-none bg-transparent px-2 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 dark:text-white"
+          />
+          <div className="flex items-center gap-2 px-1 pb-1">
+            <label className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg px-2 text-xs text-gray-500 hover:bg-gray-200/70 dark:hover:bg-white/10">
+              <Paperclip className="h-3.5 w-3.5" />
+              Attach
               <input
                 type="file"
                 multiple
+                className="sr-only"
                 onChange={(event) => {
                   void onFiles(event.target.files);
                   event.target.value = "";
                 }}
-                className="mt-1.5 block w-full text-xs text-gray-500 file:mr-3 file:rounded-lg file:border-0 file:bg-gray-100 file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-gray-700 dark:file:bg-white/10 dark:file:text-gray-200"
               />
             </label>
-            {files.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {files.map((file) => (
-                  <button
-                    key={file.url}
-                    type="button"
-                    onClick={() => setFiles((current) => current.filter((item) => item.url !== file.url))}
-                    className="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700"
-                    title={`Remove ${file.name}`}
-                  >
-                    {file.mime.startsWith("image/") ? (
-                      <img src={file.url} alt="" className="h-14 w-14 object-cover" />
-                    ) : (
-                      <span className="flex h-14 max-w-32 items-center px-2 text-left text-[10px] text-gray-600 dark:text-gray-300">{file.name}</span>
-                    )}
-                  </button>
-                ))}
-              </div>
+            <span className="text-[11px] text-gray-400">{mediaKind ? kind : "Enter to send"}</span>
+            {busy ? (
+              <button type="button" onClick={stop} className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900" aria-label="Stop">
+                <Square className="h-3.5 w-3.5 fill-current" />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                disabled={!modelId || (!prompt.trim() && files.length === 0)}
+                className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-brand-500 text-white hover:bg-brand-600 disabled:opacity-40"
+                aria-label="Send"
+              >
+                <ArrowUp className="h-4 w-4" />
+              </button>
             )}
-            <button type="submit" disabled={busy || !modelId} className="w-full rounded-lg bg-brand-500 px-3 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60">
-              {busy ? "Running…" : mediaKind ? "Generate" : "Send"}
-            </button>
-            {error && <p className="text-sm text-error-500">{error}</p>}
           </div>
-          <div className="space-y-4">
-            <textarea
-              value={prompt}
-              onChange={(event) => setPrompt(event.target.value)}
-              rows={5}
-              className="panel-card w-full resize-y px-4 py-3 text-sm text-gray-900 outline-none dark:text-white"
-            />
-            {reasoning && (
-              <div className="panel-card whitespace-pre-wrap px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{reasoning}</div>
-            )}
-            <div className="panel-card min-h-40 space-y-3 px-4 py-3 text-sm text-gray-800 dark:text-gray-100">
-              {media.map((item) =>
-                item.type === "video" ? (
-                  <video key={item.src} src={item.src} controls className="max-h-96 max-w-full rounded-lg" />
-                ) : item.type === "audio" ? (
-                  <audio key={item.src} src={item.src} controls className="w-full" />
+        </div>
+      </form>
+    </div>
+  );
+}
+
+function MessageBubble({ message, pending, onFormat }: { message: ChatMessage; pending: boolean; onFormat: (format: "markdown" | "json") => void }) {
+  if (message.role === "user") {
+    return (
+      <div className="flex justify-end">
+        <div className="max-w-[85%] space-y-2">
+          {message.files.length > 0 && (
+            <div className="flex flex-wrap justify-end gap-2">
+              {message.files.map((file) =>
+                file.mime.startsWith("image/") ? (
+                  <img key={file.url} src={file.url} alt="" className="h-20 w-20 rounded-xl object-cover" />
                 ) : (
-                  <img key={item.src} src={item.src} alt="" className="max-h-96 max-w-full rounded-lg" />
+                  <span key={file.url} className="rounded-xl bg-gray-100 px-3 py-2 text-xs text-gray-600 dark:bg-white/10 dark:text-gray-300">
+                    {file.name}
+                  </span>
                 ),
               )}
-              {output ? (
-                <RichText text={output} hideMedia={media.length > 0} />
-              ) : media.length === 0 ? (
-                <span className="text-gray-400">The reply, image, or video will show here.</span>
-              ) : null}
             </div>
+          )}
+          {message.text && <div className="rounded-2xl bg-gray-100 px-4 py-2.5 text-sm text-gray-900 dark:bg-white/10 dark:text-white">{message.text}</div>}
+        </div>
+      </div>
+    );
+  }
+
+  const payload = {
+    role: "assistant",
+    content: message.text,
+    ...(message.reasoning ? { reasoning: message.reasoning } : {}),
+    ...(message.media.length > 0 ? { media: message.media } : {}),
+    ...(message.error ? { error: message.error } : {}),
+  };
+
+  return (
+    <div className="min-w-0">
+      <div className="mb-2 inline-flex rounded-lg border border-gray-200 p-0.5 text-xs dark:border-gray-700">
+        <button type="button" onClick={() => onFormat("markdown")} className={`rounded-md px-2 py-1 ${message.format === "markdown" ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900" : "text-gray-500"}`}>
+          Markdown
+        </button>
+        <button type="button" onClick={() => onFormat("json")} className={`rounded-md px-2 py-1 ${message.format === "json" ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900" : "text-gray-500"}`}>
+          JSON
+        </button>
+      </div>
+      {message.error ? <p className="text-sm text-error-500">{message.error}</p> : null}
+      {message.format === "json" ? (
+        <pre className="overflow-x-auto rounded-xl bg-gray-50 p-3 font-mono text-xs leading-5 text-gray-800 dark:bg-white/5 dark:text-gray-100">{JSON.stringify(payload, null, 2)}</pre>
+      ) : (
+        <>
+          {message.reasoning ? (
+            <details className="mb-3 text-sm text-gray-500">
+              <summary className="cursor-pointer">Reasoning</summary>
+              <p className="mt-2 whitespace-pre-wrap">{message.reasoning}</p>
+            </details>
+          ) : null}
+          <div className="space-y-3">
+            {message.media.map((item) =>
+              item.type === "video" ? (
+                <video key={item.src} src={item.src} controls className="max-h-96 max-w-full rounded-xl" />
+              ) : item.type === "audio" ? (
+                <audio key={item.src} src={item.src} controls className="w-full" />
+              ) : (
+                <img key={item.src} src={item.src} alt="" className="max-h-96 max-w-full rounded-xl" />
+              ),
+            )}
+            {message.text ? <MarkdownView text={message.media.length > 0 ? stripMedia(message.text) : message.text} /> : pending ? <p className="text-sm text-gray-400">Thinking…</p> : null}
           </div>
-        </form>
+        </>
       )}
     </div>
   );
 }
 
-function RichText({ text, hideMedia }: { text: string; hideMedia: boolean }) {
-  if (hideMedia) return <p className="whitespace-pre-wrap">{stripMedia(text)}</p>;
-  const parts = text.split(/(!\[[^\]]*\]\([^)]+\))/g);
+function ModelMenu({ models, names, value, onChange }: { models: Model[]; names: Record<string, string>; value: string; onChange: (id: string) => void }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const root = useRef<HTMLDivElement>(null);
+  const selected = models.find((model) => model.id === value);
+
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(event: MouseEvent) {
+      if (!root.current?.contains(event.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onPointer);
+    return () => document.removeEventListener("mousedown", onPointer);
+  }, [open]);
+
+  const groups = useMemo(() => {
+    const needle = query.trim().toLowerCase();
+    const map = new Map<string, Model[]>();
+    for (const model of models) {
+      const provider = names[model.providerSlug] || model.providerSlug;
+      const hay = `${provider} ${model.displayName} ${model.upstreamId} ${model.id} ${model.kind}`.toLowerCase();
+      if (needle && !hay.includes(needle)) continue;
+      const list = map.get(model.providerSlug) ?? [];
+      list.push(model);
+      map.set(model.providerSlug, list);
+    }
+    return [...map.entries()].sort((a, b) => (names[a[0]] || a[0]).localeCompare(names[b[0]] || b[0]));
+  }, [models, names, query]);
+
   return (
-    <div className="space-y-3 whitespace-pre-wrap">
-      {parts.map((part, index) => {
-        const image = part.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
-        if (image) return <img key={index} src={image[2]} alt={image[1]} className="max-h-96 max-w-full rounded-lg" />;
-        return <span key={index}>{part}</span>;
-      })}
+    <div ref={root} className="relative min-w-0">
+      <button
+        type="button"
+        onClick={() => setOpen((current) => !current)}
+        aria-expanded={open}
+        className="inline-flex h-9 max-w-[min(28rem,70vw)] items-center gap-2 rounded-lg px-2 text-left hover:bg-gray-100 dark:hover:bg-white/5"
+      >
+        <span className="min-w-0">
+          <span className="block truncate text-sm font-medium text-gray-900 dark:text-white">{selected?.displayName || "Select a model"}</span>
+          {selected ? <span className="block truncate text-[11px] text-gray-500">{names[selected.providerSlug] || selected.providerSlug}</span> : null}
+        </span>
+        <ChevronDown className="h-4 w-4 shrink-0 text-gray-400" />
+      </button>
+      {open && (
+        <div className="absolute left-0 top-11 z-40 flex max-h-[min(28rem,70vh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900">
+          <div className="border-b border-gray-200 p-2 dark:border-gray-800">
+            <label className="flex items-center gap-2 rounded-lg bg-gray-50 px-2 dark:bg-white/5">
+              <Search className="h-4 w-4 text-gray-400" />
+              <input
+                autoFocus
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search models"
+                className="h-9 w-full bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-400 dark:text-white"
+              />
+            </label>
+          </div>
+          <div className="panel-scrollbar min-h-0 flex-1 overflow-y-auto py-1">
+            {groups.length === 0 ? (
+              <p className="px-3 py-6 text-center text-sm text-gray-500">No models match that search.</p>
+            ) : (
+              groups.map(([slug, items]) => (
+                <div key={slug}>
+                  <div className="flex items-center gap-2 px-3 pb-1 pt-3 text-xs font-semibold text-gray-500">
+                    <ProviderDot slug={slug} />
+                    {names[slug] || slug}
+                  </div>
+                  {items.map((model) => (
+                    <button
+                      key={model.id}
+                      type="button"
+                      onClick={() => {
+                        onChange(model.id);
+                        setOpen(false);
+                        setQuery("");
+                      }}
+                      className={`flex w-full items-center justify-between gap-3 px-3 py-2 text-left text-sm hover:bg-gray-50 dark:hover:bg-white/5 ${model.id === value ? "text-brand-600" : "text-gray-800 dark:text-gray-100"}`}
+                    >
+                      <span className="min-w-0 truncate">{model.displayName}</span>
+                      {model.kind && model.kind !== "chat" ? <span className="shrink-0 text-[11px] uppercase text-gray-400">{model.kind}</span> : null}
+                    </button>
+                  ))}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
+}
+
+function ProviderDot({ slug }: { slug: string }) {
+  const icon = providerIcon(slug);
+  if (!icon) return <span className="h-4 w-4 rounded bg-gray-200 dark:bg-gray-700" />;
+  return <img src={`/providers/${icon.file}.svg`} alt="" className="h-4 w-4 object-contain" />;
 }
 
 function mediaInText(text: string): MediaItem[] {
@@ -242,7 +521,8 @@ function stripMedia(text: string) {
 }
 
 function messageContent(prompt: string, files: Attachment[]) {
-  const parts: Array<Record<string, unknown>> = [{ type: "text", text: prompt }];
+  const parts: Array<Record<string, unknown>> = [];
+  if (prompt) parts.push({ type: "text", text: prompt });
   for (const file of files) {
     if (file.mime.startsWith("image/")) {
       parts.push({ type: "image_url", image_url: { url: file.url } });
@@ -271,4 +551,8 @@ function readFile(file: File) {
     reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(file);
   });
+}
+
+function newId() {
+  return crypto.randomUUID();
 }
