@@ -9,6 +9,7 @@ export default function PlaygroundPage() {
   const [modelId, setModelId] = useState("");
   const [prompt, setPrompt] = useState("Say hello in one sentence.");
   const [output, setOutput] = useState("");
+  const [reasoning, setReasoning] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -26,6 +27,7 @@ export default function PlaygroundPage() {
     setBusy(true);
     setError("");
     setOutput("");
+    setReasoning("");
     try {
       const response = await fetch("/api/playground/chat", {
         method: "POST",
@@ -41,11 +43,19 @@ export default function PlaygroundPage() {
         throw new Error(data.error || response.statusText);
       }
       let text = "";
+      let thought = "";
       for await (const message of readSSE(response.body)) {
         const delta = chatDeltaFromSSE(message.data);
+        if (delta.error) throw new Error(delta.error);
         if (delta.done) break;
-        text += delta.content;
-        setOutput(text);
+        if (delta.reasoning) {
+          thought += delta.reasoning;
+          setReasoning(thought);
+        }
+        if (delta.content) {
+          text += delta.content;
+          setOutput(text);
+        }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Request failed");
@@ -97,6 +107,9 @@ export default function PlaygroundPage() {
               rows={5}
               className="panel-card w-full resize-y px-4 py-3 text-sm text-gray-900 outline-none dark:text-white"
             />
+            {reasoning && (
+              <div className="panel-card whitespace-pre-wrap px-4 py-3 text-sm text-gray-500 dark:text-gray-400">{reasoning}</div>
+            )}
             <div className="panel-card min-h-40 whitespace-pre-wrap px-4 py-3 text-sm text-gray-800 dark:text-gray-100">
               {output || <span className="text-gray-400">The reply will stream here.</span>}
             </div>

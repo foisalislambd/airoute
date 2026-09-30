@@ -19,11 +19,23 @@ func RewriteChatModel(body []byte, upstreamID string) ([]byte, bool, error) {
 	}
 	payload["model"] = upstreamID
 	stream, _ := payload["stream"].(bool)
+	if stream {
+		payload["stream_options"] = withUsage(payload["stream_options"])
+	}
 	next, err := json.Marshal(payload)
 	if err != nil {
 		return nil, false, err
 	}
 	return next, stream, nil
+}
+
+func withUsage(current any) map[string]any {
+	options, _ := current.(map[string]any)
+	if options == nil {
+		options = map[string]any{}
+	}
+	options["include_usage"] = true
+	return options
 }
 
 // UsageFromCompletion reads token counts from a non-streaming chat completion.

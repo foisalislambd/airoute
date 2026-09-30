@@ -24,6 +24,10 @@ func TestRewriteChatModel(t *testing.T) {
 	if parsed["model"] != "gpt-6-luna" {
 		t.Fatalf("model = %#v", parsed["model"])
 	}
+	options, _ := parsed["stream_options"].(map[string]any)
+	if options["include_usage"] != true {
+		t.Fatalf("stream_options = %#v", parsed["stream_options"])
+	}
 	if !bytes.Contains(next, []byte(`"content":"hi"`)) {
 		t.Fatalf("body lost content: %s", next)
 	}

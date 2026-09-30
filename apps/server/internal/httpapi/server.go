@@ -14,6 +14,7 @@ import (
 
 	"airoute/server/internal/catalog"
 	"airoute/server/internal/provider/openai"
+	"airoute/server/internal/sse"
 	"airoute/server/internal/store"
 )
 
@@ -376,10 +377,19 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	defer resp.Body.Close()
 
 	if stream && resp.StatusCode >= 200 && resp.StatusCode < 300 {
-		copyStream(w, resp)
+		format := streamFormat(route.Protocol)
+		writeStreamHeaders(w, resp)
+		_ = sse.Relay(w, resp.Body, format)
+		prompt, completion := 0, 0
+		message := ""
+		if format != nil {
+			prompt, completion = format.Usage()
+			message = format.Err()
+		}
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
+			PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message,
 		})
 		return
 	}
@@ -455,31 +465,24 @@ func (s *Server) spa(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, filepath.Join(root, "index.html"))
 }
 
-func copyStream(w http.ResponseWriter, resp *http.Response) {
+func streamFormat(protocol string) sse.Format {
+	switch protocol {
+	case catalog.ProtocolOpenAIChat:
+		return &sse.OpenAIChat{}
+	default:
+		return nil
+	}
+}
+
+func writeStreamHeaders(w http.ResponseWriter, resp *http.Response) {
 	contentType := resp.Header.Get("Content-Type")
 	if contentType == "" {
 		contentType = "text/event-stream"
 	}
 	w.Header().Set("Content-Type", contentType)
 	w.Header().Set("Cache-Control", "no-cache")
-	w.Header().Set("Connection", "keep-alive")
+	w.Header().Set("X-Accel-Buffering", "no")
 	w.WriteHeader(resp.StatusCode)
-	flusher, _ := w.(http.Flusher)
-	buf := make([]byte, 32*1024)
-	for {
-		n, err := resp.Body.Read(buf)
-		if n > 0 {
-			if _, err := w.Write(buf[:n]); err != nil {
-				return
-			}
-			if flusher != nil {
-				flusher.Flush()
-			}
-		}
-		if err != nil {
-			return
-		}
-	}
 }
 
 func upstreamErrorMessage(payload []byte) string {

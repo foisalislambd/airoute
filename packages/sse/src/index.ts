@@ -16,7 +16,7 @@ export async function* readSSE(
       const { value, done } = await reader.read()
       if (done) break
       buffer += decoder.decode(value, { stream: true })
-      buffer = buffer.replace(/\r\n/g, "\n")
+      buffer = normalizeNewlines(buffer)
 
       let splitAt = buffer.indexOf("\n\n")
       while (splitAt !== -1) {
@@ -56,18 +56,51 @@ function parseEventBlock(block: string): SSEMessage | null {
 
 export type ChatDelta = {
   content: string
+  reasoning: string
+  error: string
   done: boolean
 }
 
-/** Pull assistant text out of one chat.completion.chunk SSE payload. */
+/** Pull text, reasoning, and an error out of one chat.completion.chunk payload. */
 export function chatDeltaFromSSE(data: string): ChatDelta {
+  const empty = { content: "", reasoning: "", error: "", done: false }
   if (data.trim() === "[DONE]") {
-    return { content: "", done: true }
+    return { ...empty, done: true }
   }
 
-  const json = JSON.parse(data) as {
-    choices?: { delta?: { content?: string | null } }[]
+  let json: {
+    error?: { message?: string } | string
+    choices?: {
+      delta?: {
+        content?: string | null
+        reasoning_content?: string | null
+        reasoning?: string | null
+      }
+    }[]
   }
-  const content = json.choices?.[0]?.delta?.content ?? ""
-  return { content, done: false }
+  try {
+    json = JSON.parse(data) as typeof json
+  } catch {
+    return empty
+  }
+  const delta = json.choices?.[0]?.delta
+  const error = json.choices?.length ? "" : readError(json.error)
+  return {
+    content: delta?.content ?? "",
+    reasoning: delta?.reasoning_content ?? delta?.reasoning ?? "",
+    error,
+    done: false,
+  }
+}
+
+function readError(error: { message?: string } | string | undefined) {
+  if (typeof error === "string") return error
+  return error?.message ?? ""
+}
+
+function normalizeNewlines(buffer: string) {
+  const holdCR = buffer.endsWith("\r")
+  let text = holdCR ? buffer.slice(0, -1) : buffer
+  text = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n")
+  return holdCR ? text + "\r" : text
 }
