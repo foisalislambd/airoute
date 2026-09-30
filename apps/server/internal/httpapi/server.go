@@ -182,14 +182,14 @@ func (s *Server) testProvider(w http.ResponseWriter, r *http.Request) {
 	apiKey = providerCredential(slug, apiKey)
 	def, known := catalog.BySlug(slug)
 	if apiKey == "" && (!known || !def.KeyOptional) {
-		writeAPIError(w, http.StatusBadRequest, "add an API key first")
+		writeAPIError(w, http.StatusBadRequest, credentialMissingMessage(slug))
 		return
 	}
 	if protocol != catalog.ProtocolOpenAIChat {
 		writeAPIError(w, http.StatusBadRequest, "this provider protocol is not supported yet")
 		return
 	}
-	count, err := s.OpenAI.Ping(r.Context(), baseURL, apiKey)
+	count, err := s.OpenAI.Ping(r.Context(), baseURL, apiKey, catalog.UsesSessionCookie(slug))
 	if err != nil {
 		writeAPIError(w, http.StatusBadGateway, err.Error())
 		return
@@ -416,7 +416,7 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		}
 		resp, err = s.OpenAI.Send(r.Context(), http.MethodPost, strings.TrimRight(route.BaseURL, "/")+path, upstreamBody, header)
 	} else {
-		resp, err = s.OpenAI.ChatCompletions(r.Context(), route.BaseURL, route.APIKey, upstreamBody)
+		resp, err = s.OpenAI.ChatCompletions(r.Context(), route.BaseURL, route.APIKey, upstreamBody, catalog.UsesSessionCookie(route.Model.ProviderSlug))
 	}
 	if err != nil {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)

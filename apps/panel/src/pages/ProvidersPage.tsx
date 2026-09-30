@@ -155,7 +155,13 @@ export default function ProvidersPage() {
                   {provider.activeModels} active / {provider.totalModels} models
                 </span>
                 <span className="shrink-0">
-                  {provider.hasApiKey ? provider.apiKeyHint : provider.keyOptional ? "No key needed" : "No API key"}
+                  {provider.hasApiKey
+                    ? provider.apiKeyHint
+                    : provider.keyOptional
+                      ? "No key needed"
+                      : provider.category === "Web Cookie"
+                        ? "No session cookie"
+                        : "No API key"}
                 </span>
               </div>
             </Link>

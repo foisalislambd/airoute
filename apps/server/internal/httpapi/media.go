@@ -11,6 +11,7 @@ import (
 
 	"airoute/server/internal/catalog"
 	"airoute/server/internal/provider/adapt"
+	"airoute/server/internal/provider/openai"
 	"airoute/server/internal/sse"
 	"airoute/server/internal/store"
 )
@@ -149,7 +150,7 @@ func (s *Server) callMedia(r *http.Request, route store.Route, prompt, size, ima
 	var lastBody []byte
 	for i, path := range paths {
 		header := http.Header{}
-		header.Set("Authorization", "Bearer "+route.APIKey)
+		openai.ApplyCredential(header, route.APIKey, catalog.UsesSessionCookie(route.Model.ProviderSlug))
 		header.Set("Content-Type", "application/json")
 		header.Set("Accept", "application/json")
 		endpoint := strings.TrimRight(route.BaseURL, "/") + path
@@ -186,9 +187,13 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 	case catalog.ProtocolAnthropic:
 		endpoint = adapt.AnthropicURL(route.BaseURL)
 		upstream, err = adapt.AnthropicBody(body, route.Model.UpstreamID)
-		header.Set("x-api-key", route.APIKey)
-		header.Set("Authorization", "Bearer "+route.APIKey)
 		header.Set("anthropic-version", "2023-06-01")
+		if catalog.UsesSessionCookie(route.Model.ProviderSlug) {
+			openai.ApplyCredential(header, route.APIKey, true)
+		} else {
+			header.Set("x-api-key", route.APIKey)
+			header.Set("Authorization", "Bearer "+route.APIKey)
+		}
 	default:
 		endpoint = adapt.GeminiURL(route.BaseURL, route.Model.UpstreamID)
 		upstream, err = adapt.GeminiBody(body, route.Model.UpstreamID)

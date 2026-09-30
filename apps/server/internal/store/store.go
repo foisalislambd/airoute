@@ -545,6 +545,9 @@ func (s *Store) UpdateProvider(slug string, update ProviderUpdate) (Provider, er
 	}
 
 	if enabled && !hasKey && !current.KeyOptional {
+		if current.Category == "Web Cookie" {
+			return Provider{}, errors.New("paste a session cookie before enabling this provider")
+		}
 		return Provider{}, errors.New("add an API key before enabling this provider")
 	}
 

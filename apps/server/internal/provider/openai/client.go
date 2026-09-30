@@ -24,12 +24,10 @@ func NewClient() *Client {
 	return &Client{HTTP: &http.Client{Transport: transport}}
 }
 
-func (c *Client) ChatCompletions(ctx context.Context, baseURL, apiKey string, body []byte) (*http.Response, error) {
+func (c *Client) ChatCompletions(ctx context.Context, baseURL, apiKey string, body []byte, cookie bool) (*http.Response, error) {
 	endpoint := strings.TrimRight(baseURL, "/") + "/chat/completions"
 	header := http.Header{}
-	if apiKey != "" {
-		header.Set("Authorization", "Bearer "+apiKey)
-	}
+	ApplyCredential(header, apiKey, cookie)
 	header.Set("Content-Type", "application/json")
 	header.Set("Accept", "application/json, text/event-stream")
 	return c.Send(ctx, http.MethodPost, endpoint, body, header)
@@ -52,7 +50,7 @@ func (c *Client) Send(ctx context.Context, method, endpoint string, body []byte,
 }
 
 // Ping lists models to verify the key and base URL. It returns how many models the provider reported.
-func (c *Client) Ping(ctx context.Context, baseURL, apiKey string) (int, error) {
+func (c *Client) Ping(ctx context.Context, baseURL, apiKey string, cookie bool) (int, error) {
 	ctx, cancel := context.WithTimeout(ctx, 20*time.Second)
 	defer cancel()
 
@@ -62,9 +60,7 @@ func (c *Client) Ping(ctx context.Context, baseURL, apiKey string) (int, error) 
 		if err != nil {
 			return nil, err
 		}
-		if apiKey != "" {
-			req.Header.Set("Authorization", "Bearer "+apiKey)
-		}
+		ApplyCredential(req.Header, apiKey, cookie)
 		return req, nil
 	})
 	if err != nil {

@@ -46,14 +46,14 @@ func (s *Server) loadProviderModels(w http.ResponseWriter, r *http.Request) {
 	apiKey = providerCredential(slug, apiKey)
 	def, known := catalog.BySlug(slug)
 	if apiKey == "" && (!known || !def.KeyOptional) {
-		writeAPIError(w, http.StatusBadRequest, "add an API key first")
+		writeAPIError(w, http.StatusBadRequest, credentialMissingMessage(slug))
 		return
 	}
 	if strings.TrimSpace(baseURL) == "" {
 		writeAPIError(w, http.StatusBadRequest, "set a base URL before loading models")
 		return
 	}
-	endpoint, header, err := modelListCall(protocol, baseURL, apiKey)
+	endpoint, header, err := modelListCall(protocol, baseURL, apiKey, catalog.UsesSessionCookie(slug))
 	if err != nil {
 		writeAPIError(w, http.StatusBadRequest, err.Error())
 		return
@@ -140,21 +140,30 @@ func withQuery(raw, key, value string) string {
 	return parsed.String()
 }
 
-func modelListCall(protocol, baseURL, apiKey string) (string, http.Header, error) {
+func credentialMissingMessage(slug string) string {
+	if catalog.UsesSessionCookie(slug) {
+		return "paste a session cookie first"
+	}
+	return "add an API key first"
+}
+
+func modelListCall(protocol, baseURL, apiKey string, cookie bool) (string, http.Header, error) {
 	base := strings.TrimRight(strings.TrimSpace(baseURL), "/")
 	header := http.Header{}
 	header.Set("Accept", "application/json")
 	switch protocol {
 	case catalog.ProtocolOpenAIChat:
-		if apiKey != "" {
-			header.Set("Authorization", "Bearer "+apiKey)
-		}
+		openai.ApplyCredential(header, apiKey, cookie)
 		return base + "/models", header, nil
 	case catalog.ProtocolAnthropic:
-		header.Set("x-api-key", apiKey)
 		header.Set("anthropic-version", "2023-06-01")
-		if apiKey != "" {
-			header.Set("Authorization", "Bearer "+apiKey)
+		if cookie {
+			openai.ApplyCredential(header, apiKey, true)
+		} else {
+			header.Set("x-api-key", apiKey)
+			if apiKey != "" {
+				header.Set("Authorization", "Bearer "+apiKey)
+			}
 		}
 		base = strings.TrimSuffix(base, "/messages")
 		if strings.HasSuffix(base, "/v1") {

@@ -74,6 +74,21 @@ func KindFromID(id string) string {
 	}
 }
 
+// UsesSessionCookie reports providers whose session secret is sent as a Cookie header.
+// Other web-session providers still use Authorization: Bearer for that same saved secret.
+func UsesSessionCookie(slug string) bool {
+	switch slug {
+	case "blackbox-web", "chatgpt-web", "chatgpt-web-codex", "claude-web",
+		"conol-web", "copilot-m365-web", "copilot-web", "doubao-web", "gemini-web",
+		"grok-web", "huggingchat", "hyperagent", "lmarena", "muse-spark-web",
+		"notion-web", "perplexity-web", "t3-web", "tencent-aistudio-web",
+		"yuanbao-web", "zenmux-free":
+		return true
+	default:
+		return false
+	}
+}
+
 func BySlug(slug string) (Provider, bool) {
 	for _, provider := range All() {
 		if provider.Slug == slug {

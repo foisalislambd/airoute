@@ -233,15 +233,26 @@ export default function ProviderPage() {
             <p className="flex items-end text-sm text-gray-600 dark:text-gray-300">No API key needed. Enable the provider and turn models on.</p>
           ) : (
             <label className="block text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-200">API key</span>
+              <span className="font-medium text-gray-700 dark:text-gray-200">
+                {provider?.category === "Web Cookie" ? "Session cookie" : "API key"}
+              </span>
               <input
                 type="password"
                 value={apiKey}
                 onChange={(event) => setApiKey(event.target.value)}
-                placeholder={provider?.hasApiKey ? `Saved ${provider.apiKeyHint}` : "sk-..."}
+                placeholder={
+                  provider?.hasApiKey
+                    ? `Saved ${provider.apiKeyHint}`
+                    : provider?.category === "Web Cookie"
+                      ? "Paste the session cookie"
+                      : "sk-..."
+                }
                 autoComplete="off"
                 className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
               />
+              {provider?.category === "Web Cookie" && (
+                <span className="mt-1.5 block text-xs text-gray-500">An API key is not used. Paste the cookie or token described above.</span>
+              )}
             </label>
           )}
         </div>
