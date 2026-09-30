@@ -1,5 +1,7 @@
 package catalog
 
+import "strings"
+
 // Model is one chat model a provider can expose through the router.
 // Prices are standard-tier USD per 1M tokens from the provider docs.
 type Model struct {
@@ -53,6 +55,23 @@ const (
 
 func All() []Provider {
 	return append([]Provider{OpenAI()}, generatedProviders()...)
+}
+
+// KindFromID guesses a model kind from an upstream id returned by a model list.
+func KindFromID(id string) string {
+	lowered := strings.ToLower(id)
+	switch {
+	case strings.Contains(lowered, "embed"):
+		return KindEmbedding
+	case strings.Contains(lowered, "whisper"), strings.Contains(lowered, "tts"), strings.Contains(lowered, "transcri"):
+		return KindAudio
+	case strings.Contains(lowered, "dall-e"), strings.Contains(lowered, "gpt-image"), strings.Contains(lowered, "flux"):
+		return KindImage
+	case strings.Contains(lowered, "sora"):
+		return KindVideo
+	default:
+		return KindChat
+	}
 }
 
 func BySlug(slug string) (Provider, bool) {

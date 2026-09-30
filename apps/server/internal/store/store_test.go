@@ -124,3 +124,73 @@ func TestProviderKeyAndModelRoute(t *testing.T) {
 		t.Fatalf("expected not found, got %v", err)
 	}
 }
+
+func TestListModelsPageSearch(t *testing.T) {
+	dir := t.TempDir()
+	key, err := secret.LoadKey(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	s, err := Open(filepath.Join(dir, "airoute.db"), key)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer s.Close()
+
+	first, err := s.ListModelsPage("openai", "", 2, 0)
+	if err != nil || len(first.Models) != 2 || first.Total < 3 {
+		t.Fatalf("page = %+v %v", first, err)
+	}
+	second, err := s.ListModelsPage("openai", "", 2, 2)
+	if err != nil || second.Models[0].ID == first.Models[0].ID {
+		t.Fatalf("second page = %+v %v", second, err)
+	}
+	found, err := s.ListModelsPage("openai", "gpt-6-luna", 24, 0)
+	if err != nil || found.Total != 1 || found.Models[0].UpstreamID != "gpt-6-luna" {
+		t.Fatalf("search = %+v %v", found, err)
+	}
+}
+
+func TestReplaceProviderModelsSurvivesCatalogSync(t *testing.T) {
+	dir := t.TempDir()
+	key, err := secret.LoadKey(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(dir, "airoute.db")
+	s, err := Open(path, key)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := s.SetModelActive("openai", "gpt-6-luna", true); err != nil {
+		t.Fatal(err)
+	}
+	count, err := s.ReplaceProviderModels("openai", []string{"gpt-6-luna", "remote-only"})
+	if err != nil || count != 2 {
+		t.Fatal(count, err)
+	}
+	s.Close()
+
+	reopened, err := Open(path, key)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer reopened.Close()
+	models, err := reopened.ListModels("openai")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(models) != 2 {
+		t.Fatalf("catalog sync replaced loaded models: %d", len(models))
+	}
+	for _, model := range models {
+		if model.UpstreamID == "gpt-6-luna" {
+			if !model.Active || model.DisplayName != "GPT-6 Luna" || model.ContextWindow == 0 {
+				t.Fatalf("catalog fields were wiped: %+v", model)
+			}
+		}
+		if model.UpstreamID == "remote-only" && model.Description != "Loaded from the provider." {
+			t.Fatalf("new model = %+v", model)
+		}
+	}
+}

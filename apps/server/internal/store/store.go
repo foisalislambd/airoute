@@ -190,6 +190,10 @@ CREATE TABLE IF NOT EXISTS request_logs (
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
 	}
+	_, err = s.db.Exec(`ALTER TABLE providers ADD COLUMN models_from_upstream INTEGER NOT NULL DEFAULT 0`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
 	return nil
 }
 
@@ -215,6 +219,14 @@ ON CONFLICT(slug) DO UPDATE SET
   key_optional = excluded.key_optional`,
 			provider.Slug, provider.DisplayName, provider.Protocol, provider.DefaultBaseURL, optional, now); err != nil {
 			return err
+		}
+
+		var fromUpstream int
+		if err := tx.QueryRow(`SELECT models_from_upstream FROM providers WHERE slug = ?`, provider.Slug).Scan(&fromUpstream); err != nil {
+			return err
+		}
+		if fromUpstream == 1 {
+			continue
 		}
 
 		keep := make([]string, 0, len(provider.Models))
@@ -566,6 +578,144 @@ func (s *Store) ProviderSecret(slug string) (baseURL, apiKey, protocol string, e
 		return "", "", "", false, err
 	}
 	return baseURL, apiKey, protocol, enabledInt == 1, nil
+}
+
+// ReplaceProviderModels stores the provider's live model list and keeps it across catalog syncs.
+// Active flags stay on for ids that are still in the new list.
+func (s *Store) ReplaceProviderModels(slug string, upstreamIDs []string) (int, error) {
+	if _, err := s.GetProvider(slug); err != nil {
+		return 0, err
+	}
+	tx, err := s.db.Begin()
+	if err != nil {
+		return 0, err
+	}
+	defer tx.Rollback()
+
+	type keptModel struct {
+		displayName string
+		description string
+		context     int
+		maxOutput   int
+		inputPrice  float64
+		outputPrice float64
+		cutoff      string
+		reasoning   int
+		kind        string
+		active      int
+	}
+	kept := map[string]keptModel{}
+	rows, err := tx.Query(`
+SELECT upstream_id, display_name, description, context_window, max_output_tokens,
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
+FROM models WHERE provider_slug = ?`, slug)
+	if err != nil {
+		return 0, err
+	}
+	for rows.Next() {
+		var id string
+		var item keptModel
+		if err := rows.Scan(&id, &item.displayName, &item.description, &item.context, &item.maxOutput,
+			&item.inputPrice, &item.outputPrice, &item.cutoff, &item.reasoning, &item.kind, &item.active); err != nil {
+			rows.Close()
+			return 0, err
+		}
+		kept[id] = item
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return 0, err
+	}
+	rows.Close()
+
+	if _, err := tx.Exec(`DELETE FROM models WHERE provider_slug = ?`, slug); err != nil {
+		return 0, err
+	}
+	for _, upstreamID := range upstreamIDs {
+		item, ok := kept[upstreamID]
+		if !ok {
+			item = keptModel{
+				displayName: upstreamID,
+				description: "Loaded from the provider.",
+				kind:        catalog.KindFromID(upstreamID),
+			}
+		}
+		if _, err := tx.Exec(`
+INSERT INTO models (
+  id, provider_slug, upstream_id, display_name, description,
+  context_window, max_output_tokens, input_usd_per_million, output_usd_per_million,
+  knowledge_cutoff, reasoning, kind, active
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+			slug+"/"+upstreamID, slug, upstreamID, item.displayName, item.description,
+			item.context, item.maxOutput, item.inputPrice, item.outputPrice,
+			item.cutoff, item.reasoning, item.kind, item.active); err != nil {
+			return 0, err
+		}
+	}
+	if _, err := tx.Exec(`UPDATE providers SET models_from_upstream = 1, updated_at = ? WHERE slug = ?`,
+		time.Now().UTC().Format(time.RFC3339), slug); err != nil {
+		return 0, err
+	}
+	if err := tx.Commit(); err != nil {
+		return 0, err
+	}
+	return len(upstreamIDs), nil
+}
+
+type ModelPage struct {
+	Models []Model
+	Total  int
+	Limit  int
+	Offset int
+}
+
+func (s *Store) ListModelsPage(slug, query string, limit, offset int) (ModelPage, error) {
+	if _, err := s.GetProvider(slug); err != nil {
+		return ModelPage{}, err
+	}
+	if limit <= 0 {
+		limit = 24
+	}
+	if limit > 60 {
+		limit = 60
+	}
+	if offset < 0 {
+		offset = 0
+	}
+	where := "provider_slug = ?"
+	args := []any{slug}
+	query = strings.TrimSpace(query)
+	if query != "" {
+		where += ` AND (display_name LIKE ? ESCAPE '\' OR upstream_id LIKE ? ESCAPE '\' OR description LIKE ? ESCAPE '\' OR id LIKE ? ESCAPE '\')`
+		needle := "%" + escapeLike(query) + "%"
+		args = append(args, needle, needle, needle, needle)
+	}
+	page := ModelPage{Models: []Model{}, Limit: limit, Offset: offset}
+	if err := s.db.QueryRow(`SELECT COUNT(*) FROM models WHERE `+where, args...).Scan(&page.Total); err != nil {
+		return ModelPage{}, err
+	}
+	rows, err := s.db.Query(`
+SELECT id, provider_slug, upstream_id, display_name, description, context_window, max_output_tokens,
+       input_usd_per_million, output_usd_per_million, knowledge_cutoff, reasoning, kind, active
+FROM models WHERE `+where+`
+ORDER BY input_usd_per_million DESC, display_name COLLATE NOCASE
+LIMIT ? OFFSET ?`, append(append([]any{}, args...), limit, offset)...)
+	if err != nil {
+		return ModelPage{}, err
+	}
+	defer rows.Close()
+	page.Models, err = scanModels(rows)
+	if page.Models == nil {
+		page.Models = []Model{}
+	}
+	return page, err
+}
+
+func escapeLike(value string) string {
+	value = strings.ReplaceAll(value, `\`, `\\`)
+	value = strings.ReplaceAll(value, `%`, `\%`)
+	value = strings.ReplaceAll(value, `_`, `\_`)
+	return value
 }
 
 func (s *Store) ListModels(slug string) ([]Model, error) {

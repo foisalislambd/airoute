@@ -45,6 +45,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /api/providers/{slug}", s.getProvider)
 	mux.HandleFunc("PUT /api/providers/{slug}", s.updateProvider)
 	mux.HandleFunc("POST /api/providers/{slug}/test", s.testProvider)
+	mux.HandleFunc("POST /api/providers/{slug}/models/load", s.loadProviderModels)
 	mux.HandleFunc("GET /api/providers/{slug}/models", s.listModels)
 	mux.HandleFunc("PUT /api/providers/{slug}/models/{model...}", s.setModelActive)
 	mux.HandleFunc("GET /api/keys", s.listKeys)
@@ -206,7 +207,9 @@ func (s *Server) listActiveModels(w http.ResponseWriter, _ *http.Request) {
 }
 
 func (s *Server) listModels(w http.ResponseWriter, r *http.Request) {
-	items, err := s.Store.ListModels(r.PathValue("slug"))
+	limit, _ := strconv.Atoi(r.URL.Query().Get("limit"))
+	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
+	page, err := s.Store.ListModelsPage(r.PathValue("slug"), r.URL.Query().Get("q"), limit, offset)
 	if errors.Is(err, store.ErrNotFound) {
 		writeAPIError(w, http.StatusNotFound, "provider not found")
 		return
@@ -215,7 +218,12 @@ func (s *Server) listModels(w http.ResponseWriter, r *http.Request) {
 		writeAPIError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"models": items})
+	writeJSON(w, http.StatusOK, map[string]any{
+		"models": page.Models,
+		"total":  page.Total,
+		"limit":  page.Limit,
+		"offset": page.Offset,
+	})
 }
 
 func (s *Server) setModelActive(w http.ResponseWriter, r *http.Request) {

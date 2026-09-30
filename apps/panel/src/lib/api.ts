@@ -129,8 +129,27 @@ export function testProvider(slug: string, body: { apiKey?: string; baseUrl?: st
   })
 }
 
-export function listProviderModels(slug: string) {
-  return request<{ models: Model[] }>(`/api/providers/${slug}/models`)
+export function loadProviderModels(slug: string, body: { apiKey?: string; baseUrl?: string }) {
+  return request<{ models: number }>(`/api/providers/${slug}/models/load`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+}
+
+export type ModelPage = {
+  models: Model[]
+  total: number
+  limit: number
+  offset: number
+}
+
+export function listProviderModels(slug: string, params?: { q?: string; limit?: number; offset?: number }) {
+  const search = new URLSearchParams()
+  if (params?.q) search.set("q", params.q)
+  if (params?.limit) search.set("limit", String(params.limit))
+  if (params?.offset) search.set("offset", String(params.offset))
+  const query = search.toString()
+  return request<ModelPage>(`/api/providers/${slug}/models${query ? `?${query}` : ""}`)
 }
 
 export function listActiveModels() {

@@ -6,33 +6,43 @@ import {
   getProvider,
   listProviderModels,
   setModelActive,
+  loadProviderModels,
   testProvider,
   updateProvider,
   type Model,
   type Provider,
 } from "@/lib/api";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, ExternalLink, Search } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+
+const MODEL_PAGE = 24;
 
 export default function ProviderPage() {
   const { slug = "" } = useParams();
   const [provider, setProvider] = useState<Provider | null>(null);
   const [models, setModels] = useState<Model[]>([]);
+  const [modelTotal, setModelTotal] = useState(0);
+  const [modelsLoading, setModelsLoading] = useState(true);
+  const [modelsPaging, setModelsPaging] = useState(false);
+  const [query, setQuery] = useState("");
+  const [debounced, setDebounced] = useState("");
+  const [modelReload, setModelReload] = useState(0);
   const [baseUrl, setBaseUrl] = useState("");
   const [apiKey, setApiKey] = useState("");
   const [enabled, setEnabled] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const generation = useRef(0);
 
   useEffect(() => {
     let cancel = false;
-    Promise.all([getProvider(slug), listProviderModels(slug)])
-      .then(([nextProvider, nextModels]) => {
+    getProvider(slug)
+      .then((nextProvider) => {
         if (cancel) return;
         setProvider(nextProvider);
-        setModels(nextModels.models);
         setBaseUrl(nextProvider.baseUrl);
         setEnabled(nextProvider.enabled);
       })
@@ -43,6 +53,65 @@ export default function ProviderPage() {
       cancel = true;
     };
   }, [slug]);
+
+  useEffect(() => {
+    setQuery("");
+    setDebounced("");
+  }, [slug]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setDebounced(query.trim()), 200);
+    return () => window.clearTimeout(timer);
+  }, [query]);
+
+  useEffect(() => {
+    const request = ++generation.current;
+    setModelsLoading(true);
+    setModelsPaging(false);
+    listProviderModels(slug, { q: debounced, limit: MODEL_PAGE, offset: 0 })
+      .then((page) => {
+        if (generation.current !== request) return;
+        setModels(page.models);
+        setModelTotal(page.total);
+      })
+      .catch((err: Error) => {
+        if (generation.current === request) setError(err.message);
+      })
+      .finally(() => {
+        if (generation.current === request) setModelsLoading(false);
+      });
+  }, [slug, debounced, modelReload]);
+
+  useEffect(() => {
+    const node = bottomRef.current;
+    if (!node || modelsLoading || models.length === 0 || models.length >= modelTotal) return;
+    const root = node.closest("main");
+    const request = generation.current;
+    let started = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (started || !entries.some((entry) => entry.isIntersecting)) return;
+        started = true;
+        observer.disconnect();
+        setModelsPaging(true);
+        listProviderModels(slug, { q: debounced, limit: MODEL_PAGE, offset: models.length })
+          .then((page) => {
+            if (generation.current !== request) return;
+            setModels((current) => appendModels(current, page.models));
+            setModelTotal(page.total);
+          })
+          .catch((err: Error) => {
+            if (generation.current === request) setError(err.message);
+          })
+          .finally(() => {
+            if (generation.current === request) setModelsPaging(false);
+          });
+      },
+      { root, rootMargin: "280px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [debounced, modelTotal, models.length, modelsLoading, slug]);
 
   async function save() {
     setBusy(true);
@@ -76,6 +145,26 @@ export default function ProviderPage() {
       setNotice(`Key works. OpenAI listed ${result.upstreamModels} models.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Connection failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function loadModels() {
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      const result = await loadProviderModels(slug, {
+        baseUrl,
+        ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
+      });
+      const nextProvider = await getProvider(slug);
+      setProvider(nextProvider);
+      setModelReload((current) => current + 1);
+      setNotice(`Loaded ${result.models} models.`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not load models");
     } finally {
       setBusy(false);
     }
@@ -167,11 +256,29 @@ export default function ProviderPage() {
           <button type="button" onClick={test} disabled={busy} className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-60 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-white/5">
             Test connection
           </button>
+          <button type="button" onClick={loadModels} disabled={busy} className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-60 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-white/5">
+            Load models
+          </button>
         </div>
       </section>
 
       <section className="mt-6">
-        <h2 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">Models</h2>
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Models</h2>
+          <label className="relative block w-full sm:w-72">
+            <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search models"
+              className="h-10 w-full rounded-lg border border-gray-200 bg-white pr-3 pl-9 text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+            />
+          </label>
+        </div>
+        <p className="mb-3 text-sm text-gray-500">
+          {models.length} of {modelTotal}
+        </p>
         <div className="panel-card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left text-sm">
@@ -184,6 +291,19 @@ export default function ProviderPage() {
                 </tr>
               </thead>
               <tbody>
+                {modelsLoading && models.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-4 py-6 text-sm text-gray-500">
+                      Loading models…
+                    </td>
+                  </tr>
+                ) : models.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-4 py-6 text-sm text-gray-500">
+                      {debounced ? "No models match that search." : "This provider has no models yet."}
+                    </td>
+                  </tr>
+                ) : null}
                 {models.map((model) => (
                   <tr key={model.id} className="border-b border-gray-100 last:border-0 dark:border-gray-800">
                     <td className="px-4 py-3">
@@ -226,7 +346,15 @@ export default function ProviderPage() {
             </table>
           </div>
         </div>
+        <div ref={bottomRef} className="h-8" />
+        {modelsPaging && <p className="text-sm text-gray-500">Loading more models…</p>}
       </section>
     </div>
   );
+}
+
+function appendModels(current: Model[], next: Model[]) {
+  const seen = new Set(current.map((model) => model.id));
+  const added = next.filter((model) => !seen.has(model.id));
+  return added.length === 0 ? current : [...current, ...added];
 }
