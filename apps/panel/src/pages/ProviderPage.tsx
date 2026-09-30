@@ -170,44 +170,32 @@ export default function ProviderPage() {
         <h2 className="mb-3 text-sm font-semibold text-gray-900 dark:text-white">Models</h2>
         <div className="panel-card overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[960px] text-left text-sm">
-              <thead className="border-b border-gray-200 bg-gray-50/80 text-xs font-medium text-gray-500 dark:border-gray-800 dark:bg-white/5 dark:text-gray-400">
+            <table className="w-full min-w-[720px] text-left text-sm">
+              <thead className="border-b border-gray-200 text-xs tracking-wide text-gray-500 uppercase dark:border-gray-800">
                 <tr>
-                  <th className="px-4 py-2.5 font-medium">Model</th>
-                  <th className="px-4 py-2.5 font-medium">ID</th>
-                  <th className="px-4 py-2.5 font-medium">Description</th>
-                  <th className="px-4 py-2.5 text-right font-medium">Context</th>
-                  <th className="px-4 py-2.5 text-right font-medium">Output</th>
-                  <th className="px-4 py-2.5 text-right font-medium">Input</th>
-                  <th className="px-4 py-2.5 text-right font-medium">Output price</th>
-                  <th className="px-4 py-2.5 font-medium">Active</th>
+                  <th className="px-4 py-3 font-medium">Model</th>
+                  <th className="px-4 py-3 font-medium">Context</th>
+                  <th className="px-4 py-3 font-medium">Price / 1M</th>
+                  <th className="px-4 py-3 font-medium">Active</th>
                 </tr>
               </thead>
               <tbody>
                 {models.map((model) => (
-                  <tr key={model.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-white/5">
-                    <td className="max-w-[220px] truncate px-4 py-2.5 font-medium text-gray-900 dark:text-white" title={model.displayName}>
-                      {model.displayName}
+                  <tr key={model.id} className="border-b border-gray-100 last:border-0 dark:border-gray-800">
+                    <td className="px-4 py-3">
+                      <p className="font-medium text-gray-900 dark:text-white">{model.displayName}</p>
+                      <p className="font-mono text-xs text-gray-500">{model.id}</p>
+                      <p className="mt-1 max-w-md text-xs text-gray-500">{model.description}</p>
                     </td>
-                    <td className="max-w-[240px] truncate px-4 py-2.5 font-mono text-xs text-gray-500" title={model.id}>
-                      {model.id}
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
+                      {formatTokens(model.contextWindow)}
+                      <span className="block text-xs text-gray-400">out {formatTokens(model.maxOutputTokens)}</span>
                     </td>
-                    <td className="max-w-[280px] truncate px-4 py-2.5 text-gray-500" title={model.description}>
-                      {model.description || "—"}
+                    <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
+                      {formatPrice(model.inputUsdPerMillion)} in
+                      <span className="block">{formatPrice(model.outputUsdPerMillion)} out</span>
                     </td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-300">
-                      {model.contextWindow > 0 ? formatTokens(model.contextWindow) : "—"}
-                    </td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-300">
-                      {model.maxOutputTokens > 0 ? formatTokens(model.maxOutputTokens) : "—"}
-                    </td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-300">
-                      {model.inputUsdPerMillion > 0 ? formatPrice(model.inputUsdPerMillion) : "—"}
-                    </td>
-                    <td className="px-4 py-2.5 text-right tabular-nums text-gray-600 dark:text-gray-300">
-                      {model.outputUsdPerMillion > 0 ? formatPrice(model.outputUsdPerMillion) : "—"}
-                    </td>
-                    <td className="px-4 py-2.5">
+                    <td className="px-4 py-3">
                       <button
                         type="button"
                         aria-pressed={model.active}

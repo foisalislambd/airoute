@@ -84,32 +84,19 @@ export default function KeysPage() {
         {keys.length === 0 ? (
           <p className="p-4 text-sm text-gray-500">No router keys yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-left text-sm">
-              <thead className="border-b border-gray-200 bg-gray-50/80 text-xs font-medium text-gray-500 dark:border-gray-800 dark:bg-white/5 dark:text-gray-400">
-                <tr>
-                  <th className="px-4 py-2.5 font-medium">Name</th>
-                  <th className="px-4 py-2.5 font-medium">Prefix</th>
-                  <th className="px-4 py-2.5 font-medium">Created</th>
-                  <th className="px-4 py-2.5 font-medium"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {keys.map((item) => (
-                  <tr key={item.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-white/5">
-                    <td className="whitespace-nowrap px-4 py-2.5 font-medium text-gray-900 dark:text-white">{item.name}</td>
-                    <td className="whitespace-nowrap px-4 py-2.5 font-mono text-xs text-gray-500">{item.prefix}</td>
-                    <td className="whitespace-nowrap px-4 py-2.5 text-gray-500">{item.createdAt.replace("T", " ").replace("Z", "")}</td>
-                    <td className="px-4 py-2.5 text-right">
-                      <button type="button" onClick={() => onDelete(item.id)} className="text-sm font-medium text-error-500 hover:underline">
-                        Revoke
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul>
+            {keys.map((item) => (
+              <li key={item.id} className="flex items-center justify-between gap-3 border-b border-gray-100 px-4 py-3 last:border-0 dark:border-gray-800">
+                <div>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</p>
+                  <p className="font-mono text-xs text-gray-500">{item.prefix}</p>
+                </div>
+                <button type="button" onClick={() => onDelete(item.id)} className="text-sm font-medium text-error-500 hover:underline">
+                  Revoke
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </div>
