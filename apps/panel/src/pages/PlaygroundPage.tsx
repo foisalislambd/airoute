@@ -18,6 +18,7 @@ type ChatMessage = {
   files: Attachment[]
   error: string
   format: "markdown" | "json"
+  request: unknown
 };
 
 type StoredChat = {
@@ -194,6 +195,7 @@ export default function PlaygroundPage() {
       files: attached,
       error: "",
       format: "markdown",
+      request: null,
     };
     const assistant: ChatMessage = {
       id: newId(),
@@ -205,6 +207,7 @@ export default function PlaygroundPage() {
       files: [],
       error: "",
       format: "markdown",
+      request: null,
     };
     const history = [...messagesRef.current, user];
     stick.current = true;
@@ -227,10 +230,13 @@ export default function PlaygroundPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ model: modelId, prompt: notes ? `${text}\n\n${notes}` : text, image }),
         });
-        const data = (await response.json().catch(() => ({}))) as { error?: string; media?: MediaItem[] };
-        if (!response.ok) throw new Error(data.error || response.statusText);
+        const data = (await response.json().catch(() => ({}))) as { error?: string; media?: MediaItem[]; request?: unknown };
+        if (!response.ok) {
+          patch(assistant.id, { request: data.request ?? null });
+          throw new Error(data.error || response.statusText);
+        }
         const media = data.media ?? [];
-        patch(assistant.id, { media, text: media.length === 0 ? "The provider returned no image, video, or audio." : "" });
+        patch(assistant.id, { request: data.request ?? null, media, text: media.length === 0 ? "The provider returned no image, video, or audio." : "" });
         return;
       }
 
@@ -247,12 +253,17 @@ export default function PlaygroundPage() {
         }),
       });
       if (!response.ok || !response.body) {
-        const data = (await response.json().catch(() => ({}))) as { error?: string };
+        const data = (await response.json().catch(() => ({}))) as { error?: string; request?: unknown };
+        patch(assistant.id, { request: data.request ?? null });
         throw new Error(data.error || response.statusText);
       }
       let reply = "";
       let thought = "";
       for await (const message of readSSE(response.body)) {
+        if (message.event === "request") {
+          patch(assistant.id, { request: parseRequest(message.data) });
+          continue;
+        }
         const delta = chatDeltaFromSSE(message.data);
         if (delta.error) throw new Error(delta.error);
         if (delta.done) break;
@@ -496,7 +507,7 @@ function MessageBubble({ message, pending, onFormat }: { message: ChatMessage; p
       </div>
       {message.error ? <p className="text-sm text-error-500">{message.error}</p> : null}
       {message.format === "json" ? (
-        <pre className="overflow-x-auto rounded-xl bg-gray-50 p-3 font-mono text-xs leading-5 text-gray-800 dark:bg-white/5 dark:text-gray-100">{JSON.stringify(payload, null, 2)}</pre>
+        <pre className="max-h-[32rem] overflow-auto rounded-xl bg-gray-50 p-3 font-mono text-xs leading-5 text-gray-800 dark:bg-white/5 dark:text-gray-100">{JSON.stringify(message.request ?? payload, null, 2)}</pre>
       ) : (
         <>
           {message.reasoning ? (
@@ -671,6 +682,14 @@ function readFile(file: File) {
 
 function newId() {
   return crypto.randomUUID();
+}
+
+function parseRequest(data: string) {
+  try {
+    return JSON.parse(data) as unknown;
+  } catch {
+    return data;
+  }
 }
 
 function chatTitle(messages: ChatMessage[]) {

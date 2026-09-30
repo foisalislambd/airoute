@@ -81,8 +81,16 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "wrong_endpoint", kindEndpointMessage(kind), started)
 		return
 	}
-	status, payload, err := s.callMedia(r, route, req.Prompt, req.Size, req.Image, req.N)
+	status, payload, request, err := s.callMedia(r, route, req.Prompt, req.Size, req.Image, req.N)
 	if err != nil {
+		if source == "playground" {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+			})
+			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
+			return
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
 		return
 	}
@@ -96,7 +104,7 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 	})
 	if status >= 400 {
 		if source == "playground" {
-			writeAPIError(w, status, message)
+			writePlaygroundFailure(w, status, message, request)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -105,7 +113,14 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 		return
 	}
 	if source == "playground" {
-		writeJSON(w, http.StatusOK, map[string]any{"media": adapt.CollectMedia(payload)})
+		body := map[string]any{"media": adapt.CollectMedia(payload)}
+		if len(request) > 0 {
+			var parsed any
+			if json.Unmarshal(request, &parsed) == nil {
+				body["request"] = parsed
+			}
+		}
+		writeJSON(w, http.StatusOK, body)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -113,7 +128,7 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 	_, _ = w.Write(payload)
 }
 
-func (s *Server) callMedia(r *http.Request, route store.Route, prompt, size, image string, n int) (int, []byte, error) {
+func (s *Server) callMedia(r *http.Request, route store.Route, prompt, size, image string, n int) (int, []byte, json.RawMessage, error) {
 	switch route.Protocol {
 	case catalog.ProtocolAudio:
 		return s.callAudio(r, route, prompt)
@@ -140,7 +155,7 @@ func (s *Server) callMedia(r *http.Request, route store.Route, prompt, size, ima
 	}
 	body, err := json.Marshal(payload)
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, nil, err
 	}
 	paths := []string{"/images/generations"}
 	if route.Model.Kind == catalog.KindVideo {
@@ -154,22 +169,23 @@ func (s *Server) callMedia(r *http.Request, route store.Route, prompt, size, ima
 		header.Set("Content-Type", "application/json")
 		header.Set("Accept", "application/json")
 		endpoint := strings.TrimRight(route.BaseURL, "/") + path
+		request := providerRequest(http.MethodPost, endpoint, header, body)
 		resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, body, header)
 		if err != nil {
-			return 0, nil, err
+			return 0, nil, request, err
 		}
 		lastBody, err = io.ReadAll(io.LimitReader(resp.Body, 32<<20))
 		resp.Body.Close()
 		if err != nil {
-			return 0, nil, err
+			return 0, nil, request, err
 		}
 		lastStatus = resp.StatusCode
 		if resp.StatusCode == http.StatusNotFound && i < len(paths)-1 {
 			continue
 		}
-		return lastStatus, lastBody, nil
+		return lastStatus, lastBody, request, nil
 	}
-	return lastStatus, lastBody, nil
+	return lastStatus, lastBody, nil, nil
 }
 
 func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time) {
@@ -203,8 +219,17 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
 		return
 	}
+	request := providerRequest(http.MethodPost, endpoint, header, upstream)
 	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, upstream, header)
 	if err != nil {
+		if source == "playground" {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+			})
+			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
+			return
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
 		return
 	}
@@ -221,7 +246,7 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message,
 		})
 		if source == "playground" {
-			writeAPIError(w, resp.StatusCode, message)
+			writePlaygroundFailure(w, resp.StatusCode, message, request)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -239,17 +264,22 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 		PromptTokens: prompt, CompletionTokens: completion,
 	})
 	if meta.Stream || source == "playground" {
-		writeChatChunk(w, route.Model.ID, text)
+		var shown json.RawMessage
+		if source == "playground" {
+			shown = request
+		}
+		writeChatChunk(w, route.Model.ID, text, shown)
 		return
 	}
 	writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, prompt, completion))
 }
 
-func writeChatChunk(w http.ResponseWriter, model, text string) {
+func writeChatChunk(w http.ResponseWriter, model, text string, request json.RawMessage) {
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")
 	w.Header().Set("X-Accel-Buffering", "no")
 	w.WriteHeader(http.StatusOK)
+	writeRequestEvent(w, request)
 	chunk, _ := json.Marshal(map[string]any{
 		"model": model,
 		"choices": []any{

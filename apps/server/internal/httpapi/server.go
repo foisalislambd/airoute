@@ -408,17 +408,29 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		stream = true
 	}
 
-	var resp *http.Response
+	endpoint := strings.TrimRight(route.BaseURL, "/") + path
+	header := http.Header{}
 	if route.Model.ProviderSlug == "opencode" && openai.OpencodeFree(route.Model.UpstreamID) {
-		header := http.Header{}
 		for key, value := range openai.OpencodeHeaders(route.APIKey) {
 			header.Set(key, value)
 		}
-		resp, err = s.OpenAI.Send(r.Context(), http.MethodPost, strings.TrimRight(route.BaseURL, "/")+path, upstreamBody, header)
 	} else {
-		resp, err = s.OpenAI.ChatCompletions(r.Context(), route.BaseURL, route.APIKey, upstreamBody, catalog.UsesSessionCookie(route.Model.ProviderSlug))
+		endpoint = strings.TrimRight(route.BaseURL, "/") + "/chat/completions"
+		openai.ApplyCredential(header, route.APIKey, catalog.UsesSessionCookie(route.Model.ProviderSlug))
+		header.Set("Content-Type", "application/json")
+		header.Set("Accept", "application/json, text/event-stream")
 	}
+	request := providerRequest(http.MethodPost, endpoint, header, upstreamBody)
+	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, upstreamBody, header)
 	if err != nil {
+		if source == "playground" {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+			})
+			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
+			return
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
 		return
 	}
@@ -436,7 +448,7 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
 		})
 		if stream || source == "playground" {
-			writeChatChunk(w, route.Model.ID, text)
+			writeChatChunk(w, route.Model.ID, text, request)
 			return
 		}
 		writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, 0, 0))
@@ -446,6 +458,9 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	if stream && resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		format := streamFormat(route.Protocol)
 		writeStreamHeaders(w, resp)
+		if source == "playground" {
+			writeRequestEvent(w, request)
+		}
 		_ = sse.Relay(w, resp.Body, format)
 		prompt, completion := 0, 0
 		message := ""
@@ -477,7 +492,7 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message,
 	})
 	if source == "playground" && resp.StatusCode >= 400 {
-		writeAPIError(w, resp.StatusCode, message)
+		writePlaygroundFailure(w, resp.StatusCode, message, request)
 		return
 	}
 	if contentType := resp.Header.Get("Content-Type"); contentType != "" {

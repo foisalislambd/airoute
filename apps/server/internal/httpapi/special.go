@@ -47,8 +47,17 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 	if call.Body == nil {
 		method = http.MethodGet
 	}
+	request := providerRequest(method, call.URL, call.Header, call.Body)
 	resp, err := s.OpenAI.Send(r.Context(), method, call.URL, call.Body, call.Header)
 	if err != nil {
+		if source == "playground" {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+			})
+			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
+			return
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
 		return
 	}
@@ -65,7 +74,7 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message,
 		})
 		if source == "playground" {
-			writeAPIError(w, resp.StatusCode, message)
+			writePlaygroundFailure(w, resp.StatusCode, message, request)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -79,7 +88,7 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
 	})
 	if source == "playground" {
-		writeChatChunk(w, route.Model.ID, text)
+		writeChatChunk(w, route.Model.ID, text, request)
 		return
 	}
 	writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, 0, 0))
@@ -139,7 +148,7 @@ func promptText(body []byte) string {
 	return b.String()
 }
 
-func (s *Server) callAudio(r *http.Request, route store.Route, prompt string) (int, []byte, error) {
+func (s *Server) callAudio(r *http.Request, route store.Route, prompt string) (int, []byte, json.RawMessage, error) {
 	header := http.Header{}
 	header.Set("Content-Type", "application/json")
 	header.Set("Accept", "audio/mpeg, application/json")
@@ -162,7 +171,8 @@ func (s *Server) callAudio(r *http.Request, route store.Route, prompt string) (i
 		}
 		body, _ = json.Marshal(map[string]string{"model": model, "input": prompt, "voice": "alloy"})
 	}
-	return s.readAudio(r, endpoint, body, header)
+	status, payload, err := s.readAudio(r, endpoint, body, header)
+	return status, payload, providerRequest(http.MethodPost, endpoint, header, body), err
 }
 
 func (s *Server) readAudio(r *http.Request, endpoint string, body []byte, header http.Header) (int, []byte, error) {
@@ -183,38 +193,39 @@ func (s *Server) readAudio(r *http.Request, endpoint string, body []byte, header
 	return resp.StatusCode, payload, nil
 }
 
-func (s *Server) callSDWebUI(r *http.Request, route store.Route, prompt string) (int, []byte, error) {
+func (s *Server) callSDWebUI(r *http.Request, route store.Route, prompt string) (int, []byte, json.RawMessage, error) {
 	body, _ := json.Marshal(map[string]string{"prompt": prompt})
 	header := http.Header{}
 	header.Set("Content-Type", "application/json")
 	endpoint := strings.TrimRight(route.BaseURL, "/") + "/sdapi/v1/txt2img"
+	request := providerRequest(http.MethodPost, endpoint, header, body)
 	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, body, header)
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, request, err
 	}
 	defer resp.Body.Close()
 	payload, err := io.ReadAll(io.LimitReader(resp.Body, 32<<20))
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, request, err
 	}
 	if resp.StatusCode >= 300 {
-		return resp.StatusCode, payload, nil
+		return resp.StatusCode, payload, request, nil
 	}
 	var parsed struct {
 		Images []string `json:"images"`
 	}
 	if err := json.Unmarshal(payload, &parsed); err != nil || len(parsed.Images) == 0 {
-		return resp.StatusCode, payload, nil
+		return resp.StatusCode, payload, request, nil
 	}
 	data := make([]map[string]string, 0, len(parsed.Images))
 	for _, image := range parsed.Images {
 		data = append(data, map[string]string{"b64_json": image})
 	}
 	wrapped, _ := json.Marshal(map[string]any{"data": data})
-	return resp.StatusCode, wrapped, nil
+	return resp.StatusCode, wrapped, request, nil
 }
 
-func (s *Server) callNativeMedia(r *http.Request, route store.Route, prompt string) (int, []byte, error) {
+func (s *Server) callNativeMedia(r *http.Request, route store.Route, prompt string) (int, []byte, json.RawMessage, error) {
 	header := http.Header{}
 	header.Set("Content-Type", "application/json")
 	header.Set("Accept", "application/json")
@@ -229,7 +240,7 @@ func (s *Server) callNativeMedia(r *http.Request, route store.Route, prompt stri
 		header.Set("x-key", route.APIKey)
 	case "fal-ai":
 		if model == "" || model == "image" || model == "video" {
-			return http.StatusBadRequest, []byte(`{"error":{"message":"Choose a fal model id."}}`), nil
+			return http.StatusBadRequest, []byte(`{"error":{"message":"Choose a fal model id."}}`), nil, nil
 		}
 		endpoint += "/" + strings.TrimLeft(model, "/")
 		header.Set("Authorization", "Key "+route.APIKey)
@@ -249,14 +260,15 @@ func (s *Server) callNativeMedia(r *http.Request, route store.Route, prompt stri
 		}
 	}
 	body, _ := json.Marshal(map[string]string{"prompt": prompt, "model": model})
+	request := providerRequest(http.MethodPost, endpoint, header, body)
 	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, body, header)
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, request, err
 	}
 	defer resp.Body.Close()
 	payload, err := io.ReadAll(io.LimitReader(resp.Body, 20<<20))
 	if err != nil {
-		return 0, nil, err
+		return 0, nil, request, err
 	}
-	return resp.StatusCode, payload, nil
+	return resp.StatusCode, payload, request, nil
 }
