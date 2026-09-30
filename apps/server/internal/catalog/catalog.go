@@ -29,7 +29,7 @@ type Provider struct {
 const ProtocolOpenAIChat = "openai_chat"
 
 func All() []Provider {
-	return []Provider{OpenAI()}
+	return append([]Provider{OpenAI()}, generatedProviders()...)
 }
 
 func BySlug(slug string) (Provider, bool) {

@@ -16,3 +16,5 @@ apps/desktop/data
 # go
 bin
 coverage.out
+
+OmniRoute

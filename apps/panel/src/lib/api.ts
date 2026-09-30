@@ -113,7 +113,8 @@ export function listActiveModels() {
 }
 
 export function setModelActive(slug: string, upstreamId: string, active: boolean) {
-  return request<Model>(`/api/providers/${slug}/models/${encodeURIComponent(upstreamId)}`, {
+  const modelPath = upstreamId.split("/").map(encodeURIComponent).join("/")
+  return request<Model>(`/api/providers/${slug}/models/${modelPath}`, {
     method: "PUT",
     body: JSON.stringify({ active }),
   })

@@ -1,0 +1,24482 @@
+package catalog
+
+// Generated from docs/all-llm-provider-list. OpenAI stays in catalog.go.
+func generatedProviders() []Provider {
+	return []Provider{
+		{
+			Slug: "google-ai-studio",
+			DisplayName: "Google AI Studio",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
+			DocsURL: "https://aistudio.google.com",
+			Summary: "Up to 2M context; free tier on Flash variants",
+			Models: []Model{
+				{
+					UpstreamID: "gemini-3.5-pro",
+					DisplayName: "gemini-3.5-pro",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash",
+					DisplayName: "gemini-3.5-flash",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro",
+					DisplayName: "gemini-3.1-pro",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash",
+					DisplayName: "gemini-3.1-flash",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite",
+					DisplayName: "gemini-2.5-flash-lite",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-2.0-flash",
+					DisplayName: "gemini-2.0-flash",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-2.0-flash-lite",
+					DisplayName: "gemini-2.0-flash-lite",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "Google AI Studio model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "Google AI Studio model",
+				},
+			},
+		},
+		{
+			Slug: "deepseek",
+			DisplayName: "DeepSeek",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.deepseek.com/v1",
+			DocsURL: "https://platform.deepseek.com",
+			Summary: "OpenAI + Anthropic format; context caching",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "DeepSeek model",
+				},
+				{
+					UpstreamID: "deepseek-reasoner",
+					DisplayName: "deepseek-reasoner",
+					Description: "DeepSeek model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "DeepSeek model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "DeepSeek model",
+				},
+			},
+		},
+		{
+			Slug: "mistral",
+			DisplayName: "Mistral AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.mistral.ai/v1",
+			DocsURL: "https://console.mistral.ai",
+			Summary: "EU-hosted; generous experiment tier",
+			Models: []Model{
+				{
+					UpstreamID: "mistral-large-latest",
+					DisplayName: "mistral-large-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "mistral-medium-latest",
+					DisplayName: "mistral-medium-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "mistral-small-latest",
+					DisplayName: "mistral-small-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "ministral-3b-latest",
+					DisplayName: "ministral-3b-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "ministral-8b-latest",
+					DisplayName: "ministral-8b-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "codestral-latest",
+					DisplayName: "codestral-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "pixtral-large-latest",
+					DisplayName: "pixtral-large-latest",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "mistral-embed",
+					DisplayName: "mistral-embed",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "mistral-medium-3-5",
+					DisplayName: "mistral-medium-3-5",
+					Description: "Mistral AI model",
+				},
+				{
+					UpstreamID: "devstral-latest",
+					DisplayName: "devstral-latest",
+					Description: "Mistral AI model",
+				},
+			},
+		},
+		{
+			Slug: "xai",
+			DisplayName: "xAI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.x.ai/v1",
+			DocsURL: "https://x.ai",
+			Summary: "Real-time streaming & agent workflows",
+			Models: []Model{
+				{
+					UpstreamID: "grok-3",
+					DisplayName: "grok-3",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-3-mini",
+					DisplayName: "grok-3-mini",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-3-fast",
+					DisplayName: "grok-3-fast",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-2",
+					DisplayName: "grok-2",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-2-vision",
+					DisplayName: "grok-2-vision",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-beta",
+					DisplayName: "grok-beta",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-build-0.1",
+					DisplayName: "grok-build-0.1",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-4.20-multi-agent-0309",
+					DisplayName: "grok-4.20-multi-agent-0309",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-4.20-0309-reasoning",
+					DisplayName: "grok-4.20-0309-reasoning",
+					Description: "xAI model",
+				},
+				{
+					UpstreamID: "grok-4.20-0309-non-reasoning",
+					DisplayName: "grok-4.20-0309-non-reasoning",
+					Description: "xAI model",
+				},
+			},
+		},
+		{
+			Slug: "ai21",
+			DisplayName: "AI21 Labs",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.ai21.com/studio/v1",
+			DocsURL: "https://studio.ai21.com",
+			Summary: "Long-context hybrid architecture",
+			Models: []Model{
+				{
+					UpstreamID: "jamba-1.5-large",
+					DisplayName: "jamba-1.5-large",
+					Description: "AI21 Labs model",
+				},
+				{
+					UpstreamID: "jamba-1.5-mini",
+					DisplayName: "jamba-1.5-mini",
+					Description: "AI21 Labs model",
+				},
+				{
+					UpstreamID: "jamba-instruct",
+					DisplayName: "jamba-instruct",
+					Description: "AI21 Labs model",
+				},
+			},
+		},
+		{
+			Slug: "baidu-qianfan",
+			DisplayName: "Baidu Qianfan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.baiduqianfan.ai/v1",
+			DocsURL: "https://cloud.baidu.com/product/wenxinworkshop",
+			Summary: "Chinese-language optimized",
+			Models: []Model{
+				{
+					UpstreamID: "ernie-4.0-turbo-8k",
+					DisplayName: "ernie-4.0-turbo-8k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.0-8k",
+					DisplayName: "ernie-4.0-8k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-speed-128k",
+					DisplayName: "ernie-speed-128k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-lite-8k",
+					DisplayName: "ernie-lite-8k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-tiny-8k",
+					DisplayName: "ernie-tiny-8k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-5.1",
+					DisplayName: "ernie-5.1",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-5.0",
+					DisplayName: "ernie-5.0",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-x1.1",
+					DisplayName: "ernie-x1.1",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-128k",
+					DisplayName: "ernie-4.5-turbo-128k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-32k",
+					DisplayName: "ernie-4.5-turbo-32k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-vl",
+					DisplayName: "ernie-4.5-turbo-vl",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.5-21b-a3b",
+					DisplayName: "ernie-4.5-21b-a3b",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.5-0.3b",
+					DisplayName: "ernie-4.5-0.3b",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-4.0-turbo-128k",
+					DisplayName: "ernie-4.0-turbo-128k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-3.5-8k",
+					DisplayName: "ernie-3.5-8k",
+					Description: "Baidu Qianfan model",
+				},
+				{
+					UpstreamID: "ernie-speed-8k",
+					DisplayName: "ernie-speed-8k",
+					Description: "Baidu Qianfan model",
+				},
+			},
+		},
+		{
+			Slug: "stepfun",
+			DisplayName: "StepFun",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.stepfun.com/v1",
+			DocsURL: "https://platform.stepfun.com",
+			Summary: "Multilingual agent pipelines",
+			Models: []Model{
+				{
+					UpstreamID: "step-3.5-flash",
+					DisplayName: "step-3.5-flash",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-3-mini",
+					DisplayName: "step-3-mini",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-2-16k",
+					DisplayName: "step-2-16k",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-1-8k",
+					DisplayName: "step-1-8k",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-3.7-flash",
+					DisplayName: "step-3.7-flash",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-3.5-flash-2603",
+					DisplayName: "step-3.5-flash-2603",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-1o-turbo-vision",
+					DisplayName: "step-1o-turbo-vision",
+					Description: "StepFun model",
+				},
+				{
+					UpstreamID: "step-1v",
+					DisplayName: "step-1v",
+					Description: "StepFun model",
+				},
+			},
+		},
+		{
+			Slug: "zhipu",
+			DisplayName: "Z.ai (Zhipu AI)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://open.bigmodel.cn/api/paas/v4",
+			DocsURL: "https://open.bigmodel.cn",
+			Summary: "Strong bilingual CN/EN performance",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4-plus",
+					DisplayName: "glm-4-plus",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4-flash",
+					DisplayName: "glm-4-flash",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4-air",
+					DisplayName: "glm-4-air",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-4-long",
+					DisplayName: "glm-4-long",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+				{
+					UpstreamID: "glm-5-turbo",
+					DisplayName: "glm-5-turbo",
+					Description: "Z.ai (Zhipu AI) model",
+				},
+			},
+		},
+		{
+			Slug: "xiaomi",
+			DisplayName: "Xiaomi",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.xiaomimimo.com/v1",
+			DocsURL: "https://xiaomi.com",
+			Summary: "On-device & edge deployments",
+			Models: []Model{
+				{
+					UpstreamID: "mimo-v2-pro",
+					DisplayName: "mimo-v2-pro",
+					Description: "Xiaomi model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "Xiaomi model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "Xiaomi model",
+				},
+			},
+		},
+		{
+			Slug: "reka",
+			DisplayName: "Reka AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.reka.ai/v1",
+			DocsURL: "https://reka.ai",
+			Summary: "Video, audio & text multimodal",
+			Models: []Model{
+				{
+					UpstreamID: "reka-core",
+					DisplayName: "reka-core",
+					Description: "Reka AI model",
+				},
+				{
+					UpstreamID: "reka-flash",
+					DisplayName: "reka-flash",
+					Description: "Reka AI model",
+				},
+				{
+					UpstreamID: "reka-edge",
+					DisplayName: "reka-edge",
+					Description: "Reka AI model",
+				},
+				{
+					UpstreamID: "reka-flash-3",
+					DisplayName: "reka-flash-3",
+					Description: "Reka AI model",
+				},
+				{
+					UpstreamID: "reka-edge-2603",
+					DisplayName: "reka-edge-2603",
+					Description: "Reka AI model",
+				},
+			},
+		},
+		{
+			Slug: "minimax",
+			DisplayName: "MiniMax",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.minimax.io/v1",
+			DocsURL: "https://platform.minimax.io",
+			Summary: "OpenAI + Anthropic compatible; agentic",
+			Models: []Model{
+				{
+					UpstreamID: "MiniMax-M3",
+					DisplayName: "MiniMax-M3",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.1",
+					DisplayName: "MiniMax-M2.1",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.1-highspeed",
+					DisplayName: "MiniMax-M2.1-highspeed",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2",
+					DisplayName: "MiniMax-M2",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-Text-01",
+					DisplayName: "MiniMax-Text-01",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7-highspeed",
+					DisplayName: "MiniMax-M2.7-highspeed",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "MiniMax model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5-highspeed",
+					DisplayName: "MiniMax-M2.5-highspeed",
+					Description: "MiniMax model",
+				},
+			},
+		},
+		{
+			Slug: "dashscope",
+			DisplayName: "Alibaba DashScope",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+			DocsURL: "https://www.alibabacloud.com",
+			Summary: "Alibaba Cloud Model Studio; Qwen family",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3-max",
+					DisplayName: "qwen3-max",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-max",
+					DisplayName: "qwen-max",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-plus",
+					DisplayName: "qwen-plus",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-flash",
+					DisplayName: "qwen-flash",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-turbo",
+					DisplayName: "qwen-turbo",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen2.5-72b-instruct",
+					DisplayName: "qwen2.5-72b-instruct",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen2.5-32b-instruct",
+					DisplayName: "qwen2.5-32b-instruct",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen2.5-7b-instruct",
+					DisplayName: "qwen2.5-7b-instruct",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-vl-max",
+					DisplayName: "qwen-vl-max",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen-vl-plus",
+					DisplayName: "qwen-vl-plus",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.6-35b-a3b",
+					DisplayName: "qwen3.6-35b-a3b",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.5-122b-a10b",
+					DisplayName: "qwen3.5-122b-a10b",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "qwen3.5-397b-a17b",
+					DisplayName: "qwen3.5-397b-a17b",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "glm-5.2-fast-preview",
+					DisplayName: "glm-5.2-fast-preview",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Alibaba DashScope model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Alibaba DashScope model",
+				},
+			},
+		},
+		{
+			Slug: "upstage",
+			DisplayName: "Upstage",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.upstage.ai/v1/solar",
+			DocsURL: "https://console.upstage.ai",
+			Summary: "Korean AI lab; strong document AI",
+			Models: []Model{
+				{
+					UpstreamID: "solar-pro3",
+					DisplayName: "solar-pro3",
+					Description: "Upstage model",
+				},
+				{
+					UpstreamID: "solar-mini",
+					DisplayName: "solar-mini",
+					Description: "Upstage model",
+				},
+				{
+					UpstreamID: "solar-1-mini-chat",
+					DisplayName: "solar-1-mini-chat",
+					Description: "Upstage model",
+				},
+			},
+		},
+		{
+			Slug: "perplexity",
+			DisplayName: "Perplexity",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.perplexity.ai",
+			DocsURL: "https://docs.perplexity.ai",
+			Summary: "Search-grounded answers with citations",
+			Models: []Model{
+				{
+					UpstreamID: "sonar",
+					DisplayName: "sonar",
+					Description: "Perplexity model",
+				},
+				{
+					UpstreamID: "sonar-pro",
+					DisplayName: "sonar-pro",
+					Description: "Perplexity model",
+				},
+				{
+					UpstreamID: "sonar-reasoning",
+					DisplayName: "sonar-reasoning",
+					Description: "Perplexity model",
+				},
+				{
+					UpstreamID: "sonar-reasoning-pro",
+					DisplayName: "sonar-reasoning-pro",
+					Description: "Perplexity model",
+				},
+				{
+					UpstreamID: "sonar-deep-research",
+					DisplayName: "sonar-deep-research",
+					Description: "Perplexity model",
+				},
+			},
+		},
+		{
+			Slug: "groq",
+			DisplayName: "Groq",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.groq.com/openai/v1",
+			DocsURL: "https://console.groq.com",
+			Summary: "LPU hardware; extremely fast TTFT",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-versatile",
+					DisplayName: "llama-3.3-70b-versatile",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-specdec",
+					DisplayName: "llama-3.3-70b-specdec",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "llama-3.1-8b-instant",
+					DisplayName: "llama-3.1-8b-instant",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "llama-3.1-70b-versatile",
+					DisplayName: "llama-3.1-70b-versatile",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "llama-guard-3-8b",
+					DisplayName: "llama-guard-3-8b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "gemma2-9b-it",
+					DisplayName: "gemma2-9b-it",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "mixtral-8x7b-32768",
+					DisplayName: "mixtral-8x7b-32768",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-4-scout-17b-16e-instruct",
+					DisplayName: "meta-llama/llama-4-scout-17b-16e-instruct",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "groq/compound",
+					DisplayName: "groq/compound",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "allam-2-7b",
+					DisplayName: "allam-2-7b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b",
+					DisplayName: "qwen/qwen3-32b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "Groq model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-20b",
+					DisplayName: "openai/gpt-oss-safeguard-20b",
+					Description: "Groq model",
+				},
+			},
+		},
+		{
+			Slug: "cerebras",
+			DisplayName: "Cerebras",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cerebras.ai/v1",
+			DocsURL: "https://cerebras.ai",
+			Summary: "Wafer-scale engine throughput",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "llama3.1-8b",
+					DisplayName: "llama3.1-8b",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "llama-3.1-70b",
+					DisplayName: "llama-3.1-70b",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "qwen-3-32b",
+					DisplayName: "qwen-3-32b",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "zai-glm-4.7",
+					DisplayName: "zai-glm-4.7",
+					Description: "Cerebras model",
+				},
+				{
+					UpstreamID: "gemma-4-31b",
+					DisplayName: "gemma-4-31b",
+					Description: "Cerebras model",
+				},
+			},
+		},
+		{
+			Slug: "sambanova",
+			DisplayName: "SambaNova",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.sambanova.ai/v1",
+			DocsURL: "https://sambanova.ai",
+			Summary: "RDU serving for large models",
+			Models: []Model{
+				{
+					UpstreamID: "Meta-Llama-3.1-405B-Instruct",
+					DisplayName: "Meta-Llama-3.1-405B-Instruct",
+					Description: "SambaNova model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3.3-70B-Instruct",
+					DisplayName: "Meta-Llama-3.3-70B-Instruct",
+					Description: "SambaNova model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3.1-70B-Instruct",
+					DisplayName: "Meta-Llama-3.1-70B-Instruct",
+					Description: "SambaNova model",
+				},
+				{
+					UpstreamID: "Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen2.5-72B-Instruct",
+					Description: "SambaNova model",
+				},
+				{
+					UpstreamID: "DeepSeek-R1",
+					DisplayName: "DeepSeek-R1",
+					Description: "SambaNova model",
+				},
+			},
+		},
+		{
+			Slug: "together",
+			DisplayName: "Together AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.together.xyz/v1",
+			DocsURL: "https://together.ai",
+			Summary: "Large catalog + fine-tuning",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.1-405B-Instruct-Turbo",
+					DisplayName: "meta-llama/Llama-3.1-405B-Instruct-Turbo",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1",
+					DisplayName: "deepseek-ai/DeepSeek-R1",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct-Turbo",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct-Turbo",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "mistralai/Mixtral-8x22B-Instruct-v0.1",
+					DisplayName: "mistralai/Mixtral-8x22B-Instruct-v0.1",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-Vision-Free",
+					DisplayName: "meta-llama/Llama-Vision-Free",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free",
+					DisplayName: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B-Free",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B",
+					DisplayName: "Qwen/Qwen3-235B-A22B",
+					Description: "Together AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+					DisplayName: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+					Description: "Together AI model",
+				},
+			},
+		},
+		{
+			Slug: "fireworks",
+			DisplayName: "Fireworks AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.fireworks.ai/inference/v1",
+			DocsURL: "https://fireworks.ai",
+			Summary: "Serverless low-latency serving",
+			Models: []Model{
+				{
+					UpstreamID: "accounts/fireworks/models/llama-v3p3-70b-instruct",
+					DisplayName: "accounts/fireworks/models/llama-v3p3-70b-instruct",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "accounts/fireworks/models/deepseek-v3",
+					DisplayName: "accounts/fireworks/models/deepseek-v3",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "accounts/fireworks/models/qwen2p5-72b-instruct",
+					DisplayName: "accounts/fireworks/models/qwen2p5-72b-instruct",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "accounts/fireworks/models/mixtral-8x22b-instruct",
+					DisplayName: "accounts/fireworks/models/mixtral-8x22b-instruct",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "glm-5p1",
+					DisplayName: "glm-5p1",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "gpt-oss-20b",
+					DisplayName: "gpt-oss-20b",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "kimi-k2p5",
+					DisplayName: "kimi-k2p5",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "kimi-k2p6",
+					DisplayName: "kimi-k2p6",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "minimax-m2p5",
+					DisplayName: "minimax-m2p5",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "minimax-m2p7",
+					DisplayName: "minimax-m2p7",
+					Description: "Fireworks AI model",
+				},
+				{
+					UpstreamID: "qwen3p6-plus",
+					DisplayName: "qwen3p6-plus",
+					Description: "Fireworks AI model",
+				},
+			},
+		},
+		{
+			Slug: "deepinfra",
+			DisplayName: "DeepInfra",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.deepinfra.com/v1/openai",
+			DocsURL: "https://deepinfra.com",
+			Summary: "Aggressive open-model pricing",
+			Models: []Model{
+				{
+					UpstreamID: "BAAI/bge-base-en-v1.5",
+					DisplayName: "BAAI/bge-base-en-v1.5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "BAAI/bge-en-icl",
+					DisplayName: "BAAI/bge-en-icl",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "BAAI/bge-large-en-v1.5",
+					DisplayName: "BAAI/bge-large-en-v1.5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "BAAI/bge-m3",
+					DisplayName: "BAAI/bge-m3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "BAAI/bge-m3-multi",
+					DisplayName: "BAAI/bge-m3-multi",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "BAAI/bge-m3-multi-8k",
+					DisplayName: "BAAI/bge-m3-multi-8k",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/Bria-3.2",
+					DisplayName: "Bria/Bria-3.2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/Bria-3.2-vector",
+					DisplayName: "Bria/Bria-3.2-vector",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/blur_background",
+					DisplayName: "Bria/blur_background",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/erase_foreground",
+					DisplayName: "Bria/erase_foreground",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/expand",
+					DisplayName: "Bria/expand",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/fibo",
+					DisplayName: "Bria/fibo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/fibo-1.5",
+					DisplayName: "Bria/fibo-1.5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/fibo_edit",
+					DisplayName: "Bria/fibo_edit",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/fibo_edit-1.5",
+					DisplayName: "Bria/fibo_edit-1.5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Bria/remove_background",
+					DisplayName: "Bria/remove_background",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seed-1.8",
+					DisplayName: "ByteDance/Seed-1.8",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seed-2.0-code",
+					DisplayName: "ByteDance/Seed-2.0-code",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seed-2.0-mini",
+					DisplayName: "ByteDance/Seed-2.0-mini",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seed-2.0-pro",
+					DisplayName: "ByteDance/Seed-2.0-pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seedance-1.5-Pro",
+					DisplayName: "ByteDance/Seedance-1.5-Pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seedance-2.0",
+					DisplayName: "ByteDance/Seedance-2.0",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ByteDance/Seedream-4",
+					DisplayName: "ByteDance/Seedream-4",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Gryphe/MythoMax-L2-13b",
+					DisplayName: "Gryphe/MythoMax-L2-13b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7-Turbo",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M3",
+					DisplayName: "MiniMaxAI/MiniMax-M3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "NousResearch/Hermes-3-Llama-3.1-405B",
+					DisplayName: "NousResearch/Hermes-3-Llama-3.1-405B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "NousResearch/Hermes-3-Llama-3.1-70B",
+					DisplayName: "NousResearch/Hermes-3-Llama-3.1-70B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Pixverse/Pixverse-6-T2V",
+					DisplayName: "Pixverse/Pixverse-6-T2V",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Pixverse/Pixverse-T2V",
+					DisplayName: "Pixverse/Pixverse-T2V",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Pixverse/Pixverse-T2V-HD",
+					DisplayName: "Pixverse/Pixverse-T2V-HD",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "PrunaAI/p-image",
+					DisplayName: "PrunaAI/p-image",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "PrunaAI/p-video",
+					DisplayName: "PrunaAI/p-video",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen-Image-Edit",
+					DisplayName: "Qwen/Qwen-Image-Edit",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen-Image-Max",
+					DisplayName: "Qwen/Qwen-Image-Max",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-14B",
+					DisplayName: "Qwen/Qwen3-14B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-30B-A3B",
+					DisplayName: "Qwen/Qwen3-30B-A3B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-32B",
+					DisplayName: "Qwen/Qwen3-32B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-ASR-0.6B",
+					DisplayName: "Qwen/Qwen3-ASR-0.6B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-ASR-1.7B",
+					DisplayName: "Qwen/Qwen3-ASR-1.7B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo",
+					DisplayName: "Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Max",
+					DisplayName: "Qwen/Qwen3-Max",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Max-Thinking",
+					DisplayName: "Qwen/Qwen3-Max-Thinking",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-VL-235B-A22B-Instruct",
+					DisplayName: "Qwen/Qwen3-VL-235B-A22B-Instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-27B",
+					DisplayName: "Qwen/Qwen3.5-27B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-35B-A3B",
+					DisplayName: "Qwen/Qwen3.5-35B-A3B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-397B-A17B",
+					DisplayName: "Qwen/Qwen3.5-397B-A17B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-9B",
+					DisplayName: "Qwen/Qwen3.5-9B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-27B",
+					DisplayName: "Qwen/Qwen3.6-27B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.7-Max",
+					DisplayName: "Qwen/Qwen3.7-Max",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-2.4T-A95B",
+					DisplayName: "Qwen/Qwen3.8-2.4T-A95B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-Flash",
+					DisplayName: "Qwen/Qwen3.8-Flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-Max",
+					DisplayName: "Qwen/Qwen3.8-Max",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ResembleAI/chatterbox-multilingual",
+					DisplayName: "ResembleAI/chatterbox-multilingual",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ResembleAI/chatterbox-turbo",
+					DisplayName: "ResembleAI/chatterbox-turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Sao10K/L3-8B-Lunaris-v1-Turbo",
+					DisplayName: "Sao10K/L3-8B-Lunaris-v1-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Sao10K/L3.1-70B-Euryale-v2.2",
+					DisplayName: "Sao10K/L3.1-70B-Euryale-v2.2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Wan-AI/Wan2.2-T2V-A14B",
+					DisplayName: "Wan-AI/Wan2.2-T2V-A14B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Wan-AI/Wan2.6-T2I",
+					DisplayName: "Wan-AI/Wan2.6-T2I",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "Wan-AI/Wan2.6-T2V",
+					DisplayName: "Wan-AI/Wan2.6-T2V",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.6-Flash",
+					DisplayName: "XiaomiMiMo/MiMo-V2.6-Flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.6-Pro",
+					DisplayName: "XiaomiMiMo/MiMo-V2.6-Pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5",
+					DisplayName: "anthropic/claude-haiku-4-5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-7",
+					DisplayName: "anthropic/claude-opus-4-7",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-8",
+					DisplayName: "anthropic/claude-opus-4-8",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5-5",
+					DisplayName: "anthropic/claude-opus-5-5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-6",
+					DisplayName: "anthropic/claude-sonnet-4-6",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-0528",
+					DisplayName: "deepseek-ai/DeepSeek-R1-0528",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3",
+					DisplayName: "deepseek-ai/DeepSeek-V3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.1",
+					DisplayName: "deepseek-ai/DeepSeek-V3.1",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4.1-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4.1-Flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-image",
+					DisplayName: "google/gemini-3-pro-image",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro",
+					DisplayName: "google/gemini-3.1-pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-3-12b-it",
+					DisplayName: "google/gemma-3-12b-it",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-3-27b-it",
+					DisplayName: "google/gemma-3-27b-it",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-it",
+					DisplayName: "google/gemma-3-4b-it",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26B-A4B-it",
+					DisplayName: "google/gemma-4-26B-A4B-it",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it",
+					DisplayName: "google/gemma-4-31B-it",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it-Ultra",
+					DisplayName: "google/gemma-4-31B-it-Ultra",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it-turbo",
+					DisplayName: "google/gemma-4-31B-it-turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/nano-banana-2",
+					DisplayName: "google/nano-banana-2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/nano-banana-2-lite",
+					DisplayName: "google/nano-banana-2-lite",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/nano-banana-pro",
+					DisplayName: "google/nano-banana-pro",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/veo-3.1",
+					DisplayName: "google/veo-3.1",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "google/veo-3.1-fast",
+					DisplayName: "google/veo-3.1-fast",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "hexgrad/Kokoro-82M",
+					DisplayName: "hexgrad/Kokoro-82M",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-30b",
+					DisplayName: "ibm-granite/granite-4.2-30b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-3b",
+					DisplayName: "ibm-granite/granite-4.2-3b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-8b",
+					DisplayName: "ibm-granite/granite-4.2-8b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash",
+					DisplayName: "inclusionAI/Ling-3.0-flash",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash-Fin",
+					DisplayName: "inclusionAI/Ling-3.0-flash-Fin",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash-VL",
+					DisplayName: "inclusionAI/Ling-3.0-flash-VL",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "intfloat/e5-base-v2",
+					DisplayName: "intfloat/e5-base-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "intfloat/e5-large-v2",
+					DisplayName: "intfloat/e5-large-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "intfloat/multilingual-e5-large",
+					DisplayName: "intfloat/multilingual-e5-large",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "intfloat/multilingual-e5-large-instruct",
+					DisplayName: "intfloat/multilingual-e5-large-instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+					DisplayName: "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-Guard-4-12B",
+					DisplayName: "meta-llama/Llama-Guard-4-12B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+					DisplayName: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+					DisplayName: "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "meta-models/Muse-Glimmer-30B",
+					DisplayName: "meta-models/Muse-Glimmer-30B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "microsoft/phi-4",
+					DisplayName: "microsoft/phi-4",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Nemo-Instruct-2407",
+					DisplayName: "mistralai/Mistral-Nemo-Instruct-2407",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Small-24B-Instruct-2501",
+					DisplayName: "mistralai/Mistral-Small-24B-Instruct-2501",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+					DisplayName: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "mistralai/Voxtral-Mini-3B-2507",
+					DisplayName: "mistralai/Voxtral-Mini-3B-2507",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "mistralai/Voxtral-Small-24B-2507",
+					DisplayName: "mistralai/Voxtral-Small-24B-2507",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K3",
+					DisplayName: "moonshotai/Kimi-K3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3.5-Lightning",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3.5-Lightning",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/Nemotron-3-Nano-30B-A3B",
+					DisplayName: "nvidia/Nemotron-3-Nano-30B-A3B",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/Nemotron-3.5-ASR-Streaming-Multilingual-0.6b",
+					DisplayName: "nvidia/Nemotron-3.5-ASR-Streaming-Multilingual-0.6b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "nvidia/Nemotron-Content-Safety-3.5",
+					DisplayName: "nvidia/Nemotron-Content-Safety-3.5",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b-Turbo",
+					DisplayName: "openai/gpt-oss-120b-Turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b-Ultra",
+					DisplayName: "openai/gpt-oss-120b-Ultra",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/all-MiniLM-L12-v2",
+					DisplayName: "sentence-transformers/all-MiniLM-L12-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/all-MiniLM-L6-v2",
+					DisplayName: "sentence-transformers/all-MiniLM-L6-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/all-mpnet-base-v2",
+					DisplayName: "sentence-transformers/all-mpnet-base-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/clip-ViT-B-32",
+					DisplayName: "sentence-transformers/clip-ViT-B-32",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/clip-ViT-B-32-multilingual-v1",
+					DisplayName: "sentence-transformers/clip-ViT-B-32-multilingual-v1",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/multi-qa-mpnet-base-dot-v1",
+					DisplayName: "sentence-transformers/multi-qa-mpnet-base-dot-v1",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sentence-transformers/paraphrase-MiniLM-L6-v2",
+					DisplayName: "sentence-transformers/paraphrase-MiniLM-L6-v2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "sesame/csm-1b",
+					DisplayName: "sesame/csm-1b",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "shibing624/text2vec-base-chinese",
+					DisplayName: "shibing624/text2vec-base-chinese",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "stabilityai/sdxl-turbo",
+					DisplayName: "stabilityai/sdxl-turbo",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "tencent/Hy3",
+					DisplayName: "tencent/Hy3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "thenlper/gte-base",
+					DisplayName: "thenlper/gte-base",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "thenlper/gte-large",
+					DisplayName: "thenlper/gte-large",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "thinkingmachines/Inkling",
+					DisplayName: "thinkingmachines/Inkling",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "thinkingmachines/Inkling-Small",
+					DisplayName: "thinkingmachines/Inkling-Small",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6",
+					DisplayName: "zai-org/GLM-4.6",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7",
+					DisplayName: "zai-org/GLM-4.7",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.2",
+					DisplayName: "zai-org/GLM-5.2",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3",
+					DisplayName: "zai-org/GLM-5.3",
+					Description: "DeepInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash",
+					DisplayName: "zai-org/GLM-5.3-Flash",
+					Description: "DeepInfra model",
+				},
+			},
+		},
+		{
+			Slug: "nebius",
+			DisplayName: "Nebius AI Studio",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.studio.nebius.ai/v1",
+			DocsURL: "https://studio.nebius.ai",
+			Summary: "EU infrastructure; Token Factory",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "Nebius AI Studio model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-0528",
+					DisplayName: "deepseek-ai/DeepSeek-R1-0528",
+					Description: "Nebius AI Studio model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-7B-Instruct-v0.3",
+					DisplayName: "mistralai/Mistral-7B-Instruct-v0.3",
+					Description: "Nebius AI Studio model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "Nebius AI Studio model",
+				},
+			},
+		},
+		{
+			Slug: "siliconflow",
+			DisplayName: "SiliconFlow",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.siliconflow.cn/v1",
+			DocsURL: "https://siliconflow.com",
+			Summary: "Excellent cost/performance (CN)",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1",
+					DisplayName: "deepseek-ai/DeepSeek-R1",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3",
+					DisplayName: "deepseek-ai/DeepSeek-V3",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "THUDM/glm-4-9b-chat",
+					DisplayName: "THUDM/glm-4-9b-chat",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "MiniMax/MiniMax-M2",
+					DisplayName: "MiniMax/MiniMax-M2",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2-Exp",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2-Exp",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.1",
+					DisplayName: "deepseek-ai/DeepSeek-V3.1",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.1-Terminus",
+					DisplayName: "deepseek-ai/DeepSeek-V3.1-Terminus",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-vl2",
+					DisplayName: "deepseek-ai/deepseek-vl2",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "nex-agi/DeepSeek-V3.1-Nex-N1",
+					DisplayName: "nex-agi/DeepSeek-V3.1-Nex-N1",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-27B",
+					DisplayName: "Qwen/Qwen3.6-27B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-397B-A17B",
+					DisplayName: "Qwen/Qwen3.5-397B-A17B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-122B-A10B",
+					DisplayName: "Qwen/Qwen3.5-122B-A10B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-35B-A3B",
+					DisplayName: "Qwen/Qwen3.5-35B-A3B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-27B",
+					DisplayName: "Qwen/Qwen3.5-27B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-9B",
+					DisplayName: "Qwen/Qwen3.5-9B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Next-80B-A3B-Thinking",
+					DisplayName: "Qwen/Qwen3-Next-80B-A3B-Thinking",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B",
+					DisplayName: "Qwen/Qwen3-235B-A22B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Thinking-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Thinking-2507",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-32B",
+					DisplayName: "Qwen/Qwen3-32B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-30B-A3B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-30B-A3B-Instruct-2507",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-30B-A3B-Thinking-2507",
+					DisplayName: "Qwen/Qwen3-30B-A3B-Thinking-2507",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-14B",
+					DisplayName: "Qwen/Qwen3-14B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-8B",
+					DisplayName: "Qwen/Qwen3-8B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					DisplayName: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Omni-30B-A3B-Thinking",
+					DisplayName: "Qwen/Qwen3-Omni-30B-A3B-Thinking",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Omni-30B-A3B-Captioner",
+					DisplayName: "Qwen/Qwen3-Omni-30B-A3B-Captioner",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct-128K",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct-128K",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-32B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-32B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-14B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-14B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-7B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-7B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-VL-7B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-VL-7B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1",
+					DisplayName: "zai-org/GLM-5.1",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5",
+					DisplayName: "zai-org/GLM-5",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5V-Turbo",
+					DisplayName: "zai-org/GLM-5V-Turbo",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7",
+					DisplayName: "zai-org/GLM-4.7",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6",
+					DisplayName: "zai-org/GLM-4.6",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6V",
+					DisplayName: "zai-org/GLM-4.6V",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5",
+					DisplayName: "zai-org/GLM-4.5",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5-Air",
+					DisplayName: "zai-org/GLM-4.5-Air",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5V",
+					DisplayName: "zai-org/GLM-4.5V",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "THUDM/GLM-4-32B-0414",
+					DisplayName: "THUDM/GLM-4-32B-0414",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "THUDM/GLM-4-9B-0414",
+					DisplayName: "THUDM/GLM-4-9B-0414",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "THUDM/GLM-Z1-32B-0414",
+					DisplayName: "THUDM/GLM-Z1-32B-0414",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "THUDM/GLM-Z1-9B-0414",
+					DisplayName: "THUDM/GLM-Z1-9B-0414",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.5",
+					DisplayName: "moonshotai/Kimi-K2.5",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Instruct",
+					DisplayName: "moonshotai/Kimi-K2-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Instruct-0905",
+					DisplayName: "moonshotai/Kimi-K2-Instruct-0905",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Thinking",
+					DisplayName: "moonshotai/Kimi-K2-Thinking",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "baidu/ERNIE-4.5-300B-A47B",
+					DisplayName: "baidu/ERNIE-4.5-300B-A47B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "tencent/Hunyuan-A13B-Instruct",
+					DisplayName: "tencent/Hunyuan-A13B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "tencent/Hunyuan-MT-7B",
+					DisplayName: "tencent/Hunyuan-MT-7B",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "tencent/Hy3-preview",
+					DisplayName: "tencent/Hy3-preview",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					DisplayName: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.5",
+					DisplayName: "MiniMaxAI/MiniMax-M2.5",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.1",
+					DisplayName: "MiniMaxAI/MiniMax-M2.1",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-flash-2.0",
+					DisplayName: "inclusionAI/Ling-flash-2.0",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-mini-2.0",
+					DisplayName: "inclusionAI/Ling-mini-2.0",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ring-flash-2.0",
+					DisplayName: "inclusionAI/Ring-flash-2.0",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it",
+					DisplayName: "google/gemma-4-31B-it",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26B-A4B-it",
+					DisplayName: "google/gemma-4-26B-A4B-it",
+					Description: "SiliconFlow model",
+				},
+				{
+					UpstreamID: "ByteDance-Seed/Seed-OSS-36B-Instruct",
+					DisplayName: "ByteDance-Seed/Seed-OSS-36B-Instruct",
+					Description: "SiliconFlow model",
+				},
+			},
+		},
+		{
+			Slug: "inception",
+			DisplayName: "Inception",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.inceptionlabs.ai/v1",
+			DocsURL: "https://inceptionlabs.ai",
+			Summary: "Diffusion language models (dLLMs)",
+			Models: []Model{
+				{
+					UpstreamID: "mercury-2",
+					DisplayName: "mercury-2",
+					Description: "Inception model",
+				},
+				{
+					UpstreamID: "mercury-edit-2",
+					DisplayName: "mercury-edit-2",
+					Description: "Inception model",
+				},
+			},
+		},
+		{
+			Slug: "liquid",
+			DisplayName: "Liquid AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.liquid.ai/v1",
+			DocsURL: "https://liquid.ai",
+			Summary: "Hybrid efficient architectures",
+			Models: []Model{
+				{
+					UpstreamID: "lfm2.5-instruct",
+					DisplayName: "lfm2.5-instruct",
+					Description: "Liquid AI model",
+				},
+				{
+					UpstreamID: "lfm2-24b-instruct",
+					DisplayName: "lfm2-24b-instruct",
+					Description: "Liquid AI model",
+				},
+				{
+					UpstreamID: "lfm2-1.2b-instruct",
+					DisplayName: "lfm2-1.2b-instruct",
+					Description: "Liquid AI model",
+				},
+				{
+					UpstreamID: "liquid-lfm-40b",
+					DisplayName: "liquid-lfm-40b",
+					Description: "Liquid AI model",
+				},
+			},
+		},
+		{
+			Slug: "friendli",
+			DisplayName: "Friendli",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.friendli.ai/serverless/v1",
+			DocsURL: "https://friendli.ai",
+			Summary: "Custom checkpoints & private instances",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama-3.3-70b-instruct",
+					DisplayName: "meta-llama-3.3-70b-instruct",
+					Description: "Friendli model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Friendli model",
+				},
+				{
+					UpstreamID: "mixtral-8x7b-instruct-v0-1",
+					DisplayName: "mixtral-8x7b-instruct-v0-1",
+					Description: "Friendli model",
+				},
+			},
+		},
+		{
+			Slug: "infermatic",
+			DisplayName: "Infermatic",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.totalgpt.ai",
+			DocsURL: "https://infermatic.ai",
+			Summary: "Flat-rate community checkpoints",
+			Models: []Model{
+				{
+					UpstreamID: "rocinante-12b",
+					DisplayName: "rocinante-12b",
+					Description: "Infermatic model",
+				},
+				{
+					UpstreamID: "midnight-miqu-70b",
+					DisplayName: "midnight-miqu-70b",
+					Description: "Infermatic model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "Infermatic model",
+				},
+			},
+		},
+		{
+			Slug: "mancer",
+			DisplayName: "Mancer",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://mancer.tech/oai/v1",
+			DocsURL: "https://mancer.tech",
+			Summary: "Creative / roleplay fine-tunes",
+			Models: []Model{
+				{
+					UpstreamID: "goliath-120b",
+					DisplayName: "goliath-120b",
+					Description: "Mancer model",
+				},
+				{
+					UpstreamID: "mythomax-l2-13b",
+					DisplayName: "mythomax-l2-13b",
+					Description: "Mancer model",
+				},
+				{
+					UpstreamID: "lumimaid-v0.2-70b",
+					DisplayName: "lumimaid-v0.2-70b",
+					Description: "Mancer model",
+				},
+			},
+		},
+		{
+			Slug: "morph",
+			DisplayName: "Morph",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.morphllm.com/v1",
+			DocsURL: "https://morphllm.com",
+			Summary: "Fast code editing & routing",
+			Models: []Model{
+				{
+					UpstreamID: "morph-qwen35-397b",
+					DisplayName: "morph-qwen35-397b",
+					Description: "Morph model",
+				},
+				{
+					UpstreamID: "morph-qwen36-27b",
+					DisplayName: "morph-qwen36-27b",
+					Description: "Morph model",
+				},
+				{
+					UpstreamID: "morph-apply-v1",
+					DisplayName: "morph-apply-v1",
+					Description: "Morph model",
+				},
+				{
+					UpstreamID: "morph-glm52-744b",
+					DisplayName: "morph-glm52-744b",
+					Description: "Morph model",
+				},
+				{
+					UpstreamID: "morph-minimax3-428b",
+					DisplayName: "morph-minimax3-428b",
+					Description: "Morph model",
+				},
+				{
+					UpstreamID: "morph-dsv4flash",
+					DisplayName: "morph-dsv4flash",
+					Description: "Morph model",
+				},
+			},
+		},
+		{
+			Slug: "aionlabs",
+			DisplayName: "AionLabs",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.aionlabs.ai/v1",
+			DocsURL: "https://aionlabs.ai",
+			Summary: "Creative multi-turn fine-tunes",
+			Models: []Model{
+				{
+					UpstreamID: "aion-2.0",
+					DisplayName: "aion-2.0",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-rp-llama-3.1-8b",
+					DisplayName: "aion-rp-llama-3.1-8b",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0",
+					DisplayName: "aion-labs/aion-3.0",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0-mini",
+					DisplayName: "aion-labs/aion-3.0-mini",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-2.5",
+					DisplayName: "aion-labs/aion-2.5",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-2.0",
+					DisplayName: "aion-labs/aion-2.0",
+					Description: "AionLabs model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-rp-llama-3.1-8b",
+					DisplayName: "aion-labs/aion-rp-llama-3.1-8b",
+					Description: "AionLabs model",
+				},
+			},
+		},
+		{
+			Slug: "huggingface",
+			DisplayName: "HuggingFace Inference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://router.huggingface.co/v1",
+			DocsURL: "https://huggingface.co",
+			Summary: "Huge model catalog; free tier available",
+			Models: []Model{
+				{
+					UpstreamID: "CohereLabs/aya-expanse-32b",
+					DisplayName: "CohereLabs/aya-expanse-32b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/aya-vision-32b",
+					DisplayName: "CohereLabs/aya-vision-32b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/c4ai-command-a-03-2025",
+					DisplayName: "CohereLabs/c4ai-command-a-03-2025",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/c4ai-command-r-08-2024",
+					DisplayName: "CohereLabs/c4ai-command-r-08-2024",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/c4ai-command-r7b-12-2024",
+					DisplayName: "CohereLabs/c4ai-command-r7b-12-2024",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/command-a-reasoning-08-2025",
+					DisplayName: "CohereLabs/command-a-reasoning-08-2025",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/command-a-translate-08-2025",
+					DisplayName: "CohereLabs/command-a-translate-08-2025",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/command-a-vision-07-2025",
+					DisplayName: "CohereLabs/command-a-vision-07-2025",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/tiny-aya-earth",
+					DisplayName: "CohereLabs/tiny-aya-earth",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/tiny-aya-fire",
+					DisplayName: "CohereLabs/tiny-aya-fire",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/tiny-aya-global",
+					DisplayName: "CohereLabs/tiny-aya-global",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "CohereLabs/tiny-aya-water",
+					DisplayName: "CohereLabs/tiny-aya-water",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M1-80k",
+					DisplayName: "MiniMaxAI/MiniMax-M1-80k",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2",
+					DisplayName: "MiniMaxAI/MiniMax-M2",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.1",
+					DisplayName: "MiniMaxAI/MiniMax-M2.1",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.5",
+					DisplayName: "MiniMaxAI/MiniMax-M2.5",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M3",
+					DisplayName: "MiniMaxAI/MiniMax-M3",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "NousResearch/Hermes-3-Llama-3.1-70B",
+					DisplayName: "NousResearch/Hermes-3-Llama-3.1-70B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-Coder-32B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-Coder-32B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-Coder-3B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-Coder-3B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-Coder-7B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-Coder-7B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-VL-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-VL-72B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-14B",
+					DisplayName: "Qwen/Qwen3-14B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B",
+					DisplayName: "Qwen/Qwen3-235B-A22B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Thinking-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Thinking-2507",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-30B-A3B",
+					DisplayName: "Qwen/Qwen3-30B-A3B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-32B",
+					DisplayName: "Qwen/Qwen3-32B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-4B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-4B-Instruct-2507",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-4B-Thinking-2507",
+					DisplayName: "Qwen/Qwen3-4B-Thinking-2507",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-8B",
+					DisplayName: "Qwen/Qwen3-8B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					DisplayName: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-Next",
+					DisplayName: "Qwen/Qwen3-Coder-Next",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-Next-80B-A3B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-VL-235B-A22B-Instruct",
+					DisplayName: "Qwen/Qwen3-VL-235B-A22B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-VL-235B-A22B-Thinking",
+					DisplayName: "Qwen/Qwen3-VL-235B-A22B-Thinking",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-122B-A10B",
+					DisplayName: "Qwen/Qwen3.5-122B-A10B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-27B",
+					DisplayName: "Qwen/Qwen3.5-27B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-35B-A3B",
+					DisplayName: "Qwen/Qwen3.5-35B-A3B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-397B-A17B",
+					DisplayName: "Qwen/Qwen3.5-397B-A17B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-9B",
+					DisplayName: "Qwen/Qwen3.5-9B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-27B",
+					DisplayName: "Qwen/Qwen3.6-27B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-2.4T-A95B",
+					DisplayName: "Qwen/Qwen3.8-2.4T-A95B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Sao10K/L3-8B-Lunaris-v1",
+					DisplayName: "Sao10K/L3-8B-Lunaris-v1",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "Sao10K/L3-8B-Stheno-v3.2",
+					DisplayName: "Sao10K/L3-8B-Stheno-v3.2",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.5",
+					DisplayName: "XiaomiMiMo/MiMo-V2.5",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.5-Pro",
+					DisplayName: "XiaomiMiMo/MiMo-V2.5-Pro",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+					DisplayName: "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+					DisplayName: "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "alpindale/WizardLM-2-8x22B",
+					DisplayName: "alpindale/WizardLM-2-8x22B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "baidu/ERNIE-4.5-VL-424B-A47B-Base-PT",
+					DisplayName: "baidu/ERNIE-4.5-VL-424B-A47B-Base-PT",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1",
+					DisplayName: "deepseek-ai/DeepSeek-R1",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-0528",
+					DisplayName: "deepseek-ai/DeepSeek-R1-0528",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+					DisplayName: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+					DisplayName: "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+					DisplayName: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+					DisplayName: "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3",
+					DisplayName: "deepseek-ai/DeepSeek-V3",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3-0324",
+					DisplayName: "deepseek-ai/DeepSeek-V3-0324",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.1",
+					DisplayName: "deepseek-ai/DeepSeek-V3.1",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.1-Terminus",
+					DisplayName: "deepseek-ai/DeepSeek-V3.1-Terminus",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2-Exp",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2-Exp",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4.1-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4.1-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "google/gemma-3-12b-it",
+					DisplayName: "google/gemma-3-12b-it",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "google/gemma-3-27b-it",
+					DisplayName: "google/gemma-3-27b-it",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-it",
+					DisplayName: "google/gemma-3-4b-it",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26B-A4B-it",
+					DisplayName: "google/gemma-4-26B-A4B-it",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it",
+					DisplayName: "google/gemma-4-31B-it",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-30b",
+					DisplayName: "ibm-granite/granite-4.2-30b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-3b",
+					DisplayName: "ibm-granite/granite-4.2-3b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-8b",
+					DisplayName: "ibm-granite/granite-4.2-8b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash",
+					DisplayName: "inclusionAI/Ling-3.0-flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash-Fin",
+					DisplayName: "inclusionAI/Ling-3.0-flash-Fin",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-3.0-flash-VL",
+					DisplayName: "inclusionAI/Ling-3.0-flash-VL",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.1-8B-Instruct",
+					DisplayName: "meta-llama/Llama-3.1-8B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+					DisplayName: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+					DisplayName: "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-Guard-4-12B",
+					DisplayName: "meta-llama/Llama-Guard-4-12B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "meta-models/Muse-Glimmer-30B",
+					DisplayName: "meta-models/Muse-Glimmer-30B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "microsoft/phi-4",
+					DisplayName: "microsoft/phi-4",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Instruct",
+					DisplayName: "moonshotai/Kimi-K2-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Instruct-0905",
+					DisplayName: "moonshotai/Kimi-K2-Instruct-0905",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.5",
+					DisplayName: "moonshotai/Kimi-K2.5",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.7-Code",
+					DisplayName: "moonshotai/Kimi-K2.7-Code",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K3",
+					DisplayName: "moonshotai/Kimi-K3",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-NVFP4",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-20b",
+					DisplayName: "openai/gpt-oss-safeguard-20b",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "prism-ml/Ternary-Bonsai-27B-AWQ-4bit",
+					DisplayName: "prism-ml/Ternary-Bonsai-27B-AWQ-4bit",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "prism-ml/Ternary-Bonsai-27B-gguf",
+					DisplayName: "prism-ml/Ternary-Bonsai-27B-gguf",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "speakleash/Bielik-11B-v3.0-Instruct",
+					DisplayName: "speakleash/Bielik-11B-v3.0-Instruct",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "stepfun-ai/Step-3.5-Flash",
+					DisplayName: "stepfun-ai/Step-3.5-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "stepfun-ai/Step-3.7-Flash",
+					DisplayName: "stepfun-ai/Step-3.7-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "swiss-ai/Apertus-70B-Instruct-2509",
+					DisplayName: "swiss-ai/Apertus-70B-Instruct-2509",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "swiss-ai/Apertus-8B-Instruct-2509",
+					DisplayName: "swiss-ai/Apertus-8B-Instruct-2509",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "swiss-ai/Apertus-v1.5-70B",
+					DisplayName: "swiss-ai/Apertus-v1.5-70B",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "tencent/Hy3",
+					DisplayName: "tencent/Hy3",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "tencent/Hy4-preview",
+					DisplayName: "tencent/Hy4-preview",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "thinkingmachines/Inkling",
+					DisplayName: "thinkingmachines/Inkling",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "thinkingmachines/Inkling-Small",
+					DisplayName: "thinkingmachines/Inkling-Small",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/AutoGLM-Phone-9B-Multilingual",
+					DisplayName: "zai-org/AutoGLM-Phone-9B-Multilingual",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4-32B-0414",
+					DisplayName: "zai-org/GLM-4-32B-0414",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5",
+					DisplayName: "zai-org/GLM-4.5",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5-Air",
+					DisplayName: "zai-org/GLM-4.5-Air",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5V",
+					DisplayName: "zai-org/GLM-4.5V",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.5V-FP8",
+					DisplayName: "zai-org/GLM-4.5V-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6",
+					DisplayName: "zai-org/GLM-4.6",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6-FP8",
+					DisplayName: "zai-org/GLM-4.6-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6V",
+					DisplayName: "zai-org/GLM-4.6V",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6V-FP8",
+					DisplayName: "zai-org/GLM-4.6V-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6V-Flash",
+					DisplayName: "zai-org/GLM-4.6V-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7",
+					DisplayName: "zai-org/GLM-4.7",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7-FP8",
+					DisplayName: "zai-org/GLM-4.7-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7-Flash",
+					DisplayName: "zai-org/GLM-4.7-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5",
+					DisplayName: "zai-org/GLM-5",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1",
+					DisplayName: "zai-org/GLM-5.1",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1-FP8",
+					DisplayName: "zai-org/GLM-5.1-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.2",
+					DisplayName: "zai-org/GLM-5.2",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.2-FP8",
+					DisplayName: "zai-org/GLM-5.2-FP8",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3",
+					DisplayName: "zai-org/GLM-5.3",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-BF16",
+					DisplayName: "zai-org/GLM-5.3-BF16",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash",
+					DisplayName: "zai-org/GLM-5.3-Flash",
+					Description: "HuggingFace Inference model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash-BF16",
+					DisplayName: "zai-org/GLM-5.3-Flash-BF16",
+					Description: "HuggingFace Inference model",
+				},
+			},
+		},
+		{
+			Slug: "nvidia-nim",
+			DisplayName: "NVIDIA NIM",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://integrate.api.nvidia.com/v1",
+			DocsURL: "https://build.nvidia.com",
+			Summary: "NVIDIA inference microservices",
+			Models: []Model{
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-pro-0813",
+					DisplayName: "deepseek-ai/deepseek-v4-pro-0813",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-flash-0731",
+					DisplayName: "deepseek-ai/deepseek-v4-flash-0731",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "meta/muse-glimmer-30b",
+					DisplayName: "meta/muse-glimmer-30b",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1",
+					DisplayName: "poolside/laguna-xs-2.1",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "google/diffusiongemma-26b-a4b-it",
+					DisplayName: "google/diffusiongemma-26b-a4b-it",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-lightning-30b-a3b",
+					DisplayName: "nvidia/nemotron-3.5-lightning-30b-a3b",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+					DisplayName: "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+					Description: "NVIDIA NIM model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "NVIDIA NIM model",
+				},
+			},
+		},
+		{
+			Slug: "hyperbolic",
+			DisplayName: "Hyperbolic",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.hyperbolic.xyz/v1",
+			DocsURL: "https://app.hyperbolic.xyz",
+			Summary: "Decentralized GPU compute",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3",
+					DisplayName: "deepseek-ai/DeepSeek-V3",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "Qwen/QwQ-32B",
+					DisplayName: "Qwen/QwQ-32B",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1",
+					DisplayName: "deepseek-ai/DeepSeek-R1",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.2-3B-Instruct",
+					DisplayName: "meta-llama/Llama-3.2-3B-Instruct",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-Coder-32B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-Coder-32B-Instruct",
+					Description: "Hyperbolic model",
+				},
+				{
+					UpstreamID: "NousResearch/Hermes-3-Llama-3.1-70B",
+					DisplayName: "NousResearch/Hermes-3-Llama-3.1-70B",
+					Description: "Hyperbolic model",
+				},
+			},
+		},
+		{
+			Slug: "lepton",
+			DisplayName: "Lepton AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.lepton.ai/v1",
+			DocsURL: "https://lepton.ai",
+			Summary: "Fast serverless inference",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "Lepton AI model",
+				},
+				{
+					UpstreamID: "mistral-7b-instruct",
+					DisplayName: "mistral-7b-instruct",
+					Description: "Lepton AI model",
+				},
+			},
+		},
+		{
+			Slug: "kluster",
+			DisplayName: "Kluster.ai",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.kluster.ai/v1",
+			DocsURL: "https://kluster.ai",
+			Summary: "Batch inference specialist",
+			Models: []Model{
+				{
+					UpstreamID: "Meta-Llama-3.1-405B-Instruct",
+					DisplayName: "Meta-Llama-3.1-405B-Instruct",
+					Description: "Kluster.ai model",
+				},
+				{
+					UpstreamID: "Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen2.5-72B-Instruct",
+					Description: "Kluster.ai model",
+				},
+			},
+		},
+		{
+			Slug: "anyscale",
+			DisplayName: "Anyscale Endpoints",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.endpoints.anyscale.com/v1",
+			DocsURL: "https://app.endpoints.anyscale.com",
+			Summary: "Ray-based model serving",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "Anyscale Endpoints model",
+				},
+				{
+					UpstreamID: "mistralai/Mixtral-8x22B-Instruct-v0.1",
+					DisplayName: "mistralai/Mixtral-8x22B-Instruct-v0.1",
+					Description: "Anyscale Endpoints model",
+				},
+			},
+		},
+		{
+			Slug: "inference-net",
+			DisplayName: "Inference.net",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.inference.net/v1",
+			DocsURL: "https://inference.net",
+			Summary: "Decentralized inference network",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1",
+					DisplayName: "deepseek-ai/DeepSeek-R1",
+					Description: "Inference.net model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.1-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.1-70B-Instruct",
+					Description: "Inference.net model",
+				},
+			},
+		},
+		{
+			Slug: "arcee",
+			DisplayName: "Arcee AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://conductor.arcee.ai/v1",
+			DocsURL: "https://arcee.ai",
+			Summary: "Enterprise fine-tuned models",
+			Models: []Model{
+				{
+					UpstreamID: "arcee-ai/trinity-large-preview",
+					DisplayName: "arcee-ai/trinity-large-preview",
+					Description: "Arcee AI model",
+				},
+				{
+					UpstreamID: "arcee-ai/caller-large",
+					DisplayName: "arcee-ai/caller-large",
+					Description: "Arcee AI model",
+				},
+			},
+		},
+		{
+			Slug: "glhf",
+			DisplayName: "Glhf.chat",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://glhf.chat/api/openai/v1",
+			DocsURL: "https://glhf.chat",
+			Summary: "vLLM-backed; run any HF model with hf: prefix",
+			Models: []Model{
+				{
+					UpstreamID: "hf:meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "hf:meta-llama/Llama-3.3-70B-Instruct",
+					Description: "Glhf.chat model",
+				},
+				{
+					UpstreamID: "hf:Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "hf:Qwen/Qwen2.5-72B-Instruct",
+					Description: "Glhf.chat model",
+				},
+				{
+					UpstreamID: "hf:deepseek-ai/DeepSeek-R1",
+					DisplayName: "hf:deepseek-ai/DeepSeek-R1",
+					Description: "Glhf.chat model",
+				},
+			},
+		},
+		{
+			Slug: "akashml",
+			DisplayName: "AkashML",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.akashml.com/v1",
+			DocsURL: "https://akash.network",
+			Summary: "Decentralized GPU marketplace",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "AkashML model",
+				},
+				{
+					UpstreamID: "qwen2.5-72b-instruct",
+					DisplayName: "qwen2.5-72b-instruct",
+					Description: "AkashML model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "AkashML model",
+				},
+			},
+		},
+		{
+			Slug: "atlascloud",
+			DisplayName: "AtlasCloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.atlascloud.ai/v1",
+			DocsURL: "https://atlascloud.ai",
+			Summary: "Language + image + video APIs",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-v3",
+					DisplayName: "deepseek-v3",
+					Description: "AtlasCloud model",
+				},
+				{
+					UpstreamID: "seedance-2.0",
+					DisplayName: "seedance-2.0",
+					Description: "AtlasCloud model",
+				},
+				{
+					UpstreamID: "kling-3.0",
+					DisplayName: "kling-3.0",
+					Description: "AtlasCloud model",
+				},
+			},
+		},
+		{
+			Slug: "chutes",
+			DisplayName: "Chutes",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://llm.chutes.ai/v1",
+			DocsURL: "https://chutes.ai",
+			Summary: "Serverless custom model deploy",
+			Models: []Model{
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "Chutes model",
+				},
+				{
+					UpstreamID: "THUDM/glm-4-9b-chat",
+					DisplayName: "THUDM/glm-4-9b-chat",
+					Description: "Chutes model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-72B-Instruct",
+					Description: "Chutes model",
+				},
+				{
+					UpstreamID: "Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen2.5-72B-Instruct",
+					Description: "Chutes model",
+				},
+			},
+		},
+		{
+			Slug: "cloudflare-workers-ai",
+			DisplayName: "Cloudflare Workers AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cloudflare.com/client/v4/accounts/{id}/ai/v1",
+			DocsURL: "https://cloudflare.com",
+			Summary: "Edge inference; neuron-second billing; needs account ID",
+			Models: []Model{
+				{
+					UpstreamID: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+					DisplayName: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/meta/llama-3.1-8b-instruct",
+					DisplayName: "@cf/meta/llama-3.1-8b-instruct",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/qwen/qwen2.5-coder-32b-instruct",
+					DisplayName: "@cf/qwen/qwen2.5-coder-32b-instruct",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/google/gemma-4-12b-it",
+					DisplayName: "@cf/google/gemma-4-12b-it",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/mistral/mistral-7b-instruct-v0.2-lora",
+					DisplayName: "@cf/mistral/mistral-7b-instruct-v0.2-lora",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+					DisplayName: "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/meta/llama-3.2-3b-instruct",
+					DisplayName: "@cf/meta/llama-3.2-3b-instruct",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/qwen/qwq-32b",
+					DisplayName: "@cf/qwen/qwq-32b",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/zai-org/glm-4.7-flash",
+					DisplayName: "@cf/zai-org/glm-4.7-flash",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/moonshotai/kimi-k2.6",
+					DisplayName: "@cf/moonshotai/kimi-k2.6",
+					Description: "Cloudflare Workers AI model",
+				},
+				{
+					UpstreamID: "@cf/google/gemma-4-26b-a4b-it",
+					DisplayName: "@cf/google/gemma-4-26b-a4b-it",
+					Description: "Cloudflare Workers AI model",
+				},
+			},
+		},
+		{
+			Slug: "digitalocean",
+			DisplayName: "DigitalOcean",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.do-ai.run/v1",
+			DocsURL: "https://digitalocean.com",
+			Summary: "Integrates with App Platform",
+			Models: []Model{
+				{
+					UpstreamID: "llama3-8b-instruct",
+					DisplayName: "llama3-8b-instruct",
+					Description: "DigitalOcean model",
+				},
+			},
+		},
+		{
+			Slug: "gmicloud",
+			DisplayName: "GMICloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.gmi-serving.com/v1",
+			DocsURL: "https://gmicloud.ai",
+			Summary: "Enterprise H100 GPU cloud",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5.1-fp8",
+					DisplayName: "glm-5.1-fp8",
+					Description: "GMICloud model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "GMICloud model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4",
+					DisplayName: "claude-sonnet-4",
+					Description: "GMICloud model",
+				},
+			},
+		},
+		{
+			Slug: "io-net",
+			DisplayName: "io.net",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.intelligence.io.solutions/api/v1",
+			DocsURL: "https://io.net",
+			Summary: "DePIN GPU clusters",
+			Models: []Model{
+				{
+					UpstreamID: "glm-4.5-air",
+					DisplayName: "glm-4.5-air",
+					Description: "io.net model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "io.net model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "io.net model",
+				},
+			},
+		},
+		{
+			Slug: "nextbit",
+			DisplayName: "NextBit",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.nextbit256.com/v1",
+			DocsURL: "https://nextbit256.com",
+			Summary: "EU data centers (Spain)",
+			Models: []Model{
+				{
+					UpstreamID: "qwen:3.5-35b",
+					DisplayName: "qwen:3.5-35b",
+					Description: "NextBit model",
+				},
+				{
+					UpstreamID: "qwen3:30b",
+					DisplayName: "qwen3:30b",
+					Description: "NextBit model",
+				},
+				{
+					UpstreamID: "qwen3:14b",
+					DisplayName: "qwen3:14b",
+					Description: "NextBit model",
+				},
+			},
+		},
+		{
+			Slug: "novita",
+			DisplayName: "Novita",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.novita.ai/openai/v1",
+			DocsURL: "https://novita.ai",
+			Summary: "Model APIs + agent sandboxes",
+			Models: []Model{
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.3-70b-instruct",
+					DisplayName: "meta-llama/llama-3.3-70b-instruct",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "qwen/qwen2.5-72b-instruct",
+					DisplayName: "qwen/qwen2.5-72b-instruct",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "zai-org/glm-5.2",
+					DisplayName: "zai-org/glm-5.2",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "zai-org/glm-5.1",
+					DisplayName: "zai-org/glm-5.1",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.7",
+					DisplayName: "zai-org/glm-4.7",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-480b-a35b-instruct",
+					DisplayName: "qwen/qwen3-coder-480b-a35b-instruct",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "xiaomimimo/mimo-v2.5-pro",
+					DisplayName: "xiaomimimo/mimo-v2.5-pro",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Novita model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.1-8b-instruct",
+					DisplayName: "meta-llama/llama-3.1-8b-instruct",
+					Description: "Novita model",
+				},
+			},
+		},
+		{
+			Slug: "parasail",
+			DisplayName: "Parasail",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.saas.parasail.io/v1",
+			DocsURL: "https://parasail.io",
+			Summary: "Serverless + dedicated instances",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Parasail model",
+				},
+				{
+					UpstreamID: "qwen-coder-32b",
+					DisplayName: "qwen-coder-32b",
+					Description: "Parasail model",
+				},
+			},
+		},
+		{
+			Slug: "poolside",
+			DisplayName: "Poolside",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://divers.poolsi.de/openai/v1",
+			DocsURL: "https://poolside.ai",
+			Summary: "Code generation focus",
+			Models: []Model{
+				{
+					UpstreamID: "laguna-xs.2",
+					DisplayName: "laguna-xs.2",
+					Description: "Poolside model",
+				},
+				{
+					UpstreamID: "laguna-m.1",
+					DisplayName: "laguna-m.1",
+					Description: "Poolside model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1",
+					DisplayName: "poolside/laguna-xs-2.1",
+					Description: "Poolside model",
+				},
+				{
+					UpstreamID: "poolside/laguna-s-2.1",
+					DisplayName: "poolside/laguna-s-2.1",
+					Description: "Poolside model",
+				},
+			},
+		},
+		{
+			Slug: "venice",
+			DisplayName: "Venice",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.venice.ai/api/v1",
+			DocsURL: "https://venice.ai",
+			Summary: "Privacy-first; web3 auth",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "Venice model",
+				},
+				{
+					UpstreamID: "qwen-2.5-72b",
+					DisplayName: "qwen-2.5-72b",
+					Description: "Venice model",
+				},
+				{
+					UpstreamID: "fluently-xl",
+					DisplayName: "fluently-xl",
+					Description: "Venice model",
+				},
+			},
+		},
+		{
+			Slug: "wafer",
+			DisplayName: "Wafer",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://pass.wafer.ai/v1",
+			DocsURL: "https://wafer.ai",
+			Summary: "Fast serverless; Claude Code compatible",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen3.5-397B-A17B",
+					DisplayName: "Qwen3.5-397B-A17B",
+					Description: "Wafer model",
+				},
+				{
+					UpstreamID: "GLM-5.1",
+					DisplayName: "GLM-5.1",
+					Description: "Wafer model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "Wafer model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro",
+					DisplayName: "DeepSeek-V4-Pro",
+					Description: "Wafer model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "Wafer model",
+				},
+			},
+		},
+		{
+			Slug: "azure-openai",
+			DisplayName: "Azure OpenAI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://<resource>.openai.azure.com/openai/v1",
+			DocsURL: "https://azure.microsoft.com",
+			Summary: "Enterprise Microsoft integration",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Azure OpenAI model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Azure OpenAI model",
+				},
+				{
+					UpstreamID: "gpt-4.1",
+					DisplayName: "gpt-4.1",
+					Description: "Azure OpenAI model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "Azure OpenAI model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "Azure OpenAI model",
+				},
+			},
+		},
+		{
+			Slug: "vertex-ai",
+			DisplayName: "Google Vertex AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://us-central1-aiplatform.googleapis.com/v1/projects",
+			DocsURL: "https://cloud.google.com/vertex-ai",
+			Summary: "VPC, IAM, enterprise procurement",
+			Models: []Model{
+				{
+					UpstreamID: "gemini-3.5-pro",
+					DisplayName: "gemini-3.5-pro",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro",
+					DisplayName: "gemini-3.1-pro",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "gemma-4-31b-it",
+					DisplayName: "gemma-4-31b-it",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash",
+					DisplayName: "DeepSeek-V4-Flash",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro",
+					DisplayName: "DeepSeek-V4-Pro",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "Qwen3.6-35B-A3B",
+					DisplayName: "Qwen3.6-35B-A3B",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "GLM-5.1-FP8",
+					DisplayName: "GLM-5.1-FP8",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-fable-5-1",
+					DisplayName: "claude-fable-5-1",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8",
+					DisplayName: "claude-opus-4-8",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7",
+					DisplayName: "claude-opus-4-7",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5-v2",
+					DisplayName: "claude-sonnet-4-5-v2",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5",
+					DisplayName: "claude-sonnet-4-5",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5",
+					DisplayName: "claude-opus-4-5",
+					Description: "Google Vertex AI model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "Google Vertex AI model",
+				},
+			},
+		},
+		{
+			Slug: "baseten",
+			DisplayName: "Baseten",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://model-{id}.api.baseten.co/v1",
+			DocsURL: "https://baseten.co",
+			Summary: "MLOps with Truss packaging",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "Baseten model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Baseten model",
+				},
+			},
+		},
+		{
+			Slug: "scaleway",
+			DisplayName: "Scaleway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.scaleway.ai/v1",
+			DocsURL: "https://console.scaleway.com",
+			Summary: "European cloud; GDPR-compliant",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-instruct-2507",
+					DisplayName: "qwen3-235b-a22b-instruct-2507",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "llama-3.1-70b-instruct",
+					DisplayName: "llama-3.1-70b-instruct",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "llama-3.1-8b-instruct",
+					DisplayName: "llama-3.1-8b-instruct",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "mistral-small-3.2-24b-instruct-2506",
+					DisplayName: "mistral-small-3.2-24b-instruct-2506",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "deepseek-v3-0324",
+					DisplayName: "deepseek-v3-0324",
+					Description: "Scaleway model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Scaleway model",
+				},
+			},
+		},
+		{
+			Slug: "ovhcloud",
+			DisplayName: "OVHcloud AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1",
+			DocsURL: "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/",
+			Summary: "EU-hosted open models",
+			Models: []Model{
+				{
+					UpstreamID: "Meta-Llama-3_1-70B-Instruct",
+					DisplayName: "Meta-Llama-3_1-70B-Instruct",
+					Description: "OVHcloud AI model",
+				},
+				{
+					UpstreamID: "Qwen2.5-72B-Instruct",
+					DisplayName: "Qwen2.5-72B-Instruct",
+					Description: "OVHcloud AI model",
+				},
+			},
+		},
+		{
+			Slug: "github-models",
+			DisplayName: "GitHub Models",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://models.inference.ai.azure.com",
+			DocsURL: "https://github.com/marketplace/models",
+			Summary: "Free tier with GitHub PAT",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "GitHub Models model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "GitHub Models model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3.1-70B-Instruct",
+					DisplayName: "Meta-Llama-3.1-70B-Instruct",
+					Description: "GitHub Models model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3.1-405B-Instruct",
+					DisplayName: "Meta-Llama-3.1-405B-Instruct",
+					Description: "GitHub Models model",
+				},
+				{
+					UpstreamID: "Mistral-large",
+					DisplayName: "Mistral-large",
+					Description: "GitHub Models model",
+				},
+			},
+		},
+		{
+			Slug: "modal",
+			DisplayName: "Modal",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://<app>.modal.run/v1",
+			DocsURL: "https://modal.com",
+			Summary: "Serverless GPU; deploy your own models",
+			Models: []Model{
+				{
+					UpstreamID: "google/gemini-2.0-flash",
+					DisplayName: "google/gemini-2.0-flash",
+					Description: "Modal model",
+				},
+			},
+		},
+		{
+			Slug: "openrouter",
+			DisplayName: "OpenRouter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://openrouter.ai/api/v1",
+			DocsURL: "https://openrouter.ai",
+			Summary: "Auto fallback & provider selection",
+			Models: []Model{
+				{
+					UpstreamID: "aion-labs/aion-2.0",
+					DisplayName: "aion-labs/aion-2.0",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0",
+					DisplayName: "aion-labs/aion-3.0",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0-mini",
+					DisplayName: "aion-labs/aion-3.0-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.5",
+					DisplayName: "aion-labs/aion-3.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.5-mini",
+					DisplayName: "aion-labs/aion-3.5-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-rp-llama-3.1-8b",
+					DisplayName: "aion-labs/aion-rp-llama-3.1-8b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "amazon/nova-2-lite-v1",
+					DisplayName: "amazon/nova-2-lite-v1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "amazon/nova-lite-v1",
+					DisplayName: "amazon/nova-lite-v1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "amazon/nova-micro-v1",
+					DisplayName: "amazon/nova-micro-v1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "amazon/nova-premier-v1",
+					DisplayName: "amazon/nova-premier-v1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "amazon/nova-pro-v1",
+					DisplayName: "amazon/nova-pro-v1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthracite-org/magnum-v4-72b",
+					DisplayName: "anthracite-org/magnum-v4-72b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-3-haiku",
+					DisplayName: "anthropic/claude-3-haiku",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5.1",
+					DisplayName: "anthropic/claude-fable-5.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5.1:batch",
+					DisplayName: "anthropic/claude-fable-5.1:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5:batch",
+					DisplayName: "anthropic/claude-fable-5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4.5",
+					DisplayName: "anthropic/claude-haiku-4.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4.5:batch",
+					DisplayName: "anthropic/claude-haiku-4.5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.1",
+					DisplayName: "anthropic/claude-opus-4.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.1:batch",
+					DisplayName: "anthropic/claude-opus-4.1:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.5",
+					DisplayName: "anthropic/claude-opus-4.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.5:batch",
+					DisplayName: "anthropic/claude-opus-4.5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.6",
+					DisplayName: "anthropic/claude-opus-4.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.6:batch",
+					DisplayName: "anthropic/claude-opus-4.6:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.7",
+					DisplayName: "anthropic/claude-opus-4.7",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.7:batch",
+					DisplayName: "anthropic/claude-opus-4.7:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8",
+					DisplayName: "anthropic/claude-opus-4.8",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8:batch",
+					DisplayName: "anthropic/claude-opus-4.8:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5.5",
+					DisplayName: "anthropic/claude-opus-5.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5.5:batch",
+					DisplayName: "anthropic/claude-opus-5.5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5:batch",
+					DisplayName: "anthropic/claude-opus-5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4",
+					DisplayName: "anthropic/claude-sonnet-4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.5",
+					DisplayName: "anthropic/claude-sonnet-4.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.5:batch",
+					DisplayName: "anthropic/claude-sonnet-4.5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.6",
+					DisplayName: "anthropic/claude-sonnet-4.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.6:batch",
+					DisplayName: "anthropic/claude-sonnet-4.6:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5:batch",
+					DisplayName: "anthropic/claude-sonnet-5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "arcee-ai/trinity-large-thinking",
+					DisplayName: "arcee-ai/trinity-large-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "baidu/ernie-4.5-vl-424b-a47b",
+					DisplayName: "baidu/ernie-4.5-vl-424b-a47b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-1.6",
+					DisplayName: "bytedance-seed/seed-1.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-1.6-flash",
+					DisplayName: "bytedance-seed/seed-1.6-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2-1-turbo",
+					DisplayName: "bytedance-seed/seed-2-1-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-code",
+					DisplayName: "bytedance-seed/seed-2.0-code",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-lite",
+					DisplayName: "bytedance-seed/seed-2.0-lite",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-mini",
+					DisplayName: "bytedance-seed/seed-2.0-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "bytedance/ui-tars-1.5-7b",
+					DisplayName: "bytedance/ui-tars-1.5-7b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+					DisplayName: "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/command-a",
+					DisplayName: "cohere/command-a",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/command-a-plus",
+					DisplayName: "cohere/command-a-plus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/command-r-08-2024",
+					DisplayName: "cohere/command-r-08-2024",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/command-r-plus-08-2024",
+					DisplayName: "cohere/command-r-plus-08-2024",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/command-r7b-12-2024",
+					DisplayName: "cohere/command-r7b-12-2024",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "cohere/north-mini-code:free",
+					DisplayName: "cohere/north-mini-code:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat",
+					DisplayName: "deepseek/deepseek-chat",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat-v3-0324",
+					DisplayName: "deepseek/deepseek-chat-v3-0324",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat-v3.1",
+					DisplayName: "deepseek/deepseek-chat-v3.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1",
+					DisplayName: "deepseek/deepseek-r1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1-0528",
+					DisplayName: "deepseek/deepseek-r1-0528",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1-distill-llama-70b",
+					DisplayName: "deepseek/deepseek-r1-distill-llama-70b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.1-terminus",
+					DisplayName: "deepseek/deepseek-v3.1-terminus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2-exp",
+					DisplayName: "deepseek/deepseek-v3.2-exp",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-vision-exp",
+					DisplayName: "deepseek/deepseek-v4-flash-vision-exp",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash:batch",
+					DisplayName: "deepseek/deepseek-v4.1-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "dots-studio/dots-3-note-preview:free",
+					DisplayName: "dots-studio/dots-3-note-preview:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "fireworks/ember-1",
+					DisplayName: "fireworks/ember-1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-image",
+					DisplayName: "google/gemini-2.5-flash-image",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite",
+					DisplayName: "google/gemini-2.5-flash-lite",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite:batch",
+					DisplayName: "google/gemini-2.5-flash-lite:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash:batch",
+					DisplayName: "google/gemini-2.5-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro-preview",
+					DisplayName: "google/gemini-2.5-pro-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro:batch",
+					DisplayName: "google/gemini-2.5-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview:batch",
+					DisplayName: "google/gemini-3-flash-preview:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-image",
+					DisplayName: "google/gemini-3-pro-image",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-image-preview",
+					DisplayName: "google/gemini-3-pro-image-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-image",
+					DisplayName: "google/gemini-3.1-flash-image",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-image-preview",
+					DisplayName: "google/gemini-3.1-flash-image-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite-image",
+					DisplayName: "google/gemini-3.1-flash-lite-image",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite-preview",
+					DisplayName: "google/gemini-3.1-flash-lite-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite:batch",
+					DisplayName: "google/gemini-3.1-flash-lite:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview-customtools",
+					DisplayName: "google/gemini-3.1-pro-preview-customtools",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview:batch",
+					DisplayName: "google/gemini-3.1-pro-preview:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite:batch",
+					DisplayName: "google/gemini-3.5-flash-lite:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash:batch",
+					DisplayName: "google/gemini-3.5-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash",
+					DisplayName: "google/gemini-3.6-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash:batch",
+					DisplayName: "google/gemini-3.6-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash:batch",
+					DisplayName: "google/gemini-3.7-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash",
+					DisplayName: "google/gemini-3.8-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash:batch",
+					DisplayName: "google/gemini-3.8-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-2-27b-it",
+					DisplayName: "google/gemma-2-27b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-3-12b-it",
+					DisplayName: "google/gemma-3-12b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-3-27b-it",
+					DisplayName: "google/gemma-3-27b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-it",
+					DisplayName: "google/gemma-3-4b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26b-a4b-it",
+					DisplayName: "google/gemma-4-26b-a4b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26b-a4b-it:free",
+					DisplayName: "google/gemma-4-26b-a4b-it:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it:free",
+					DisplayName: "google/gemma-4-31b-it:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/lyria-3-clip-preview",
+					DisplayName: "google/lyria-3-clip-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "google/lyria-3-pro-preview",
+					DisplayName: "google/lyria-3-pro-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "gryphe/mythomax-l2-13b",
+					DisplayName: "gryphe/mythomax-l2-13b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.0-h-micro",
+					DisplayName: "ibm-granite/granite-4.0-h-micro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-8b",
+					DisplayName: "ibm-granite/granite-4.2-8b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inception/mercury-2",
+					DisplayName: "inception/mercury-2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inception/mercury-2.5",
+					DisplayName: "inception/mercury-2.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash",
+					DisplayName: "inclusionai/ling-3.0-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-fin",
+					DisplayName: "inclusionai/ling-3.0-flash-fin",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-fin:free",
+					DisplayName: "inclusionai/ling-3.0-flash-fin:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-sante:free",
+					DisplayName: "inclusionai/ling-3.0-flash-sante:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-vl",
+					DisplayName: "inclusionai/ling-3.0-flash-vl",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inference-net/schematron-v2-small",
+					DisplayName: "inference-net/schematron-v2-small",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "inference-net/schematron-v2-turbo",
+					DisplayName: "inference-net/schematron-v2-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "kwaipilot/kat-coder-pro-v2.5",
+					DisplayName: "kwaipilot/kat-coder-pro-v2.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "liquid/lfm-2.5-2.6b:free",
+					DisplayName: "liquid/lfm-2.5-2.6b:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mancer/weaver",
+					DisplayName: "mancer/weaver",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meituan/longcat-2.0",
+					DisplayName: "meituan/longcat-2.0",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.1-70b-instruct",
+					DisplayName: "meta-llama/llama-3.1-70b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.1-8b-instruct",
+					DisplayName: "meta-llama/llama-3.1-8b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.2-1b-instruct",
+					DisplayName: "meta-llama/llama-3.2-1b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.2-3b-instruct",
+					DisplayName: "meta-llama/llama-3.2-3b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.3-70b-instruct",
+					DisplayName: "meta-llama/llama-3.3-70b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-4-maverick",
+					DisplayName: "meta-llama/llama-4-maverick",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-4-scout",
+					DisplayName: "meta-llama/llama-4-scout",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-guard-4-12b",
+					DisplayName: "meta-llama/llama-guard-4-12b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-glimmer-30b",
+					DisplayName: "meta/muse-glimmer-30b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.1",
+					DisplayName: "meta/muse-spark-1.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2",
+					DisplayName: "meta/muse-spark-1.2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2-contributor",
+					DisplayName: "meta/muse-spark-1.2-contributor",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3",
+					DisplayName: "meta/muse-spark-1.3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3-contributor",
+					DisplayName: "meta/muse-spark-1.3-contributor",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "microsoft/phi-4",
+					DisplayName: "microsoft/phi-4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "microsoft/wizardlm-2-8x22b",
+					DisplayName: "microsoft/wizardlm-2-8x22b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-01",
+					DisplayName: "minimax/minimax-01",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m1",
+					DisplayName: "minimax/minimax-m1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2",
+					DisplayName: "minimax/minimax-m2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2-her",
+					DisplayName: "minimax/minimax-m2-her",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.1",
+					DisplayName: "minimax/minimax-m2.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5",
+					DisplayName: "minimax/minimax-m2.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/codestral-2508",
+					DisplayName: "mistralai/codestral-2508",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/codestral-2508:batch",
+					DisplayName: "mistralai/codestral-2508:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/devstral-2512",
+					DisplayName: "mistralai/devstral-2512",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-14b-2512",
+					DisplayName: "mistralai/ministral-14b-2512",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-3b-2512",
+					DisplayName: "mistralai/ministral-3b-2512",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-8b-2512",
+					DisplayName: "mistralai/ministral-8b-2512",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-8b-2512:batch",
+					DisplayName: "mistralai/ministral-8b-2512:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large",
+					DisplayName: "mistralai/mistral-large",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large-2407",
+					DisplayName: "mistralai/mistral-large-2407",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large-2512",
+					DisplayName: "mistralai/mistral-large-2512",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large-2512:batch",
+					DisplayName: "mistralai/mistral-large-2512:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3",
+					DisplayName: "mistralai/mistral-medium-3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3-5",
+					DisplayName: "mistralai/mistral-medium-3-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3-5:batch",
+					DisplayName: "mistralai/mistral-medium-3-5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3.1",
+					DisplayName: "mistralai/mistral-medium-3.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3.1:batch",
+					DisplayName: "mistralai/mistral-medium-3.1:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-nemo",
+					DisplayName: "mistralai/mistral-nemo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-saba",
+					DisplayName: "mistralai/mistral-saba",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-24b-instruct-2501",
+					DisplayName: "mistralai/mistral-small-24b-instruct-2501",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-2603",
+					DisplayName: "mistralai/mistral-small-2603",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-2603:batch",
+					DisplayName: "mistralai/mistral-small-2603:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-3.1-24b-instruct",
+					DisplayName: "mistralai/mistral-small-3.1-24b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-3.2-24b-instruct",
+					DisplayName: "mistralai/mistral-small-3.2-24b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/mixtral-8x22b-instruct",
+					DisplayName: "mistralai/mixtral-8x22b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "mistralai/voxtral-small-24b-2507",
+					DisplayName: "mistralai/voxtral-small-24b-2507",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2",
+					DisplayName: "moonshotai/kimi-k2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-0905",
+					DisplayName: "moonshotai/kimi-k2-0905",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-thinking",
+					DisplayName: "moonshotai/kimi-k2-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3:batch",
+					DisplayName: "moonshotai/kimi-k3:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "morph/morph-v3-fast",
+					DisplayName: "morph/morph-v3-fast",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "morph/morph-v3-large",
+					DisplayName: "morph/morph-v3-large",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nousresearch/hermes-3-llama-3.1-405b",
+					DisplayName: "nousresearch/hermes-3-llama-3.1-405b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nousresearch/hermes-3-llama-3.1-70b",
+					DisplayName: "nousresearch/hermes-3-llama-3.1-70b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nousresearch/hermes-4-405b",
+					DisplayName: "nousresearch/hermes-4-405b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-nano-30b-a3b",
+					DisplayName: "nvidia/nemotron-3-nano-30b-a3b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+					DisplayName: "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b:free",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b:free",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-content-safety",
+					DisplayName: "nvidia/nemotron-3.5-content-safety",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-content-safety:free",
+					DisplayName: "nvidia/nemotron-3.5-content-safety:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-lightning",
+					DisplayName: "nvidia/nemotron-3.5-lightning",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-lightning:free",
+					DisplayName: "nvidia/nemotron-3.5-lightning:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo",
+					DisplayName: "openai/gpt-3.5-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo-0613",
+					DisplayName: "openai/gpt-3.5-turbo-0613",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo-16k",
+					DisplayName: "openai/gpt-3.5-turbo-16k",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo-instruct",
+					DisplayName: "openai/gpt-3.5-turbo-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo:batch",
+					DisplayName: "openai/gpt-3.5-turbo:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4",
+					DisplayName: "openai/gpt-4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4-turbo",
+					DisplayName: "openai/gpt-4-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4-turbo:batch",
+					DisplayName: "openai/gpt-4-turbo:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1",
+					DisplayName: "openai/gpt-4.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini",
+					DisplayName: "openai/gpt-4.1-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini:batch",
+					DisplayName: "openai/gpt-4.1-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano",
+					DisplayName: "openai/gpt-4.1-nano",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano:batch",
+					DisplayName: "openai/gpt-4.1-nano:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1:batch",
+					DisplayName: "openai/gpt-4.1:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-05-13",
+					DisplayName: "openai/gpt-4o-2024-05-13",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-08-06",
+					DisplayName: "openai/gpt-4o-2024-08-06",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-11-20",
+					DisplayName: "openai/gpt-4o-2024-11-20",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini-2024-07-18",
+					DisplayName: "openai/gpt-4o-mini-2024-07-18",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini:batch",
+					DisplayName: "openai/gpt-4o-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o:batch",
+					DisplayName: "openai/gpt-4o:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-image",
+					DisplayName: "openai/gpt-5-image",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-image-mini",
+					DisplayName: "openai/gpt-5-image-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini",
+					DisplayName: "openai/gpt-5-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini:batch",
+					DisplayName: "openai/gpt-5-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano",
+					DisplayName: "openai/gpt-5-nano",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano:batch",
+					DisplayName: "openai/gpt-5-nano:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-pro",
+					DisplayName: "openai/gpt-5-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-pro:batch",
+					DisplayName: "openai/gpt-5-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1-codex",
+					DisplayName: "openai/gpt-5.1-codex",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1-codex-max",
+					DisplayName: "openai/gpt-5.1-codex-max",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1-codex-mini",
+					DisplayName: "openai/gpt-5.1-codex-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1:batch",
+					DisplayName: "openai/gpt-5.1:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-chat",
+					DisplayName: "openai/gpt-5.2-chat",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-codex",
+					DisplayName: "openai/gpt-5.2-codex",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-pro",
+					DisplayName: "openai/gpt-5.2-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-pro:batch",
+					DisplayName: "openai/gpt-5.2-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2:batch",
+					DisplayName: "openai/gpt-5.2:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.3-codex",
+					DisplayName: "openai/gpt-5.3-codex",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-image-2",
+					DisplayName: "openai/gpt-5.4-image-2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini:batch",
+					DisplayName: "openai/gpt-5.4-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano:batch",
+					DisplayName: "openai/gpt-5.4-nano:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-pro",
+					DisplayName: "openai/gpt-5.4-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-pro:batch",
+					DisplayName: "openai/gpt-5.4-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4:batch",
+					DisplayName: "openai/gpt-5.4:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro",
+					DisplayName: "openai/gpt-5.5-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro:batch",
+					DisplayName: "openai/gpt-5.5-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5:batch",
+					DisplayName: "openai/gpt-5.5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna-pro",
+					DisplayName: "openai/gpt-5.6-luna-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna-pro:batch",
+					DisplayName: "openai/gpt-5.6-luna-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna:batch",
+					DisplayName: "openai/gpt-5.6-luna:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol-pro",
+					DisplayName: "openai/gpt-5.6-sol-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol-pro:batch",
+					DisplayName: "openai/gpt-5.6-sol-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol:batch",
+					DisplayName: "openai/gpt-5.6-sol:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra-pro",
+					DisplayName: "openai/gpt-5.6-terra-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra-pro:batch",
+					DisplayName: "openai/gpt-5.6-terra-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra:batch",
+					DisplayName: "openai/gpt-5.6-terra:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5:batch",
+					DisplayName: "openai/gpt-5:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra-pro",
+					DisplayName: "openai/gpt-6-astra-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra-pro:batch",
+					DisplayName: "openai/gpt-6-astra-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra:batch",
+					DisplayName: "openai/gpt-6-astra:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna-pro",
+					DisplayName: "openai/gpt-6-luna-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna-pro:batch",
+					DisplayName: "openai/gpt-6-luna-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna:batch",
+					DisplayName: "openai/gpt-6-luna:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol-pro",
+					DisplayName: "openai/gpt-6-sol-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol-pro:batch",
+					DisplayName: "openai/gpt-6-sol-pro:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol:batch",
+					DisplayName: "openai/gpt-6-sol:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-chat-latest",
+					DisplayName: "openai/gpt-chat-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b:batch",
+					DisplayName: "openai/gpt-oss-120b:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b:batch",
+					DisplayName: "openai/gpt-oss-20b:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-20b",
+					DisplayName: "openai/gpt-oss-safeguard-20b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o1",
+					DisplayName: "openai/o1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o1-pro",
+					DisplayName: "openai/o1-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3",
+					DisplayName: "openai/o3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3-mini",
+					DisplayName: "openai/o3-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3-mini-high",
+					DisplayName: "openai/o3-mini-high",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3-mini:batch",
+					DisplayName: "openai/o3-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3-pro",
+					DisplayName: "openai/o3-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o3:batch",
+					DisplayName: "openai/o3:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o4-mini",
+					DisplayName: "openai/o4-mini",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o4-mini-high",
+					DisplayName: "openai/o4-mini-high",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openai/o4-mini:batch",
+					DisplayName: "openai/o4-mini:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/auto",
+					DisplayName: "openrouter/auto",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/auto-beta",
+					DisplayName: "openrouter/auto-beta",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/bodybuilder",
+					DisplayName: "openrouter/bodybuilder",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/free",
+					DisplayName: "openrouter/free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/fusion",
+					DisplayName: "openrouter/fusion",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "openrouter/pareto-code",
+					DisplayName: "openrouter/pareto-code",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perceptron/perceptron-mk1",
+					DisplayName: "perceptron/perceptron-mk1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perplexity/sonar",
+					DisplayName: "perplexity/sonar",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-deep-research",
+					DisplayName: "perplexity/sonar-deep-research",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-pro",
+					DisplayName: "perplexity/sonar-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-pro-search",
+					DisplayName: "perplexity/sonar-pro-search",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-reasoning-pro",
+					DisplayName: "perplexity/sonar-reasoning-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "poolside/laguna-s-2.1",
+					DisplayName: "poolside/laguna-s-2.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "poolside/laguna-s-2.1:free",
+					DisplayName: "poolside/laguna-s-2.1:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1",
+					DisplayName: "poolside/laguna-xs-2.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1:free",
+					DisplayName: "poolside/laguna-xs-2.1:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "prism-ml/ternary-bonsai-2-27b",
+					DisplayName: "prism-ml/ternary-bonsai-2-27b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen-2.5-72b-instruct",
+					DisplayName: "qwen/qwen-2.5-72b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen-2.5-7b-instruct",
+					DisplayName: "qwen/qwen-2.5-7b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen-2.5-coder-32b-instruct",
+					DisplayName: "qwen/qwen-2.5-coder-32b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus",
+					DisplayName: "qwen/qwen-plus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-07-28",
+					DisplayName: "qwen/qwen-plus-2025-07-28",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen2.5-vl-72b-instruct",
+					DisplayName: "qwen/qwen2.5-vl-72b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-14b",
+					DisplayName: "qwen/qwen3-14b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b",
+					DisplayName: "qwen/qwen3-235b-a22b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-2507",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-thinking-2507",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b",
+					DisplayName: "qwen/qwen3-30b-a3b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-instruct-2507",
+					DisplayName: "qwen/qwen3-30b-a3b-instruct-2507",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-thinking-2507",
+					DisplayName: "qwen/qwen3-30b-a3b-thinking-2507",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b",
+					DisplayName: "qwen/qwen3-32b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-8b",
+					DisplayName: "qwen/qwen3-8b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder",
+					DisplayName: "qwen/qwen3-coder",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-30b-a3b-instruct",
+					DisplayName: "qwen/qwen3-coder-30b-a3b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-flash",
+					DisplayName: "qwen/qwen3-coder-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-next",
+					DisplayName: "qwen/qwen3-coder-next",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-plus",
+					DisplayName: "qwen/qwen3-coder-plus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max",
+					DisplayName: "qwen/qwen3-max",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max-thinking",
+					DisplayName: "qwen/qwen3-max-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen/qwen3-next-80b-a3b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-thinking",
+					DisplayName: "qwen/qwen3-next-80b-a3b-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-instruct",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-thinking",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-30b-a3b-instruct",
+					DisplayName: "qwen/qwen3-vl-30b-a3b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-30b-a3b-thinking",
+					DisplayName: "qwen/qwen3-vl-30b-a3b-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-32b-instruct",
+					DisplayName: "qwen/qwen3-vl-32b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-8b-instruct",
+					DisplayName: "qwen/qwen3-vl-8b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-8b-thinking",
+					DisplayName: "qwen/qwen3-vl-8b-thinking",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-122b-a10b",
+					DisplayName: "qwen/qwen3.5-122b-a10b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-27b",
+					DisplayName: "qwen/qwen3.5-27b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-35b-a3b",
+					DisplayName: "qwen/qwen3.5-35b-a3b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-9b",
+					DisplayName: "qwen/qwen3.5-9b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-flash-02-23",
+					DisplayName: "qwen/qwen3.5-flash-02-23",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus-02-15",
+					DisplayName: "qwen/qwen3.5-plus-02-15",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus-20260420",
+					DisplayName: "qwen/qwen3.5-plus-20260420",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-35b-a3b",
+					DisplayName: "qwen/qwen3.6-35b-a3b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-flash",
+					DisplayName: "qwen/qwen3.6-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-max-preview",
+					DisplayName: "qwen/qwen3.6-max-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-flash",
+					DisplayName: "qwen/qwen3.7-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b:free",
+					DisplayName: "qwen/qwen3.8-27b:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-flash",
+					DisplayName: "qwen/qwen3.8-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max-0902",
+					DisplayName: "qwen/qwen3.8-max-0902",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max-prime",
+					DisplayName: "qwen/qwen3.8-max-prime",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-omni-flash",
+					DisplayName: "qwen/qwen3.8-omni-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "rekaai/reka-edge",
+					DisplayName: "rekaai/reka-edge",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "rekaai/reka-flash-3",
+					DisplayName: "rekaai/reka-flash-3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "relace/relace-apply-3",
+					DisplayName: "relace/relace-apply-3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "relace/relace-search",
+					DisplayName: "relace/relace-search",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sakana/fugu-max",
+					DisplayName: "sakana/fugu-max",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sakana/fugu-ultra",
+					DisplayName: "sakana/fugu-ultra",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sakana/fugu-ultra-v2",
+					DisplayName: "sakana/fugu-ultra-v2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sakana/sakana-namazu",
+					DisplayName: "sakana/sakana-namazu",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sao10k/l3-lunaris-8b",
+					DisplayName: "sao10k/l3-lunaris-8b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sao10k/l3.1-euryale-70b",
+					DisplayName: "sao10k/l3.1-euryale-70b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "sao10k/l3.3-euryale-70b",
+					DisplayName: "sao10k/l3.3-euryale-70b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "stealth/space-bunny-alpha",
+					DisplayName: "stealth/space-bunny-alpha",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.5-flash",
+					DisplayName: "stepfun/step-3.5-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.7-flash",
+					DisplayName: "stepfun/step-3.7-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hunyuan-a13b-instruct",
+					DisplayName: "tencent/hunyuan-a13b-instruct",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-1.8b",
+					DisplayName: "tencent/hy-mt2-1.8b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-30b-a3b",
+					DisplayName: "tencent/hy-mt2-30b-a3b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-7b",
+					DisplayName: "tencent/hy-mt2-7b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy3",
+					DisplayName: "tencent/hy3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy3-preview",
+					DisplayName: "tencent/hy3-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "tencent/hy4-preview",
+					DisplayName: "tencent/hy4-preview",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thedrummer/cydonia-24b-v4.1",
+					DisplayName: "thedrummer/cydonia-24b-v4.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thedrummer/skyfall-36b-v2",
+					DisplayName: "thedrummer/skyfall-36b-v2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thedrummer/unslopnemo-12b",
+					DisplayName: "thedrummer/unslopnemo-12b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling",
+					DisplayName: "thinkingmachines/inkling",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling-small",
+					DisplayName: "thinkingmachines/inkling-small",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling-small:free",
+					DisplayName: "thinkingmachines/inkling-small:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling:free",
+					DisplayName: "thinkingmachines/inkling:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "unbiased/pareto",
+					DisplayName: "unbiased/pareto",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "undi95/remm-slerp-l2-13b",
+					DisplayName: "undi95/remm-slerp-l2-13b",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "upstage/solar-mini4",
+					DisplayName: "upstage/solar-mini4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro-3",
+					DisplayName: "upstage/solar-pro-3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro4",
+					DisplayName: "upstage/solar-pro4",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "writer/palmyra-x5",
+					DisplayName: "writer/palmyra-x5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.20",
+					DisplayName: "x-ai/grok-4.20",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.20-multi-agent",
+					DisplayName: "x-ai/grok-4.20-multi-agent",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.3",
+					DisplayName: "x-ai/grok-4.3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.3:batch",
+					DisplayName: "x-ai/grok-4.3:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.5",
+					DisplayName: "x-ai/grok-4.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.6",
+					DisplayName: "x-ai/grok-4.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.7",
+					DisplayName: "x-ai/grok-4.7",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "x-ai/grok-build-0.1",
+					DisplayName: "x-ai/grok-build-0.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5",
+					DisplayName: "xiaomi/mimo-v2.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5-pro",
+					DisplayName: "xiaomi/mimo-v2.5-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-flash",
+					DisplayName: "xiaomi/mimo-v2.6-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-pro",
+					DisplayName: "xiaomi/mimo-v2.6-pro",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-pro-ultraspeed",
+					DisplayName: "xiaomi/mimo-v2.6-pro-ultraspeed",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.5",
+					DisplayName: "z-ai/glm-4.5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.5-air",
+					DisplayName: "z-ai/glm-4.5-air",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.5v",
+					DisplayName: "z-ai/glm-4.5v",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.6",
+					DisplayName: "z-ai/glm-4.6",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.6v",
+					DisplayName: "z-ai/glm-4.6v",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.7",
+					DisplayName: "z-ai/glm-4.7",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.7-flash",
+					DisplayName: "z-ai/glm-4.7-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5",
+					DisplayName: "z-ai/glm-5",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5-turbo",
+					DisplayName: "z-ai/glm-5-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.1",
+					DisplayName: "z-ai/glm-5.1",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2:free",
+					DisplayName: "z-ai/glm-5.2:free",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3",
+					DisplayName: "z-ai/glm-5.3",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash:batch",
+					DisplayName: "z-ai/glm-5.3-flash:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flashx",
+					DisplayName: "z-ai/glm-5.3-flashx",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-prime",
+					DisplayName: "z-ai/glm-5.3-prime",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3:batch",
+					DisplayName: "z-ai/glm-5.3:batch",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5v-turbo",
+					DisplayName: "z-ai/glm-5v-turbo",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~anthropic/claude-fable-latest",
+					DisplayName: "~anthropic/claude-fable-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~anthropic/claude-haiku-latest",
+					DisplayName: "~anthropic/claude-haiku-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~anthropic/claude-opus-latest",
+					DisplayName: "~anthropic/claude-opus-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~anthropic/claude-sonnet-latest",
+					DisplayName: "~anthropic/claude-sonnet-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~deepseek/deepseek-flash-latest",
+					DisplayName: "~deepseek/deepseek-flash-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~deepseek/deepseek-pro-latest",
+					DisplayName: "~deepseek/deepseek-pro-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~deepseek/deepseek-v4-flash-latest",
+					DisplayName: "~deepseek/deepseek-v4-flash-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~google/gemini-flash-latest",
+					DisplayName: "~google/gemini-flash-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~google/gemini-pro-latest",
+					DisplayName: "~google/gemini-pro-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~moonshotai/kimi-latest",
+					DisplayName: "~moonshotai/kimi-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~openai/gpt-astra-latest",
+					DisplayName: "~openai/gpt-astra-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~openai/gpt-luna-latest",
+					DisplayName: "~openai/gpt-luna-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~openai/gpt-mini-latest",
+					DisplayName: "~openai/gpt-mini-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~openai/gpt-sol-latest",
+					DisplayName: "~openai/gpt-sol-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~openai/gpt-terra-latest",
+					DisplayName: "~openai/gpt-terra-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~x-ai/grok-latest",
+					DisplayName: "~x-ai/grok-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~z-ai/glm-flash-latest",
+					DisplayName: "~z-ai/glm-flash-latest",
+					Description: "OpenRouter model",
+				},
+				{
+					UpstreamID: "~z-ai/glm-latest",
+					DisplayName: "~z-ai/glm-latest",
+					Description: "OpenRouter model",
+				},
+			},
+		},
+		{
+			Slug: "switchpoint",
+			DisplayName: "Switchpoint",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.ppq.ai",
+			DocsURL: "https://switchpoint.ai",
+			Summary: "Request-aware provider selection",
+			Models: []Model{
+				{
+					UpstreamID: "switchpoint/router",
+					DisplayName: "switchpoint/router",
+					Description: "Switchpoint model",
+				},
+			},
+		},
+		{
+			Slug: "relace",
+			DisplayName: "Relace",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.relace.ai/v1",
+			DocsURL: "https://relace.ai",
+			Summary: "Coding APIs; zero data retention default",
+			Models: []Model{
+				{
+					UpstreamID: "relace-apply-3",
+					DisplayName: "relace-apply-3",
+					Description: "Relace model",
+				},
+				{
+					UpstreamID: "relace-search",
+					DisplayName: "relace-search",
+					Description: "Relace model",
+				},
+			},
+		},
+		{
+			Slug: "moonshot",
+			DisplayName: "Moonshot AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.moonshot.ai/v1",
+			DocsURL: "https://api.moonshot.ai/v1",
+			Summary: "First-party Kimi gateway",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "moonshot-v1-128k",
+					DisplayName: "moonshot-v1-128k",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "moonshot-v1-32k",
+					DisplayName: "moonshot-v1-32k",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "moonshot-v1-8k",
+					DisplayName: "moonshot-v1-8k",
+					Description: "Moonshot AI model",
+				},
+				{
+					UpstreamID: "KIMI_K3_MODEL",
+					DisplayName: "KIMI_K3_MODEL",
+					Description: "Moonshot AI model",
+				},
+			},
+		},
+		{
+			Slug: "wandb",
+			DisplayName: "Weights & Biases",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.inference.wandb.ai/v1",
+			DocsURL: "https://wandb.ai",
+			Summary: "Experiment tracking",
+			Models: []Model{
+				{
+					UpstreamID: "evaluation-registry",
+					DisplayName: "evaluation-registry",
+					Description: "Weights & Biases model",
+				},
+			},
+		},
+		{
+			Slug: "requesty",
+			DisplayName: "Requesty",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://router.requesty.ai/v1",
+			DocsURL: "https://requesty.ai",
+			Summary: "Auto-failover between providers",
+			Models: []Model{
+				{
+					UpstreamID: "multi-provider-routed",
+					DisplayName: "multi-provider-routed",
+					Description: "Requesty model",
+				},
+			},
+		},
+		{
+			Slug: "unify",
+			DisplayName: "Unify.ai",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.unify.ai/v0",
+			DocsURL: "https://unify.ai",
+			Summary: "Picks optimal provider per query",
+			Models: []Model{
+				{
+					UpstreamID: "ml-routed-models",
+					DisplayName: "ml-routed-models",
+					Description: "Unify.ai model",
+				},
+			},
+		},
+		{
+			Slug: "aimlapi",
+			DisplayName: "AIMLAPI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.aimlapi.com/v1",
+			DocsURL: "https://aimlapi.com",
+			Summary: "300+ models; free tier available",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "claude-3-5-sonnet",
+					DisplayName: "claude-3-5-sonnet",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "claude-3-5-sonnet-20241022",
+					DisplayName: "claude-3-5-sonnet-20241022",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "gemini-1.5-pro",
+					DisplayName: "gemini-1.5-pro",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+					DisplayName: "meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "AIMLAPI model",
+				},
+				{
+					UpstreamID: "mistral-large-latest",
+					DisplayName: "mistral-large-latest",
+					Description: "AIMLAPI model",
+				},
+			},
+		},
+		{
+			Slug: "lemondata",
+			DisplayName: "LemonData",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.lemondata.ai/v1",
+			DocsURL: "https://lemondata.ai",
+			Summary: "300+ models; $1 free credits",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "LemonData model",
+				},
+				{
+					UpstreamID: "claude-3.5-sonnet",
+					DisplayName: "claude-3.5-sonnet",
+					Description: "LemonData model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "LemonData model",
+				},
+			},
+		},
+		{
+			Slug: "coze",
+			DisplayName: "Coze (ByteDance)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.coze.com/v1",
+			DocsURL: "https://coze.com",
+			Summary: "Bot-builder platform with LLM backends",
+			Models: []Model{
+				{
+					UpstreamID: "bot-backed-gpt-4o",
+					DisplayName: "bot-backed-gpt-4o",
+					Description: "Coze (ByteDance) model",
+				},
+				{
+					UpstreamID: "bot-backed-gemini",
+					DisplayName: "bot-backed-gemini",
+					Description: "Coze (ByteDance) model",
+				},
+				{
+					UpstreamID: "bot-backed-claude",
+					DisplayName: "bot-backed-claude",
+					Description: "Coze (ByteDance) model",
+				},
+				{
+					UpstreamID: "claude-3-7-sonnet-20250514",
+					DisplayName: "claude-3-7-sonnet-20250514",
+					Description: "Coze (ByteDance) model",
+				},
+			},
+		},
+		{
+			Slug: "ollama",
+			DisplayName: "Ollama",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:11434/v1",
+			DocsURL: "https://ollama.com",
+			Summary: "Easiest local setup; 50+ models",
+			Models: []Model{
+				{
+					UpstreamID: "llama3.3",
+					DisplayName: "llama3.3",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "llama3.2",
+					DisplayName: "llama3.2",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "llama3.1",
+					DisplayName: "llama3.1",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "qwen2.5",
+					DisplayName: "qwen2.5",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "qwen3",
+					DisplayName: "qwen3",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "gemma3",
+					DisplayName: "gemma3",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "mistral",
+					DisplayName: "mistral",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "phi4",
+					DisplayName: "phi4",
+					Description: "Ollama model",
+				},
+				{
+					UpstreamID: "codellama",
+					DisplayName: "codellama",
+					Description: "Ollama model",
+				},
+			},
+		},
+		{
+			Slug: "302-ai",
+			DisplayName: "302.AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.302.ai/v1",
+			DocsURL: "https://302.ai",
+			Summary: "OpenCode-supported; unified OpenAI-compatible gateway for 100+ models",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "302.AI model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "302.AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-20250514",
+					DisplayName: "claude-sonnet-4-20250514",
+					Description: "302.AI model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "302.AI model",
+				},
+			},
+		},
+		{
+			Slug: "atomic-chat",
+			DisplayName: "Atomic Chat",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://127.0.0.1:1337/v1",
+			DocsURL: "https://atomicchat.ai",
+			Summary: "OpenCode-supported; desktop app with local OpenAI-compatible server",
+			Models: []Model{
+				{
+					UpstreamID: "qwen-coder",
+					DisplayName: "qwen-coder",
+					Description: "Atomic Chat model",
+				},
+				{
+					UpstreamID: "deepseek-coder",
+					DisplayName: "deepseek-coder",
+					Description: "Atomic Chat model",
+				},
+			},
+		},
+		{
+			Slug: "azure-cognitive-services",
+			DisplayName: "Azure Cognitive Services",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://<resource>.cognitiveservices.azure.com/openai/v1",
+			DocsURL: "https://azure.microsoft.com/products/ai-services",
+			Summary: "OpenCode-supported; separate from Azure OpenAI; set AZURE_COGNITIVE_SERVICES_RESOURCE_NAME",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "Azure Cognitive Services model",
+				},
+				{
+					UpstreamID: "gpt-4.1",
+					DisplayName: "gpt-4.1",
+					Description: "Azure Cognitive Services model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "Azure Cognitive Services model",
+				},
+			},
+		},
+		{
+			Slug: "cortecs",
+			DisplayName: "Cortecs",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cortecs.ai/v1",
+			DocsURL: "https://cortecs.ai",
+			Summary: "OpenCode-supported; EU GDPR-compliant LLM router with speed/cost/balanced routing",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k2-instruct",
+					DisplayName: "kimi-k2-instruct",
+					Description: "Cortecs model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "Cortecs model",
+				},
+			},
+		},
+		{
+			Slug: "frogbot",
+			DisplayName: "FrogBot",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://app.frogbot.ai/api",
+			DocsURL: "https://frogbot.ai",
+			Summary: "OpenCode-supported; unified AI subscription for chat, embeddings, audio, and images",
+			Models: []Model{
+				{
+					UpstreamID: "claude-sonnet-4",
+					DisplayName: "claude-sonnet-4",
+					Description: "FrogBot model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "FrogBot model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "FrogBot model",
+				},
+			},
+		},
+		{
+			Slug: "github-copilot",
+			DisplayName: "GitHub Copilot",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.githubcopilot.com",
+			DocsURL: "https://github.com/features/copilot",
+			Summary: "OpenCode-supported; OAuth via /connect; separate from GitHub Models marketplace API",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4",
+					DisplayName: "claude-sonnet-4",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8-fast",
+					DisplayName: "claude-opus-4.8-fast",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-4.7",
+					DisplayName: "claude-opus-4.7",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-4.6",
+					DisplayName: "claude-opus-4.6",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-opus-4.5",
+					DisplayName: "claude-opus-4.5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.5",
+					DisplayName: "claude-sonnet-4.5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "claude-haiku-4.5",
+					DisplayName: "claude-haiku-4.5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gemini-3.6-flash",
+					DisplayName: "gemini-3.6-flash",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash",
+					DisplayName: "gemini-3.5-flash",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-4o-2024-11-20",
+					DisplayName: "gpt-4o-2024-11-20",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "gpt-4-0125-preview",
+					DisplayName: "gpt-4-0125-preview",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "mai-code-1-flash",
+					DisplayName: "mai-code-1-flash",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "mai-code-1.1-flash",
+					DisplayName: "mai-code-1.1-flash",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "mai-code-1-flash-picker",
+					DisplayName: "mai-code-1-flash-picker",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "GitHub Copilot model",
+				},
+				{
+					UpstreamID: "oswe-vscode-prime",
+					DisplayName: "oswe-vscode-prime",
+					Description: "GitHub Copilot model",
+				},
+			},
+		},
+		{
+			Slug: "opencode-zen",
+			DisplayName: "OpenCode Zen",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://opencode.ai/zen/v1",
+			DocsURL: "https://opencode.ai/zen",
+			Summary: "OpenCode-curated models verified for coding agents; use opencode/<model-id> prefix",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "qwen3-coder-480b",
+					DisplayName: "qwen3-coder-480b",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "kimi-k2.7",
+					DisplayName: "kimi-k2.7",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "big-pickle",
+					DisplayName: "big-pickle",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex-spark",
+					DisplayName: "gpt-5.3-codex-spark",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gpt-5.1",
+					DisplayName: "gpt-5.1",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash-lite",
+					DisplayName: "gemini-3.5-flash-lite",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro",
+					DisplayName: "gemini-3.1-pro",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "gemini-3-flash",
+					DisplayName: "gemini-3-flash",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "grok-build-0.1",
+					DisplayName: "grok-build-0.1",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2",
+					DisplayName: "muse-spark-1.2",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-free",
+					DisplayName: "muse-spark-1.2-contributor-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3",
+					DisplayName: "muse-spark-1.3",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-free",
+					DisplayName: "muse-spark-1.3-contributor-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-free",
+					DisplayName: "deepseek-v4-flash-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-free",
+					DisplayName: "mimo-v2.5-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "hy3-free",
+					DisplayName: "hy3-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "nemotron-3-ultra-free",
+					DisplayName: "nemotron-3-ultra-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "nemotron-3.5-lightning-free",
+					DisplayName: "nemotron-3.5-lightning-free",
+					Description: "OpenCode Zen model",
+				},
+				{
+					UpstreamID: "laguna-s-2.1-free",
+					DisplayName: "laguna-s-2.1-free",
+					Description: "OpenCode Zen model",
+				},
+			},
+		},
+		{
+			Slug: "opencode-go",
+			DisplayName: "OpenCode Go",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://opencode.ai/zen/go/v1",
+			DocsURL: "https://opencode.ai/docs/go/",
+			Summary: "OpenCode-supported; low-cost subscription for open coding models; use opencode-go/<model-id>",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k2.7",
+					DisplayName: "kimi-k2.7",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "glm-5.2-high",
+					DisplayName: "glm-5.2-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "glm-5.2-max",
+					DisplayName: "glm-5.2-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "kimi-k3-max",
+					DisplayName: "kimi-k3-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-high",
+					DisplayName: "mimo-v2.5-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-max",
+					DisplayName: "mimo-v2.5-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-max-high",
+					DisplayName: "qwen3.7-max-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-max-max",
+					DisplayName: "qwen3.7-max-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus-high",
+					DisplayName: "qwen3.7-plus-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus-max",
+					DisplayName: "qwen3.7-plus-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus-high",
+					DisplayName: "qwen3.6-plus-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus-max",
+					DisplayName: "qwen3.6-plus-max",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "hy3",
+					DisplayName: "hy3",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "hy3-none",
+					DisplayName: "hy3-none",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "hy3-low",
+					DisplayName: "hy3-low",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "hy3-high",
+					DisplayName: "hy3-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "hy3-preview",
+					DisplayName: "hy3-preview",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor",
+					DisplayName: "muse-spark-1.2-contributor",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-minimal",
+					DisplayName: "muse-spark-1.2-contributor-minimal",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-low",
+					DisplayName: "muse-spark-1.2-contributor-low",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-medium",
+					DisplayName: "muse-spark-1.2-contributor-medium",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-high",
+					DisplayName: "muse-spark-1.2-contributor-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-xhigh",
+					DisplayName: "muse-spark-1.2-contributor-xhigh",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor",
+					DisplayName: "muse-spark-1.3-contributor",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-minimal",
+					DisplayName: "muse-spark-1.3-contributor-minimal",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-low",
+					DisplayName: "muse-spark-1.3-contributor-low",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-medium",
+					DisplayName: "muse-spark-1.3-contributor-medium",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-high",
+					DisplayName: "muse-spark-1.3-contributor-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-xhigh",
+					DisplayName: "muse-spark-1.3-contributor-xhigh",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "grok-4.5-low",
+					DisplayName: "grok-4.5-low",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "grok-4.5-medium",
+					DisplayName: "grok-4.5-medium",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "grok-4.5-high",
+					DisplayName: "grok-4.5-high",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "OpenCode Go model",
+				},
+				{
+					UpstreamID: "ox-alpha-free",
+					DisplayName: "ox-alpha-free",
+					Description: "OpenCode Go model",
+				},
+			},
+		},
+		{
+			Slug: "llm-gateway",
+			DisplayName: "LLM Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.llmgateway.io/v1",
+			DocsURL: "https://llmgateway.io",
+			Summary: "OpenCode-supported; unified API with provider/model routing",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "LLM Gateway model",
+				},
+				{
+					UpstreamID: "claude-3-5-sonnet-20241022",
+					DisplayName: "claude-3-5-sonnet-20241022",
+					Description: "LLM Gateway model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "LLM Gateway model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "LLM Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "stackit",
+			DisplayName: "STACKIT AI Model Serving",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.openai-compat.model-serving.eu01.onstackit.cloud/v1",
+			DocsURL: "https://www.stackit.de/en/product/stackit-ai-model-serving",
+			Summary: "OpenCode-supported; EU sovereign hosting for Llama, Mistral, Qwen",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3-vl-235b",
+					DisplayName: "qwen3-vl-235b",
+					Description: "STACKIT AI Model Serving model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "STACKIT AI Model Serving model",
+				},
+				{
+					UpstreamID: "neuralmagic/Mistral-Nemo-Instruct-2407-FP8",
+					DisplayName: "neuralmagic/Mistral-Nemo-Instruct-2407-FP8",
+					Description: "STACKIT AI Model Serving model",
+				},
+			},
+		},
+		{
+			Slug: "snowflake-cortex",
+			DisplayName: "Snowflake Cortex",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://<account>.snowflakecomputing.com/api/v2/cortex/v1",
+			DocsURL: "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-llm-rest-api",
+			Summary: "OpenCode-supported; OAuth or PAT; Claude/OpenAI families with tool calling",
+			Models: []Model{
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "Snowflake Cortex model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "Snowflake Cortex model",
+				},
+				{
+					UpstreamID: "gpt-5",
+					DisplayName: "gpt-5",
+					Description: "Snowflake Cortex model",
+				},
+			},
+		},
+		{
+			Slug: "zenmux",
+			DisplayName: "ZenMux",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://zenmux.ai/api/v1",
+			DocsURL: "https://zenmux.ai",
+			Summary: "OpenCode-supported; enterprise routing across 200+ models",
+			Models: []Model{
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4",
+					DisplayName: "anthropic/claude-sonnet-4",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.5",
+					DisplayName: "anthropic/claude-sonnet-4.5",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.5",
+					DisplayName: "anthropic/claude-opus-4.5",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat",
+					DisplayName: "deepseek/deepseek-chat",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.1-fast",
+					DisplayName: "x-ai/grok-4.1-fast",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large-2512",
+					DisplayName: "mistralai/mistral-large-2512",
+					Description: "ZenMux model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.6v-flash",
+					DisplayName: "z-ai/glm-4.6v-flash",
+					Description: "ZenMux model",
+				},
+			},
+		},
+		{
+			Slug: "sakana-fugu",
+			DisplayName: "Sakana AI (Fugu)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.sakana.ai/v1",
+			DocsURL: "https://console.sakana.ai",
+			Summary: "Trained multi-agent orchestrator; routes to frontier LLM pool via single OpenAI-compatible API",
+			Models: []Model{
+				{
+					UpstreamID: "fugu",
+					DisplayName: "fugu",
+					Description: "Sakana AI (Fugu) model",
+				},
+				{
+					UpstreamID: "fugu-ultra",
+					DisplayName: "fugu-ultra",
+					Description: "Sakana AI (Fugu) model",
+				},
+				{
+					UpstreamID: "fugu-ultra-20260615",
+					DisplayName: "fugu-ultra-20260615",
+					Description: "Sakana AI (Fugu) model",
+				},
+			},
+		},
+		{
+			Slug: "prism-api",
+			DisplayName: "Prism API",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://sub2api.558686.xyz/v1",
+			DocsURL: "https://go165.github.io/prism-api-promo/",
+			Summary: "Independent OpenAI-compatible gateway for overseas developers; low-cost GPT-5.5 access and crypto-friendly recharge/voucher options",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Prism API model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Prism API model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4",
+					DisplayName: "claude-sonnet-4",
+					Description: "Prism API model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "Prism API model",
+				},
+			},
+		},
+		{
+			Slug: "discountedtokens",
+			DisplayName: "DiscountedTokens",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://discountedtokens.com/v1",
+			DocsURL: "https://discountedtokens.com",
+			Summary: "Budget resale of GPT-5.x family; OpenAI/Anthropic/Responses compatible; ~80% below retail",
+			Models: []Model{
+				{
+					UpstreamID: "GPT-5.5",
+					DisplayName: "GPT-5.5",
+					Description: "DiscountedTokens model",
+				},
+				{
+					UpstreamID: "GPT-5.4",
+					DisplayName: "GPT-5.4",
+					Description: "DiscountedTokens model",
+				},
+				{
+					UpstreamID: "GPT-5.6",
+					DisplayName: "GPT-5.6",
+					Description: "DiscountedTokens model",
+				},
+			},
+		},
+		{
+			Slug: "xiurouter",
+			DisplayName: "XiuRouter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://router-api.xiu.ai/v1",
+			DocsURL: "https://router.xiu.ai/",
+			Summary: "Usage-based gateway with OpenAI Chat Completions and Responses, Anthropic Messages, Gemini GenerateContent, scoped keys, and request-level usage and cost records",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "XiuRouter model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "XiuRouter model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "XiuRouter model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "XiuRouter model",
+				},
+			},
+		},
+		{
+			Slug: "sagg",
+			DisplayName: "SAGG",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.privatedeskai.com/v1",
+			DocsURL: "https://api.privatedeskai.com",
+			Summary: "Multi-provider failover gateway; a flat-rate Super Deal tier ($0.028/1M tokens, separate key) is also available",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					Description: "SAGG model",
+				},
+			},
+		},
+		{
+			Slug: "aiwave",
+			DisplayName: "AIWave",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://aiwave.live/v1",
+			DocsURL: "https://aiwave.live/",
+			Summary: "Chinese AI providers with USD billing, dated pricing, and request-level usage records",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "AIWave model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "AIWave model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "AIWave model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "AIWave model",
+				},
+				{
+					UpstreamID: "MiniMax-M3",
+					DisplayName: "MiniMax-M3",
+					Description: "AIWave model",
+				},
+			},
+		},
+		{
+			Slug: "opencode",
+			DisplayName: "OpenCode Free",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://opencode.ai/zen/v1",
+			DocsURL: "https://opencode.ai",
+			Summary: "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models.; No API key required — uses OpenCode's public free endpoint.; OpenCode Free uses the public OpenCode endpoint (https://opencode.ai/zen/v1). No signup or API key needed. Rate limits apply.",
+			Models: []Model{
+				{
+					UpstreamID: "big-pickle",
+					DisplayName: "big-pickle",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2",
+					DisplayName: "muse-spark-1.2",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor-free",
+					DisplayName: "muse-spark-1.2-contributor-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3",
+					DisplayName: "muse-spark-1.3",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor-free",
+					DisplayName: "muse-spark-1.3-contributor-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-free",
+					DisplayName: "deepseek-v4-flash-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-free",
+					DisplayName: "mimo-v2.5-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "hy3-free",
+					DisplayName: "hy3-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "nemotron-3-ultra-free",
+					DisplayName: "nemotron-3-ultra-free",
+					Description: "OpenCode Free model",
+				},
+				{
+					UpstreamID: "north-mini-code-free",
+					DisplayName: "north-mini-code-free",
+					Description: "OpenCode Free model",
+				},
+			},
+		},
+		{
+			Slug: "duckduckgo-web",
+			DisplayName: "DuckDuckGo AI Chat",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://duck.ai/duckchat/v1/chat",
+			DocsURL: "https://duckduckgo.com/duckchat",
+			Summary: "Free — anonymous access to multiple AI models via DuckDuckGo.; No credentials required — DuckDuckGo AI Chat is anonymous and free.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "DuckDuckGo AI Chat model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "DuckDuckGo AI Chat model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "DuckDuckGo AI Chat model",
+				},
+				{
+					UpstreamID: "mistral-small-2603",
+					DisplayName: "mistral-small-2603",
+					Description: "DuckDuckGo AI Chat model",
+				},
+				{
+					UpstreamID: "tinfoil/gpt-oss-120b",
+					DisplayName: "tinfoil/gpt-oss-120b",
+					Description: "DuckDuckGo AI Chat model",
+				},
+				{
+					UpstreamID: "tinfoil/gemma4-31b",
+					DisplayName: "tinfoil/gemma4-31b",
+					Description: "DuckDuckGo AI Chat model",
+				},
+			},
+		},
+		{
+			Slug: "cloudflare-playground",
+			DisplayName: "Cloudflare AI Playground",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://playground.ai.cloudflare.com",
+			DocsURL: "https://playground.ai.cloudflare.com",
+			Summary: "Free — Cloudflare's AI Playground: GLM 5.2, Kimi K2.7 Code, DeepSeek V4 Pro, gpt-oss-120B and 16 more. No account, no API key.; No credentials required — anonymous browser sessions over a reverse-engineered cf_agent WebSocket protocol (Playwright transport).; Cloudflare AI Playground uses a reverse-engineered anonymous WebSocket protocol (no official API). Requires Playwright with a Chromium browser on first reque…",
+			Models: []Model{
+				{
+					UpstreamID: "zai-org/glm-5.2",
+					DisplayName: "zai-org/glm-5.2",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-pro-0813",
+					DisplayName: "deepseek-ai/deepseek-v4-pro-0813",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-flash-0731",
+					DisplayName: "deepseek-ai/deepseek-v4-flash-0731",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.7-flash",
+					DisplayName: "zai-org/glm-4.7-flash",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.3-70b-instruct-fp8-fast",
+					DisplayName: "meta-llama/llama-3.3-70b-instruct-fp8-fast",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "meta/llama-3.1-8b-instruct-fp8",
+					DisplayName: "meta/llama-3.1-8b-instruct-fp8",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "meta/llama-4-scout-17b-16e-instruct",
+					DisplayName: "meta/llama-4-scout-17b-16e-instruct",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-120b-a12b",
+					DisplayName: "nvidia/nemotron-3-120b-a12b",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "qwen/qwen2.5-coder-32b-instruct",
+					DisplayName: "qwen/qwen2.5-coder-32b-instruct",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-fp8",
+					DisplayName: "qwen/qwen3-30b-a3b-fp8",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "qwen/qwq-32b",
+					DisplayName: "qwen/qwq-32b",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-r1-distill-qwen-32b",
+					DisplayName: "deepseek-ai/deepseek-r1-distill-qwen-32b",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26b-a4b-it",
+					DisplayName: "google/gemma-4-26b-a4b-it",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-3.1-24b-instruct",
+					DisplayName: "mistralai/mistral-small-3.1-24b-instruct",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.0-h-micro",
+					DisplayName: "ibm-granite/granite-4.0-h-micro",
+					Description: "Cloudflare AI Playground model",
+				},
+				{
+					UpstreamID: "aisingapore/gemma-sea-lion-v4-27b-it",
+					DisplayName: "aisingapore/gemma-sea-lion-v4-27b-it",
+					Description: "Cloudflare AI Playground model",
+				},
+			},
+		},
+		{
+			Slug: "chipotle",
+			DisplayName: "Chipotle Pepper AI (Free)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://amelia.chipotle.com",
+			DocsURL: "https://amelia.chipotle.com",
+			Summary: "Free — Chipotle's Pepper AI (IPsoft Amelia). Anonymous sessions, no API key. Rate-limited.; No credentials required. Uses Chipotle's public support chatbot via reverse-engineered SockJS/STOMP protocol.",
+			Models: []Model{
+				{
+					UpstreamID: "pepper-1",
+					DisplayName: "pepper-1",
+					Description: "Chipotle Pepper AI (Free) model",
+				},
+			},
+		},
+		{
+			Slug: "uncloseai",
+			DisplayName: "UncloseAI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://hermes.ai.unturf.com/v1",
+			DocsURL: "https://uncloseai.com",
+			Summary: "Free forever — no signup, no credit card. OpenAI-compatible endpoints.; No auth required. API accepts any non-empty string as key for identification. If older built-in models return 404, use Available Models → Import from /models or Auto-Sync; verified live model: solidrust/Hermes-3-Llama-3.1-8B-AWQ.; UncloseAI needs no API key. API accepts any non-empty string as key for identification. If older built-in models r…",
+			Models: []Model{
+				{
+					UpstreamID: "adamo1139/Hermes-3-Llama-3.1-8B-FP8-Dynamic",
+					DisplayName: "adamo1139/Hermes-3-Llama-3.1-8B-FP8-Dynamic",
+					Description: "UncloseAI model",
+				},
+				{
+					UpstreamID: "qwen3.6:27b",
+					DisplayName: "qwen3.6:27b",
+					Description: "UncloseAI model",
+				},
+				{
+					UpstreamID: "gemma4:31b",
+					DisplayName: "gemma4:31b",
+					Description: "UncloseAI model",
+				},
+			},
+		},
+		{
+			Slug: "aihorde",
+			DisplayName: "AI Horde",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://oai.aihorde.net/v1",
+			DocsURL: "https://aihorde.net",
+			Summary: "Crowdsourced inference from volunteer GPUs. Throughput is a shared queue, not a quota: there is no RPM/RPD cap, but waits grow when the network is busy.; No API key required — uses AI Horde's documented anonymous key. Adding a free aihorde.net key is optional and only buys higher queue priority (kudos).; AI Horde routes to volunteer-run workers, so chat and image jobs can take minutes and tool calling is unavailab…",
+			Models: []Model{
+				{
+					UpstreamID: "aphrodite/TheDrummer/Cydonia-24B-v4.3",
+					DisplayName: "aphrodite/TheDrummer/Cydonia-24B-v4.3",
+					Description: "AI Horde model",
+				},
+				{
+					UpstreamID: "aphrodite/TheDrummer/Skyfall-31B-v4.2",
+					DisplayName: "aphrodite/TheDrummer/Skyfall-31B-v4.2",
+					Description: "AI Horde model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b",
+					DisplayName: "google/gemma-4-31b",
+					Description: "AI Horde model",
+				},
+			},
+		},
+		{
+			Slug: "openference",
+			DisplayName: "Openference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.openference.com/v1",
+			DocsURL: "https://openference.com",
+			Summary: "Free plan: 3-day trial with open-source models — no credit card required; Sign in with your Openference account to route requests through api.openference.com. An active plan is required for inference — OAuth may authenticate but return 402 without one.",
+			Models: []Model{
+				{
+					UpstreamID: "GLM-5.2",
+					DisplayName: "GLM-5.2",
+					Description: "Openference model",
+				},
+			},
+		},
+		{
+			Slug: "grok-cli",
+			DisplayName: "Grok Build",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://cli-chat-proxy.grok.com/v1",
+			DocsURL: "https://x.ai",
+			Summary: "Sign in with your browser, or paste your ~/.grok/auth.json (or the JWT access token) from the Grok Build CLI; refresh_token is rotated automatically either way.",
+			Models: []Model{
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "Grok Build model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "Grok Build model",
+				},
+				{
+					UpstreamID: "grok-composer-2.5-fast",
+					DisplayName: "grok-composer-2.5-fast",
+					Description: "Grok Build model",
+				},
+			},
+		},
+		{
+			Slug: "qoder",
+			DisplayName: "Qoder",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.qoder.com/v1",
+			DocsURL: "https://qoder.com",
+			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.8-max-preview",
+					DisplayName: "qwen3.8-max-preview",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Qoder model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Qoder model",
+				},
+			},
+		},
+		{
+			Slug: "codex",
+			DisplayName: "OpenAI Codex",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://chatgpt.com/backend-api/codex",
+			DocsURL: "https://developers.openai.com/codex",
+			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-6-astra",
+					DisplayName: "gpt-6-astra",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-ultra",
+					DisplayName: "gpt-6-astra-ultra",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-max",
+					DisplayName: "gpt-6-astra-max",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-xhigh",
+					DisplayName: "gpt-6-astra-xhigh",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-high",
+					DisplayName: "gpt-6-astra-high",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-medium",
+					DisplayName: "gpt-6-astra-medium",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-6-astra-low",
+					DisplayName: "gpt-6-astra-low",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-ultra",
+					DisplayName: "gpt-5.6-sol-ultra",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-max",
+					DisplayName: "gpt-5.6-sol-max",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-xhigh",
+					DisplayName: "gpt-5.6-sol-xhigh",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-high",
+					DisplayName: "gpt-5.6-sol-high",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-medium",
+					DisplayName: "gpt-5.6-sol-medium",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-low",
+					DisplayName: "gpt-5.6-sol-low",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-ultra",
+					DisplayName: "gpt-5.6-terra-ultra",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-max",
+					DisplayName: "gpt-5.6-terra-max",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-xhigh",
+					DisplayName: "gpt-5.6-terra-xhigh",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-high",
+					DisplayName: "gpt-5.6-terra-high",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-medium",
+					DisplayName: "gpt-5.6-terra-medium",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra-low",
+					DisplayName: "gpt-5.6-terra-low",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna-max",
+					DisplayName: "gpt-5.6-luna-max",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna-xhigh",
+					DisplayName: "gpt-5.6-luna-xhigh",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna-high",
+					DisplayName: "gpt-5.6-luna-high",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna-medium",
+					DisplayName: "gpt-5.6-luna-medium",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna-low",
+					DisplayName: "gpt-5.6-luna-low",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.5-xhigh",
+					DisplayName: "gpt-5.5-xhigh",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.5-high",
+					DisplayName: "gpt-5.5-high",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.5-medium",
+					DisplayName: "gpt-5.5-medium",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.5-low",
+					DisplayName: "gpt-5.5-low",
+					Description: "OpenAI Codex model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex-spark",
+					DisplayName: "gpt-5.3-codex-spark",
+					Description: "OpenAI Codex model",
+				},
+			},
+		},
+		{
+			Slug: "trae",
+			DisplayName: "Trae",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://core-normal.trae.ai/api/remote/v1",
+			DocsURL: "https://trae.ai",
+			Summary: "Trae is an AI-native IDE by ByteDance (SOLO remote agent). Authorize via trae.ai in the popup, or sign in at solo.trae.ai and paste the Cloud-IDE-JWT (sent as 'Authorization: Cloud-IDE-JWT <token>', ~14-day lifetime) as the access token; web_id/biz_user_id/user_unique_id/scope/tenant/region propagate via providerSpecificData. No headless refresh for pasted tokens — re-paste on expiry.",
+			Models: []Model{
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "work",
+					DisplayName: "work",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro",
+					DisplayName: "gemini-3.1-pro",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-solo",
+					DisplayName: "gemini-3-flash-solo",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Trae model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "Trae model",
+				},
+			},
+		},
+		{
+			Slug: "kilocode",
+			DisplayName: "Kilo Code",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.kilo.ai/api/openrouter",
+			DocsURL: "https://kilocode.ai",
+			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Models: []Model{
+				{
+					UpstreamID: "openrouter/free",
+					DisplayName: "openrouter/free",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4.5",
+					DisplayName: "anthropic/claude-haiku-4.5",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max",
+					DisplayName: "qwen/qwen3.8-max",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "Kilo Code model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "Kilo Code model",
+				},
+			},
+		},
+		{
+			Slug: "cline",
+			DisplayName: "Cline",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cline.bot/api/v1",
+			DocsURL: "https://cline.bot",
+			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Models: []Model{
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.5",
+					DisplayName: "x-ai/grok-4.5",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8",
+					DisplayName: "anthropic/claude-opus-4.8",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "openrouter/free",
+					DisplayName: "openrouter/free",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "tencent/hy3:free",
+					DisplayName: "tencent/hy3:free",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.7-flash",
+					DisplayName: "stepfun/step-3.7-flash",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "poolside/laguna-m.1:free",
+					DisplayName: "poolside/laguna-m.1:free",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it:free",
+					DisplayName: "google/gemma-4-31b-it:free",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b:free",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b:free",
+					Description: "Cline model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "Cline model",
+				},
+			},
+		},
+		{
+			Slug: "clinepass",
+			DisplayName: "ClinePass",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cline.bot/api/v1",
+			DocsURL: "https://cline.bot/cline-pass",
+			Summary: "ClinePass is Cline's $9.99/mo subscription bundling 10 open coding models. Sign in with your Cline account (same login as the Cline CLI/IDE), or paste a direct ClinePass API key (app.cline.bot → Settings → API Keys). A ClinePass subscription unlocks the cline-pass/* models. Reuses the Cline WorkOS OAuth flow.",
+			Models: []Model{
+				{
+					UpstreamID: "cline-pass/glm-5.2",
+					DisplayName: "cline-pass/glm-5.2",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/minimax-m3",
+					DisplayName: "cline-pass/minimax-m3",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/deepseek-v4-pro",
+					DisplayName: "cline-pass/deepseek-v4-pro",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/deepseek-v4-flash",
+					DisplayName: "cline-pass/deepseek-v4-flash",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/kimi-k3",
+					DisplayName: "cline-pass/kimi-k3",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/kimi-k2.7-code",
+					DisplayName: "cline-pass/kimi-k2.7-code",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/mimo-v2.5-pro",
+					DisplayName: "cline-pass/mimo-v2.5-pro",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/mimo-v2.5",
+					DisplayName: "cline-pass/mimo-v2.5",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/qwen3.8-max",
+					DisplayName: "cline-pass/qwen3.8-max",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/qwen3.7-max",
+					DisplayName: "cline-pass/qwen3.7-max",
+					Description: "ClinePass model",
+				},
+				{
+					UpstreamID: "cline-pass/qwen3.7-plus",
+					DisplayName: "cline-pass/qwen3.7-plus",
+					Description: "ClinePass model",
+				},
+			},
+		},
+		{
+			Slug: "codebuddy-cn",
+			DisplayName: "CodeBuddy CN",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://copilot.tencent.com/v2",
+			DocsURL: "https://copilot.tencent.com",
+			Summary: "Tencent CodeBuddy CN (copilot.tencent.com). Sign in via the official CLI device-code flow, or paste a direct API key (sent as Authorization: Bearer). Catalog: GLM / Kimi / MiniMax / DeepSeek / Hunyuan.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "glm-5.0",
+					DisplayName: "glm-5.0",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "glm-5.0-turbo",
+					DisplayName: "glm-5.0-turbo",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "glm-5v-turbo",
+					DisplayName: "glm-5v-turbo",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "kimi-k2.7",
+					DisplayName: "kimi-k2.7",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "hy3-preview",
+					DisplayName: "hy3-preview",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "hy3",
+					DisplayName: "hy3",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "CodeBuddy CN model",
+				},
+				{
+					UpstreamID: "deepseek-v3-2-volc",
+					DisplayName: "deepseek-v3-2-volc",
+					Description: "CodeBuddy CN model",
+				},
+			},
+		},
+		{
+			Slug: "pioneer",
+			DisplayName: "Pioneer AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.pioneer.ai/v1",
+			DocsURL: "https://pioneer.ai",
+			Summary: "$75 free usage credits — no credit card required; Pioneer AI by Fastino Labs. Free $75 usage credits, no credit card required. Use API key auth with a pio_sk_... key. Only open-tier models (Qwen3, Llama, Gemma, SmolLM) work directly — gated models (Claude/GPT/Gemini) require prior fine-tuning via the Pioneer platform.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen/Qwen3-32B",
+					DisplayName: "Qwen/Qwen3-32B",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-27B",
+					DisplayName: "Qwen/Qwen3.6-27B",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-9B",
+					DisplayName: "Qwen/Qwen3.5-9B",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-8B",
+					DisplayName: "Qwen/Qwen3-8B",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-4B-Base",
+					DisplayName: "Qwen/Qwen3-4B-Base",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-1.7B-Base",
+					DisplayName: "Qwen/Qwen3-1.7B-Base",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.1-8B-Instruct",
+					DisplayName: "meta-llama/Llama-3.1-8B-Instruct",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.2-1B-Instruct",
+					DisplayName: "meta-llama/Llama-3.2-1B-Instruct",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-pt",
+					DisplayName: "google/gemma-3-4b-pt",
+					Description: "Pioneer AI model",
+				},
+				{
+					UpstreamID: "HuggingFaceTB/SmolLM3-3B-Base",
+					DisplayName: "HuggingFaceTB/SmolLM3-3B-Base",
+					Description: "Pioneer AI model",
+				},
+			},
+		},
+		{
+			Slug: "uc-direct",
+			DisplayName: "UC Direct (uncensored.com)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.uncensored.com/api/v1",
+			DocsURL: "https://uncensored.com",
+			Summary: "Use your uncensored.com Developer API key (uai_sk_live_...). The key never expires. This is the metered/credits surface; the un-metered subscription chat is the separate 'uc' provider.; UC Direct is OpenAI-compatible on /api/v1.",
+			Models: []Model{
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-opus-5-fast",
+					DisplayName: "claude-opus-5-fast",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-opus-4.5",
+					DisplayName: "claude-opus-4.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.5",
+					DisplayName: "claude-sonnet-4.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-haiku-4.5",
+					DisplayName: "claude-haiku-4.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-opus-4.7",
+					DisplayName: "claude-opus-4.7",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-opus-4.6",
+					DisplayName: "claude-opus-4.6",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.2-codex",
+					DisplayName: "gpt-5.2-codex",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.4-pro",
+					DisplayName: "gpt-5.4-pro",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5.5-pro",
+					DisplayName: "gpt-5.5-pro",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gpt-5-nano",
+					DisplayName: "gpt-5-nano",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "openai-gpt-oss-120b",
+					DisplayName: "openai-gpt-oss-120b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-3-6-flash",
+					DisplayName: "gemini-3-6-flash",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "gemma-3-27b-it",
+					DisplayName: "gemma-3-27b-it",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "grok-4-6",
+					DisplayName: "grok-4-6",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "grok-4.20-beta",
+					DisplayName: "grok-4.20-beta",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen-3-8-2-4t-a95b",
+					DisplayName: "qwen-3-8-2-4t-a95b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen-3-8-max",
+					DisplayName: "qwen-3-8-max",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen-3-6-35b-a3b",
+					DisplayName: "qwen-3-6-35b-a3b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-2507",
+					DisplayName: "qwen3-235b-a22b-2507",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen3-235b-a22b-thinking-2507",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3.5-397b-a17b",
+					DisplayName: "qwen3.5-397b-a17b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-30b-a3b",
+					DisplayName: "qwen3-30b-a3b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-5-35b-a3b",
+					DisplayName: "qwen3-5-35b-a3b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-5-9b",
+					DisplayName: "qwen3-5-9b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-coder",
+					DisplayName: "qwen3-coder",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen3-next-80b-a3b-instruct",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-vl-235b-a22b-thinking",
+					DisplayName: "qwen3-vl-235b-a22b-thinking",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3-vl-30b-a3b-thinking",
+					DisplayName: "qwen3-vl-30b-a3b-thinking",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3.5-flash",
+					DisplayName: "qwen3.5-flash",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "kimi-k2",
+					DisplayName: "kimi-k2",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "kimi-k2-thinking",
+					DisplayName: "kimi-k2-thinking",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "minimax-m2.1",
+					DisplayName: "minimax-m2.1",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "mistral-large",
+					DisplayName: "mistral-large",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "mistral-small-3.2-24b-instruct",
+					DisplayName: "mistral-small-3.2-24b-instruct",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "llama-3.2-3b-instruct",
+					DisplayName: "llama-3.2-3b-instruct",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "nvidia-nemotron-3-5-lightning-30b-a3b",
+					DisplayName: "nvidia-nemotron-3-5-lightning-30b-a3b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "nvidia-nemotron-3-nano-30b-a3b",
+					DisplayName: "nvidia-nemotron-3-nano-30b-a3b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "hermes-3-llama-3.1-405b",
+					DisplayName: "hermes-3-llama-3.1-405b",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "aion-labs.aion-2-0",
+					DisplayName: "aion-labs.aion-2-0",
+					Description: "UC Direct (uncensored.com) model",
+				},
+				{
+					UpstreamID: "inkling",
+					DisplayName: "inkling",
+					Description: "UC Direct (uncensored.com) model",
+				},
+			},
+		},
+		{
+			Slug: "blackbox",
+			DisplayName: "Blackbox AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.blackbox.ai/v1",
+			DocsURL: "https://blackbox.ai",
+			Summary: "Limited free access is available through Blackbox; model availability and account limits apply",
+			Models: []Model{
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "gpt-5.4-pro",
+					DisplayName: "gpt-5.4-pro",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Blackbox AI model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "Blackbox AI model",
+				},
+			},
+		},
+		{
+			Slug: "perplexity-agent",
+			DisplayName: "Perplexity Agent",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.perplexity.ai/v1",
+			DocsURL: "https://www.perplexity.ai",
+			Summary: "Use your Perplexity API key.; Use Agent API model IDs with the pplx-agent/ prefix, for example pplx-agent/openai/gpt-5.6-sol or pplx-agent/anthropic/claude-opus-4-5.",
+			Models: []Model{
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "Perplexity Agent model",
+				},
+				{
+					UpstreamID: "perplexity/kimi-k3",
+					DisplayName: "perplexity/kimi-k3",
+					Description: "Perplexity Agent model",
+				},
+			},
+		},
+		{
+			Slug: "nous-research",
+			DisplayName: "Nous Research",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference-api.nousresearch.com/v1",
+			DocsURL: "https://portal.nousresearch.com/help",
+			Summary: "Free tier: 50 RPM, 500,000 TPM — no credit card; Use your Nous Portal API key.; Nous exposes an OpenAI-compatible /v1 surface with a large remote /models catalog. The /chat/completions endpoint requires a valid API key for programmatic inference.",
+			Models: []Model{
+				{
+					UpstreamID: "Hermes-4-405B",
+					DisplayName: "Hermes-4-405B",
+					Description: "Nous Research model",
+				},
+				{
+					UpstreamID: "Hermes-4-70B",
+					DisplayName: "Hermes-4-70B",
+					Description: "Nous Research model",
+				},
+			},
+		},
+		{
+			Slug: "writer",
+			DisplayName: "Writer",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.writer.com/v1",
+			DocsURL: "https://dev.writer.com",
+			Summary: "Writer Palmyra is OpenAI-compatible at https://api.writer.com/v1. palmyra-x5 offers a 1M-token context window.",
+			Models: []Model{
+				{
+					UpstreamID: "palmyra-x5",
+					DisplayName: "palmyra-x5",
+					Description: "Writer model",
+				},
+				{
+					UpstreamID: "palmyra-x4",
+					DisplayName: "palmyra-x4",
+					Description: "Writer model",
+				},
+			},
+		},
+		{
+			Slug: "muse-code",
+			DisplayName: "Muse Code (Meta)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:8321/v1",
+			DocsURL: "https://github.com/meta-llama/llama-stack",
+			Summary: "Use your META_API_KEY env var as a Bearer token. Muse Code CLI uses the OpenAI Responses API wire format (POST /responses).; Muse Code is OpenAI-compatible.",
+			Models: []Model{
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-4-scout",
+					DisplayName: "llama-4-scout",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b",
+					DisplayName: "llama-3.3-70b",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.1-405b",
+					DisplayName: "llama-3.1-405b",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.1-70b",
+					DisplayName: "llama-3.1-70b",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.1-8b",
+					DisplayName: "llama-3.1-8b",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.2-90b-vision",
+					DisplayName: "llama-3.2-90b-vision",
+					Description: "Muse Code (Meta) model",
+				},
+				{
+					UpstreamID: "llama-3.2-11b-vision",
+					DisplayName: "llama-3.2-11b-vision",
+					Description: "Muse Code (Meta) model",
+				},
+			},
+		},
+		{
+			Slug: "openvecta",
+			DisplayName: "OpenVecta",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.openvecta.com/v1",
+			DocsURL: "https://openvecta.com",
+			Summary: "Free credits on signup for OpenAI-compatible inference across LLMs, embeddings, and reasoning models",
+			Models: []Model{
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "gemma-4-31b",
+					DisplayName: "gemma-4-31b",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "OpenVecta model",
+				},
+				{
+					UpstreamID: "nemotron-3-super-120b",
+					DisplayName: "nemotron-3-super-120b",
+					Description: "OpenVecta model",
+				},
+			},
+		},
+		{
+			Slug: "openference-api",
+			DisplayName: "Openference API",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.openference.com/v1",
+			DocsURL: "https://openference.com",
+			Summary: "Free plan: 3-day trial with open-source models — no credit card required",
+			Models: []Model{
+				{
+					UpstreamID: "GLM-5.2",
+					DisplayName: "GLM-5.2",
+					Description: "Openference API model",
+				},
+			},
+		},
+		{
+			Slug: "monsterapi",
+			DisplayName: "MonsterAPI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.monsterapi.ai/v1",
+			DocsURL: "https://monsterapi.ai",
+			Summary: "One-time signup trial credits for decentralized GPU inference (no recurring free plan). No credit card required.; Get API key at monsterapi.ai",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					DisplayName: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					Description: "MonsterAPI model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "MonsterAPI model",
+				},
+			},
+		},
+		{
+			Slug: "byteplus",
+			DisplayName: "BytePlus ModelArk",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ark.ap-southeast.bytepluses.com/api/v3",
+			DocsURL: "https://console.byteplus.com/ark",
+			Summary: "Free credits for new accounts. Seed 2.0, Kimi K2 Thinking, GLM 4.7, GPT-OSS-120B available.",
+			Models: []Model{
+				{
+					UpstreamID: "seed-2.0",
+					DisplayName: "seed-2.0",
+					Description: "BytePlus ModelArk model",
+				},
+				{
+					UpstreamID: "kimi-k2-thinking",
+					DisplayName: "kimi-k2-thinking",
+					Description: "BytePlus ModelArk model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "BytePlus ModelArk model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "BytePlus ModelArk model",
+				},
+			},
+		},
+		{
+			Slug: "oneminai",
+			DisplayName: "1min.AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.1min.ai/api/chat-with-ai",
+			DocsURL: "https://1min.ai",
+			Summary: "Create an API key at https://docs.1min.ai/docs/api/create-api-key, then paste it here.; 1min.ai uses a proprietary chat API (single prompt string + SSE) instead of OpenAI chat/completions.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "1min.AI model",
+				},
+			},
+		},
+		{
+			Slug: "cheaperinference",
+			DisplayName: "Cheaper Inference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cheaperinference.com/v1",
+			DocsURL: "https://cheaperinference.com",
+			Summary: "Create an API key at https://cheaperinference.com/ (needs the `inference` scope), then paste the ir_live_… token here.",
+			Models: []Model{
+				{
+					UpstreamID: "aion-labs.aion-2-0",
+					DisplayName: "aion-labs.aion-2-0",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-haiku-4.5",
+					DisplayName: "claude-haiku-4.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7-fast",
+					DisplayName: "claude-opus-4-7-fast",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8-fast",
+					DisplayName: "claude-opus-4-8-fast",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4.5",
+					DisplayName: "claude-opus-4.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4.6",
+					DisplayName: "claude-opus-4.6",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4.7",
+					DisplayName: "claude-opus-4.7",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-opus-5-fast",
+					DisplayName: "claude-opus-5-fast",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.5",
+					DisplayName: "claude-sonnet-4.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro",
+					DisplayName: "gemini-3.1-pro",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-4.5",
+					DisplayName: "glm-4.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-4.5-air",
+					DisplayName: "glm-4.5-air",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "Cheaper Inference model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "Cheaper Inference model",
+				},
+			},
+		},
+		{
+			Slug: "freebuff",
+			DisplayName: "Freebuff",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://www.codebuff.com/api/v1",
+			DocsURL: "https://freebuff.com",
+			Summary: "Free Codebuff / Freebuff AI models.; Enter Freebuff / Codebuff Auth Token (obtained via CLI login or automated harvester).; Token is authenticated against Codebuff upstream session pool.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.5",
+					DisplayName: "mimo/mimo-v2.5",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "crof/kimi-k3-eco",
+					DisplayName: "crof/kimi-k3-eco",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "Freebuff model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2-contributor",
+					DisplayName: "meta/muse-spark-1.2-contributor",
+					Description: "Freebuff model",
+				},
+			},
+		},
+		{
+			Slug: "charm-hyper",
+			DisplayName: "Charm Hyper",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://hyper.charm.land/v1",
+			DocsURL: "https://hyper.charm.land",
+			Summary: "100 free monthly Hypercredits on signup; Create an API key at https://hyper.charm.land, then paste it here as a Bearer token.",
+			Models: []Model{
+				{
+					UpstreamID: "hyper/auto",
+					DisplayName: "hyper/auto",
+					Description: "Charm Hyper model",
+				},
+			},
+		},
+		{
+			Slug: "command-code",
+			DisplayName: "Command Code",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.commandcode.ai",
+			DocsURL: "https://commandcode.ai",
+			Summary: "Use a Command Code API key. Requests are sent to Command Code's /provider/v1/chat/completions endpoint.; Create or copy an API key from Command Code, then paste it here as a Bearer token.",
+			Models: []Model{
+				{
+					UpstreamID: "claude-opus-4-7",
+					DisplayName: "claude-opus-4-7",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5-20251001",
+					DisplayName: "claude-haiku-4-5-20251001",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.5",
+					DisplayName: "moonshotai/Kimi-K2.5",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1",
+					DisplayName: "zai-org/GLM-5.1",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5",
+					DisplayName: "zai-org/GLM-5",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.5",
+					DisplayName: "MiniMaxAI/MiniMax-M2.5",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-Max-Preview",
+					DisplayName: "Qwen/Qwen3.6-Max-Preview",
+					Description: "Command Code model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-Plus",
+					DisplayName: "Qwen/Qwen3.6-Plus",
+					Description: "Command Code model",
+				},
+			},
+		},
+		{
+			Slug: "llm-kiwi",
+			DisplayName: "LLM.Kiwi",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.llm.kiwi/v1",
+			DocsURL: "https://llm.kiwi",
+			Summary: "Free plan exposes auto and hrLLM; the published 40 requests/hour limit applies to hrLLM.; Create a free LLM.Kiwi key, then use https://api.llm.kiwi/v1 as the OpenAI-compatible base URL.",
+			Models: []Model{
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "LLM.Kiwi model",
+				},
+				{
+					UpstreamID: "hrLLM",
+					DisplayName: "hrLLM",
+					Description: "LLM.Kiwi model",
+				},
+			},
+		},
+		{
+			Slug: "mixlayer",
+			DisplayName: "Mixlayer",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://models.mixlayer.ai/v1",
+			DocsURL: "https://www.mixlayer.com",
+			Summary: "The qwen/qwen3.5-4b-free model is free for prototyping and rate-limited; no fixed public RPM or daily quota is confirmed.; Create a Mixlayer API key, then use https://models.mixlayer.ai/v1 as the OpenAI-compatible base URL.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen/qwen3.5-4b-free",
+					DisplayName: "qwen/qwen3.5-4b-free",
+					Description: "Mixlayer model",
+				},
+			},
+		},
+		{
+			Slug: "yolo-auto",
+			DisplayName: "Yolo-Auto",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://yolo-auto.com/v1",
+			DocsURL: "https://yolo-auto.com",
+			Summary: "Free API access is request-limited and intended for testing; no numeric daily quota is published and free access is not promised indefinitely.; Create a yolo_ API key, then use https://yolo-auto.com/v1 as the OpenAI-compatible base URL.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.6-35b-a3b",
+					DisplayName: "qwen3.6-35b-a3b",
+					Description: "Yolo-Auto model",
+				},
+			},
+		},
+		{
+			Slug: "cloudcode-one",
+			DisplayName: "CloudCode.ONE",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cloudcode.one/v1",
+			DocsURL: "https://cloudcode.one",
+			Summary: "Published free models include glm-4.7-flash and glm-4.6v-flash; no numeric quota is published, and key creation may require credit or a coupon.; Create a CloudCode.ONE key, then use https://api.cloudcode.one/v1 as the OpenAI-compatible base URL. Key issuance may require credit or a coupon.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "CloudCode.ONE model",
+				},
+				{
+					UpstreamID: "glm-4.6v-flash",
+					DisplayName: "glm-4.6v-flash",
+					Description: "CloudCode.ONE model",
+				},
+			},
+		},
+		{
+			Slug: "dgrid",
+			DisplayName: "DGrid",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.dgrid.ai/v1",
+			DocsURL: "https://dgrid.ai",
+			Summary: "DGrid Free Models Router: 10 requests/minute and 100 requests/day. A $5 lifetime top-up unlocks up to 20 requests/minute and 1,000 requests/day.; Create a DGrid API key at https://dgrid.ai, then use https://api.dgrid.ai/v1 as the OpenAI-compatible base URL.",
+			Models: []Model{
+				{
+					UpstreamID: "dgridai/free",
+					DisplayName: "dgridai/free",
+					Description: "DGrid model",
+				},
+			},
+		},
+		{
+			Slug: "orcarouter",
+			DisplayName: "OrcaRouter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.orcarouter.ai/v1",
+			DocsURL: "https://www.orcarouter.ai",
+			Summary: "Create an API key (starts with sk-orca-) at https://www.orcarouter.ai, then paste it as a Bearer token. OpenAI-compatible endpoint at https://api.orcarouter.ai/v1.",
+			Models: []Model{
+				{
+					UpstreamID: "orcarouter/auto",
+					DisplayName: "orcarouter/auto",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash",
+					DisplayName: "google/gemini-3.6-flash",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8",
+					DisplayName: "anthropic/claude-opus-4.8",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "grok/grok-4.3",
+					DisplayName: "grok/grok-4.3",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "OrcaRouter model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "OrcaRouter model",
+				},
+			},
+		},
+		{
+			Slug: "api-airforce",
+			DisplayName: "Api.airforce",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.airforce/v1",
+			DocsURL: "https://api.airforce",
+			Summary: "55 free tier models including Grok-3, Claude 3.7, Qwen3, Kimi-K2, Gemini 2.5 Flash, DeepSeek-V3; Get your API key from https://panel.api.airforce — OpenAI-compatible endpoint at https://api.airforce/v1",
+			Models: []Model{
+				{
+					UpstreamID: "x-ai/grok-3",
+					DisplayName: "x-ai/grok-3",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "x-ai/grok-2-1212",
+					DisplayName: "x-ai/grok-2-1212",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "anthropic/claude-3.7-sonnet",
+					DisplayName: "anthropic/claude-3.7-sonnet",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b",
+					DisplayName: "qwen/qwen3-32b",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.6",
+					DisplayName: "moonshot/kimi-k2.6",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "Api.airforce model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3",
+					DisplayName: "deepseek/deepseek-v3",
+					Description: "Api.airforce model",
+				},
+			},
+		},
+		{
+			Slug: "crof",
+			DisplayName: "CrofAI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://crof.ai/v1",
+			DocsURL: "https://crof.ai",
+			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "kimi-k3-eco",
+					DisplayName: "kimi-k3-eco",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "gemma-4-31b-it",
+					DisplayName: "gemma-4-31b-it",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "qwen3.5-397b-a17b",
+					DisplayName: "qwen3.5-397b-a17b",
+					Description: "CrofAI model",
+				},
+				{
+					UpstreamID: "qwen3.5-9b",
+					DisplayName: "qwen3.5-9b",
+					Description: "CrofAI model",
+				},
+			},
+		},
+		{
+			Slug: "bazaarlink",
+			DisplayName: "BazaarLink",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://bazaarlink.ai/api/v1",
+			DocsURL: "https://bazaarlink.ai",
+			Summary: "Free tier: 4M tokens/day per account with auto:free routing — zero-cost inference, no credit card required.; Use your BazaarLink API key (starts with sk-bl-) in Authorization: Bearer <key>. OpenAI SDK works with base URL https://bazaarlink.ai/api/v1. Models use provider/model-name format.; Create a free API key at https://bazaarlink.ai — model 'auto:free' routes to zero-cost inference. All models use the provider/…",
+			Models: []Model{
+				{
+					UpstreamID: "auto:free",
+					DisplayName: "auto:free",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "claude-opus-4.7",
+					DisplayName: "claude-opus-4.7",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "claude-haiku-4.5",
+					DisplayName: "claude-haiku-4.5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "grok-4.20",
+					DisplayName: "grok-4.20",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite-preview",
+					DisplayName: "gemini-3.1-flash-lite-preview",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gemma-4-31b-it",
+					DisplayName: "gemma-4-31b-it",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "gemma-4-26b-a4b-it",
+					DisplayName: "gemma-4-26b-a4b-it",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "llama-4-scout",
+					DisplayName: "llama-4-scout",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "mistral-large-2512",
+					DisplayName: "mistral-large-2512",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "mistral-medium-3.1",
+					DisplayName: "mistral-medium-3.1",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "mistral-small-2603",
+					DisplayName: "mistral-small-2603",
+					Description: "BazaarLink model",
+				},
+				{
+					UpstreamID: "nemotron-3-super-120b-a12b",
+					DisplayName: "nemotron-3-super-120b-a12b",
+					Description: "BazaarLink model",
+				},
+			},
+		},
+		{
+			Slug: "synthetic",
+			DisplayName: "Synthetic",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.synthetic.new/openai/v1",
+			DocsURL: "https://synthetic.new",
+			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Models: []Model{
+				{
+					UpstreamID: "hf:openai/gpt-oss-120b",
+					DisplayName: "hf:openai/gpt-oss-120b",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:zai-org/GLM-5.2",
+					DisplayName: "hf:zai-org/GLM-5.2",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:moonshotai/Kimi-K2.7-Code",
+					DisplayName: "hf:moonshotai/Kimi-K2.7-Code",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:Qwen/Qwen3.6-27B",
+					DisplayName: "hf:Qwen/Qwen3.6-27B",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:MiniMaxAI/MiniMax-M3",
+					DisplayName: "hf:MiniMaxAI/MiniMax-M3",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:zai-org/GLM-4.7-Flash",
+					DisplayName: "hf:zai-org/GLM-4.7-Flash",
+					Description: "Synthetic model",
+				},
+				{
+					UpstreamID: "hf:nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+					DisplayName: "hf:nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4",
+					Description: "Synthetic model",
+				},
+			},
+		},
+		{
+			Slug: "kilo-gateway",
+			DisplayName: "Kilo Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.kilo.ai/api/gateway",
+			DocsURL: "https://kilo.ai",
+			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Models: []Model{
+				{
+					UpstreamID: "kilo-auto/frontier",
+					DisplayName: "kilo-auto/frontier",
+					Description: "Kilo Gateway model",
+				},
+				{
+					UpstreamID: "kilo-auto/balanced",
+					DisplayName: "kilo-auto/balanced",
+					Description: "Kilo Gateway model",
+				},
+				{
+					UpstreamID: "kilo-auto/free",
+					DisplayName: "kilo-auto/free",
+					Description: "Kilo Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b:free",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b:free",
+					Description: "Kilo Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5:free",
+					DisplayName: "minimax/minimax-m2.5:free",
+					Description: "Kilo Gateway model",
+				},
+				{
+					UpstreamID: "arcee-ai/trinity-large-preview:free",
+					DisplayName: "arcee-ai/trinity-large-preview:free",
+					Description: "Kilo Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "dahl",
+			DisplayName: "Dahl",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.dahl.global/v1",
+			DocsURL: "https://inference.dahl.global",
+			Summary: "Free — MiniMax M2.7, Kimi K2.6. Click 'Add Account' to auto-generate a token, or add your own API key.; Click 'Add Account' to auto-generate a token, or add a manual API key.; Auto-generate a token or paste your own API key.; Dahl auto-generates tokens via https://inference.dahl.global/tokens. No signup needed. Rate limits apply. You can also add your own API key.",
+			Models: []Model{
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7",
+					Description: "Dahl model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Dahl model",
+				},
+			},
+		},
+		{
+			Slug: "freetheai",
+			DisplayName: "FreeTheAi",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.freetheai.xyz/v1",
+			DocsURL: "https://freetheai.xyz",
+			Summary: "Free OpenAI-compatible gateway — sign up via Discord for an API key.; Join the FreeTheAi Discord to get your free API key.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "FreeTheAi model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "FreeTheAi model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "FreeTheAi model",
+				},
+			},
+		},
+		{
+			Slug: "g4f-groq",
+			DisplayName: "g4f.space — Groq",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://g4f.space/api/groq/v1",
+			DocsURL: "https://g4f.space",
+			Summary: "Anonymous access to Groq requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last verified…",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-versatile",
+					DisplayName: "llama-3.3-70b-versatile",
+					Description: "g4f.space — Groq model",
+				},
+				{
+					UpstreamID: "llama-3.1-8b-instant",
+					DisplayName: "llama-3.1-8b-instant",
+					Description: "g4f.space — Groq model",
+				},
+			},
+		},
+		{
+			Slug: "g4f-gemini",
+			DisplayName: "g4f.space — Gemini",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://g4f.space/api/gemini/v1",
+			DocsURL: "https://g4f.space",
+			Summary: "Anonymous access to Gemini requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last verifi…",
+			Models: []Model{
+				{
+					UpstreamID: "models/gemini-2.5-flash",
+					DisplayName: "models/gemini-2.5-flash",
+					Description: "g4f.space — Gemini model",
+				},
+				{
+					UpstreamID: "models/gemini-2.5-pro",
+					DisplayName: "models/gemini-2.5-pro",
+					Description: "g4f.space — Gemini model",
+				},
+			},
+		},
+		{
+			Slug: "g4f-pollinations",
+			DisplayName: "g4f.space — Pollinations",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://g4f.space/api/pollinations/v1",
+			DocsURL: "https://g4f.space",
+			Summary: "Anonymous access to Pollinations requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last…",
+			Models: []Model{
+				{
+					UpstreamID: "openai",
+					DisplayName: "openai",
+					Description: "g4f.space — Pollinations model",
+				},
+				{
+					UpstreamID: "openai-fast",
+					DisplayName: "openai-fast",
+					Description: "g4f.space — Pollinations model",
+				},
+			},
+		},
+		{
+			Slug: "g4f-ollama",
+			DisplayName: "g4f.space — Ollama",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://g4f.space/api/ollama/v1",
+			DocsURL: "https://g4f.space",
+			Summary: "Anonymous access to hosted Ollama requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last…",
+			Models: []Model{
+				{
+					UpstreamID: "gemma3:4b",
+					DisplayName: "gemma3:4b",
+					Description: "g4f.space — Ollama model",
+				},
+			},
+		},
+		{
+			Slug: "g4f-nvidia",
+			DisplayName: "g4f.space — NVIDIA",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://g4f.space/api/nvidia/v1",
+			DocsURL: "https://g4f.space",
+			Summary: "Anonymous access to NVIDIA NIM requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last ve…",
+			Models: []Model{
+				{
+					UpstreamID: "nvidia/nemotron-3-nano-30b-a3b",
+					DisplayName: "nvidia/nemotron-3-nano-30b-a3b",
+					Description: "g4f.space — NVIDIA model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "g4f.space — NVIDIA model",
+				},
+				{
+					UpstreamID: "minimaxai/minimax-m2.7",
+					DisplayName: "minimaxai/minimax-m2.7",
+					Description: "g4f.space — NVIDIA model",
+				},
+			},
+		},
+		{
+			Slug: "llm7",
+			DisplayName: "LLM7.io",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.llm7.io/v1",
+			DocsURL: "https://llm7.io",
+			Summary: "No signup required - 2 req/s, 20 RPM, 100 req/hr free tier; Use any non-empty key (for example 'unused'). If older built-in models return model_unavailable, use Available Models → Import from /models or Auto-Sync; verified live model: gemini-3.1-flash-lite.; Works without API key (use 'unused' as key). Get free token at token.llm7.io for higher limits.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o-mini-2024-07-18",
+					DisplayName: "gpt-4o-mini-2024-07-18",
+					Description: "LLM7.io model",
+				},
+				{
+					UpstreamID: "gpt-4.1-nano-2025-04-14",
+					DisplayName: "gpt-4.1-nano-2025-04-14",
+					Description: "LLM7.io model",
+				},
+				{
+					UpstreamID: "deepseek-r1-0528",
+					DisplayName: "deepseek-r1-0528",
+					Description: "LLM7.io model",
+				},
+				{
+					UpstreamID: "qwen2.5-coder-32b-instruct",
+					DisplayName: "qwen2.5-coder-32b-instruct",
+					Description: "LLM7.io model",
+				},
+			},
+		},
+		{
+			Slug: "gitlawb",
+			DisplayName: "Gitlawb Opengateway (MiMo)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/xiaomi-mimo",
+			DocsURL: "https://opengateway.gitlawb.com",
+			Summary: "Free MiMo (xiaomi/mimo-v2.5) revoked 2026-05 — Opengateway is now a pay-as-you-go credit gateway; no recurring free model.; Get your API key from Gitlawb Opengateway dashboard.",
+			Models: []Model{
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "Gitlawb Opengateway (MiMo) model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "Gitlawb Opengateway (MiMo) model",
+				},
+				{
+					UpstreamID: "mimo-v2-pro",
+					DisplayName: "mimo-v2-pro",
+					Description: "Gitlawb Opengateway (MiMo) model",
+				},
+				{
+					UpstreamID: "mimo-v2-omni",
+					DisplayName: "mimo-v2-omni",
+					Description: "Gitlawb Opengateway (MiMo) model",
+				},
+				{
+					UpstreamID: "mimo-v2-flash",
+					DisplayName: "mimo-v2-flash",
+					Description: "Gitlawb Opengateway (MiMo) model",
+				},
+			},
+		},
+		{
+			Slug: "gitlawb-gmi",
+			DisplayName: "Gitlawb Opengateway (GMI Cloud)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/gmi-cloud",
+			DocsURL: "https://opengateway.gitlawb.com",
+			Summary: "Free Nemotron promo ended 2026-06 — the GMI Cloud route is now pay-as-you-go credit only.; Get your API key from Gitlawb Opengateway dashboard.",
+			Models: []Model{
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.5-Pro",
+					DisplayName: "XiaomiMiMo/MiMo-V2.5-Pro",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "XiaomiMiMo/MiMo-V2.5",
+					DisplayName: "XiaomiMiMo/MiMo-V2.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-pro",
+					DisplayName: "openai/gpt-5.4-pro",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.3-codex",
+					DisplayName: "openai/gpt-5.3-codex",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-codex",
+					DisplayName: "openai/gpt-5.2-codex",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.7",
+					DisplayName: "anthropic/claude-opus-4.7",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.6",
+					DisplayName: "anthropic/claude-opus-4.6",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.5",
+					DisplayName: "anthropic/claude-opus-4.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.1",
+					DisplayName: "anthropic/claude-opus-4.1",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.6",
+					DisplayName: "anthropic/claude-sonnet-4.6",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.5",
+					DisplayName: "anthropic/claude-sonnet-4.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4",
+					DisplayName: "anthropic/claude-sonnet-4",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4.5",
+					DisplayName: "anthropic/claude-haiku-4.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-R1-0528",
+					DisplayName: "deepseek-ai/DeepSeek-R1-0528",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3.2",
+					DisplayName: "deepseek-ai/DeepSeek-V3.2",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite-preview",
+					DisplayName: "google/gemini-3.1-flash-lite-preview",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1-FP8",
+					DisplayName: "zai-org/GLM-5.1-FP8",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5-FP8",
+					DisplayName: "zai-org/GLM-5-FP8",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.5",
+					DisplayName: "moonshotai/Kimi-K2.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.5",
+					DisplayName: "MiniMaxAI/MiniMax-M2.5",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-Max-Preview",
+					DisplayName: "Qwen/Qwen3.6-Max-Preview",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-Plus",
+					DisplayName: "Qwen/Qwen3.6-Plus",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-397B-A17B",
+					DisplayName: "Qwen/Qwen3.5-397B-A17B",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8",
+					DisplayName: "Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Nano-Omni",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Nano-Omni",
+					Description: "Gitlawb Opengateway (GMI Cloud) model",
+				},
+			},
+		},
+		{
+			Slug: "poe",
+			DisplayName: "Poe",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.poe.com",
+			DocsURL: "https://creator.poe.com/api-reference",
+			Summary: "Bearer API key for the Poe OpenAI-compatible API.; Poe exposes OpenAI-compatible chat and responses on https://api.poe.com/v1, with authenticated balance checks on /usage/current_balance.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "Poe model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "Poe model",
+				},
+				{
+					UpstreamID: "gemini-3.0-pro",
+					DisplayName: "gemini-3.0-pro",
+					Description: "Poe model",
+				},
+			},
+		},
+		{
+			Slug: "factory",
+			DisplayName: "Factory",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.factory.ai/v1",
+			DocsURL: "https://factory.ai",
+			Summary: "Bearer API key for the Factory OpenAI-compatible gateway.; Get your Factory API key at https://app.factory.ai/settings/api-keys, then paste it as a Bearer token. OpenAI-compatible endpoint at https://api.factory.ai/v1.",
+			Models: []Model{
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "Factory model",
+				},
+			},
+		},
+		{
+			Slug: "bluesminds",
+			DisplayName: "BluesMinds",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.bluesminds.com/v1",
+			DocsURL: "https://www.bluesminds.com",
+			Summary: "Free daily pi credits — supports 200+ models including GPT-4o, GPT-4.1, Claude Sonnet 4.5, Gemini 2.0 Flash, DeepSeek V4, Qwen, Kimi K2; Get your API key at https://www.bluesminds.com — OpenAI-compatible endpoint at https://api.bluesminds.com/v1 with free daily credits. VIP models (Claude Opus 4.5, Gemini 2.5 Pro) consume pi credits.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gpt-4.1",
+					DisplayName: "gpt-4.1",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gpt-4.1-mini",
+					DisplayName: "gpt-4.1-mini",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gpt-4.1-nano",
+					DisplayName: "gpt-4.1-nano",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5",
+					DisplayName: "claude-sonnet-4-5",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gemini-2.0-flash",
+					DisplayName: "gemini-2.0-flash",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gemini-2.0-flash-exp",
+					DisplayName: "gemini-2.0-flash-exp",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "deepseek-reasoner",
+					DisplayName: "deepseek-reasoner",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "qwen-plus",
+					DisplayName: "qwen-plus",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "qwen-turbo",
+					DisplayName: "qwen-turbo",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "kimi-k2",
+					DisplayName: "kimi-k2",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "kimi-k2-thinking",
+					DisplayName: "kimi-k2-thinking",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "glm-4-flash",
+					DisplayName: "glm-4-flash",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5",
+					DisplayName: "claude-opus-4-5",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "grok-3",
+					DisplayName: "grok-3",
+					Description: "BluesMinds model",
+				},
+				{
+					UpstreamID: "qwen-max",
+					DisplayName: "qwen-max",
+					Description: "BluesMinds model",
+				},
+			},
+		},
+		{
+			Slug: "freemodel-dev",
+			DisplayName: "FreeModel.dev",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.freemodel.dev/v1",
+			DocsURL: "https://freemodel.dev",
+			Summary: "$300 free credits on signup — no credit card required. Access GPT-5.4 and GPT-5.5 (OpenAI's latest flagship models) through an OpenAI-compatible API.; Get $300 free API credits at https://freemodel.dev — no payment info required. OpenAI-compatible endpoint. GPT-5.4 and GPT-5.5 models available.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "FreeModel.dev model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "FreeModel.dev model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "FreeModel.dev model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "FreeModel.dev model",
+				},
+			},
+		},
+		{
+			Slug: "freeaiapikey",
+			DisplayName: "FreeAIAPIKey",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.freeaiapikey.com/v1",
+			DocsURL: "https://freeaiapikey.com",
+			Summary: "Discounted API proxy for 40+ models including GPT-5, Claude Opus 4.6, Claude Sonnet 4.6, Qwen 3.5. Get your API key at https://freeaiapikey.com/dashboard. Base URL: https://freeaiapikey.com/v1.",
+			Models: []Model{
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.6",
+					DisplayName: "anthropic/claude-opus-4.6",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.7",
+					DisplayName: "anthropic/claude-opus-4.7",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8",
+					DisplayName: "anthropic/claude-opus-4.8",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.6",
+					DisplayName: "anthropic/claude-sonnet-4.6",
+					Description: "FreeAIAPIKey model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "FreeAIAPIKey model",
+				},
+			},
+		},
+		{
+			Slug: "openadapter",
+			DisplayName: "OpenAdapter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.openadapter.in/v1",
+			DocsURL: "https://openadapter.dev",
+			Summary: "Free tier with a generous quota and no credit card — 15+ open-source models with daily quota. Get your API key at https://dashboard.openadapter.in.; Use your OpenAdapter API key in Authorization: Bearer sk-cv-<key>. Fully OpenAI-compatible. API base URL: https://api.openadapter.in/v1.; OpenAdapter exposes an OpenAI-compatible chat completions endpoint at https://api.openadapter.in/v1/chat/completions, aggregating…",
+			Models: []Model{
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "OpenAdapter model",
+				},
+			},
+		},
+		{
+			Slug: "dit",
+			DisplayName: "DIT.ai",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.dit.ai/v1",
+			DocsURL: "https://dit.ai",
+			Summary: "Use your dit.ai API key in Authorization: Bearer <key>. Fully OpenAI-compatible — a drop-in replacement, just change the base URL to https://api.dit.ai/v1.; dit.ai (Distributed Intelligence Trade) is an OpenAI-compatible router/gateway with dynamic per-request pricing, exposing /v1/chat/completions at https://api.dit.ai/v1.; spend/savings analytics live in the dit.ai dashboard.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "DIT.ai model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "DIT.ai model",
+				},
+			},
+		},
+		{
+			Slug: "tokenrouter",
+			DisplayName: "TokenRouter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.tokenrouter.com/v1",
+			DocsURL: "https://tokenrouter.com",
+			Summary: "Free tier includes the MiniMax 3 model. Get your API key at https://tokenrouter.com.; Use your TokenRouter API key in Authorization: Bearer <key>. Fully OpenAI-compatible. API base URL: https://api.tokenrouter.com/v1.; TokenRouter exposes an OpenAI-compatible chat completions endpoint at https://api.tokenrouter.com/v1/chat/completions, plus a working /v1/models catalog.",
+			Models: []Model{
+				{
+					UpstreamID: "minimax-3",
+					DisplayName: "minimax-3",
+					Description: "TokenRouter model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "TokenRouter model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "TokenRouter model",
+				},
+			},
+		},
+		{
+			Slug: "token-kiosk",
+			DisplayName: "Token Kiosk",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://agent-router.gaib.ai/v1",
+			DocsURL: "https://agent-router.gaib.ai",
+			Summary: "Use your Token Kiosk API key in Authorization: Bearer <key>. Fully OpenAI-compatible gateway. API base URL: https://agent-router.gaib.ai/v1.; Token Kiosk is a multi-provider agent LLM routing infrastructure exposing an OpenAI-compatible endpoint at https://agent-router.gaib.ai/v1/chat/completions with auto-fallback and latency routing.",
+			Models: []Model{
+				{
+					UpstreamID: "claude-3-5-sonnet",
+					DisplayName: "claude-3-5-sonnet",
+					Description: "Token Kiosk model",
+				},
+				{
+					UpstreamID: "deepseek-v3",
+					DisplayName: "deepseek-v3",
+					Description: "Token Kiosk model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "Token Kiosk model",
+				},
+				{
+					UpstreamID: "kimi-k1.5",
+					DisplayName: "kimi-k1.5",
+					Description: "Token Kiosk model",
+				},
+				{
+					UpstreamID: "minimax-m6",
+					DisplayName: "minimax-m6",
+					Description: "Token Kiosk model",
+				},
+			},
+		},
+		{
+			Slug: "navy",
+			DisplayName: "NavyAI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.navy/v1",
+			DocsURL: "https://api.navy",
+			Summary: "Free plan is one shared 150K tokens/day pool at 20 RPM. Each model carries a token multiplier, so heavier models drain the pool faster (grok-4 at 10x is ~15K real tokens/day).; Create a free API key from the NavyAI dashboard, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.navy/v1 with a live /v1/models catalog that exposes per-model token_multiplier and premium flags. Upstream req…",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "NavyAI model",
+				},
+				{
+					UpstreamID: "gemma-4-31b-it",
+					DisplayName: "gemma-4-31b-it",
+					Description: "NavyAI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "NavyAI model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "NavyAI model",
+				},
+				{
+					UpstreamID: "mistral-small-latest",
+					DisplayName: "mistral-small-latest",
+					Description: "NavyAI model",
+				},
+				{
+					UpstreamID: "llama-4-scout",
+					DisplayName: "llama-4-scout",
+					Description: "NavyAI model",
+				},
+			},
+		},
+		{
+			Slug: "ainative",
+			DisplayName: "AINative Studio",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.ainative.studio/api/v1",
+			DocsURL: "https://ainative.studio",
+			Summary: "Free tier ~10M tokens/month (claimed) across Qwen3, Llama 4, DeepSeek R1 and more.; Create a free API key at ainative.studio (no card), then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.ainative.studio/api/v1 with a public /models catalog (84 models).",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3-235b-cerebras",
+					DisplayName: "qwen3-235b-cerebras",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "qwen3-32b",
+					DisplayName: "qwen3-32b",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "qwen3-14b",
+					DisplayName: "qwen3-14b",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "qwen3-8b",
+					DisplayName: "qwen3-8b",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "llama3.1-8b-cerebras",
+					DisplayName: "llama3.1-8b-cerebras",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "nous-coder",
+					DisplayName: "nous-coder",
+					Description: "AINative Studio model",
+				},
+				{
+					UpstreamID: "gemini-flash",
+					DisplayName: "gemini-flash",
+					Description: "AINative Studio model",
+				},
+			},
+		},
+		{
+			Slug: "routeway",
+			DisplayName: "Routeway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.routeway.ai/v1",
+			DocsURL: "https://routeway.ai",
+			Summary: "Free models (:free suffix) at ~5 RPM / 200 RPD across Llama, Nemotron, Step and Laguna.; Create a free API key at routeway.ai, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.routeway.ai/v1 with a public /models catalog (236 models). Cloudflare fronts the API and requires a browser-style User-Agent.",
+			Models: []Model{
+				{
+					UpstreamID: "llama-3.3-70b-instruct:free",
+					DisplayName: "llama-3.3-70b-instruct:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "nemotron-3-nano-30b-a3b:free",
+					DisplayName: "nemotron-3-nano-30b-a3b:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "nemotron-nano-9b-v2:free",
+					DisplayName: "nemotron-nano-9b-v2:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "step-3.7-flash:free",
+					DisplayName: "step-3.7-flash:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "step-3.5-flash:free",
+					DisplayName: "step-3.5-flash:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "laguna-m.1:free",
+					DisplayName: "laguna-m.1:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "laguna-xs.2:free",
+					DisplayName: "laguna-xs.2:free",
+					Description: "Routeway model",
+				},
+				{
+					UpstreamID: "llama-3.2-3b-instruct:free",
+					DisplayName: "llama-3.2-3b-instruct:free",
+					Description: "Routeway model",
+				},
+			},
+		},
+		{
+			Slug: "nara",
+			DisplayName: "NaraRouter",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://router.bynara.id/v1",
+			DocsURL: "https://bynara.id",
+			Summary: "Free plan: one 7M tokens/day bucket per account (15 req/min) across the plan's 8 models; others need credit.; Create a free NaraRouter account, link your Telegram (required before /v1 answers), then paste the key here as a Bearer token.; OpenAI-compatible endpoint at https://router.bynara.id/v1. Free-tier models are pinned",
+			Models: []Model{
+				{
+					UpstreamID: "agnes-2.0-flash",
+					DisplayName: "agnes-2.0-flash",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "agnes-2.5-flash",
+					DisplayName: "agnes-2.5-flash",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "laguna-s-2.1",
+					DisplayName: "laguna-s-2.1",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "minimax-m3-free",
+					DisplayName: "minimax-m3-free",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "mistral-large",
+					DisplayName: "mistral-large",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "mistral-medium-3-5",
+					DisplayName: "mistral-medium-3-5",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "qwen3.8-27b",
+					DisplayName: "qwen3.8-27b",
+					Description: "NaraRouter model",
+				},
+				{
+					UpstreamID: "stepfun-3.7-flash",
+					DisplayName: "stepfun-3.7-flash",
+					Description: "NaraRouter model",
+				},
+			},
+		},
+		{
+			Slug: "regolo",
+			DisplayName: "Regolo AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.regolo.ai",
+			DocsURL: "https://regolo.ai",
+			Summary: "Get your Regolo API key from regolo.ai, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.regolo.ai/v1 with dynamic model discovery (19 models).",
+			Models: []Model{
+				{
+					UpstreamID: "regolo-chat",
+					DisplayName: "regolo-chat",
+					Description: "Regolo AI model",
+				},
+				{
+					UpstreamID: "regolo-fast",
+					DisplayName: "regolo-fast",
+					Description: "Regolo AI model",
+				},
+			},
+		},
+		{
+			Slug: "glm-coding",
+			DisplayName: "GLM Coding",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.z.ai/api/coding/paas/v4",
+			DocsURL: "https://z.ai/subscribe",
+			Summary: "First-party model lab API.; Preset GLM profile with higher token budget, thinking enabled, and longer timeout.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-high",
+					DisplayName: "glm-5.3-high",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-low",
+					DisplayName: "glm-5.3-low",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-max",
+					DisplayName: "glm-5.3-max",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-high",
+					DisplayName: "glm-5.3-flash-high",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-low",
+					DisplayName: "glm-5.3-flash-low",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-max",
+					DisplayName: "glm-5.3-flash-max",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.2-high",
+					DisplayName: "glm-5.2-high",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.2-max",
+					DisplayName: "glm-5.2-max",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-5-turbo",
+					DisplayName: "glm-5-turbo",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.6v",
+					DisplayName: "glm-4.6v",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.5v",
+					DisplayName: "glm-4.5v",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.5",
+					DisplayName: "glm-4.5",
+					Description: "GLM Coding model",
+				},
+				{
+					UpstreamID: "glm-4.5-air",
+					DisplayName: "glm-4.5-air",
+					Description: "GLM Coding model",
+				},
+			},
+		},
+		{
+			Slug: "glm-cn",
+			DisplayName: "GLM Coding (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://open.bigmodel.cn/api/coding/paas/v4",
+			DocsURL: "https://open.bigmodel.cn",
+			Summary: "First-party model lab API.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-high",
+					DisplayName: "glm-5.3-high",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-low",
+					DisplayName: "glm-5.3-low",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-max",
+					DisplayName: "glm-5.3-max",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-high",
+					DisplayName: "glm-5.3-flash-high",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-low",
+					DisplayName: "glm-5.3-flash-low",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-max",
+					DisplayName: "glm-5.3-flash-max",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.2-high",
+					DisplayName: "glm-5.2-high",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.2-max",
+					DisplayName: "glm-5.2-max",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-5-turbo",
+					DisplayName: "glm-5-turbo",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.6v",
+					DisplayName: "glm-4.6v",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.5v",
+					DisplayName: "glm-4.5v",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.5",
+					DisplayName: "glm-4.5",
+					Description: "GLM Coding (China) model",
+				},
+				{
+					UpstreamID: "glm-4.5-air",
+					DisplayName: "glm-4.5-air",
+					Description: "GLM Coding (China) model",
+				},
+			},
+		},
+		{
+			Slug: "qwen-cloud",
+			DisplayName: "Qwen Cloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+			DocsURL: "https://www.qwencloud.com",
+			Summary: "Use a Qwen Cloud API key and select its Global or Beijing region.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.7-max-2026-06-08",
+					DisplayName: "qwen3.7-max-2026-06-08",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.6-35b-a3b",
+					DisplayName: "qwen3.6-35b-a3b",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus-2026-04-20",
+					DisplayName: "qwen3.5-plus-2026-04-20",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.5-122b-a10b",
+					DisplayName: "qwen3.5-122b-a10b",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "qwen3.5-397b-a17b",
+					DisplayName: "qwen3.5-397b-a17b",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "glm-5.2-fast-preview",
+					DisplayName: "glm-5.2-fast-preview",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Qwen Cloud model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Qwen Cloud model",
+				},
+			},
+		},
+		{
+			Slug: "qwen-cloud-token-plan",
+			DisplayName: "Qwen Cloud Token Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
+			DocsURL: "https://www.qwencloud.com/pricing/token-plan",
+			Summary: "Use a Qwen Cloud Token Plan key and select its Singapore or Beijing region.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "qwen3.6-flash",
+					DisplayName: "qwen3.6-flash",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Qwen Cloud Token Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "Qwen Cloud Token Plan model",
+				},
+			},
+		},
+		{
+			Slug: "minimax-cn",
+			DisplayName: "Minimax (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.minimaxi.com/v1",
+			DocsURL: "https://www.minimaxi.com",
+			Summary: "First-party model lab API.",
+			Models: []Model{
+				{
+					UpstreamID: "MiniMax-M3",
+					DisplayName: "MiniMax-M3",
+					Description: "Minimax (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "Minimax (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7-highspeed",
+					DisplayName: "MiniMax-M2.7-highspeed",
+					Description: "Minimax (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "Minimax (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5-highspeed",
+					DisplayName: "MiniMax-M2.5-highspeed",
+					Description: "Minimax (China) model",
+				},
+			},
+		},
+		{
+			Slug: "longcat",
+			DisplayName: "LongCat AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.longcat.chat/openai/v1",
+			DocsURL: "https://longcat.chat/platform/docs",
+			Summary: "Free: one-time 10M-token grant after account signup + KYC verification (LongCat-2.0). One-time only — not a recurring daily/monthly allowance.",
+			Models: []Model{
+				{
+					UpstreamID: "LongCat-2.0",
+					DisplayName: "LongCat-2.0",
+					Description: "LongCat AI model",
+				},
+			},
+		},
+		{
+			Slug: "volcengine-agent-plan",
+			DisplayName: "Volcengine Ark Agent Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/plan/v3",
+			DocsURL: "https://console.volcengine.com/ark/region:cn-beijing/subscription/agent-plan",
+			Summary: "Connect your Volcano Engine account or use an Ark Agent Plan subscription API key.",
+			Models: []Model{
+				{
+					UpstreamID: "doubao-seed-evolving",
+					DisplayName: "doubao-seed-evolving",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-turbo-260628",
+					DisplayName: "doubao-seed-2-1-turbo-260628",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-lite-260215",
+					DisplayName: "doubao-seed-2-0-lite-260215",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-mini-260215",
+					DisplayName: "doubao-seed-2-0-mini-260215",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-ga-260731",
+					DisplayName: "deepseek-v4-flash-ga-260731",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "glm-5-2-260617",
+					DisplayName: "glm-5-2-260617",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro-260425",
+					DisplayName: "deepseek-v4-pro-260425",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Volcengine Ark Agent Plan model",
+				},
+			},
+		},
+		{
+			Slug: "volcengine-coding-plan",
+			DisplayName: "Volcengine Ark Coding Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/coding/v3",
+			DocsURL: "https://console.volcengine.com/ark/region:cn-beijing/subscription/coding-plan",
+			Summary: "Connect your Volcano Engine account or use an Ark Coding Plan subscription API key.",
+			Models: []Model{
+				{
+					UpstreamID: "doubao-seed-2-1-turbo",
+					DisplayName: "doubao-seed-2-1-turbo",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "doubao-seed-2.0-lite",
+					DisplayName: "doubao-seed-2.0-lite",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Volcengine Ark Coding Plan model",
+				},
+			},
+		},
+		{
+			Slug: "xiaomi-mimo-token-plan",
+			DisplayName: "Xiaomi MiMo Token Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://token-plan-sgp.xiaomimimo.com/v1",
+			DocsURL: "https://mimo.mi.com",
+			Summary: "First-party model lab API.",
+			Models: []Model{
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "Xiaomi MiMo Token Plan model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "Xiaomi MiMo Token Plan model",
+				},
+			},
+		},
+		{
+			Slug: "tencent",
+			DisplayName: "Tencent Hunyuan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.hunyuan.cloud.tencent.com/v1",
+			DocsURL: "https://hunyuan.tencent.com",
+			Summary: "Free Hunyuan Lite models. WeChat ecosystem.; Get API key at console.cloud.tencent.com",
+			Models: []Model{
+				{
+					UpstreamID: "hunyuan-turbos-latest",
+					DisplayName: "hunyuan-turbos-latest",
+					Description: "Tencent Hunyuan model",
+				},
+				{
+					UpstreamID: "hunyuan-t1-latest",
+					DisplayName: "hunyuan-t1-latest",
+					Description: "Tencent Hunyuan model",
+				},
+				{
+					UpstreamID: "hunyuan-pro",
+					DisplayName: "hunyuan-pro",
+					Description: "Tencent Hunyuan model",
+				},
+				{
+					UpstreamID: "hunyuan-vision",
+					DisplayName: "hunyuan-vision",
+					Description: "Tencent Hunyuan model",
+				},
+				{
+					UpstreamID: "hunyuan-functioncall",
+					DisplayName: "hunyuan-functioncall",
+					Description: "Tencent Hunyuan model",
+				},
+				{
+					UpstreamID: "hunyuan-lite",
+					DisplayName: "hunyuan-lite",
+					Description: "Tencent Hunyuan model",
+				},
+			},
+		},
+		{
+			Slug: "iflytek",
+			DisplayName: "iFlytek Spark",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://spark-api-open.xf-yun.com/v1",
+			DocsURL: "https://xinghuo.xfyun.cn",
+			Summary: "Spark Lite is free (2 QPS rate-limited), but iFlytek ToS §2.4(3) prohibits programmatic extraction and requires Chinese real-name auth — use with caution.; Get API key at console.xfyun.cn",
+			Models: []Model{
+				{
+					UpstreamID: "4.0Ultra",
+					DisplayName: "4.0Ultra",
+					Description: "iFlytek Spark model",
+				},
+				{
+					UpstreamID: "generalv3.5",
+					DisplayName: "generalv3.5",
+					Description: "iFlytek Spark model",
+				},
+				{
+					UpstreamID: "max-32k",
+					DisplayName: "max-32k",
+					Description: "iFlytek Spark model",
+				},
+				{
+					UpstreamID: "generalv3",
+					DisplayName: "generalv3",
+					Description: "iFlytek Spark model",
+				},
+				{
+					UpstreamID: "pro-128k",
+					DisplayName: "pro-128k",
+					Description: "iFlytek Spark model",
+				},
+				{
+					UpstreamID: "lite",
+					DisplayName: "lite",
+					Description: "iFlytek Spark model",
+				},
+			},
+		},
+		{
+			Slug: "baichuan",
+			DisplayName: "Baichuan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.baichuan-ai.com/v1",
+			DocsURL: "https://www.baichuan-ai.com",
+			Summary: "Free Baichuan models. Popular Chinese LLM startup.; Get API key at platform.baichuan-ai.com",
+			Models: []Model{
+				{
+					UpstreamID: "Baichuan4-Turbo",
+					DisplayName: "Baichuan4-Turbo",
+					Description: "Baichuan model",
+				},
+				{
+					UpstreamID: "Baichuan4-Air",
+					DisplayName: "Baichuan4-Air",
+					Description: "Baichuan model",
+				},
+				{
+					UpstreamID: "Baichuan4",
+					DisplayName: "Baichuan4",
+					Description: "Baichuan model",
+				},
+				{
+					UpstreamID: "Baichuan3-Turbo",
+					DisplayName: "Baichuan3-Turbo",
+					Description: "Baichuan model",
+				},
+				{
+					UpstreamID: "Baichuan3-Turbo-128k",
+					DisplayName: "Baichuan3-Turbo-128k",
+					Description: "Baichuan model",
+				},
+			},
+		},
+		{
+			Slug: "yi",
+			DisplayName: "Yi (01.AI)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.lingyiwanwu.com/v1",
+			DocsURL: "https://01.ai",
+			Summary: "No free API tier (2026) — Yi-Light retired; platform.01.ai is pay-as-you-go (Yi-Lightning paid). Open weights are download-only.; Get API key at platform.lingyiwanwu.com",
+			Models: []Model{
+				{
+					UpstreamID: "yi-large",
+					DisplayName: "yi-large",
+					Description: "Yi (01.AI) model",
+				},
+			},
+		},
+		{
+			Slug: "doubao",
+			DisplayName: "Doubao",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/v3",
+			DocsURL: "https://doubao.com",
+			Summary: "Free Doubao models. ByteDance's chatbot.; Get API key at console.volcengine.com",
+			Models: []Model{
+				{
+					UpstreamID: "doubao-seed-2-0-pro-260215",
+					DisplayName: "doubao-seed-2-0-pro-260215",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-lite-260215",
+					DisplayName: "doubao-seed-2-0-lite-260215",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-mini-260215",
+					DisplayName: "doubao-seed-2-0-mini-260215",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-code-preview-260215",
+					DisplayName: "doubao-seed-2-0-code-preview-260215",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-8-251228",
+					DisplayName: "doubao-seed-1-8-251228",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6-251015",
+					DisplayName: "doubao-seed-1-6-251015",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6-flash-250828",
+					DisplayName: "doubao-seed-1-6-flash-250828",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-1-5-pro-32k-250115",
+					DisplayName: "doubao-1-5-pro-32k-250115",
+					Description: "Doubao model",
+				},
+				{
+					UpstreamID: "doubao-pro-32k",
+					DisplayName: "doubao-pro-32k",
+					Description: "Doubao model",
+				},
+			},
+		},
+		{
+			Slug: "sensenova",
+			DisplayName: "SenseNova",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://token.sensenova.cn/v1",
+			DocsURL: "https://platform.sensenova.cn",
+			Summary: "Free SenseTime models. Computer vision leader.; Get API key at platform.sensenova.cn; SenseNova registration appears to require a Chinese (+86) phone number for SMS verification — no international sign-up path is documented, so users outside mainland China may be unable to obtain an API key.",
+			Models: []Model{
+				{
+					UpstreamID: "sensenova-6.7-flash-lite",
+					DisplayName: "sensenova-6.7-flash-lite",
+					Description: "SenseNova model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "SenseNova model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "SenseNova model",
+				},
+			},
+		},
+		{
+			Slug: "sealion",
+			DisplayName: "SEA-LION",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.sea-lion.ai/v1",
+			DocsURL: "https://sea-lion.ai",
+			Summary: "Permanently free at 10 RPM — AI Singapore's Southeast-Asian models (Llama/Qwen/Gemma SEA-LION).; Sign in at sea-lion.ai with Google (no card, no region wall), create an API key, then paste it here.",
+			Models: []Model{
+				{
+					UpstreamID: "aisingapore/Llama-SEA-LION-v3.5-70B-R",
+					DisplayName: "aisingapore/Llama-SEA-LION-v3.5-70B-R",
+					Description: "SEA-LION model",
+				},
+				{
+					UpstreamID: "aisingapore/Llama-SEA-LION-v3-70B-IT",
+					DisplayName: "aisingapore/Llama-SEA-LION-v3-70B-IT",
+					Description: "SEA-LION model",
+				},
+				{
+					UpstreamID: "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+					DisplayName: "aisingapore/Gemma-SEA-LION-v4-27B-IT",
+					Description: "SEA-LION model",
+				},
+				{
+					UpstreamID: "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
+					DisplayName: "aisingapore/Qwen-SEA-LION-v4.5-27B-IT",
+					Description: "SEA-LION model",
+				},
+				{
+					UpstreamID: "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+					DisplayName: "aisingapore/Qwen-SEA-LION-v4-32B-IT",
+					Description: "SEA-LION model",
+				},
+			},
+		},
+		{
+			Slug: "internlm",
+			DisplayName: "InternLM (Intern-S1)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://chat.intern-ai.org.cn/api/v1",
+			DocsURL: "https://internlm.intern-ai.org.cn",
+			Summary: "Free monthly quota ~1M input / 3M output tokens (~10 RPM)",
+			Models: []Model{
+				{
+					UpstreamID: "intern-s1-pro",
+					DisplayName: "intern-s1-pro",
+					Description: "InternLM (Intern-S1) model",
+				},
+				{
+					UpstreamID: "intern-s1",
+					DisplayName: "intern-s1",
+					Description: "InternLM (Intern-S1) model",
+				},
+				{
+					UpstreamID: "intern-s1-mini",
+					DisplayName: "intern-s1-mini",
+					Description: "InternLM (Intern-S1) model",
+				},
+				{
+					UpstreamID: "internvl3.5-latest",
+					DisplayName: "internvl3.5-latest",
+					Description: "InternLM (Intern-S1) model",
+				},
+				{
+					UpstreamID: "intern-latest",
+					DisplayName: "intern-latest",
+					Description: "InternLM (Intern-S1) model",
+				},
+			},
+		},
+		{
+			Slug: "ant-ling",
+			DisplayName: "Ant Ling / Ring (inclusionAI)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.ant-ling.com/v1",
+			DocsURL: "https://developer.ant-ling.com/en/docs",
+			Summary: "500,000 free tokens per day per account (resets 02:00 UTC+8, no rollover); Register and create an API key at the Ant Ling API console (https://chat.ant-ling.com/open), then paste it here.; the provider is OpenAI-compatible and also exposes an Anthropic-compatible surface.",
+			Models: []Model{
+				{
+					UpstreamID: "Ling-2.6-1T",
+					DisplayName: "Ling-2.6-1T",
+					Description: "Ant Ling / Ring (inclusionAI) model",
+				},
+				{
+					UpstreamID: "Ring-2.6-1T",
+					DisplayName: "Ring-2.6-1T",
+					Description: "Ant Ling / Ring (inclusionAI) model",
+				},
+				{
+					UpstreamID: "Ling-2.6-flash",
+					DisplayName: "Ling-2.6-flash",
+					Description: "Ant Ling / Ring (inclusionAI) model",
+				},
+			},
+		},
+		{
+			Slug: "sarvam",
+			DisplayName: "Sarvam AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.sarvam.ai/v1",
+			DocsURL: "https://docs.sarvam.ai",
+			Summary: "₹1,000 in free signup credits — never expire; Sarvam AI is OpenAI-compatible on /v1. Models are tuned for Indic languages.",
+			Models: []Model{
+				{
+					UpstreamID: "sarvam-105b",
+					DisplayName: "sarvam-105b",
+					Description: "Sarvam AI model",
+				},
+				{
+					UpstreamID: "sarvam-30b",
+					DisplayName: "sarvam-30b",
+					Description: "Sarvam AI model",
+				},
+			},
+		},
+		{
+			Slug: "plamo",
+			DisplayName: "PLaMo",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.platform.preferredai.jp/v1",
+			DocsURL: "https://plamo.preferredai.jp/api",
+			Summary: "PLaMo is OpenAI-compatible at https://api.platform.preferredai.jp/v1. Built by Preferred Networks and optimized for Japanese. Docs are primarily in Japanese.",
+			Models: []Model{
+				{
+					UpstreamID: "plamo-3.0-prime",
+					DisplayName: "plamo-3.0-prime",
+					Description: "PLaMo model",
+				},
+			},
+		},
+		{
+			Slug: "typhoon",
+			DisplayName: "Typhoon",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.opentyphoon.ai/v1",
+			DocsURL: "https://docs.opentyphoon.ai",
+			Summary: "Free API key with a 5 req/s and 200 req/m rate limit.; Typhoon is OpenAI-compatible on /v1. Built by SCB 10X (Thailand); typhoon-v2.5-30b-a3b-instruct is a thai-first, multilingual model.",
+			Models: []Model{
+				{
+					UpstreamID: "typhoon-v2.5-30b-a3b-instruct",
+					DisplayName: "typhoon-v2.5-30b-a3b-instruct",
+					Description: "Typhoon model",
+				},
+			},
+		},
+		{
+			Slug: "pollinations",
+			DisplayName: "Pollinations AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://gen.pollinations.ai/v1",
+			DocsURL: "https://pollinations.ai",
+			Summary: "Free keyless tier: openai, openai-fast, openai-large, qwen-coder, mistral, deepseek, grok, gemini-flash-lite-3.1, perplexity-fast, perplexity-reasoning. Premium models (claude, gemini, midijourney) require a Pollinations API key from enter.pollinations.ai.; Anonymous/keyless access to the documented free models is best-effort.",
+			Models: []Model{
+				{
+					UpstreamID: "openai",
+					DisplayName: "openai",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "openai-fast",
+					DisplayName: "openai-fast",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "openai-large",
+					DisplayName: "openai-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "qwen-coder",
+					DisplayName: "qwen-coder",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "mistral",
+					DisplayName: "mistral",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "gemini",
+					DisplayName: "gemini",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "gemini-flash-lite-3.1",
+					DisplayName: "gemini-flash-lite-3.1",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "gemini-fast",
+					DisplayName: "gemini-fast",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "deepseek",
+					DisplayName: "deepseek",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "grok",
+					DisplayName: "grok",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "grok-large",
+					DisplayName: "grok-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "gemini-search",
+					DisplayName: "gemini-search",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "midijourney",
+					DisplayName: "midijourney",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "midijourney-large",
+					DisplayName: "midijourney-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "claude-fast",
+					DisplayName: "claude-fast",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "claude",
+					DisplayName: "claude",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "claude-large",
+					DisplayName: "claude-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "perplexity-fast",
+					DisplayName: "perplexity-fast",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "perplexity-reasoning",
+					DisplayName: "perplexity-reasoning",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "kimi",
+					DisplayName: "kimi",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "gemini-large",
+					DisplayName: "gemini-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "nova-fast",
+					DisplayName: "nova-fast",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "nova",
+					DisplayName: "nova",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "glm",
+					DisplayName: "glm",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "minimax",
+					DisplayName: "minimax",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "mistral-large",
+					DisplayName: "mistral-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "polly",
+					DisplayName: "polly",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "qwen-coder-large",
+					DisplayName: "qwen-coder-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "qwen-large",
+					DisplayName: "qwen-large",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "qwen-vision",
+					DisplayName: "qwen-vision",
+					Description: "Pollinations AI model",
+				},
+				{
+					UpstreamID: "qwen-safety",
+					DisplayName: "qwen-safety",
+					Description: "Pollinations AI model",
+				},
+			},
+		},
+		{
+			Slug: "dify",
+			DisplayName: "Dify",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.dify.ai",
+			DocsURL: "https://dify.ai",
+			Summary: "Free open-source AI app builder + RAG platform.; Get API key from your Dify instance.",
+			Models: []Model{
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "Dify model",
+				},
+			},
+		},
+		{
+			Slug: "omniroute",
+			DisplayName: "OmniRoute",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:3000/v1",
+			DocsURL: "https://github.com/diegosouzapw/OmniRoute",
+			Summary: "Open-source MIT AI gateway (352 providers, 1200+ models). Self-hosted OpenAI-compatible endpoint; quota-aware auto-fallback.",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "OmniRoute model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4",
+					DisplayName: "claude-sonnet-4",
+					Description: "OmniRoute model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "OmniRoute model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "OmniRoute model",
+				},
+			},
+		},
+		{
+			Slug: "amazon-nova",
+			DisplayName: "Amazon Nova",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.nova.amazon.com/v1",
+			DocsURL: "https://nova.amazon.com",
+			Summary: "Amazon's first-party Nova API, separate from Bedrock.",
+			Models: []Model{
+				{
+					UpstreamID: "nova-2-pro-v1",
+					DisplayName: "nova-2-pro-v1",
+					Description: "Amazon Nova model",
+				},
+				{
+					UpstreamID: "nova-2-lite-v1",
+					DisplayName: "nova-2-lite-v1",
+					Description: "Amazon Nova model",
+				},
+			},
+		},
+		{
+			Slug: "meta-ai",
+			DisplayName: "Meta AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.meta.ai/v1",
+			DocsURL: "https://dev.meta.ai",
+			Summary: "Meta Muse Spark models on api.meta.ai (distinct from the Llama API).",
+			Models: []Model{
+				{
+					UpstreamID: "muse-spark-1.3",
+					DisplayName: "muse-spark-1.3",
+					Description: "Meta AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1.1",
+					DisplayName: "muse-spark-1.1",
+					Description: "Meta AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2",
+					DisplayName: "muse-spark-1.2",
+					Description: "Meta AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2-contributor",
+					DisplayName: "muse-spark-1.2-contributor",
+					Description: "Meta AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor",
+					DisplayName: "muse-spark-1.3-contributor",
+					Description: "Meta AI model",
+				},
+			},
+		},
+		{
+			Slug: "moonshot-cn",
+			DisplayName: "Moonshot AI (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.moonshot.cn/v1",
+			DocsURL: "https://platform.moonshot.cn",
+			Summary: "Kimi models on Moonshot's China endpoint.",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Moonshot AI (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Moonshot AI (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code-highspeed",
+					DisplayName: "kimi-k2.7-code-highspeed",
+					Description: "Moonshot AI (China) model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "Moonshot AI (China) model",
+				},
+			},
+		},
+		{
+			Slug: "krutrim",
+			DisplayName: "Krutrim",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://cloud.olakrutrim.com/v1",
+			DocsURL: "https://cloud.olakrutrim.com",
+			Summary: "Ola Krutrim OpenAI-compatible inference API.",
+			Models: []Model{
+				{
+					UpstreamID: "krutrim-1",
+					DisplayName: "krutrim-1",
+					Description: "Krutrim model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3-8B-Instruct",
+					DisplayName: "Meta-Llama-3-8B-Instruct",
+					Description: "Krutrim model",
+				},
+			},
+		},
+		{
+			Slug: "kimi-ai-coding",
+			DisplayName: "Kimi For Coding",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.kimi.ai/coding/v1",
+			DocsURL: "https://www.kimi.ai/code",
+			Summary: "Kimi coding plan on kimi.ai (distinct from api.kimi.com).",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-for-coding-highspeed",
+					DisplayName: "kimi-for-coding-highspeed",
+					Description: "Kimi For Coding model",
+				},
+				{
+					UpstreamID: "kimi-for-coding",
+					DisplayName: "kimi-for-coding",
+					Description: "Kimi For Coding model",
+				},
+				{
+					UpstreamID: "k3-256k",
+					DisplayName: "k3-256k",
+					Description: "Kimi For Coding model",
+				},
+				{
+					UpstreamID: "k3",
+					DisplayName: "k3",
+					Description: "Kimi For Coding model",
+				},
+			},
+		},
+		{
+			Slug: "alibaba-coding-plan",
+			DisplayName: "Alibaba Coding Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://coding-intl.dashscope.aliyuncs.com/v1",
+			DocsURL: "https://www.alibabacloud.com/help/en/model-studio/coding-plan",
+			Summary: "International Alibaba Model Studio coding-plan endpoint.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3-coder-next",
+					DisplayName: "qwen3-coder-next",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3-max-2026-01-23",
+					DisplayName: "qwen3-max-2026-01-23",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3.6-flash",
+					DisplayName: "qwen3.6-flash",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3-coder-plus",
+					DisplayName: "qwen3-coder-plus",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "Alibaba Coding Plan model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Alibaba Coding Plan model",
+				},
+			},
+		},
+		{
+			Slug: "alibaba-coding-plan-cn",
+			DisplayName: "Alibaba Coding Plan (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://coding.dashscope.aliyuncs.com/v1",
+			DocsURL: "https://help.aliyun.com/zh/model-studio/coding-plan",
+			Summary: "China Alibaba Model Studio coding-plan endpoint.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3-coder-next",
+					DisplayName: "qwen3-coder-next",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3-max-2026-01-23",
+					DisplayName: "qwen3-max-2026-01-23",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.6-flash",
+					DisplayName: "qwen3.6-flash",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3-coder-plus",
+					DisplayName: "qwen3-coder-plus",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Alibaba Coding Plan (China) model",
+				},
+			},
+		},
+		{
+			Slug: "alibaba-token-plan-cn",
+			DisplayName: "Alibaba Token Plan (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
+			DocsURL: "https://www.alibabacloud.com/help/zh/model-studio/token-plan-overview",
+			Summary: "China-region Alibaba token plan (Beijing MaaS).",
+			Models: []Model{
+				{
+					UpstreamID: "happyhorse-1.1-r2v",
+					DisplayName: "happyhorse-1.1-r2v",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "happyhorse-1.1-t2v",
+					DisplayName: "happyhorse-1.1-t2v",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen-image-2.0",
+					DisplayName: "qwen-image-2.0",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash",
+					DisplayName: "deepseek-v4.1-flash",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.8-max-preview",
+					DisplayName: "qwen3.8-max-preview",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen-image-2.0-pro",
+					DisplayName: "qwen-image-2.0-pro",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "wan2.7-image",
+					DisplayName: "wan2.7-image",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "wan2.7-image-pro",
+					DisplayName: "wan2.7-image-pro",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "happyhorse-1.1-i2v",
+					DisplayName: "happyhorse-1.1-i2v",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.6-flash",
+					DisplayName: "qwen3.6-flash",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro-0813",
+					DisplayName: "deepseek-v4-pro-0813",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash",
+					DisplayName: "qwen3.8-flash",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "Alibaba Token Plan (China) model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Alibaba Token Plan (China) model",
+				},
+			},
+		},
+		{
+			Slug: "stepfun-step-plan",
+			DisplayName: "StepFun Step Plan (China)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.stepfun.com/step_plan/v1",
+			DocsURL: "https://platform.stepfun.com/docs/zh/step-plan/integrations/reasoning-api",
+			Summary: "StepFun Step Plan on the China platform.",
+			Models: []Model{
+				{
+					UpstreamID: "step-5-preview",
+					DisplayName: "step-5-preview",
+					Description: "StepFun Step Plan (China) model",
+				},
+				{
+					UpstreamID: "step-router-v1",
+					DisplayName: "step-router-v1",
+					Description: "StepFun Step Plan (China) model",
+				},
+				{
+					UpstreamID: "step-3.5-flash-2603",
+					DisplayName: "step-3.5-flash-2603",
+					Description: "StepFun Step Plan (China) model",
+				},
+				{
+					UpstreamID: "step-3.5-flash",
+					DisplayName: "step-3.5-flash",
+					Description: "StepFun Step Plan (China) model",
+				},
+				{
+					UpstreamID: "step-3.7-flash",
+					DisplayName: "step-3.7-flash",
+					Description: "StepFun Step Plan (China) model",
+				},
+			},
+		},
+		{
+			Slug: "stepfun-step-plan-global",
+			DisplayName: "StepFun Step Plan (Global)",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.stepfun.ai/step_plan/v1",
+			DocsURL: "https://platform.stepfun.ai/docs/en/step-plan/integrations/reasoning-api",
+			Summary: "StepFun Step Plan on the global platform.",
+			Models: []Model{
+				{
+					UpstreamID: "step-5-preview",
+					DisplayName: "step-5-preview",
+					Description: "StepFun Step Plan (Global) model",
+				},
+				{
+					UpstreamID: "step-3.5-flash-2603",
+					DisplayName: "step-3.5-flash-2603",
+					Description: "StepFun Step Plan (Global) model",
+				},
+				{
+					UpstreamID: "step-3.5-flash",
+					DisplayName: "step-3.5-flash",
+					Description: "StepFun Step Plan (Global) model",
+				},
+				{
+					UpstreamID: "step-3.7-flash",
+					DisplayName: "step-3.7-flash",
+					Description: "StepFun Step Plan (Global) model",
+				},
+			},
+		},
+		{
+			Slug: "tencent-tokenhub",
+			DisplayName: "Tencent TokenHub",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://tokenhub.tencentmaas.com/v1",
+			DocsURL: "https://cloud.tencent.com/document/product/1823/130050",
+			Summary: "Tencent MaaS TokenHub for Hunyuan models.",
+			Models: []Model{
+				{
+					UpstreamID: "hy3-preview",
+					DisplayName: "hy3-preview",
+					Description: "Tencent TokenHub model",
+				},
+				{
+					UpstreamID: "hy3",
+					DisplayName: "hy3",
+					Description: "Tencent TokenHub model",
+				},
+				{
+					UpstreamID: "hy4-preview",
+					DisplayName: "hy4-preview",
+					Description: "Tencent TokenHub model",
+				},
+			},
+		},
+		{
+			Slug: "tencent-token-plan",
+			DisplayName: "Tencent Token Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.lkeap.cloud.tencent.com/plan/v3",
+			DocsURL: "https://cloud.tencent.com/document/product/1823/130060",
+			Summary: "Tencent Cloud token-plan endpoint (LKEAP).",
+			Models: []Model{
+				{
+					UpstreamID: "hy3",
+					DisplayName: "hy3",
+					Description: "Tencent Token Plan model",
+				},
+				{
+					UpstreamID: "hy4-preview",
+					DisplayName: "hy4-preview",
+					Description: "Tencent Token Plan model",
+				},
+			},
+		},
+		{
+			Slug: "crusoe",
+			DisplayName: "Crusoe",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.inference.crusoecloud.com/v1",
+			DocsURL: "https://docs.crusoecloud.com/managed-inference/overview",
+			Summary: "Crusoe managed inference for open-weight models.",
+			Models: []Model{
+				{
+					UpstreamID: "zai/GLM-5.1",
+					DisplayName: "zai/GLM-5.1",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "zai/GLM-5.2",
+					DisplayName: "zai/GLM-5.2",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					DisplayName: "Qwen/Qwen3-235B-A22B-Instruct-2507",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V3-0324",
+					DisplayName: "deepseek-ai/DeepSeek-V3-0324",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "nvidia/Nemotron-3-Nano-Omni-Reasoning-30B-A3B",
+					DisplayName: "nvidia/Nemotron-3-Nano-Omni-Reasoning-30B-A3B",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B",
+					Description: "Crusoe model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Crusoe model",
+				},
+			},
+		},
+		{
+			Slug: "vultr",
+			DisplayName: "Vultr Inference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.vultrinference.com/v1",
+			DocsURL: "https://www.vultr.com",
+			Summary: "Vultr serverless inference, OpenAI-compatible.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash",
+					DisplayName: "deepseek-v4.1-flash",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "glm-5.x-menthol",
+					DisplayName: "glm-5.x-menthol",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "laguna-s-2.1",
+					DisplayName: "laguna-s-2.1",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-flash-rl",
+					DisplayName: "mimo-v2.6-flash-rl",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro-rl",
+					DisplayName: "mimo-v2.6-pro-rl",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "muse-glimmer-30b",
+					DisplayName: "muse-glimmer-30b",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "nemotron-3-nano-omni-30b-a3b-reasoning",
+					DisplayName: "nemotron-3-nano-omni-30b-a3b-reasoning",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "nemotron-3.5-content-safety",
+					DisplayName: "nemotron-3.5-content-safety",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "qwen3.8-27b",
+					DisplayName: "qwen3.8-27b",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash-next",
+					DisplayName: "qwen3.8-flash-next",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "vultron-retriever-core-qwen3.5-4.5b",
+					DisplayName: "vultron-retriever-core-qwen3.5-4.5b",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "vultron-retriever-flash-qwen3.5-0.8b",
+					DisplayName: "vultron-retriever-flash-qwen3.5-0.8b",
+					Description: "Vultr Inference model",
+				},
+				{
+					UpstreamID: "z-image-turbo",
+					DisplayName: "z-image-turbo",
+					Description: "Vultr Inference model",
+				},
+			},
+		},
+		{
+			Slug: "coralbricks",
+			DisplayName: "CoralBricks",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.coralbricks.ai/v1",
+			DocsURL: "https://www.coralbricks.ai",
+			Summary: "CoralBricks serverless inference.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5.3-fp4",
+					DisplayName: "glm-5.3-fp4",
+					Description: "CoralBricks model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash-fp4",
+					DisplayName: "glm-5.3-flash-fp4",
+					Description: "CoralBricks model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "CoralBricks model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash-fast-fp4",
+					DisplayName: "deepseek-v4.1-flash-fast-fp4",
+					Description: "CoralBricks model",
+				},
+			},
+		},
+		{
+			Slug: "jalapeno",
+			DisplayName: "Jalapeno Cloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.jalapeno-cloud.ai/v1",
+			DocsURL: "https://www.jalapeno-cloud.ai",
+			Summary: "Jalapeno Cloud hosted open-weight models.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen3-VL-235B-A22B-Instruct",
+					DisplayName: "Qwen3-VL-235B-A22B-Instruct",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "MiniMax-M3",
+					DisplayName: "MiniMax-M3",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3-Next-80B-A3B-Instruct",
+					DisplayName: "Qwen3-Next-80B-A3B-Instruct",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "GLM-5.1",
+					DisplayName: "GLM-5.1",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Hy3",
+					DisplayName: "Hy3",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "GLM-5.2",
+					DisplayName: "GLM-5.2",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3-VL-235B-A22B-Thinking",
+					DisplayName: "Qwen3-VL-235B-A22B-Thinking",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3.5-27B",
+					DisplayName: "Qwen3.5-27B",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Kimi-K3",
+					DisplayName: "Kimi-K3",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3-Next-80B-A3B-Thinking",
+					DisplayName: "Qwen3-Next-80B-A3B-Thinking",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash",
+					DisplayName: "DeepSeek-V4-Flash",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro",
+					DisplayName: "DeepSeek-V4-Pro",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3.5-35B-A3B",
+					DisplayName: "Qwen3.5-35B-A3B",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3.5-122B-A10B",
+					DisplayName: "Qwen3.5-122B-A10B",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Qwen3.5-397B-A17B",
+					DisplayName: "Qwen3.5-397B-A17B",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Kimi-K2.7-Code",
+					DisplayName: "Kimi-K2.7-Code",
+					Description: "Jalapeno Cloud model",
+				},
+				{
+					UpstreamID: "Kimi-K2.5",
+					DisplayName: "Kimi-K2.5",
+					Description: "Jalapeno Cloud model",
+				},
+			},
+		},
+		{
+			Slug: "berget",
+			DisplayName: "Berget.AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.berget.ai/v1",
+			DocsURL: "https://berget.ai",
+			Summary: "Swedish inference API for open-weight models.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen/Qwen3.5-2B",
+					DisplayName: "Qwen/Qwen3.5-2B",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B-FP8",
+					DisplayName: "Qwen/Qwen3.8-27B-FP8",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "convaiinnovations/laya",
+					DisplayName: "convaiinnovations/laya",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it",
+					DisplayName: "google/gemma-4-31B-it",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "intfloat/multilingual-e5-large",
+					DisplayName: "intfloat/multilingual-e5-large",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "intfloat/multilingual-e5-large-instruct",
+					DisplayName: "intfloat/multilingual-e5-large-instruct",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "klang/pianissimo",
+					DisplayName: "klang/pianissimo",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+					DisplayName: "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K3",
+					DisplayName: "moonshotai/Kimi-K3",
+					Description: "Berget.AI model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash",
+					DisplayName: "zai-org/GLM-5.3-Flash",
+					Description: "Berget.AI model",
+				},
+			},
+		},
+		{
+			Slug: "amd-token-factory",
+			DisplayName: "AMD Token Factory",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://developer.amd.com.cn/radeon/api/v1",
+			DocsURL: "https://developer.amd.com.cn/radeon/tokenfactory",
+			Summary: "AMD Radeon Token Factory OpenAI-compatible API.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen3.8-27B",
+					DisplayName: "Qwen3.8-27B",
+					Description: "AMD Token Factory model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4.1-Flash",
+					DisplayName: "DeepSeek-V4.1-Flash",
+					Description: "AMD Token Factory model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash",
+					DisplayName: "DeepSeek-V4-Flash",
+					Description: "AMD Token Factory model",
+				},
+				{
+					UpstreamID: "Qwen3.8-Flash-Next",
+					DisplayName: "Qwen3.8-Flash-Next",
+					Description: "AMD Token Factory model",
+				},
+				{
+					UpstreamID: "MiniCPM5-2B",
+					DisplayName: "MiniCPM5-2B",
+					Description: "AMD Token Factory model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash-Vision-Exp",
+					DisplayName: "DeepSeek-V4-Flash-Vision-Exp",
+					Description: "AMD Token Factory model",
+				},
+			},
+		},
+		{
+			Slug: "ebcloud",
+			DisplayName: "EBCloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://maas-api.ebcloud.com/v1",
+			DocsURL: "https://www.ebcloud.com",
+			Summary: "EBCloud MaaS inference endpoint.",
+			Models: []Model{
+				{
+					UpstreamID: "Kimi-K2.6",
+					DisplayName: "Kimi-K2.6",
+					Description: "EBCloud model",
+				},
+				{
+					UpstreamID: "GLM-5.1",
+					DisplayName: "GLM-5.1",
+					Description: "EBCloud model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash",
+					DisplayName: "DeepSeek-V4-Flash",
+					Description: "EBCloud model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro",
+					DisplayName: "DeepSeek-V4-Pro",
+					Description: "EBCloud model",
+				},
+			},
+		},
+		{
+			Slug: "drun",
+			DisplayName: "D.Run",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://chat.d.run/v1",
+			DocsURL: "https://www.d.run",
+			Summary: "D.Run public model inference (China).",
+			Models: []Model{
+				{
+					UpstreamID: "public/deepseek-v3",
+					DisplayName: "public/deepseek-v3",
+					Description: "D.Run model",
+				},
+				{
+					UpstreamID: "public/minimax-m25",
+					DisplayName: "public/minimax-m25",
+					Description: "D.Run model",
+				},
+				{
+					UpstreamID: "public/deepseek-r1",
+					DisplayName: "public/deepseek-r1",
+					Description: "D.Run model",
+				},
+			},
+		},
+		{
+			Slug: "lilac",
+			DisplayName: "Lilac",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.getlilac.com/v1",
+			DocsURL: "https://docs.getlilac.com/inference/models",
+			Summary: "Lilac hosted open-weight inference.",
+			Models: []Model{
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Lilac model",
+				},
+				{
+					UpstreamID: "minimaxai/minimax-m3",
+					DisplayName: "minimaxai/minimax-m3",
+					Description: "Lilac model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "Lilac model",
+				},
+				{
+					UpstreamID: "zai-org/glm-5.2",
+					DisplayName: "zai-org/glm-5.2",
+					Description: "Lilac model",
+				},
+			},
+		},
+		{
+			Slug: "runinfra",
+			DisplayName: "RunInfra",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.runinfra.ai/v1",
+			DocsURL: "https://runinfra.ai",
+			Summary: "RunInfra gateway for open-weight models.",
+			Models: []Model{
+				{
+					UpstreamID: "Inferact/Qwen3.8-2.4T-A95B-NVFP4",
+					DisplayName: "Inferact/Qwen3.8-2.4T-A95B-NVFP4",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash",
+					DisplayName: "zai-org/GLM-5.3-Flash",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+					Description: "RunInfra model",
+				},
+				{
+					UpstreamID: "ornith-ai/Ornith-1.5-35B-A3B",
+					DisplayName: "ornith-ai/Ornith-1.5-35B-A3B",
+					Description: "RunInfra model",
+				},
+			},
+		},
+		{
+			Slug: "aki",
+			DisplayName: "AKI.IO",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://aki.io/v1",
+			DocsURL: "https://aki.io",
+			Summary: "AKI.IO OpenAI-compatible inference.",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.8-27b",
+					DisplayName: "qwen3.8-27b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731-284b",
+					DisplayName: "deepseek-v4-flash-0731-284b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "qwen3.6-35b",
+					DisplayName: "qwen3.6-35b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "glm5.3-754b",
+					DisplayName: "glm5.3-754b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "mistral4-119b",
+					DisplayName: "mistral4-119b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "AKI.IO model",
+				},
+				{
+					UpstreamID: "gemma4-26b",
+					DisplayName: "gemma4-26b",
+					Description: "AKI.IO model",
+				},
+			},
+		},
+		{
+			Slug: "dinference",
+			DisplayName: "DInference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.dinference.com/v1",
+			DocsURL: "https://dinference.com",
+			Summary: "DInference hosted chat models.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "DInference model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "DInference model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "DInference model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "DInference model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "DInference model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "DInference model",
+				},
+			},
+		},
+		{
+			Slug: "hetzner",
+			DisplayName: "Hetzner",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.hetzner.com/api/v1",
+			DocsURL: "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
+			Summary: "Hetzner experimental OpenAI-compatible inference API.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen3.8-27B",
+					DisplayName: "Qwen3.8-27B",
+					Description: "Hetzner model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B-FP8",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B-FP8",
+					Description: "Hetzner model",
+				},
+			},
+		},
+		{
+			Slug: "evroc",
+			DisplayName: "evroc",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://models.think.evroc.com/v1",
+			DocsURL: "https://docs.evroc.com/products/think/",
+			Summary: "evroc Think sovereign inference in the EU.",
+			Models: []Model{
+				{
+					UpstreamID: "google/gemma-4-26B-A4B-it",
+					DisplayName: "google/gemma-4-26B-A4B-it",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "intfloat/multilingual-e5-large-instruct",
+					DisplayName: "intfloat/multilingual-e5-large-instruct",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Medium-3.5-128B",
+					DisplayName: "mistralai/Mistral-Medium-3.5-128B",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "mistralai/Voxtral-Small-24B-2507",
+					DisplayName: "mistralai/Voxtral-Small-24B-2507",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.2",
+					DisplayName: "zai-org/GLM-5.2",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "nvidia/Llama-3.3-70B-Instruct-FP8",
+					DisplayName: "nvidia/Llama-3.3-70B-Instruct-FP8",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "evroc/roc",
+					DisplayName: "evroc/roc",
+					Description: "evroc model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "evroc model",
+				},
+			},
+		},
+		{
+			Slug: "cloudferro",
+			DisplayName: "CloudFerro Sherlock",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api-sherlock.cloudferro.com/openai/v1",
+			DocsURL: "https://docs.sherlock.cloudferro.com/",
+			Summary: "CloudFerro Sherlock EU inference, including Bielik.",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
+					DisplayName: "meta-llama/Llama-3.3-70B-Instruct",
+					Description: "CloudFerro Sherlock model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.5",
+					DisplayName: "MiniMaxAI/MiniMax-M2.5",
+					Description: "CloudFerro Sherlock model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "CloudFerro Sherlock model",
+				},
+				{
+					UpstreamID: "speakleash/Bielik-11B-v2.6-Instruct",
+					DisplayName: "speakleash/Bielik-11B-v2.6-Instruct",
+					Description: "CloudFerro Sherlock model",
+				},
+				{
+					UpstreamID: "speakleash/Bielik-11B-v3.0-Instruct",
+					DisplayName: "speakleash/Bielik-11B-v3.0-Instruct",
+					Description: "CloudFerro Sherlock model",
+				},
+			},
+		},
+		{
+			Slug: "scnet",
+			DisplayName: "SCNet Token Plan",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.scnet.cn/api/llm/v1",
+			DocsURL: "https://www.scnet.cn/ac/openapi/doc/2.0/moduleapi/plans/token-plan.html",
+			Summary: "China SCNet supercomputing token-plan LLM API.",
+			Models: []Model{
+				{
+					UpstreamID: "DeepSeek-V4-Flash-0731",
+					DisplayName: "DeepSeek-V4-Flash-0731",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Kimi-K2.6",
+					DisplayName: "Kimi-K2.6",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "MiniMax-M3",
+					DisplayName: "MiniMax-M3",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "GLM-5.1",
+					DisplayName: "GLM-5.1",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "GLM-5.2",
+					DisplayName: "GLM-5.2",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Qwen3.8-Max",
+					DisplayName: "Qwen3.8-Max",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Kimi-K3",
+					DisplayName: "Kimi-K3",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro-0813",
+					DisplayName: "DeepSeek-V4-Pro-0813",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4.1-Flash",
+					DisplayName: "DeepSeek-V4.1-Flash",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Flash",
+					DisplayName: "DeepSeek-V4-Flash",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "GLM-5",
+					DisplayName: "GLM-5",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "GLM-5.3-Flash",
+					DisplayName: "GLM-5.3-Flash",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "DeepSeek-V4-Pro",
+					DisplayName: "DeepSeek-V4-Pro",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Qwen3.8-Flash",
+					DisplayName: "Qwen3.8-Flash",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.5",
+					DisplayName: "MiniMax-M2.5",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "GLM-5.3",
+					DisplayName: "GLM-5.3",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Kimi-K2.7-Code",
+					DisplayName: "Kimi-K2.7-Code",
+					Description: "SCNet Token Plan model",
+				},
+				{
+					UpstreamID: "Kimi-K2.5",
+					DisplayName: "Kimi-K2.5",
+					Description: "SCNet Token Plan model",
+				},
+			},
+		},
+		{
+			Slug: "abacus",
+			DisplayName: "Abacus",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://routellm.abacus.ai/v1",
+			DocsURL: "https://abacus.ai",
+			Summary: "Abacus RouteLLM multi-model router.",
+			Models: []Model{
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
+					DisplayName: "MiniMaxAI/MiniMax-M2.7",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "MiniMaxAI/MiniMax-M3",
+					DisplayName: "MiniMaxAI/MiniMax-M3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-32B",
+					DisplayName: "Qwen/Qwen3-32B",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					DisplayName: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-27B",
+					DisplayName: "Qwen/Qwen3.6-27B",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-Flash-Next",
+					DisplayName: "Qwen/Qwen3.8-Flash-Next",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "abacusai/Smaug-Flash",
+					DisplayName: "abacusai/Smaug-Flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-fable-5-1",
+					DisplayName: "claude-fable-5-1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5-20251001",
+					DisplayName: "claude-haiku-4-5-20251001",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5-20251101",
+					DisplayName: "claude-opus-4-5-20251101",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7",
+					DisplayName: "claude-opus-4-7",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8",
+					DisplayName: "claude-opus-4-8",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-opus-5-5-thinking",
+					DisplayName: "claude-opus-5-5-thinking",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5-20250929",
+					DisplayName: "claude-sonnet-4-5-20250929",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "dalle",
+					DisplayName: "dalle",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-0731",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					DisplayName: "deepseek-ai/DeepSeek-V4-Pro-0813",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "deepseek-ai/DeepSeek-V4.1-Flash",
+					DisplayName: "deepseek-ai/DeepSeek-V4.1-Flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "dreamina",
+					DisplayName: "dreamina",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "elevenlabs",
+					DisplayName: "elevenlabs",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-image",
+					DisplayName: "gemini-2.5-flash-image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3-pro-image",
+					DisplayName: "gemini-3-pro-image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-image",
+					DisplayName: "gemini-3.1-flash-image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash",
+					DisplayName: "gemini-3.5-flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash-lite",
+					DisplayName: "gemini-3.5-flash-lite",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.6-flash",
+					DisplayName: "gemini-3.6-flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini-3.8-flash",
+					DisplayName: "gemini-3.8-flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini_omni_flash",
+					DisplayName: "gemini_omni_flash",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gemini_omni_flash11",
+					DisplayName: "gemini_omni_flash11",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-4.1",
+					DisplayName: "gpt-4.1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-4.1-mini",
+					DisplayName: "gpt-4.1-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-4.1-nano",
+					DisplayName: "gpt-4.1-nano",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5",
+					DisplayName: "gpt-5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5-nano",
+					DisplayName: "gpt-5-nano",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.1",
+					DisplayName: "gpt-5.1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-6-astra",
+					DisplayName: "gpt-6-astra",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-6-luna",
+					DisplayName: "gpt-6-luna",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt-6-sol",
+					DisplayName: "gpt-6-sol",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image15",
+					DisplayName: "gpt_image15",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image15_edit",
+					DisplayName: "gpt_image15_edit",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image2",
+					DisplayName: "gpt_image2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image25",
+					DisplayName: "gpt_image25",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image25_edit",
+					DisplayName: "gpt_image25_edit",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image2_edit",
+					DisplayName: "gpt_image2_edit",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "gpt_image_edit",
+					DisplayName: "gpt_image_edit",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok-4.7",
+					DisplayName: "grok-4.7",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok_imagine_image",
+					DisplayName: "grok_imagine_image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok_imagine_image2",
+					DisplayName: "grok_imagine_image2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok_imagine_image_quality",
+					DisplayName: "grok_imagine_image_quality",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok_imagine_video",
+					DisplayName: "grok_imagine_video",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "grok_imagine_video15",
+					DisplayName: "grok_imagine_video15",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "hume",
+					DisplayName: "hume",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "hunyuan",
+					DisplayName: "hunyuan",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "hunyuan_image",
+					DisplayName: "hunyuan_image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "ideogram",
+					DisplayName: "ideogram",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "ideogram_character",
+					DisplayName: "ideogram_character",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "imagine_art",
+					DisplayName: "imagine_art",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai",
+					DisplayName: "kling_ai",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_o1",
+					DisplayName: "kling_ai_o1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_o3",
+					DisplayName: "kling_ai_o3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v2",
+					DisplayName: "kling_ai_v2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v21",
+					DisplayName: "kling_ai_v21",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v25",
+					DisplayName: "kling_ai_v25",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v26",
+					DisplayName: "kling_ai_v26",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v26_motion",
+					DisplayName: "kling_ai_v26_motion",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v3",
+					DisplayName: "kling_ai_v3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "kling_ai_v3_motion",
+					DisplayName: "kling_ai_v3_motion",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "luma_labs",
+					DisplayName: "luma_labs",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "magnific",
+					DisplayName: "magnific",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "meta_muse_image",
+					DisplayName: "meta_muse_image",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "midjourney",
+					DisplayName: "midjourney",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "mimo-v2-pro",
+					DisplayName: "mimo-v2-pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro",
+					DisplayName: "mimo-v2.6-pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "minimax",
+					DisplayName: "minimax",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "minimax_h3",
+					DisplayName: "minimax_h3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2-Instruct",
+					DisplayName: "moonshotai/Kimi-K2-Instruct",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.7-Code",
+					DisplayName: "moonshotai/Kimi-K2.7-Code",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K3",
+					DisplayName: "moonshotai/Kimi-K3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "muse-spark-1.1",
+					DisplayName: "muse-spark-1.1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2",
+					DisplayName: "muse-spark-1.2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3",
+					DisplayName: "muse-spark-1.3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3-contributor",
+					DisplayName: "muse-spark-1.3-contributor",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "nano_banana",
+					DisplayName: "nano_banana",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "nano_banana2",
+					DisplayName: "nano_banana2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "nano_banana25",
+					DisplayName: "nano_banana25",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "nano_banana_lite",
+					DisplayName: "nano_banana_lite",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "nano_banana_pro",
+					DisplayName: "nano_banana_pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "o3",
+					DisplayName: "o3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "o3-pro",
+					DisplayName: "o3-pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "o4-mini",
+					DisplayName: "o4-mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "qwen_image_edit",
+					DisplayName: "qwen_image_edit",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "recraft",
+					DisplayName: "recraft",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "recraft_svg",
+					DisplayName: "recraft_svg",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "recraft_vectorize",
+					DisplayName: "recraft_vectorize",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "route-llm",
+					DisplayName: "route-llm",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "route-llm-code",
+					DisplayName: "route-llm-code",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "route-llm-code-low",
+					DisplayName: "route-llm-code-low",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "runway",
+					DisplayName: "runway",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seed_speech",
+					DisplayName: "seed_speech",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance",
+					DisplayName: "seedance",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance15_pro",
+					DisplayName: "seedance15_pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance20",
+					DisplayName: "seedance20",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance20_mini",
+					DisplayName: "seedance20_mini",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance25",
+					DisplayName: "seedance25",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedance_pro",
+					DisplayName: "seedance_pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedream",
+					DisplayName: "seedream",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedream5_lite",
+					DisplayName: "seedream5_lite",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "seedream5_pro",
+					DisplayName: "seedream5_pro",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "sora",
+					DisplayName: "sora",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "thinkingmachines/Inkling",
+					DisplayName: "thinkingmachines/Inkling",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "topaz",
+					DisplayName: "topaz",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "veo31",
+					DisplayName: "veo31",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "veo31_lite",
+					DisplayName: "veo31_lite",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "vibevoice",
+					DisplayName: "vibevoice",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "wan",
+					DisplayName: "wan",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "wan25",
+					DisplayName: "wan25",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "wan27",
+					DisplayName: "wan27",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "wan27_video",
+					DisplayName: "wan27_video",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "wan30_video",
+					DisplayName: "wan30_video",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.6",
+					DisplayName: "zai-org/GLM-4.6",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-4.7",
+					DisplayName: "zai-org/GLM-4.7",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5",
+					DisplayName: "zai-org/GLM-5",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.1",
+					DisplayName: "zai-org/GLM-5.1",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.2",
+					DisplayName: "zai-org/GLM-5.2",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3",
+					DisplayName: "zai-org/GLM-5.3",
+					Description: "Abacus model",
+				},
+				{
+					UpstreamID: "zai-org/GLM-5.3-Flash",
+					DisplayName: "zai-org/GLM-5.3-Flash",
+					Description: "Abacus model",
+				},
+			},
+		},
+		{
+			Slug: "merge-gateway",
+			DisplayName: "Merge Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api-gateway.merge.dev/v1",
+			DocsURL: "https://docs.merge.dev/merge-gateway",
+			Summary: "Merge.dev gateway: one key for OpenAI, Anthropic, Google, and Bedrock.",
+			Models: []Model{
+				{
+					UpstreamID: "zai/glm-4.5",
+					DisplayName: "zai/glm-4.5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5.3-flash",
+					DisplayName: "zai/glm-5.3-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.6",
+					DisplayName: "zai/glm-4.6",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5",
+					DisplayName: "zai/glm-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5v",
+					DisplayName: "zai/glm-4.5v",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.7-flash",
+					DisplayName: "zai/glm-4.7-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.7",
+					DisplayName: "zai/glm-4.7",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5.2",
+					DisplayName: "zai/glm-5.2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5.1",
+					DisplayName: "zai/glm-5.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.7-flashx",
+					DisplayName: "zai/glm-4.7-flashx",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5-turbo",
+					DisplayName: "zai/glm-5-turbo",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5-air",
+					DisplayName: "zai/glm-4.5-air",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "zai/glm-5.3",
+					DisplayName: "zai/glm-5.3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-3-7-sonnet-20250219",
+					DisplayName: "anthropic/claude-3-7-sonnet-20250219",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5-5",
+					DisplayName: "anthropic/claude-opus-5-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-20250514",
+					DisplayName: "anthropic/claude-opus-4-20250514",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5-1",
+					DisplayName: "anthropic/claude-fable-5-1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-1-20250805",
+					DisplayName: "anthropic/claude-opus-4-1-20250805",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-5-20251101",
+					DisplayName: "anthropic/claude-opus-4-5-20251101",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-8",
+					DisplayName: "anthropic/claude-opus-4-8",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-5-20250929",
+					DisplayName: "anthropic/claude-sonnet-4-5-20250929",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-6",
+					DisplayName: "anthropic/claude-opus-4-6",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5-20251001",
+					DisplayName: "anthropic/claude-haiku-4-5-20251001",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-6",
+					DisplayName: "anthropic/claude-sonnet-4-6",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-20250514",
+					DisplayName: "anthropic/claude-sonnet-4-20250514",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-7",
+					DisplayName: "anthropic/claude-opus-4-7",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r-08-2024",
+					DisplayName: "cohere/command-r-08-2024",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-a-03-2025",
+					DisplayName: "cohere/command-a-03-2025",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r7b-12-2024",
+					DisplayName: "cohere/command-r7b-12-2024",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r-plus-08-2024",
+					DisplayName: "cohere/command-r-plus-08-2024",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0423",
+					DisplayName: "deepseek/deepseek-v4-flash-0423",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731-fast",
+					DisplayName: "deepseek/deepseek-v4-flash-0731-fast",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3",
+					DisplayName: "deepseek/deepseek-v3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0423",
+					DisplayName: "deepseek/deepseek-v4-pro-0423",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.1",
+					DisplayName: "deepseek/deepseek-v3.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1",
+					DisplayName: "deepseek/deepseek-r1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling",
+					DisplayName: "thinkingmachines/inkling",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.1",
+					DisplayName: "meta/muse-spark-1.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "meta/llama-3.3-70b-instruct",
+					DisplayName: "meta/llama-3.3-70b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2",
+					DisplayName: "meta/muse-spark-1.2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "meta/llama-3.1-8b-instruct",
+					DisplayName: "meta/llama-3.1-8b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "meta/llama-3.1-70b-instruct",
+					DisplayName: "meta/llama-3.1-70b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/dola-seed-2.0-code-preview",
+					DisplayName: "bytedance/dola-seed-2.0-code-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/dola-seed-2.0-code",
+					DisplayName: "bytedance/dola-seed-2.0-code",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/dola-seed-2.0-mini",
+					DisplayName: "bytedance/dola-seed-2.0-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/dola-seed-2.0-lite",
+					DisplayName: "bytedance/dola-seed-2.0-lite",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/dola-seed-2.0-pro",
+					DisplayName: "bytedance/dola-seed-2.0-pro",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-flash-latest",
+					DisplayName: "google/gemini-flash-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-27b-it",
+					DisplayName: "google/gemma-3-27b-it",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-preview",
+					DisplayName: "google/gemini-3-pro-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-image",
+					DisplayName: "google/gemini-2.5-flash-image",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-flash-lite-latest",
+					DisplayName: "google/gemini-flash-lite-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash",
+					DisplayName: "google/gemini-3.6-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26b-a4b-it",
+					DisplayName: "google/gemma-4-26b-a4b-it",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-image",
+					DisplayName: "google/gemini-3.1-flash-image",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-12b-it",
+					DisplayName: "google/gemma-3-12b-it",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-computer-use-preview-10-2025",
+					DisplayName: "google/gemini-2.5-computer-use-preview-10-2025",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-image",
+					DisplayName: "google/gemini-3-pro-image",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview-customtools",
+					DisplayName: "google/gemini-3.1-pro-preview-customtools",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash",
+					DisplayName: "google/gemini-3.8-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-it",
+					DisplayName: "google/gemma-3-4b-it",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite",
+					DisplayName: "google/gemini-2.5-flash-lite",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite-preview",
+					DisplayName: "google/gemini-3.1-flash-lite-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "writer/palmyra-x4",
+					DisplayName: "writer/palmyra-x4",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "writer/palmyra-x5",
+					DisplayName: "writer/palmyra-x5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.7",
+					DisplayName: "xai/grok-4.7",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.3",
+					DisplayName: "xai/grok-4.3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.20-0309-reasoning",
+					DisplayName: "xai/grok-4.20-0309-reasoning",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.5",
+					DisplayName: "xai/grok-4.5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.20-0309-non-reasoning",
+					DisplayName: "xai/grok-4.20-0309-non-reasoning",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-build-0.1",
+					DisplayName: "xai/grok-build-0.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "xai/grok-4.6",
+					DisplayName: "xai/grok-4.6",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "sakana/fugu-ultra",
+					DisplayName: "sakana/fugu-ultra",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "sakana/sakana-namazu",
+					DisplayName: "sakana/sakana-namazu",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-thinking",
+					DisplayName: "moonshotai/kimi-k2-thinking",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-lightning-30b-a3b",
+					DisplayName: "nvidia/nemotron-3.5-lightning-30b-a3b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-nano-9b-v2",
+					DisplayName: "nvidia/nemotron-nano-9b-v2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5",
+					DisplayName: "minimax/minimax-m2.5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7-highspeed",
+					DisplayName: "minimax/minimax-m2.7-highspeed",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5-highspeed",
+					DisplayName: "minimax/minimax-m2.5-highspeed",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.1",
+					DisplayName: "minimax/minimax-m2.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2",
+					DisplayName: "minimax/minimax-m2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/codestral-latest",
+					DisplayName: "mistral/codestral-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-large-2411",
+					DisplayName: "mistral/mistral-large-2411",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-large-latest",
+					DisplayName: "mistral/mistral-large-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-small-latest",
+					DisplayName: "mistral/mistral-small-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/devstral-medium-latest",
+					DisplayName: "mistral/devstral-medium-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/devstral-2512",
+					DisplayName: "mistral/devstral-2512",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-medium-2505",
+					DisplayName: "mistral/mistral-medium-2505",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/magistral-medium-latest",
+					DisplayName: "mistral/magistral-medium-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/devstral-medium-2507",
+					DisplayName: "mistral/devstral-medium-2507",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-large-2512",
+					DisplayName: "mistral/mistral-large-2512",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/devstral-small-2507",
+					DisplayName: "mistral/devstral-small-2507",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/pixtral-large-latest",
+					DisplayName: "mistral/pixtral-large-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "mistral/mistral-medium-latest",
+					DisplayName: "mistral/mistral-medium-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-flash",
+					DisplayName: "qwen/qwen-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-flash",
+					DisplayName: "qwen/qwen3.5-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-instruct",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-thinking",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-thinking",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-plus",
+					DisplayName: "qwen/qwen3-vl-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-27b",
+					DisplayName: "qwen/qwen3.5-27b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-instruct-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-instruct-2507",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-thinking",
+					DisplayName: "qwen/qwen3-next-80b-a3b-thinking",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max",
+					DisplayName: "qwen/qwen3.8-max",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-next",
+					DisplayName: "qwen/qwen3-coder-next",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus",
+					DisplayName: "qwen/qwen3.5-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b",
+					DisplayName: "qwen/qwen3-32b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus",
+					DisplayName: "qwen/qwen-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max",
+					DisplayName: "qwen/qwen3-max",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-480b-a35b-instruct",
+					DisplayName: "qwen/qwen3-coder-480b-a35b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b",
+					DisplayName: "qwen/qwen3-235b-a22b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-122b-a10b",
+					DisplayName: "qwen/qwen3.5-122b-a10b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-35b-a3b",
+					DisplayName: "qwen/qwen3.6-35b-a3b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen/qwen3-next-80b-a3b-instruct",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-flash",
+					DisplayName: "qwen/qwen3.6-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-flash",
+					DisplayName: "qwen/qwen3-coder-flash",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-plus",
+					DisplayName: "qwen/qwen3-coder-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-9b",
+					DisplayName: "qwen/qwen3.5-9b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-35b-a3b",
+					DisplayName: "qwen/qwen3.5-35b-a3b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-max-preview",
+					DisplayName: "qwen/qwen3.6-max-preview",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b",
+					DisplayName: "qwen/qwen3-30b-a3b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-120b",
+					DisplayName: "openai/gpt-oss-safeguard-120b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo",
+					DisplayName: "openai/gpt-3.5-turbo",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-05-13",
+					DisplayName: "openai/gpt-4o-2024-05-13",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini",
+					DisplayName: "openai/gpt-5-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/o4-mini",
+					DisplayName: "openai/o4-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-mini",
+					DisplayName: "openai/o3-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4",
+					DisplayName: "openai/gpt-4",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano",
+					DisplayName: "openai/gpt-4.1-nano",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano",
+					DisplayName: "openai/gpt-5-nano",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-chat-latest",
+					DisplayName: "openai/gpt-5.2-chat-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1-chat-latest",
+					DisplayName: "openai/gpt-5.1-chat-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/o1",
+					DisplayName: "openai/o1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-chat-latest",
+					DisplayName: "openai/gpt-5-chat-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-08-06",
+					DisplayName: "openai/gpt-4o-2024-08-06",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-20b",
+					DisplayName: "openai/gpt-oss-safeguard-20b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1",
+					DisplayName: "openai/gpt-4.1",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-11-20",
+					DisplayName: "openai/gpt-4o-2024-11-20",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini",
+					DisplayName: "openai/gpt-4.1-mini",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.3-chat-latest",
+					DisplayName: "openai/gpt-5.3-chat-latest",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4-turbo",
+					DisplayName: "openai/gpt-4-turbo",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3",
+					DisplayName: "openai/o3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k3",
+					DisplayName: "moonshot/kimi-k3",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.7-code-highspeed",
+					DisplayName: "moonshot/kimi-k2.7-code-highspeed",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.6",
+					DisplayName: "moonshot/kimi-k2.6",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.5",
+					DisplayName: "moonshot/kimi-k2.5",
+					Description: "Merge Gateway model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.7-code",
+					DisplayName: "moonshot/kimi-k2.7-code",
+					Description: "Merge Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "near-ai",
+			DisplayName: "NEAR AI Cloud",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://cloud-api.near.ai/v1",
+			DocsURL: "https://docs.near.ai/",
+			Summary: "NEAR AI Cloud multi-provider inference API.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					DisplayName: "Qwen/Qwen3-VL-30B-A3B-Instruct",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.6-35B-A3B-FP8",
+					DisplayName: "Qwen/Qwen3.6-35B-A3B-FP8",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B",
+					DisplayName: "Qwen/Qwen3.8-27B",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5-1",
+					DisplayName: "anthropic/claude-fable-5-1",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5",
+					DisplayName: "anthropic/claude-haiku-4-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-6",
+					DisplayName: "anthropic/claude-opus-4-6",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-7",
+					DisplayName: "anthropic/claude-opus-4-7",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-8",
+					DisplayName: "anthropic/claude-opus-4-8",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5-5",
+					DisplayName: "anthropic/claude-opus-5-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-5",
+					DisplayName: "anthropic/claude-sonnet-4-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-6",
+					DisplayName: "anthropic/claude-sonnet-4-6",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite",
+					DisplayName: "google/gemini-2.5-flash-lite",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash",
+					DisplayName: "google/gemini-3.8-flash",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1",
+					DisplayName: "openai/gpt-4.1",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini",
+					DisplayName: "openai/gpt-4.1-mini",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano",
+					DisplayName: "openai/gpt-4.1-nano",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini",
+					DisplayName: "openai/gpt-5-mini",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano",
+					DisplayName: "openai/gpt-5-nano",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/o3",
+					DisplayName: "openai/o3",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/o3-mini",
+					DisplayName: "openai/o3-mini",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/o4-mini",
+					DisplayName: "openai/o4-mini",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "openai/privacy-filter",
+					DisplayName: "openai/privacy-filter",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "typesafe/jev-1.13",
+					DisplayName: "typesafe/jev-1.13",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.6",
+					DisplayName: "x-ai/grok-4.6",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.7",
+					DisplayName: "x-ai/grok-4.7",
+					Description: "NEAR AI Cloud model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "NEAR AI Cloud model",
+				},
+			},
+		},
+		{
+			Slug: "scx",
+			DisplayName: "SCX.ai",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.scx.ai/v1",
+			DocsURL: "https://platform.scx.ai",
+			Summary: "SCX.ai OpenAI-compatible model API.",
+			Models: []Model{
+				{
+					UpstreamID: "GLM-5.2",
+					DisplayName: "GLM-5.2",
+					Description: "SCX.ai model",
+				},
+				{
+					UpstreamID: "Qwen3.8-Max",
+					DisplayName: "Qwen3.8-Max",
+					Description: "SCX.ai model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "SCX.ai model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "SCX.ai model",
+				},
+			},
+		},
+		{
+			Slug: "iflow",
+			DisplayName: "iFlow",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://apis.iflow.cn/v1",
+			DocsURL: "https://platform.iflow.cn",
+			Summary: "iFlow multi-model API (Qwen, GLM, DeepSeek).",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3-vl-plus",
+					DisplayName: "qwen3-vl-plus",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-32b",
+					DisplayName: "qwen3-32b",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-max",
+					DisplayName: "qwen3-max",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "deepseek-v3",
+					DisplayName: "deepseek-v3",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen3-235b-a22b-thinking-2507",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-max-preview",
+					DisplayName: "qwen3-max-preview",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-coder-plus",
+					DisplayName: "qwen3-coder-plus",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-instruct",
+					DisplayName: "qwen3-235b-a22b-instruct",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "kimi-k2-0905",
+					DisplayName: "kimi-k2-0905",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "kimi-k2",
+					DisplayName: "kimi-k2",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "qwen3-235b",
+					DisplayName: "qwen3-235b",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "deepseek-r1",
+					DisplayName: "deepseek-r1",
+					Description: "iFlow model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "iFlow model",
+				},
+			},
+		},
+		{
+			Slug: "llmtr",
+			DisplayName: "LLMTR",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://llmtr.com/v1",
+			DocsURL: "https://llmtr.com",
+			Summary: "Turkish and multilingual models plus routed open weights.",
+			Models: []Model{
+				{
+					UpstreamID: "agnes/agnes-2.5-flash",
+					DisplayName: "agnes/agnes-2.5-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "agnes/agnes-3.0-flash",
+					DisplayName: "agnes/agnes-3.0-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-2.0",
+					DisplayName: "aion-labs/aion-2.0",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0",
+					DisplayName: "aion-labs/aion-3.0",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0-mini",
+					DisplayName: "aion-labs/aion-3.0-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.5",
+					DisplayName: "aion-labs/aion-3.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.5-mini",
+					DisplayName: "aion-labs/aion-3.5-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-rp-llama-3.1-8b",
+					DisplayName: "aion-labs/aion-rp-llama-3.1-8b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "alibaba/happyhorse-1.0-t2v",
+					DisplayName: "alibaba/happyhorse-1.0-t2v",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "alibaba/wan3.0-video-prime",
+					DisplayName: "alibaba/wan3.0-video-prime",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5.1",
+					DisplayName: "anthropic/claude-fable-5.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4.5",
+					DisplayName: "anthropic/claude-haiku-4.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.5",
+					DisplayName: "anthropic/claude-opus-4.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.6",
+					DisplayName: "anthropic/claude-opus-4.6",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.7",
+					DisplayName: "anthropic/claude-opus-4.7",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4.8",
+					DisplayName: "anthropic/claude-opus-4.8",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5.5",
+					DisplayName: "anthropic/claude-opus-5.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.5",
+					DisplayName: "anthropic/claude-sonnet-4.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4.6",
+					DisplayName: "anthropic/claude-sonnet-4.6",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-flash",
+					DisplayName: "deepseek/deepseek-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "dots-studio/dots-3-note-preview",
+					DisplayName: "dots-studio/dots-3-note-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "evren/deepseek-v4-flash-tr",
+					DisplayName: "evren/deepseek-v4-flash-tr",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "evren/gemma-4-31b",
+					DisplayName: "evren/gemma-4-31b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "evren/glm-5.3-fp8",
+					DisplayName: "evren/glm-5.3-fp8",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "evren/qwen3-vl-30b",
+					DisplayName: "evren/qwen3-vl-30b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "evren/qwen3.8-flash-next",
+					DisplayName: "evren/qwen3.8-flash-next",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "fastino/gliner2.5-multi-v1",
+					DisplayName: "fastino/gliner2.5-multi-v1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "fireworks/ember-1",
+					DisplayName: "fireworks/ember-1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "gemma/gemma-4-26b-a4b-it",
+					DisplayName: "gemma/gemma-4-26b-a4b-it",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "gemma/gemma-4-31b-it",
+					DisplayName: "gemma/gemma-4-31b-it",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-computer-use-preview-10-2025",
+					DisplayName: "google/gemini-2.5-computer-use-preview-10-2025",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-image",
+					DisplayName: "google/gemini-2.5-flash-image",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite",
+					DisplayName: "google/gemini-2.5-flash-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3-pro-image",
+					DisplayName: "google/gemini-3-pro-image",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-image",
+					DisplayName: "google/gemini-3.1-flash-image",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-live-preview",
+					DisplayName: "google/gemini-3.1-flash-live-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview-customtools",
+					DisplayName: "google/gemini-3.1-pro-preview-customtools",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash",
+					DisplayName: "google/gemini-3.6-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash",
+					DisplayName: "google/gemini-3.8-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/veo-3.1-fast-generate-001",
+					DisplayName: "google/veo-3.1-fast-generate-001",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/veo-3.1-generate-001",
+					DisplayName: "google/veo-3.1-generate-001",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "google/veo-3.1-lite-generate-001",
+					DisplayName: "google/veo-3.1-lite-generate-001",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/bge-multilingual-gemma2",
+					DisplayName: "greenpt/bge-multilingual-gemma2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/deepseek-v4-flash-0731",
+					DisplayName: "greenpt/deepseek-v4-flash-0731",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/devstral-2-123b-instruct-2512",
+					DisplayName: "greenpt/devstral-2-123b-instruct-2512",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/gemma-3-27b-it",
+					DisplayName: "greenpt/gemma-3-27b-it",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/gemma4",
+					DisplayName: "greenpt/gemma4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-caveman",
+					DisplayName: "greenpt/glm-5.2-caveman",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-caveman-lite",
+					DisplayName: "greenpt/glm-5.2-caveman-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-caveman-ultra",
+					DisplayName: "greenpt/glm-5.2-caveman-ultra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-eu",
+					DisplayName: "greenpt/glm-5.2-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-honey",
+					DisplayName: "greenpt/glm-5.2-honey",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-honey-lite",
+					DisplayName: "greenpt/glm-5.2-honey-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-honey-ultra",
+					DisplayName: "greenpt/glm-5.2-honey-ultra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-ponytail",
+					DisplayName: "greenpt/glm-5.2-ponytail",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-ponytail-lite",
+					DisplayName: "greenpt/glm-5.2-ponytail-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.2-ponytail-ultra",
+					DisplayName: "greenpt/glm-5.2-ponytail-ultra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.3-eu",
+					DisplayName: "greenpt/glm-5.3-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/glm-5.3-flash-eu",
+					DisplayName: "greenpt/glm-5.3-flash-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/gpt-oss-120b-eu",
+					DisplayName: "greenpt/gpt-oss-120b-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/green-l",
+					DisplayName: "greenpt/green-l",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/green-l-raw",
+					DisplayName: "greenpt/green-l-raw",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/green-r",
+					DisplayName: "greenpt/green-r",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/green-r-raw",
+					DisplayName: "greenpt/green-r-raw",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/holo2-30b-a3b",
+					DisplayName: "greenpt/holo2-30b-a3b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/kimi-k2.6-eu",
+					DisplayName: "greenpt/kimi-k2.6-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/kimi-k2.7-code-eu",
+					DisplayName: "greenpt/kimi-k2.7-code-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/kimi-k3-eu",
+					DisplayName: "greenpt/kimi-k3-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/llama-3.3-70b-instruct-eu",
+					DisplayName: "greenpt/llama-3.3-70b-instruct-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/minimax-m2.5-eu",
+					DisplayName: "greenpt/minimax-m2.5-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/mistral-medium-3.5-128b",
+					DisplayName: "greenpt/mistral-medium-3.5-128b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/mistral-small-3.2-24b-instruct-2506",
+					DisplayName: "greenpt/mistral-small-3.2-24b-instruct-2506",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/pixtral-12b-2409",
+					DisplayName: "greenpt/pixtral-12b-2409",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/qwen3-235b-a22b-instruct-2507",
+					DisplayName: "greenpt/qwen3-235b-a22b-instruct-2507",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/qwen3-coder-30b-a3b-instruct-eu",
+					DisplayName: "greenpt/qwen3-coder-30b-a3b-instruct-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/qwen3.5-397b-a17b-eu",
+					DisplayName: "greenpt/qwen3.5-397b-a17b-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "greenpt/qwen3.6-35b-a3b-eu",
+					DisplayName: "greenpt/qwen3.6-35b-a3b-eu",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "inception/mercury-2",
+					DisplayName: "inception/mercury-2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "inception/mercury-2.5-preview",
+					DisplayName: "inception/mercury-2.5-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash",
+					DisplayName: "inclusionai/ling-3.0-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-fin",
+					DisplayName: "inclusionai/ling-3.0-flash-fin",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "krea/krea-2-large",
+					DisplayName: "krea/krea-2-large",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "krea/krea-2-medium",
+					DisplayName: "krea/krea-2-medium",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/gemma-4",
+					DisplayName: "llmtr/gemma-4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/magibu-11b-v8",
+					DisplayName: "llmtr/magibu-11b-v8",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/muse-glimmer-30b-tr",
+					DisplayName: "llmtr/muse-glimmer-30b-tr",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/qwen3-5-4b",
+					DisplayName: "llmtr/qwen3-5-4b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/qwen3-6-35b",
+					DisplayName: "llmtr/qwen3-6-35b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "llmtr/trendyol-asure-12b",
+					DisplayName: "llmtr/trendyol-asure-12b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/llama-3.1-8b-instruct-16k",
+					DisplayName: "meta/llama-3.1-8b-instruct-16k",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/llama-3.3-70b-instruct-12k",
+					DisplayName: "meta/llama-3.3-70b-instruct-12k",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-glimmer-30b",
+					DisplayName: "meta/muse-glimmer-30b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-image-1.0",
+					DisplayName: "meta/muse-image-1.0",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.1",
+					DisplayName: "meta/muse-spark-1.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2",
+					DisplayName: "meta/muse-spark-1.2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2-contributor",
+					DisplayName: "meta/muse-spark-1.2-contributor",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3",
+					DisplayName: "meta/muse-spark-1.3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3-contributor",
+					DisplayName: "meta/muse-spark-1.3-contributor",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.5",
+					DisplayName: "mimo/mimo-v2.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.5-pro",
+					DisplayName: "mimo/mimo-v2.5-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.6-flash",
+					DisplayName: "mimo/mimo-v2.6-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.6-pro",
+					DisplayName: "mimo/mimo-v2.6-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mimo/mimo-v2.6-pro-ultraspeed",
+					DisplayName: "mimo/mimo-v2.6-pro-ultraspeed",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-h3",
+					DisplayName: "minimax/minimax-h3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-h3-max",
+					DisplayName: "minimax/minimax-h3-max",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5",
+					DisplayName: "minimax/minimax-m2.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5-highspeed",
+					DisplayName: "minimax/minimax-m2.5-highspeed",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7-highspeed",
+					DisplayName: "minimax/minimax-m2.7-highspeed",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/codestral-latest",
+					DisplayName: "mistral/codestral-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/devstral-medium-latest",
+					DisplayName: "mistral/devstral-medium-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/devstral-small-latest",
+					DisplayName: "mistral/devstral-small-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/magistral-medium-latest",
+					DisplayName: "mistral/magistral-medium-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/magistral-small-latest",
+					DisplayName: "mistral/magistral-small-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/ministral-14b-latest",
+					DisplayName: "mistral/ministral-14b-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/ministral-3b-latest",
+					DisplayName: "mistral/ministral-3b-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/ministral-8b-latest",
+					DisplayName: "mistral/ministral-8b-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/mistral-large-latest",
+					DisplayName: "mistral/mistral-large-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/mistral-medium-latest",
+					DisplayName: "mistral/mistral-medium-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/mistral-small-latest",
+					DisplayName: "mistral/mistral-small-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/pixtral-12b",
+					DisplayName: "mistral/pixtral-12b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "mistral/voxtral-small-latest",
+					DisplayName: "mistral/voxtral-small-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.6",
+					DisplayName: "moonshot/kimi-k2.6",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.7-code",
+					DisplayName: "moonshot/kimi-k2.7-code",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k3",
+					DisplayName: "moonshot/kimi-k3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "motif/motif-3",
+					DisplayName: "motif/motif-3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b-262k",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b-262k",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo",
+					DisplayName: "openai/gpt-3.5-turbo",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4-turbo",
+					DisplayName: "openai/gpt-4-turbo",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1",
+					DisplayName: "openai/gpt-4.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini",
+					DisplayName: "openai/gpt-4.1-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano",
+					DisplayName: "openai/gpt-4.1-nano",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini",
+					DisplayName: "openai/gpt-5-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano",
+					DisplayName: "openai/gpt-5-nano",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.3-codex",
+					DisplayName: "openai/gpt-5.3-codex",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro",
+					DisplayName: "openai/gpt-5.5-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna-pro",
+					DisplayName: "openai/gpt-5.6-luna-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol-pro",
+					DisplayName: "openai/gpt-5.6-sol-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra-pro",
+					DisplayName: "openai/gpt-5.6-terra-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-image-2",
+					DisplayName: "openai/gpt-image-2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b-unmetered",
+					DisplayName: "openai/gpt-oss-120b-unmetered",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b-unmetered",
+					DisplayName: "openai/gpt-oss-20b-unmetered",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-safeguard-20b",
+					DisplayName: "openai/gpt-oss-safeguard-20b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/o1",
+					DisplayName: "openai/o1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/o3",
+					DisplayName: "openai/o3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/o3-mini",
+					DisplayName: "openai/o3-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "openai/o4-mini",
+					DisplayName: "openai/o4-mini",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "patientdesk/alania-v1",
+					DisplayName: "patientdesk/alania-v1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "patientdesk/duyu-1",
+					DisplayName: "patientdesk/duyu-1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "perceptron/perceptron-mk1",
+					DisplayName: "perceptron/perceptron-mk1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "perplexity/sonar",
+					DisplayName: "perplexity/sonar",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-deep-research",
+					DisplayName: "perplexity/sonar-deep-research",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-pro",
+					DisplayName: "perplexity/sonar-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-reasoning-pro",
+					DisplayName: "perplexity/sonar-reasoning-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1",
+					DisplayName: "poolside/laguna-xs-2.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "prismml/ternary-bonsai-2-27b",
+					DisplayName: "prismml/ternary-bonsai-2-27b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "publicai/apertus-70b-instruct",
+					DisplayName: "publicai/apertus-70b-instruct",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "publicai/apertus-8b-instruct",
+					DisplayName: "publicai/apertus-8b-instruct",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "publicai/apertus-v1.5-70b",
+					DisplayName: "publicai/apertus-v1.5-70b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "publicai/apertus-v1.5-8b",
+					DisplayName: "publicai/apertus-v1.5-8b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "publicai/apertus-v1.5-8b-thinking",
+					DisplayName: "publicai/apertus-v1.5-8b-thinking",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-flash",
+					DisplayName: "qwen/qwen-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-flash-2025-07-28",
+					DisplayName: "qwen/qwen-flash-2025-07-28",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-mt-flash",
+					DisplayName: "qwen/qwen-mt-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-mt-plus",
+					DisplayName: "qwen/qwen-mt-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus",
+					DisplayName: "qwen/qwen-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-01-25",
+					DisplayName: "qwen/qwen-plus-2025-01-25",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-04-28",
+					DisplayName: "qwen/qwen-plus-2025-04-28",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-07-14",
+					DisplayName: "qwen/qwen-plus-2025-07-14",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-07-28",
+					DisplayName: "qwen/qwen-plus-2025-07-28",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-09-11",
+					DisplayName: "qwen/qwen-plus-2025-09-11",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-character-ja",
+					DisplayName: "qwen/qwen-plus-character-ja",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-latest",
+					DisplayName: "qwen/qwen-plus-latest",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-vl-ocr",
+					DisplayName: "qwen/qwen-vl-ocr",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen-vl-ocr-2025-11-20",
+					DisplayName: "qwen/qwen-vl-ocr-2025-11-20",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-flash",
+					DisplayName: "qwen/qwen3-coder-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-flash-2025-07-28",
+					DisplayName: "qwen/qwen3-coder-flash-2025-07-28",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-plus",
+					DisplayName: "qwen/qwen3-coder-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max",
+					DisplayName: "qwen/qwen3-max",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max-preview",
+					DisplayName: "qwen/qwen3-max-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-flash",
+					DisplayName: "qwen/qwen3-vl-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-plus",
+					DisplayName: "qwen/qwen3-vl-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-plus-2025-09-23",
+					DisplayName: "qwen/qwen3-vl-plus-2025-09-23",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-122b-a10b",
+					DisplayName: "qwen/qwen3.5-122b-a10b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-27b",
+					DisplayName: "qwen/qwen3.5-27b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-35b-a3b",
+					DisplayName: "qwen/qwen3.5-35b-a3b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-flash",
+					DisplayName: "qwen/qwen3.5-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-flash-2026-02-23",
+					DisplayName: "qwen/qwen3.5-flash-2026-02-23",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus",
+					DisplayName: "qwen/qwen3.5-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus-2026-02-15",
+					DisplayName: "qwen/qwen3.5-plus-2026-02-15",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-35b-a3b",
+					DisplayName: "qwen/qwen3.6-35b-a3b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-flash",
+					DisplayName: "qwen/qwen3.6-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus-2026-04-02",
+					DisplayName: "qwen/qwen3.6-plus-2026-04-02",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b-free",
+					DisplayName: "qwen/qwen3.8-27b-free",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-flash",
+					DisplayName: "qwen/qwen3.8-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max",
+					DisplayName: "qwen/qwen3.8-max",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v3",
+					DisplayName: "recraft/recraft-v3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v3-vector",
+					DisplayName: "recraft/recraft-v3-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4",
+					DisplayName: "recraft/recraft-v4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-pro",
+					DisplayName: "recraft/recraft-v4-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-pro-vector",
+					DisplayName: "recraft/recraft-v4-pro-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-styles",
+					DisplayName: "recraft/recraft-v4-styles",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-styles-pro",
+					DisplayName: "recraft/recraft-v4-styles-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-styles-pro-vector",
+					DisplayName: "recraft/recraft-v4-styles-pro-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-styles-vector",
+					DisplayName: "recraft/recraft-v4-styles-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4-vector",
+					DisplayName: "recraft/recraft-v4-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1",
+					DisplayName: "recraft/recraft-v4.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-flash",
+					DisplayName: "recraft/recraft-v4.1-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-pro",
+					DisplayName: "recraft/recraft-v4.1-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-pro-vector",
+					DisplayName: "recraft/recraft-v4.1-pro-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-utility",
+					DisplayName: "recraft/recraft-v4.1-utility",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-utility-pro",
+					DisplayName: "recraft/recraft-v4.1-utility-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-utility-pro-vector",
+					DisplayName: "recraft/recraft-v4.1-utility-pro-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-utility-vector",
+					DisplayName: "recraft/recraft-v4.1-utility-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "recraft/recraft-v4.1-vector",
+					DisplayName: "recraft/recraft-v4.1-vector",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "sakana/fugu-max",
+					DisplayName: "sakana/fugu-max",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "sakana/fugu-ultra",
+					DisplayName: "sakana/fugu-ultra",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.5-flash",
+					DisplayName: "stepfun/step-3.5-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.5-flash-2603",
+					DisplayName: "stepfun/step-3.5-flash-2603",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.7-flash",
+					DisplayName: "stepfun/step-3.7-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-lite",
+					DisplayName: "tencent/hy-mt2-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-plus",
+					DisplayName: "tencent/hy-mt2-plus",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-pro",
+					DisplayName: "tencent/hy-mt2-pro",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "tencent/hy3",
+					DisplayName: "tencent/hy3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "tencent/hy4-preview",
+					DisplayName: "tencent/hy4-preview",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling",
+					DisplayName: "thinkingmachines/inkling",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling-small",
+					DisplayName: "thinkingmachines/inkling-small",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "typesafe/jev",
+					DisplayName: "typesafe/jev",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "upstage/solar-mini4",
+					DisplayName: "upstage/solar-mini4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro2",
+					DisplayName: "upstage/solar-pro2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro3",
+					DisplayName: "upstage/solar-pro3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro4",
+					DisplayName: "upstage/solar-pro4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-4",
+					DisplayName: "voyageai/voyage-4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-4-large",
+					DisplayName: "voyageai/voyage-4-large",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-4-lite",
+					DisplayName: "voyageai/voyage-4-lite",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-code-3",
+					DisplayName: "voyageai/voyage-code-3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-code-4",
+					DisplayName: "voyageai/voyage-code-4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-context-4",
+					DisplayName: "voyageai/voyage-context-4",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-finance-2",
+					DisplayName: "voyageai/voyage-finance-2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-law-2",
+					DisplayName: "voyageai/voyage-law-2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "voyageai/voyage-multimodal-3.5",
+					DisplayName: "voyageai/voyage-multimodal-3.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.20-0309-non-reasoning",
+					DisplayName: "xai/grok-4.20-0309-non-reasoning",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.20-0309-reasoning",
+					DisplayName: "xai/grok-4.20-0309-reasoning",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.20-multi-agent",
+					DisplayName: "xai/grok-4.20-multi-agent",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.3",
+					DisplayName: "xai/grok-4.3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.5",
+					DisplayName: "xai/grok-4.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.6",
+					DisplayName: "xai/grok-4.6",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-4.7",
+					DisplayName: "xai/grok-4.7",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-imagine-image",
+					DisplayName: "xai/grok-imagine-image",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-imagine-image-quality",
+					DisplayName: "xai/grok-imagine-image-quality",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-imagine-video",
+					DisplayName: "xai/grok-imagine-video",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-imagine-video-1.5",
+					DisplayName: "xai/grok-imagine-video-1.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "xai/grok-voice-stt",
+					DisplayName: "xai/grok-voice-stt",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4-32b-0414-128k",
+					DisplayName: "zai/glm-4-32b-0414-128k",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5",
+					DisplayName: "zai/glm-4.5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5-air",
+					DisplayName: "zai/glm-4.5-air",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5-airx",
+					DisplayName: "zai/glm-4.5-airx",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5-x",
+					DisplayName: "zai/glm-4.5-x",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.5v",
+					DisplayName: "zai/glm-4.5v",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.6",
+					DisplayName: "zai/glm-4.6",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.6v",
+					DisplayName: "zai/glm-4.6v",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.6v-flashx",
+					DisplayName: "zai/glm-4.6v-flashx",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.7",
+					DisplayName: "zai/glm-4.7",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-4.7-flashx",
+					DisplayName: "zai/glm-4.7-flashx",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5",
+					DisplayName: "zai/glm-5",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5-turbo",
+					DisplayName: "zai/glm-5-turbo",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5.1",
+					DisplayName: "zai/glm-5.1",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5.2",
+					DisplayName: "zai/glm-5.2",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5.3",
+					DisplayName: "zai/glm-5.3",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5.3-flash",
+					DisplayName: "zai/glm-5.3-flash",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5.3-flashx",
+					DisplayName: "zai/glm-5.3-flashx",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-5v-turbo",
+					DisplayName: "zai/glm-5v-turbo",
+					Description: "LLMTR model",
+				},
+				{
+					UpstreamID: "zai/glm-ocr",
+					DisplayName: "zai/glm-ocr",
+					Description: "LLMTR model",
+				},
+			},
+		},
+		{
+			Slug: "jiekou",
+			DisplayName: "Jiekou.AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.jiekou.ai/openai",
+			DocsURL: "https://docs.jiekou.ai",
+			Summary: "Jiekou.AI multi-vendor model catalog.",
+			Models: []Model{
+				{
+					UpstreamID: "grok-4-1-fast-reasoning",
+					DisplayName: "grok-4-1-fast-reasoning",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "grok-4-1-fast-non-reasoning",
+					DisplayName: "grok-4-1-fast-non-reasoning",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.2-codex",
+					DisplayName: "gpt-5.2-codex",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex",
+					DisplayName: "gpt-5.1-codex",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-3-pro-preview",
+					DisplayName: "gemini-3-pro-preview",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5-codex",
+					DisplayName: "gpt-5-codex",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.2-pro",
+					DisplayName: "gpt-5.2-pro",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "o4-mini",
+					DisplayName: "o4-mini",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "grok-4-fast-reasoning",
+					DisplayName: "grok-4-fast-reasoning",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5-nano",
+					DisplayName: "gpt-5-nano",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite-preview-06-17",
+					DisplayName: "gemini-2.5-flash-lite-preview-06-17",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-20250514",
+					DisplayName: "claude-opus-4-20250514",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "grok-4-fast-non-reasoning",
+					DisplayName: "grok-4-fast-non-reasoning",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-1-20250805",
+					DisplayName: "claude-opus-4-1-20250805",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5-pro",
+					DisplayName: "gpt-5-pro",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5-chat-latest",
+					DisplayName: "gpt-5-chat-latest",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5-20251101",
+					DisplayName: "claude-opus-4-5-20251101",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.1",
+					DisplayName: "gpt-5.1",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-preview-05-20",
+					DisplayName: "gemini-2.5-flash-preview-05-20",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex-max",
+					DisplayName: "gpt-5.1-codex-max",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "grok-code-fast-1",
+					DisplayName: "grok-code-fast-1",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5-20250929",
+					DisplayName: "claude-sonnet-4-5-20250929",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5-20251001",
+					DisplayName: "claude-haiku-4-5-20251001",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite-preview-09-2025",
+					DisplayName: "gemini-2.5-flash-lite-preview-09-2025",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-06-05",
+					DisplayName: "gemini-2.5-pro-preview-06-05",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite",
+					DisplayName: "gemini-2.5-flash-lite",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-20250514",
+					DisplayName: "claude-sonnet-4-20250514",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex-mini",
+					DisplayName: "gpt-5.1-codex-mini",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "o3",
+					DisplayName: "o3",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "grok-4-0709",
+					DisplayName: "grok-4-0709",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3-0324",
+					DisplayName: "deepseek/deepseek-v3-0324",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.1",
+					DisplayName: "deepseek/deepseek-v3.1",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1-0528",
+					DisplayName: "deepseek/deepseek-r1-0528",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "xiaomimimo/mimo-v2-flash",
+					DisplayName: "xiaomimimo/mimo-v2-flash",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "baidu/ernie-4.5-vl-424b-a47b",
+					DisplayName: "baidu/ernie-4.5-vl-424b-a47b",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "baidu/ernie-4.5-300b-a47b-paddle",
+					DisplayName: "baidu/ernie-4.5-300b-a47b-paddle",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "minimaxai/minimax-m1-80k",
+					DisplayName: "minimaxai/minimax-m1-80k",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-instruct",
+					DisplayName: "moonshotai/kimi-k2-instruct",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-0905",
+					DisplayName: "moonshotai/kimi-k2-0905",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.5",
+					DisplayName: "zai-org/glm-4.5",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.5v",
+					DisplayName: "zai-org/glm-4.5v",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.7-flash",
+					DisplayName: "zai-org/glm-4.7-flash",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "zai-org/glm-4.7",
+					DisplayName: "zai-org/glm-4.7",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.1",
+					DisplayName: "minimax/minimax-m2.1",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-instruct-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-instruct-2507",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-thinking",
+					DisplayName: "qwen/qwen3-next-80b-a3b-thinking",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-next",
+					DisplayName: "qwen/qwen3-coder-next",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-fp8",
+					DisplayName: "qwen/qwen3-235b-a22b-fp8",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-480b-a35b-instruct",
+					DisplayName: "qwen/qwen3-coder-480b-a35b-instruct",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-thinking-2507",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-fp8",
+					DisplayName: "qwen/qwen3-30b-a3b-fp8",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen/qwen3-next-80b-a3b-instruct",
+					Description: "Jiekou.AI model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b-fp8",
+					DisplayName: "qwen/qwen3-32b-fp8",
+					Description: "Jiekou.AI model",
+				},
+			},
+		},
+		{
+			Slug: "aihubmix",
+			DisplayName: "AIHubMix",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://aihubmix.com/v1",
+			DocsURL: "https://aihubmix.com",
+			Summary: "AIHubMix OpenAI-compatible aggregator for text, image, and audio models.",
+			Models: []Model{
+				{
+					UpstreamID: "AiHubmix-Phi-4-mini-reasoning",
+					DisplayName: "AiHubmix-Phi-4-mini-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ByteDance-Seed/Seed-OSS-36B-Instruct",
+					DisplayName: "ByteDance-Seed/Seed-OSS-36B-Instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "DeepSeek-OCR",
+					DisplayName: "DeepSeek-OCR",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "DeepSeek-V3",
+					DisplayName: "DeepSeek-V3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "DeepSeek-V3.1-Think",
+					DisplayName: "DeepSeek-V3.1-Think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ERNIE-X1.1-Preview",
+					DisplayName: "ERNIE-X1.1-Preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "Qwen/QwQ-32B",
+					DisplayName: "Qwen/QwQ-32B",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-VL-32B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-VL-32B-Instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen2.5-VL-72B-Instruct",
+					DisplayName: "Qwen/Qwen2.5-VL-72B-Instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "agents-a1-free",
+					DisplayName: "agents-a1-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "agnes-2.5-flash",
+					DisplayName: "agnes-2.5-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "agnes-2.5-pro",
+					DisplayName: "agnes-2.5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "agnes-2.5-pro-alpha",
+					DisplayName: "agnes-2.5-pro-alpha",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "agnes-3.0-flash",
+					DisplayName: "agnes-3.0-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ahm-Phi-3-5-vision-instruct",
+					DisplayName: "ahm-Phi-3-5-vision-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihub-Phi-4",
+					DisplayName: "aihub-Phi-4",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihub-Phi-4-mini-instruct",
+					DisplayName: "aihub-Phi-4-mini-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihub-Phi-4-multimodal-instruct",
+					DisplayName: "aihub-Phi-4-multimodal-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihubmix-Cohere-command-r",
+					DisplayName: "aihubmix-Cohere-command-r",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihubmix-command-r-08-2024",
+					DisplayName: "aihubmix-command-r-08-2024",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihubmix-command-r-plus",
+					DisplayName: "aihubmix-command-r-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihubmix-command-r-plus-08-2024",
+					DisplayName: "aihubmix-command-r-plus-08-2024",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "aihubmix-router",
+					DisplayName: "aihubmix-router",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "anthropic-opus-4-6",
+					DisplayName: "anthropic-opus-4-6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "bai-qwen3-vl-235b-a22b-instruct",
+					DisplayName: "bai-qwen3-vl-235b-a22b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "baidu/ERNIE-4.5-300B-A47B",
+					DisplayName: "baidu/ERNIE-4.5-300B-A47B",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-MiniMax-M2",
+					DisplayName: "cc-MiniMax-M2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-deepseek-v3.1",
+					DisplayName: "cc-deepseek-v3.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-ernie-4.5-300b-a47b",
+					DisplayName: "cc-ernie-4.5-300b-a47b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-glm-5",
+					DisplayName: "cc-glm-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-glm-5-turbo",
+					DisplayName: "cc-glm-5-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-glm-5.1",
+					DisplayName: "cc-glm-5.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-kimi-k2-instruct",
+					DisplayName: "cc-kimi-k2-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-kimi-k2-instruct-0905",
+					DisplayName: "cc-kimi-k2-instruct-0905",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2",
+					DisplayName: "cc-minimax-m2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2.1",
+					DisplayName: "cc-minimax-m2.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2.5",
+					DisplayName: "cc-minimax-m2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2.5-highspeed",
+					DisplayName: "cc-minimax-m2.5-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2.7",
+					DisplayName: "cc-minimax-m2.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m2.7-highspeed",
+					DisplayName: "cc-minimax-m2.7-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cc-minimax-m3",
+					DisplayName: "cc-minimax-m3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-3-haiku-20240229",
+					DisplayName: "claude-3-haiku-20240229",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-3-haiku-20240307",
+					DisplayName: "claude-3-haiku-20240307",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-3-haiku@20240307",
+					DisplayName: "claude-3-haiku@20240307",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-3-sonnet-20240229",
+					DisplayName: "claude-3-sonnet-20240229",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-fable-5-1",
+					DisplayName: "claude-fable-5-1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-1",
+					DisplayName: "claude-opus-4-1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5",
+					DisplayName: "claude-opus-4-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5-think",
+					DisplayName: "claude-opus-4-5-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6-think",
+					DisplayName: "claude-opus-4-6-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7",
+					DisplayName: "claude-opus-4-7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7-think",
+					DisplayName: "claude-opus-4-7-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8",
+					DisplayName: "claude-opus-4-8",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8-think",
+					DisplayName: "claude-opus-4-8-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-opus-5-5",
+					DisplayName: "claude-opus-5-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5",
+					DisplayName: "claude-sonnet-4-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5-think",
+					DisplayName: "claude-sonnet-4-5-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6-think",
+					DisplayName: "claude-sonnet-4-6-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cloudflare-glm-5.2",
+					DisplayName: "cloudflare-glm-5.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "codex-mini-latest",
+					DisplayName: "codex-mini-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-4.6",
+					DisplayName: "coding-glm-4.6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-4.6-free",
+					DisplayName: "coding-glm-4.6-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-4.7",
+					DisplayName: "coding-glm-4.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-4.7-free",
+					DisplayName: "coding-glm-4.7-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5",
+					DisplayName: "coding-glm-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5-free",
+					DisplayName: "coding-glm-5-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5-turbo",
+					DisplayName: "coding-glm-5-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5-turbo-free",
+					DisplayName: "coding-glm-5-turbo-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.1",
+					DisplayName: "coding-glm-5.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.1-free",
+					DisplayName: "coding-glm-5.1-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.2",
+					DisplayName: "coding-glm-5.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.2-free",
+					DisplayName: "coding-glm-5.2-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.3",
+					DisplayName: "coding-glm-5.3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-glm-5.3-free",
+					DisplayName: "coding-glm-5.3-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-kimi-k3",
+					DisplayName: "coding-kimi-k3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-kimi-k3-free",
+					DisplayName: "coding-kimi-k3-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2",
+					DisplayName: "coding-minimax-m2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2-free",
+					DisplayName: "coding-minimax-m2-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.1",
+					DisplayName: "coding-minimax-m2.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.1-free",
+					DisplayName: "coding-minimax-m2.1-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.5",
+					DisplayName: "coding-minimax-m2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.5-free",
+					DisplayName: "coding-minimax-m2.5-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.5-highspeed",
+					DisplayName: "coding-minimax-m2.5-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.7",
+					DisplayName: "coding-minimax-m2.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.7-free",
+					DisplayName: "coding-minimax-m2.7-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m2.7-highspeed",
+					DisplayName: "coding-minimax-m2.7-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m3",
+					DisplayName: "coding-minimax-m3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-minimax-m3-free",
+					DisplayName: "coding-minimax-m3-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2-omni",
+					DisplayName: "coding-xiaomi-mimo-v2-omni",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2-pro",
+					DisplayName: "coding-xiaomi-mimo-v2-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2.5",
+					DisplayName: "coding-xiaomi-mimo-v2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2.5-pro",
+					DisplayName: "coding-xiaomi-mimo-v2.5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2.6-flash",
+					DisplayName: "coding-xiaomi-mimo-v2.6-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "coding-xiaomi-mimo-v2.6-pro",
+					DisplayName: "coding-xiaomi-mimo-v2.6-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "cohere-command-a",
+					DisplayName: "cohere-command-a",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command",
+					DisplayName: "command",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-a-03-2025",
+					DisplayName: "command-a-03-2025",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-a-plus-05-2026",
+					DisplayName: "command-a-plus-05-2026",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-r",
+					DisplayName: "command-r",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-r-08-2024",
+					DisplayName: "command-r-08-2024",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-r-plus",
+					DisplayName: "command-r-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "command-r-plus-08-2024",
+					DisplayName: "command-r-plus-08-2024",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepinfra-gemma-4-26b-a4b-it",
+					DisplayName: "deepinfra-gemma-4-26b-a4b-it",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-r1-distill-llama-70b",
+					DisplayName: "deepseek-r1-distill-llama-70b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2",
+					DisplayName: "deepseek-v3.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v3.2-think",
+					DisplayName: "deepseek-v3.2-think",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731-fast",
+					DisplayName: "deepseek-v4-flash-0731-fast",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-vision-exp",
+					DisplayName: "deepseek-v4-flash-vision-exp",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro-0813",
+					DisplayName: "deepseek-v4-pro-0813",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash",
+					DisplayName: "deepseek-v4.1-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "dots-3-note-preview-free",
+					DisplayName: "dots-3-note-preview-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6",
+					DisplayName: "doubao-seed-1-6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6-flash",
+					DisplayName: "doubao-seed-1-6-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6-lite",
+					DisplayName: "doubao-seed-1-6-lite",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-6-thinking",
+					DisplayName: "doubao-seed-1-6-thinking",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-8",
+					DisplayName: "doubao-seed-1-8",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-code-preview",
+					DisplayName: "doubao-seed-2-0-code-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-lite-260215",
+					DisplayName: "doubao-seed-2-0-lite-260215",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-lite-260428",
+					DisplayName: "doubao-seed-2-0-lite-260428",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-mini",
+					DisplayName: "doubao-seed-2-0-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-mini-260428",
+					DisplayName: "doubao-seed-2-0-mini-260428",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-pro",
+					DisplayName: "doubao-seed-2-0-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-pro",
+					DisplayName: "doubao-seed-2-1-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-pro-260628",
+					DisplayName: "doubao-seed-2-1-pro-260628",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-turbo",
+					DisplayName: "doubao-seed-2-1-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-4.5",
+					DisplayName: "ernie-4.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-4.5-0.3b",
+					DisplayName: "ernie-4.5-0.3b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-128k-preview",
+					DisplayName: "ernie-4.5-turbo-128k-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-latest",
+					DisplayName: "ernie-4.5-turbo-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-4.5-turbo-vl",
+					DisplayName: "ernie-4.5-turbo-vl",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-5.0",
+					DisplayName: "ernie-5.0",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-5.0-thinking-exp",
+					DisplayName: "ernie-5.0-thinking-exp",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-5.0-thinking-preview",
+					DisplayName: "ernie-5.0-thinking-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-5.1",
+					DisplayName: "ernie-5.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ernie-x1-turbo",
+					DisplayName: "ernie-x1-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash",
+					DisplayName: "gemini-2.5-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-image",
+					DisplayName: "gemini-2.5-flash-image",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite",
+					DisplayName: "gemini-2.5-flash-lite",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite-nothink",
+					DisplayName: "gemini-2.5-flash-lite-nothink",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite-preview-09-2025",
+					DisplayName: "gemini-2.5-flash-lite-preview-09-2025",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-lite-preview-09-2025-nothink",
+					DisplayName: "gemini-2.5-flash-lite-preview-09-2025-nothink",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-nothink",
+					DisplayName: "gemini-2.5-flash-nothink",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-preview-05-20-nothink",
+					DisplayName: "gemini-2.5-flash-preview-05-20-nothink",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-preview-05-20-search",
+					DisplayName: "gemini-2.5-flash-preview-05-20-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-preview-09-2025",
+					DisplayName: "gemini-2.5-flash-preview-09-2025",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-flash-search",
+					DisplayName: "gemini-2.5-flash-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro",
+					DisplayName: "gemini-2.5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-exp-03-25",
+					DisplayName: "gemini-2.5-pro-exp-03-25",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-03-25",
+					DisplayName: "gemini-2.5-pro-preview-03-25",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-03-25-search",
+					DisplayName: "gemini-2.5-pro-preview-03-25-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-05-06",
+					DisplayName: "gemini-2.5-pro-preview-05-06",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-05-06-search",
+					DisplayName: "gemini-2.5-pro-preview-05-06-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-06-05",
+					DisplayName: "gemini-2.5-pro-preview-06-05",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-preview-06-05-search",
+					DisplayName: "gemini-2.5-pro-preview-06-05-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-2.5-pro-search",
+					DisplayName: "gemini-2.5-pro-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview",
+					DisplayName: "gemini-3-flash-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3-flash-preview-search",
+					DisplayName: "gemini-3-flash-preview-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3-pro-image",
+					DisplayName: "gemini-3-pro-image",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3-pro-image-preview",
+					DisplayName: "gemini-3-pro-image-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-image",
+					DisplayName: "gemini-3.1-flash-image",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-image-preview",
+					DisplayName: "gemini-3.1-flash-image-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite",
+					DisplayName: "gemini-3.1-flash-lite",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite-image",
+					DisplayName: "gemini-3.1-flash-lite-image",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite-nothink",
+					DisplayName: "gemini-3.1-flash-lite-nothink",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview-customtools",
+					DisplayName: "gemini-3.1-pro-preview-customtools",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview-search",
+					DisplayName: "gemini-3.1-pro-preview-search",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash",
+					DisplayName: "gemini-3.5-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash-lite",
+					DisplayName: "gemini-3.5-flash-lite",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.6-flash",
+					DisplayName: "gemini-3.6-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemini-3.8-flash",
+					DisplayName: "gemini-3.8-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemma-4-26b-a4b-it",
+					DisplayName: "gemma-4-26b-a4b-it",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gemma-4-31b-it",
+					DisplayName: "gemma-4-31b-it",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-4.5v",
+					DisplayName: "glm-4.5v",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-4.6",
+					DisplayName: "glm-4.6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-4.6v",
+					DisplayName: "glm-4.6v",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-4.7",
+					DisplayName: "glm-4.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash-free",
+					DisplayName: "glm-4.7-flash-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5-turbo",
+					DisplayName: "glm-5-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.2-fast-preview",
+					DisplayName: "glm-5.2-fast-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5.3-flashx",
+					DisplayName: "glm-5.3-flashx",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "glm-5v-turbo",
+					DisplayName: "glm-5v-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4.1",
+					DisplayName: "gpt-4.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4.1-mini",
+					DisplayName: "gpt-4.1-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4.1-nano",
+					DisplayName: "gpt-4.1-nano",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o",
+					DisplayName: "gpt-4o",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-2024-11-20",
+					DisplayName: "gpt-4o-2024-11-20",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini",
+					DisplayName: "gpt-4o-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini-2024-07-18",
+					DisplayName: "gpt-4o-mini-2024-07-18",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini-search-preview",
+					DisplayName: "gpt-4o-mini-search-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-search-preview",
+					DisplayName: "gpt-4o-search-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-4o-zh",
+					DisplayName: "gpt-4o-zh",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5",
+					DisplayName: "gpt-5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5-chat-latest",
+					DisplayName: "gpt-5-chat-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5-codex",
+					DisplayName: "gpt-5-codex",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5-nano",
+					DisplayName: "gpt-5-nano",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5-pro",
+					DisplayName: "gpt-5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.1",
+					DisplayName: "gpt-5.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.1-chat-latest",
+					DisplayName: "gpt-5.1-chat-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex",
+					DisplayName: "gpt-5.1-codex",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex-max",
+					DisplayName: "gpt-5.1-codex-max",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.1-codex-mini",
+					DisplayName: "gpt-5.1-codex-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2-chat-latest",
+					DisplayName: "gpt-5.2-chat-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2-codex",
+					DisplayName: "gpt-5.2-codex",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2-high",
+					DisplayName: "gpt-5.2-high",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2-low",
+					DisplayName: "gpt-5.2-low",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.2-pro",
+					DisplayName: "gpt-5.2-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.3-chat-latest",
+					DisplayName: "gpt-5.3-chat-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4-high",
+					DisplayName: "gpt-5.4-high",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4-low",
+					DisplayName: "gpt-5.4-low",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.4-pro",
+					DisplayName: "gpt-5.4-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.5-pro",
+					DisplayName: "gpt-5.5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-disc",
+					DisplayName: "gpt-5.6-sol-disc",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.6-sol-pro",
+					DisplayName: "gpt-5.6-sol-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-6-astra",
+					DisplayName: "gpt-6-astra",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-6-luna",
+					DisplayName: "gpt-6-luna",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-6-sol",
+					DisplayName: "gpt-6-sol",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-chat-latest",
+					DisplayName: "gpt-chat-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "gpt-oss-20b",
+					DisplayName: "gpt-oss-20b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-2-vision-1212",
+					DisplayName: "grok-2-vision-1212",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4",
+					DisplayName: "grok-4",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-1-fast-non-reasoning",
+					DisplayName: "grok-4-1-fast-non-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-1-fast-reasoning",
+					DisplayName: "grok-4-1-fast-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-20-non-reasoning",
+					DisplayName: "grok-4-20-non-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-20-reasoning",
+					DisplayName: "grok-4-20-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-fast-non-reasoning",
+					DisplayName: "grok-4-fast-non-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4-fast-reasoning",
+					DisplayName: "grok-4-fast-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.20-beta-0309-non-reasoning",
+					DisplayName: "grok-4.20-beta-0309-non-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.20-beta-0309-reasoning",
+					DisplayName: "grok-4.20-beta-0309-reasoning",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.20-multi-agent-0309",
+					DisplayName: "grok-4.20-multi-agent-0309",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.20-multi-agent-beta-0309",
+					DisplayName: "grok-4.20-multi-agent-beta-0309",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-4.7",
+					DisplayName: "grok-4.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-build-0.1",
+					DisplayName: "grok-build-0.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-code-fast-1",
+					DisplayName: "grok-code-fast-1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "grok-vision-beta",
+					DisplayName: "grok-vision-beta",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "hy3",
+					DisplayName: "hy3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "hy3-free",
+					DisplayName: "hy3-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "hy3-preview",
+					DisplayName: "hy3-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "hy4-preview",
+					DisplayName: "hy4-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-1T",
+					DisplayName: "inclusionAI/Ling-1T",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-flash-2.0",
+					DisplayName: "inclusionAI/Ling-flash-2.0",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ling-mini-2.0",
+					DisplayName: "inclusionAI/Ling-mini-2.0",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ring-1T",
+					DisplayName: "inclusionAI/Ring-1T",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "inclusionAI/Ring-flash-2.0",
+					DisplayName: "inclusionAI/Ring-flash-2.0",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "intern-s2-free",
+					DisplayName: "intern-s2-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "jina-deepsearch-v1",
+					DisplayName: "jina-deepsearch-v1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "k2.6-code-preview-free",
+					DisplayName: "k2.6-code-preview-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kat-dev",
+					DisplayName: "kat-dev",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-for-coding-free",
+					DisplayName: "kimi-for-coding-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2-0711",
+					DisplayName: "kimi-k2-0711",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2-instruct",
+					DisplayName: "kimi-k2-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2-thinking",
+					DisplayName: "kimi-k2-thinking",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2-turbo-preview",
+					DisplayName: "kimi-k2-turbo-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code-highspeed",
+					DisplayName: "kimi-k2.7-code-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "l3.1-euryale-70b",
+					DisplayName: "l3.1-euryale-70b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "laguna-s-2.1",
+					DisplayName: "laguna-s-2.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "laguna-s-2.1-free",
+					DisplayName: "laguna-s-2.1-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "laguna-xs-2.1",
+					DisplayName: "laguna-xs-2.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "laguna-xs-2.1-free",
+					DisplayName: "laguna-xs-2.1-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "lfm-2.5-2.6b-free",
+					DisplayName: "lfm-2.5-2.6b-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ling-3.0-flash",
+					DisplayName: "ling-3.0-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ling-3.0-flash-free",
+					DisplayName: "ling-3.0-flash-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "ling-3.0-tiny-free",
+					DisplayName: "ling-3.0-tiny-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "llama-3.3-70b-instruct",
+					DisplayName: "llama-3.3-70b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "llama-4-scout",
+					DisplayName: "llama-4-scout",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "llama2-70b-4096",
+					DisplayName: "llama2-70b-4096",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "llama2-70b-40960",
+					DisplayName: "llama2-70b-40960",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "longcat-2.0",
+					DisplayName: "longcat-2.0",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mai-thinking-1",
+					DisplayName: "mai-thinking-1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mercury-2.5",
+					DisplayName: "mercury-2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mercury-2.5-preview",
+					DisplayName: "mercury-2.5-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2-flash",
+					DisplayName: "mimo-v2-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2-flash-free",
+					DisplayName: "mimo-v2-flash-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2-omni",
+					DisplayName: "mimo-v2-omni",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2-pro",
+					DisplayName: "mimo-v2-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-flash",
+					DisplayName: "mimo-v2.6-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro",
+					DisplayName: "mimo-v2.6-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro-ultraspeed",
+					DisplayName: "mimo-v2.6-pro-ultraspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m2.1",
+					DisplayName: "minimax-m2.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m2.5-highspeed",
+					DisplayName: "minimax-m2.5-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m2.7-free",
+					DisplayName: "minimax-m2.7-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mistral-large-3",
+					DisplayName: "mistral-large-3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "mm-minimax-m2.7-highspeed",
+					DisplayName: "mm-minimax-m2.7-highspeed",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "muse-spark-1.1",
+					DisplayName: "muse-spark-1.1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "muse-spark-1.2",
+					DisplayName: "muse-spark-1.2",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "muse-spark-1.3",
+					DisplayName: "muse-spark-1.3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3-nano-30b-a3b-free",
+					DisplayName: "nemotron-3-nano-30b-a3b-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3-nano-omni-30b-a3b-reasoning-free",
+					DisplayName: "nemotron-3-nano-omni-30b-a3b-reasoning-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3-super-120b-a12b-free",
+					DisplayName: "nemotron-3-super-120b-a12b-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3-ultra-550b-a55b-free",
+					DisplayName: "nemotron-3-ultra-550b-a55b-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3.5-content-safety-free",
+					DisplayName: "nemotron-3.5-content-safety-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-3.5-lightning-free",
+					DisplayName: "nemotron-3.5-lightning-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-nano-12b-v2-vl-free",
+					DisplayName: "nemotron-nano-12b-v2-vl-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nemotron-nano-9b-v2-free",
+					DisplayName: "nemotron-nano-9b-v2-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "north-mini-code-free",
+					DisplayName: "north-mini-code-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "nvidia-nemotron-3-super-120b-a12b",
+					DisplayName: "nvidia-nemotron-3-super-120b-a12b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o1",
+					DisplayName: "o1",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o1-2024-12-17",
+					DisplayName: "o1-2024-12-17",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o1-preview",
+					DisplayName: "o1-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o1-pro",
+					DisplayName: "o1-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o3",
+					DisplayName: "o3",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o3-mini",
+					DisplayName: "o3-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o3-pro",
+					DisplayName: "o3-pro",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "o4-mini",
+					DisplayName: "o4-mini",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-3.8-27b",
+					DisplayName: "qwen-3.8-27b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-mt-plus",
+					DisplayName: "qwen-mt-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-mt-turbo",
+					DisplayName: "qwen-mt-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-plus-2025-04-28",
+					DisplayName: "qwen-plus-2025-04-28",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-plus-latest",
+					DisplayName: "qwen-plus-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-turbo",
+					DisplayName: "qwen-turbo",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-turbo-2024-11-01",
+					DisplayName: "qwen-turbo-2024-11-01",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-turbo-2025-04-28",
+					DisplayName: "qwen-turbo-2025-04-28",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen-turbo-latest",
+					DisplayName: "qwen-turbo-latest",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen2.5-vl-72b-instruct",
+					DisplayName: "qwen2.5-vl-72b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-0.6b",
+					DisplayName: "qwen3-0.6b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-1.7b",
+					DisplayName: "qwen3-1.7b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-14b",
+					DisplayName: "qwen3-14b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b",
+					DisplayName: "qwen3-235b-a22b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-2507",
+					DisplayName: "qwen3-235b-a22b-2507",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-instruct-2507",
+					DisplayName: "qwen3-235b-a22b-instruct-2507",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen3-235b-a22b-thinking-2507",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-4b",
+					DisplayName: "qwen3-4b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-8b",
+					DisplayName: "qwen3-8b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-30b-a3b-instruct",
+					DisplayName: "qwen3-coder-30b-a3b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-480b-a35b-instruct",
+					DisplayName: "qwen3-coder-480b-a35b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-flash",
+					DisplayName: "qwen3-coder-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-next",
+					DisplayName: "qwen3-coder-next",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-plus",
+					DisplayName: "qwen3-coder-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-coder-plus-2025-07-22",
+					DisplayName: "qwen3-coder-plus-2025-07-22",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-max",
+					DisplayName: "qwen3-max",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-max-2026-01-23",
+					DisplayName: "qwen3-max-2026-01-23",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-max-preview",
+					DisplayName: "qwen3-max-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen3-next-80b-a3b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-next-80b-a3b-thinking",
+					DisplayName: "qwen3-next-80b-a3b-thinking",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-235b-a22b-instruct",
+					DisplayName: "qwen3-vl-235b-a22b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-235b-a22b-thinking",
+					DisplayName: "qwen3-vl-235b-a22b-thinking",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-30b-a3b-instruct",
+					DisplayName: "qwen3-vl-30b-a3b-instruct",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-30b-a3b-thinking",
+					DisplayName: "qwen3-vl-30b-a3b-thinking",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-flash",
+					DisplayName: "qwen3-vl-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-flash-2026-01-22",
+					DisplayName: "qwen3-vl-flash-2026-01-22",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3-vl-plus",
+					DisplayName: "qwen3-vl-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-122b-a10b",
+					DisplayName: "qwen3.5-122b-a10b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-27b",
+					DisplayName: "qwen3.5-27b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-35b-a3b",
+					DisplayName: "qwen3.5-35b-a3b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-397b-a17b",
+					DisplayName: "qwen3.5-397b-a17b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-flash",
+					DisplayName: "qwen3.5-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.5-plus",
+					DisplayName: "qwen3.5-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-35b-a3b",
+					DisplayName: "qwen3.6-35b-a3b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-flash",
+					DisplayName: "qwen3.6-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-max-preview",
+					DisplayName: "qwen3.6-max-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus-preview-free",
+					DisplayName: "qwen3.6-plus-preview-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.7-flash",
+					DisplayName: "qwen3.7-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-2.4t-a95b",
+					DisplayName: "qwen3.8-2.4t-a95b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-27b",
+					DisplayName: "qwen3.8-27b",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash",
+					DisplayName: "qwen3.8-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-max-2026-09-02",
+					DisplayName: "qwen3.8-max-2026-09-02",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-max-preview",
+					DisplayName: "qwen3.8-max-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "qwen3.8-omni-flash",
+					DisplayName: "qwen3.8-omni-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "solar-pro4",
+					DisplayName: "solar-pro4",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "step-3.5-flash",
+					DisplayName: "step-3.5-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "step-3.7-flash",
+					DisplayName: "step-3.7-flash",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "step-5-preview",
+					DisplayName: "step-5-preview",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "union-alpha-free",
+					DisplayName: "union-alpha-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2-omni-free",
+					DisplayName: "xiaomi-mimo-v2-omni-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2-pro-free",
+					DisplayName: "xiaomi-mimo-v2-pro-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2.5-free",
+					DisplayName: "xiaomi-mimo-v2.5-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2.5-pro-free",
+					DisplayName: "xiaomi-mimo-v2.5-pro-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2.6-flash-free",
+					DisplayName: "xiaomi-mimo-v2.6-flash-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "xiaomi-mimo-v2.6-pro-free",
+					DisplayName: "xiaomi-mimo-v2.6-pro-free",
+					Description: "AIHubMix model",
+				},
+				{
+					UpstreamID: "zai-glm-5-turbo",
+					DisplayName: "zai-glm-5-turbo",
+					Description: "AIHubMix model",
+				},
+			},
+		},
+		{
+			Slug: "empiriolabs",
+			DisplayName: "EmpirioLabs AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.empiriolabs.ai/v1",
+			DocsURL: "https://docs.empiriolabs.ai",
+			Summary: "EmpirioLabs multi-model inference API.",
+			Models: []Model{
+				{
+					UpstreamID: "ace-step-1-5-xl",
+					DisplayName: "ace-step-1-5-xl",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "amazon-nova-canvas",
+					DisplayName: "amazon-nova-canvas",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "amazon-nova-reel-1-1",
+					DisplayName: "amazon-nova-reel-1-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepgram-nova-3",
+					DisplayName: "deepgram-nova-3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepgram-nova-3-stream",
+					DisplayName: "deepgram-nova-3-stream",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepreasoning",
+					DisplayName: "deepreasoning",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v3-2",
+					DisplayName: "deepseek-v3-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-1-flash",
+					DisplayName: "deepseek-v4-1-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731:variant1",
+					DisplayName: "deepseek-v4-flash-0731:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash:variant1",
+					DisplayName: "deepseek-v4-flash:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash:variant2",
+					DisplayName: "deepseek-v4-flash:variant2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash:variant3",
+					DisplayName: "deepseek-v4-flash:variant3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro-0813",
+					DisplayName: "deepseek-v4-pro-0813",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro:variant1",
+					DisplayName: "deepseek-v4-pro:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro:variant2",
+					DisplayName: "deepseek-v4-pro:variant2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro:variant3",
+					DisplayName: "deepseek-v4-pro:variant3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "exa-answer",
+					DisplayName: "exa-answer",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "exa-search",
+					DisplayName: "exa-search",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "fugu-max",
+					DisplayName: "fugu-max",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "fugu-ultra-v1-0",
+					DisplayName: "fugu-ultra-v1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "fugu-ultra-v1-1",
+					DisplayName: "fugu-ultra-v1-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "fugu-ultra-v2-0",
+					DisplayName: "fugu-ultra-v2-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gemini-3-8-live",
+					DisplayName: "gemini-3-8-live",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gemini-3-8-live-extended-thinking",
+					DisplayName: "gemini-3-8-live-extended-thinking",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gemma-3-27b",
+					DisplayName: "gemma-3-27b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gemma-4-26b-a4b",
+					DisplayName: "gemma-4-26b-a4b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-4-5-flash",
+					DisplayName: "glm-4-5-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-4-6v-flash",
+					DisplayName: "glm-4-6v-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-4-7-flash",
+					DisplayName: "glm-4-7-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-1",
+					DisplayName: "glm-5-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-2",
+					DisplayName: "glm-5-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-2:variant1",
+					DisplayName: "glm-5-2:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-2:variant2",
+					DisplayName: "glm-5-2:variant2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-3",
+					DisplayName: "glm-5-3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "glm-5-3-flash",
+					DisplayName: "glm-5-3-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gpt-image-2",
+					DisplayName: "gpt-image-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "gptzero",
+					DisplayName: "gptzero",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "grok-imagine-image-2-0",
+					DisplayName: "grok-imagine-image-2-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "grok-imagine-video-1-5",
+					DisplayName: "grok-imagine-video-1-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "happyhorse-1-0",
+					DisplayName: "happyhorse-1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "happyhorse-1-1",
+					DisplayName: "happyhorse-1-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "hitem3d-2-0",
+					DisplayName: "hitem3d-2-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "hunyuan-image-3",
+					DisplayName: "hunyuan-image-3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "hunyuan-video-1-5",
+					DisplayName: "hunyuan-video-1-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "hyper3d-gen2",
+					DisplayName: "hyper3d-gen2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "janus-pro-deepseek",
+					DisplayName: "janus-pro-deepseek",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kimi-k2-6",
+					DisplayName: "kimi-k2-6",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kimi-k2-7-code",
+					DisplayName: "kimi-k2-7-code",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kimi-k2-7-code-highspeed",
+					DisplayName: "kimi-k2-7-code-highspeed",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kimi-k2-7-code:variant1",
+					DisplayName: "kimi-k2-7-code:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kling-3-0-turbo",
+					DisplayName: "kling-3-0-turbo",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kling-o3",
+					DisplayName: "kling-o3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kling-v3",
+					DisplayName: "kling-v3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "kling-v3-motion-control",
+					DisplayName: "kling-v3-motion-control",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "linkup-deep-search",
+					DisplayName: "linkup-deep-search",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "linkup-standard",
+					DisplayName: "linkup-standard",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "manus",
+					DisplayName: "manus",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mimo-v2-5",
+					DisplayName: "mimo-v2-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mimo-v2-5-pro",
+					DisplayName: "mimo-v2-5-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mimo-v2-6-flash",
+					DisplayName: "mimo-v2-6-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mimo-v2-6-pro",
+					DisplayName: "mimo-v2-6-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mimo-v2-6-pro-ultraspeed",
+					DisplayName: "mimo-v2-6-pro-ultraspeed",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-h3",
+					DisplayName: "minimax-h3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-m2-7",
+					DisplayName: "minimax-m2-7",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-m2-7-highspeed",
+					DisplayName: "minimax-m2-7-highspeed",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-m3:priority",
+					DisplayName: "minimax-m3:priority",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "minimax-music-3",
+					DisplayName: "minimax-music-3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mistral-small-3-1",
+					DisplayName: "mistral-small-3-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "mistral-small-4",
+					DisplayName: "mistral-small-4",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "muse-glimmer-30b",
+					DisplayName: "muse-glimmer-30b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1-1",
+					DisplayName: "muse-spark-1-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1-2",
+					DisplayName: "muse-spark-1-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "muse-spark-1-3",
+					DisplayName: "muse-spark-1-3",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "nova-lite-1-0",
+					DisplayName: "nova-lite-1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "nova-lite-2",
+					DisplayName: "nova-lite-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "nova-micro-1-0",
+					DisplayName: "nova-micro-1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "nova-pro-1-0",
+					DisplayName: "nova-pro-1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-advanced-deep-research",
+					DisplayName: "perplexity-advanced-deep-research",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-deep-research",
+					DisplayName: "perplexity-deep-research",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-pro-search",
+					DisplayName: "perplexity-pro-search",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-search",
+					DisplayName: "perplexity-search",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-sonar",
+					DisplayName: "perplexity-sonar",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-sonar-pro",
+					DisplayName: "perplexity-sonar-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "perplexity-sonar-reasoning-pro",
+					DisplayName: "perplexity-sonar-reasoning-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-avatar",
+					DisplayName: "pixverse-avatar",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-c1",
+					DisplayName: "pixverse-c1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-edit",
+					DisplayName: "pixverse-edit",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-lipsync",
+					DisplayName: "pixverse-lipsync",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-v5",
+					DisplayName: "pixverse-v5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-v5-6",
+					DisplayName: "pixverse-v5-6",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "pixverse-v6",
+					DisplayName: "pixverse-v6",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen-image-2-0",
+					DisplayName: "qwen-image-2-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen-image-3-0",
+					DisplayName: "qwen-image-3-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-122b-a10b",
+					DisplayName: "qwen3-5-122b-a10b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-27b",
+					DisplayName: "qwen3-5-27b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-35b-a3b",
+					DisplayName: "qwen3-5-35b-a3b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-397b-a17b",
+					DisplayName: "qwen3-5-397b-a17b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-4b",
+					DisplayName: "qwen3-5-4b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-9b",
+					DisplayName: "qwen3-5-9b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-flash",
+					DisplayName: "qwen3-5-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-flash:variant1",
+					DisplayName: "qwen3-5-flash:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-omni-flash",
+					DisplayName: "qwen3-5-omni-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-omni-flash-realtime",
+					DisplayName: "qwen3-5-omni-flash-realtime",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-omni-plus",
+					DisplayName: "qwen3-5-omni-plus",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-omni-plus-realtime",
+					DisplayName: "qwen3-5-omni-plus-realtime",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-plus",
+					DisplayName: "qwen3-5-plus",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-5-plus:variant1",
+					DisplayName: "qwen3-5-plus:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-27b",
+					DisplayName: "qwen3-6-27b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-35b-a3b",
+					DisplayName: "qwen3-6-35b-a3b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-flash",
+					DisplayName: "qwen3-6-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-flash:variant1",
+					DisplayName: "qwen3-6-flash:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-max-preview",
+					DisplayName: "qwen3-6-max-preview",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-plus",
+					DisplayName: "qwen3-6-plus",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-6-plus:variant1",
+					DisplayName: "qwen3-6-plus:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-flash",
+					DisplayName: "qwen3-7-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-flash:variant1",
+					DisplayName: "qwen3-7-flash:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-max",
+					DisplayName: "qwen3-7-max",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-max:variant1",
+					DisplayName: "qwen3-7-max:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-plus",
+					DisplayName: "qwen3-7-plus",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-7-plus:variant1",
+					DisplayName: "qwen3-7-plus:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-27b",
+					DisplayName: "qwen3-8-27b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-flash",
+					DisplayName: "qwen3-8-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-livetranslate-flash-realtime",
+					DisplayName: "qwen3-8-livetranslate-flash-realtime",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-max",
+					DisplayName: "qwen3-8-max",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-max-0902",
+					DisplayName: "qwen3-8-max-0902",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-max:variant1",
+					DisplayName: "qwen3-8-max:variant1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-omni-flash",
+					DisplayName: "qwen3-8-omni-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-8-omni-flash-realtime",
+					DisplayName: "qwen3-8-omni-flash-realtime",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-max",
+					DisplayName: "qwen3-max",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-max-preview",
+					DisplayName: "qwen3-max-preview",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "qwen3-max-thinking",
+					DisplayName: "qwen3-max-thinking",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seed-2-0-code",
+					DisplayName: "seed-2-0-code",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seed-2-0-lite",
+					DisplayName: "seed-2-0-lite",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seed-2-0-mini",
+					DisplayName: "seed-2-0-mini",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seed-2-0-pro",
+					DisplayName: "seed-2-0-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seed-2-1-turbo",
+					DisplayName: "seed-2-1-turbo",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedance-1-5-pro",
+					DisplayName: "seedance-1-5-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedance-2-0-fast",
+					DisplayName: "seedance-2-0-fast",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedance-2-0-mini",
+					DisplayName: "seedance-2-0-mini",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedance-2-0-pro",
+					DisplayName: "seedance-2-0-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedance-2-5",
+					DisplayName: "seedance-2-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedream-4-0",
+					DisplayName: "seedream-4-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedream-4-5",
+					DisplayName: "seedream-4-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedream-5-0-lite",
+					DisplayName: "seedream-5-0-lite",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "seedream-5-0-pro",
+					DisplayName: "seedream-5-0-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-proofread",
+					DisplayName: "sonilo-proofread",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-sound-effects-1-0",
+					DisplayName: "sonilo-sound-effects-1-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-v1-1",
+					DisplayName: "sonilo-v1-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-video-analysis",
+					DisplayName: "sonilo-video-analysis",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-video-to-video",
+					DisplayName: "sonilo-video-to-video",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "sonilo-video-translation",
+					DisplayName: "sonilo-video-translation",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "soulx-podcast",
+					DisplayName: "soulx-podcast",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "step-3-5-flash",
+					DisplayName: "step-3-5-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "step-3-5-flash-2603",
+					DisplayName: "step-3-5-flash-2603",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "step-3-7-flash",
+					DisplayName: "step-3-7-flash",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "step-5-preview",
+					DisplayName: "step-5-preview",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "step-image-edit-2",
+					DisplayName: "step-image-edit-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "svi-2-0-pro",
+					DisplayName: "svi-2-0-pro",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "tavily-research",
+					DisplayName: "tavily-research",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "tavily-search",
+					DisplayName: "tavily-search",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "trellis-2-4b",
+					DisplayName: "trellis-2-4b",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-2-1",
+					DisplayName: "wan-2-1",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-2-2",
+					DisplayName: "wan-2-2",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-2-5",
+					DisplayName: "wan-2-5",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-2-6",
+					DisplayName: "wan-2-6",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-2-7",
+					DisplayName: "wan-2-7",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan-3-0",
+					DisplayName: "wan-3-0",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan2-1-image",
+					DisplayName: "wan2-1-image",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan2-2-image",
+					DisplayName: "wan2-2-image",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan2-5-image",
+					DisplayName: "wan2-5-image",
+					Description: "EmpirioLabs AI model",
+				},
+				{
+					UpstreamID: "wan2-7-image",
+					DisplayName: "wan2-7-image",
+					Description: "EmpirioLabs AI model",
+				},
+			},
+		},
+		{
+			Slug: "aiand",
+			DisplayName: "ai&",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.aiand.com/v1",
+			DocsURL: "https://docs.aiand.com/",
+			Summary: "ai& API, including Motif Technologies models.",
+			Models: []Model{
+				{
+					UpstreamID: "zai-org/glm-5.3",
+					DisplayName: "zai-org/glm-5.3",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "zai-org/glm-5.2",
+					DisplayName: "zai-org/glm-5.2",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "motif-technologies/motif-3",
+					DisplayName: "motif-technologies/motif-3",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-flash",
+					DisplayName: "deepseek-ai/deepseek-v4-flash",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "deepseek-ai/deepseek-v4-pro",
+					DisplayName: "deepseek-ai/deepseek-v4-pro",
+					Description: "ai& model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "ai& model",
+				},
+			},
+		},
+		{
+			Slug: "ambient",
+			DisplayName: "Ambient",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.ambient.xyz/v1",
+			DocsURL: "https://ambient.xyz",
+			Summary: "Ambient.xyz hosted inference.",
+			Models: []Model{
+				{
+					UpstreamID: "ambient/large",
+					DisplayName: "ambient/large",
+					Description: "Ambient model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "Ambient model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "Ambient model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "Ambient model",
+				},
+			},
+		},
+		{
+			Slug: "inco",
+			DisplayName: "Inco",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.inco.ai/v1",
+			DocsURL: "https://platform.inco.ai",
+			Summary: "Inco routed inference for Kimi, GLM, MiniMax, and DeepSeek.",
+			Models: []Model{
+				{
+					UpstreamID: "kimi-k3:fast",
+					DisplayName: "kimi-k3:fast",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "glm-5.3:fast",
+					DisplayName: "glm-5.3:fast",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash:fast",
+					DisplayName: "glm-5.3-flash:fast",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash:fast",
+					DisplayName: "deepseek-v4.1-flash:fast",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "minimax-m3:fast",
+					DisplayName: "minimax-m3:fast",
+					Description: "Inco model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "Inco model",
+				},
+			},
+		},
+		{
+			Slug: "pendra",
+			DisplayName: "Pendra",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.pendra.ai/api/v1",
+			DocsURL: "https://pendra.ai",
+			Summary: "Pendra OpenAI-compatible router.",
+			Models: []Model{
+				{
+					UpstreamID: "llama3.3:70b",
+					DisplayName: "llama3.3:70b",
+					Description: "Pendra model",
+				},
+				{
+					UpstreamID: "qwen3-coder:30b",
+					DisplayName: "qwen3-coder:30b",
+					Description: "Pendra model",
+				},
+				{
+					UpstreamID: "gpt-oss:120b",
+					DisplayName: "gpt-oss:120b",
+					Description: "Pendra model",
+				},
+				{
+					UpstreamID: "qwen3.6:27b",
+					DisplayName: "qwen3.6:27b",
+					Description: "Pendra model",
+				},
+				{
+					UpstreamID: "glm-4.7-flash",
+					DisplayName: "glm-4.7-flash",
+					Description: "Pendra model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "Pendra model",
+				},
+			},
+		},
+		{
+			Slug: "ionos",
+			DisplayName: "IONOS AI Model Hub",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://openai.inference.de-txl.ionos.com/v1",
+			DocsURL: "https://docs.ionos.com/cloud/ai/ai-model-hub/how-tos/tool-integration",
+			Summary: "IONOS Cloud OpenAI-compatible Model Hub in Germany.",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					DisplayName: "meta-llama/Meta-Llama-3.1-8B-Instruct",
+					Description: "IONOS AI Model Hub model",
+				},
+				{
+					UpstreamID: "openGPT-X/Teuken-7B-instruct-commercial",
+					DisplayName: "openGPT-X/Teuken-7B-instruct-commercial",
+					Description: "IONOS AI Model Hub model",
+				},
+			},
+		},
+		{
+			Slug: "infomaniak",
+			DisplayName: "Infomaniak AI Services",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.infomaniak.com/2/ai/{product_id}/openai/v1",
+			DocsURL: "https://www.infomaniak.com/en/hosting/ai-services/open-source-models",
+			Summary: "Swiss AI Services. Replace {product_id} with your AI product id.",
+			Models: []Model{
+				{
+					UpstreamID: "mini_lm_l12_v2",
+					DisplayName: "mini_lm_l12_v2",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "bge_multilingual_gemma2",
+					DisplayName: "bge_multilingual_gemma2",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "swiss-ai/Apertus-v1.5-70B",
+					DisplayName: "swiss-ai/Apertus-v1.5-70B",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31B-it",
+					DisplayName: "google/gemma-4-31B-it",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-122B-A10B-FP8",
+					DisplayName: "Qwen/Qwen3.5-122B-A10B-FP8",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "Qwen/Qwen3.5-397B-A17B-FP8",
+					DisplayName: "Qwen/Qwen3.5-397B-A17B-FP8",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "mistralai/Mistral-Small-4-119B-2603",
+					DisplayName: "mistralai/Mistral-Small-4-119B-2603",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "mistralai/Ministral-3-14B-Instruct-2512",
+					DisplayName: "mistralai/Ministral-3-14B-Instruct-2512",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "moonshotai/Kimi-K2.6",
+					DisplayName: "moonshotai/Kimi-K2.6",
+					Description: "Infomaniak AI Services model",
+				},
+				{
+					UpstreamID: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+					DisplayName: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-FP8",
+					Description: "Infomaniak AI Services model",
+				},
+			},
+		},
+		{
+			Slug: "yandex",
+			DisplayName: "Yandex Cloud AI Studio",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ai.api.cloud.yandex.net/v1",
+			DocsURL: "https://yandex.cloud/en/docs/ai-studio/",
+			Summary: "OpenAI-compatible. Model URIs look like gpt://<folder_ID>/yandexgpt/latest.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt://<folder_ID>/yandexgpt/latest",
+					DisplayName: "gpt://<folder_ID>/yandexgpt/latest",
+					Description: "Yandex Cloud AI Studio model",
+				},
+				{
+					UpstreamID: "gpt://<folder_ID>/yandexgpt-lite/latest",
+					DisplayName: "gpt://<folder_ID>/yandexgpt-lite/latest",
+					Description: "Yandex Cloud AI Studio model",
+				},
+				{
+					UpstreamID: "gpt://<folder_ID>/qwen3-235b-a22b-fp8/latest",
+					DisplayName: "gpt://<folder_ID>/qwen3-235b-a22b-fp8/latest",
+					Description: "Yandex Cloud AI Studio model",
+				},
+				{
+					UpstreamID: "gpt://<folder_ID>/gpt-oss-120b/latest",
+					DisplayName: "gpt://<folder_ID>/gpt-oss-120b/latest",
+					Description: "Yandex Cloud AI Studio model",
+				},
+			},
+		},
+		{
+			Slug: "gcore",
+			DisplayName: "Gcore Everywhere Inference",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://model-<deployment>-<project>-<account>.ai.gcore.dev/v1",
+			DocsURL: "https://docs.gcore.com/edge-ai/everywhere-inference/ai-models/query-deployed-model",
+			Summary: "Per-deployment OpenAI endpoint. When auth is on, send the key in X-API-Key.",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Llama-3.2-1B-Instruct",
+					DisplayName: "meta-llama/Llama-3.2-1B-Instruct",
+					Description: "Gcore Everywhere Inference model",
+				},
+			},
+		},
+		{
+			Slug: "tinfoil",
+			DisplayName: "Tinfoil",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.tinfoil.sh/v1",
+			DocsURL: "https://docs.tinfoil.sh",
+			Summary: "Confidential inference with an OpenAI-compatible chat API.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek-v4-1-flash",
+					DisplayName: "deepseek-v4-1-flash",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "glm-5-3",
+					DisplayName: "glm-5-3",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "glm-5-3-flash",
+					DisplayName: "glm-5-3-flash",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "llama3-3-70b",
+					DisplayName: "llama3-3-70b",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "gemma4-31b",
+					DisplayName: "gemma4-31b",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "gpt-oss-safeguard-120b",
+					DisplayName: "gpt-oss-safeguard-120b",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "pii-filter",
+					DisplayName: "pii-filter",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "doc-upload",
+					DisplayName: "doc-upload",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "voxtral-small-24b",
+					DisplayName: "voxtral-small-24b",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "websearch",
+					DisplayName: "websearch",
+					Description: "Tinfoil model",
+				},
+				{
+					UpstreamID: "voxtral-mini-4b-realtime",
+					DisplayName: "voxtral-mini-4b-realtime",
+					Description: "Tinfoil model",
+				},
+			},
+		},
+		{
+			Slug: "salad",
+			DisplayName: "Salad AI Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://ai.salad.cloud/v1",
+			DocsURL: "https://docs.salad.com/ai-gateway/explanation/overview",
+			Summary: "Salad pay-per-token AI Gateway (beta).",
+			Models: []Model{
+				{
+					UpstreamID: "qwen3.5-35b-a3b",
+					DisplayName: "qwen3.5-35b-a3b",
+					Description: "Salad AI Gateway model",
+				},
+				{
+					UpstreamID: "qwen3.5-9b",
+					DisplayName: "qwen3.5-9b",
+					Description: "Salad AI Gateway model",
+				},
+				{
+					UpstreamID: "qwen3.6-27b",
+					DisplayName: "qwen3.6-27b",
+					Description: "Salad AI Gateway model",
+				},
+				{
+					UpstreamID: "qwen3.6-35b-a3b",
+					DisplayName: "qwen3.6-35b-a3b",
+					Description: "Salad AI Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "infercom",
+			DisplayName: "Infercom",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.infercom.ai/v1",
+			DocsURL: "https://api.infercom.ai",
+			Summary: "Infercom hosted OpenAI-compatible inference.",
+			Models: []Model{
+				{
+					UpstreamID: "DeepSeek-V3.1",
+					DisplayName: "DeepSeek-V3.1",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "DeepSeek-V3.2",
+					DisplayName: "DeepSeek-V3.2",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "E5-Mistral-7B-Instruct",
+					DisplayName: "E5-Mistral-7B-Instruct",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "Meta-Llama-3.3-70B-Instruct",
+					DisplayName: "Meta-Llama-3.3-70B-Instruct",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "MiniMax-M2.7",
+					DisplayName: "MiniMax-M2.7",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "gemma-4-31B-it",
+					DisplayName: "gemma-4-31B-it",
+					Description: "Infercom model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Infercom model",
+				},
+			},
+		},
+		{
+			Slug: "tensorx",
+			DisplayName: "TensorX",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.tensorx.ai/v1",
+			DocsURL: "https://docs.tensorx.ai/",
+			Summary: "TensorX multi-model API.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1-0528",
+					DisplayName: "deepseek/deepseek-r1-0528",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5v-turbo",
+					DisplayName: "z-ai/glm-5v-turbo",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5",
+					DisplayName: "z-ai/glm-5",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.1",
+					DisplayName: "z-ai/glm-5.1",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5-turbo",
+					DisplayName: "z-ai/glm-5-turbo",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3",
+					DisplayName: "z-ai/glm-5.3",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5",
+					DisplayName: "minimax/minimax-m2.5",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-2507",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-122b-a10b",
+					DisplayName: "qwen/qwen3.5-122b-a10b",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-9b",
+					DisplayName: "qwen/qwen3.5-9b",
+					Description: "TensorX model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-flash-next",
+					DisplayName: "qwen/qwen3.8-flash-next",
+					Description: "TensorX model",
+				},
+			},
+		},
+		{
+			Slug: "lyceum",
+			DisplayName: "Lyceum",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.lyceum.technology/openai/v1",
+			DocsURL: "https://docs.lyceum.technology/docs/inference/serverless",
+			Summary: "Lyceum serverless OpenAI-compatible inference.",
+			Models: []Model{
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "Lyceum model",
+				},
+			},
+		},
+		{
+			Slug: "inferx",
+			DisplayName: "InferX",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://model.inferx.net/v1",
+			DocsURL: "https://www.inferx.net",
+			Summary: "InferX serverless endpoints. Requests need a tenant-scoped API key.",
+			Models: []Model{
+				{
+					UpstreamID: "gemma-4-31B-it-fp8",
+					DisplayName: "gemma-4-31B-it-fp8",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Qwen3.6-35B-A3B-fp8-no-thinking",
+					DisplayName: "Qwen3.6-35B-A3B-fp8-no-thinking",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Devstral-2-123B-Instruct-2512-int4-AutoRound",
+					DisplayName: "Devstral-2-123B-Instruct-2512-int4-AutoRound",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Qwen3.6-27B-FP8",
+					DisplayName: "Qwen3.6-27B-FP8",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Qwen3-Coder-Next-FP8",
+					DisplayName: "Qwen3-Coder-Next-FP8",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Qwen3-Coder-Next-FP8-no-thinking",
+					DisplayName: "Qwen3-Coder-Next-FP8-no-thinking",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "mimo-v25",
+					DisplayName: "mimo-v25",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Qwen3.6-35B-A3B-FP8",
+					DisplayName: "Qwen3.6-35B-A3B-FP8",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Ornith-1.0-35B-FP8",
+					DisplayName: "Ornith-1.0-35B-FP8",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "Agents-A1",
+					DisplayName: "Agents-A1",
+					Description: "InferX model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "InferX model",
+				},
+			},
+		},
+		{
+			Slug: "iteracompute",
+			DisplayName: "IteraCompute",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.iteracompute.com/v1",
+			DocsURL: "https://iteracompute.com/docs.html",
+			Summary: "IteraCompute hosted models. Access depends on the API key or contract.",
+			Models: []Model{
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3",
+					DisplayName: "z-ai/glm-5.3",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "IteraCompute model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "IteraCompute model",
+				},
+			},
+		},
+		{
+			Slug: "cloudrift",
+			DisplayName: "CloudRift",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://inference.cloudrift.ai/v1",
+			DocsURL: "https://www.cloudrift.ai",
+			Summary: "CloudRift OpenAI-compatible inference.",
+			Models: []Model{
+				{
+					UpstreamID: "Qwen/Qwen3.8-27B-FP8",
+					DisplayName: "Qwen/Qwen3.8-27B-FP8",
+					Description: "CloudRift model",
+				},
+			},
+		},
+		{
+			Slug: "braintrust",
+			DisplayName: "Braintrust AI Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://gateway.braintrust.dev/v1",
+			DocsURL: "https://www.braintrust.dev/docs/deploy/gateway",
+			Summary: "Hosted Braintrust gateway for multi-provider models, caching, and logs.",
+			Models: []Model{
+				{
+					UpstreamID: "claude-haiku-4-5",
+					DisplayName: "claude-haiku-4-5",
+					Description: "Braintrust AI Gateway model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5",
+					DisplayName: "claude-sonnet-4-5",
+					Description: "Braintrust AI Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "martian",
+			DisplayName: "Martian Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.withmartian.com/v1",
+			DocsURL: "https://withmartian.com",
+			Summary: "Martian model router.",
+			Models: []Model{
+				{
+					UpstreamID: "aion-labs/aion-2.0",
+					DisplayName: "aion-labs/aion-2.0",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0",
+					DisplayName: "aion-labs/aion-3.0",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-3.0-mini",
+					DisplayName: "aion-labs/aion-3.0-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "aion-labs/aion-rp-llama-3.1-8b",
+					DisplayName: "aion-labs/aion-rp-llama-3.1-8b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "amazon/nova-2-lite-v1",
+					DisplayName: "amazon/nova-2-lite-v1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "amazon/nova-lite-v1",
+					DisplayName: "amazon/nova-lite-v1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "amazon/nova-micro-v1",
+					DisplayName: "amazon/nova-micro-v1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "amazon/nova-premier-v1",
+					DisplayName: "amazon/nova-premier-v1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "amazon/nova-pro-v1",
+					DisplayName: "amazon/nova-pro-v1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthracite-org/magnum-v4-72b",
+					DisplayName: "anthracite-org/magnum-v4-72b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5-1",
+					DisplayName: "anthropic/claude-fable-5-1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5",
+					DisplayName: "anthropic/claude-haiku-4-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5-20251001",
+					DisplayName: "anthropic/claude-haiku-4-5-20251001",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-5",
+					DisplayName: "anthropic/claude-opus-4-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-5-20251101",
+					DisplayName: "anthropic/claude-opus-4-5-20251101",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-6",
+					DisplayName: "anthropic/claude-opus-4-6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-7",
+					DisplayName: "anthropic/claude-opus-4-7",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-8",
+					DisplayName: "anthropic/claude-opus-4-8",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5-5",
+					DisplayName: "anthropic/claude-opus-5-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-5",
+					DisplayName: "anthropic/claude-sonnet-4-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-5-20250929",
+					DisplayName: "anthropic/claude-sonnet-4-5-20250929",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-6",
+					DisplayName: "anthropic/claude-sonnet-4-6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "arcee-ai/trinity-large-thinking",
+					DisplayName: "arcee-ai/trinity-large-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "baidu/ernie-4.5-vl-424b-a47b",
+					DisplayName: "baidu/ernie-4.5-vl-424b-a47b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-1.6",
+					DisplayName: "bytedance-seed/seed-1.6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-1.6-flash",
+					DisplayName: "bytedance-seed/seed-1.6-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2-1-turbo",
+					DisplayName: "bytedance-seed/seed-2-1-turbo",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-code",
+					DisplayName: "bytedance-seed/seed-2.0-code",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-lite",
+					DisplayName: "bytedance-seed/seed-2.0-lite",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance-seed/seed-2.0-mini",
+					DisplayName: "bytedance-seed/seed-2.0-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "bytedance/ui-tars-1.5-7b",
+					DisplayName: "bytedance/ui-tars-1.5-7b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+					DisplayName: "cognitivecomputations/dolphin-mistral-24b-venice-edition",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-a",
+					DisplayName: "cohere/command-a",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r-08-2024",
+					DisplayName: "cohere/command-r-08-2024",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r-plus-08-2024",
+					DisplayName: "cohere/command-r-plus-08-2024",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "cohere/command-r7b-12-2024",
+					DisplayName: "cohere/command-r7b-12-2024",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat-v3-0324",
+					DisplayName: "deepseek/deepseek-chat-v3-0324",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat-v3.1",
+					DisplayName: "deepseek/deepseek-chat-v3.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1",
+					DisplayName: "deepseek/deepseek-r1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-r1-0528",
+					DisplayName: "deepseek/deepseek-r1-0528",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.1-terminus",
+					DisplayName: "deepseek/deepseek-v3.1-terminus",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v3.2",
+					DisplayName: "deepseek/deepseek-v3.2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-0731",
+					DisplayName: "deepseek/deepseek-v4-flash-0731",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro-0813",
+					DisplayName: "deepseek/deepseek-v4-pro-0813",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash",
+					DisplayName: "google/gemini-2.5-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-flash-lite",
+					DisplayName: "google/gemini-2.5-flash-lite",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-2.5-pro",
+					DisplayName: "google/gemini-2.5-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3-flash-preview",
+					DisplayName: "google/gemini-3-flash-preview",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-flash-lite",
+					DisplayName: "google/gemini-3.1-flash-lite",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.1-pro-preview",
+					DisplayName: "google/gemini-3.1-pro-preview",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash",
+					DisplayName: "google/gemini-3.5-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.5-flash-lite",
+					DisplayName: "google/gemini-3.5-flash-lite",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.6-flash",
+					DisplayName: "google/gemini-3.6-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.7-flash",
+					DisplayName: "google/gemini-3.7-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-3.8-flash",
+					DisplayName: "google/gemini-3.8-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-flash-latest",
+					DisplayName: "google/gemini-flash-latest",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-flash-lite-latest",
+					DisplayName: "google/gemini-flash-lite-latest",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemini-pro-latest",
+					DisplayName: "google/gemini-pro-latest",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-12b-it",
+					DisplayName: "google/gemma-3-12b-it",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-27b-it",
+					DisplayName: "google/gemma-3-27b-it",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-3-4b-it",
+					DisplayName: "google/gemma-3-4b-it",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-4-26b-a4b-it",
+					DisplayName: "google/gemma-4-26b-a4b-it",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "google/gemma-4-31b-it",
+					DisplayName: "google/gemma-4-31b-it",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "gryphe/mythomax-l2-13b",
+					DisplayName: "gryphe/mythomax-l2-13b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.0-h-micro",
+					DisplayName: "ibm-granite/granite-4.0-h-micro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "ibm-granite/granite-4.2-8b",
+					DisplayName: "ibm-granite/granite-4.2-8b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inception/mercury-2",
+					DisplayName: "inception/mercury-2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inception/mercury-2.5",
+					DisplayName: "inception/mercury-2.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash",
+					DisplayName: "inclusionai/ling-3.0-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-fin",
+					DisplayName: "inclusionai/ling-3.0-flash-fin",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inclusionai/ling-3.0-flash-vl",
+					DisplayName: "inclusionai/ling-3.0-flash-vl",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inference-net/schematron-v2-small",
+					DisplayName: "inference-net/schematron-v2-small",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "inference-net/schematron-v2-turbo",
+					DisplayName: "inference-net/schematron-v2-turbo",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "kwaipilot/kat-coder-pro-v2.5",
+					DisplayName: "kwaipilot/kat-coder-pro-v2.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mancer/weaver",
+					DisplayName: "mancer/weaver",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meituan/longcat-2.0",
+					DisplayName: "meituan/longcat-2.0",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.1-70b-instruct",
+					DisplayName: "meta-llama/llama-3.1-70b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.1-8b-instruct",
+					DisplayName: "meta-llama/llama-3.1-8b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.2-1b-instruct",
+					DisplayName: "meta-llama/llama-3.2-1b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.2-3b-instruct",
+					DisplayName: "meta-llama/llama-3.2-3b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-3.3-70b-instruct",
+					DisplayName: "meta-llama/llama-3.3-70b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-4-maverick",
+					DisplayName: "meta-llama/llama-4-maverick",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-4-scout",
+					DisplayName: "meta-llama/llama-4-scout",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta-llama/llama-guard-4-12b",
+					DisplayName: "meta-llama/llama-guard-4-12b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-glimmer-30b",
+					DisplayName: "meta/muse-glimmer-30b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.1",
+					DisplayName: "meta/muse-spark-1.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2",
+					DisplayName: "meta/muse-spark-1.2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.2-contributor",
+					DisplayName: "meta/muse-spark-1.2-contributor",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3",
+					DisplayName: "meta/muse-spark-1.3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "meta/muse-spark-1.3-contributor",
+					DisplayName: "meta/muse-spark-1.3-contributor",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "microsoft/phi-4",
+					DisplayName: "microsoft/phi-4",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "microsoft/wizardlm-2-8x22b",
+					DisplayName: "microsoft/wizardlm-2-8x22b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m1",
+					DisplayName: "minimax/minimax-m1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2",
+					DisplayName: "minimax/minimax-m2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2-her",
+					DisplayName: "minimax/minimax-m2-her",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.1",
+					DisplayName: "minimax/minimax-m2.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.5",
+					DisplayName: "minimax/minimax-m2.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/codestral-2508",
+					DisplayName: "mistralai/codestral-2508",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-14b-2512",
+					DisplayName: "mistralai/ministral-14b-2512",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-3b-2512",
+					DisplayName: "mistralai/ministral-3b-2512",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/ministral-8b-2512",
+					DisplayName: "mistralai/ministral-8b-2512",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large",
+					DisplayName: "mistralai/mistral-large",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-large-2407",
+					DisplayName: "mistralai/mistral-large-2407",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3",
+					DisplayName: "mistralai/mistral-medium-3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3-5",
+					DisplayName: "mistralai/mistral-medium-3-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-medium-3.1",
+					DisplayName: "mistralai/mistral-medium-3.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-nemo",
+					DisplayName: "mistralai/mistral-nemo",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-saba",
+					DisplayName: "mistralai/mistral-saba",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-24b-instruct-2501",
+					DisplayName: "mistralai/mistral-small-24b-instruct-2501",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-2603",
+					DisplayName: "mistralai/mistral-small-2603",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-3.2-24b-instruct",
+					DisplayName: "mistralai/mistral-small-3.2-24b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/mixtral-8x22b-instruct",
+					DisplayName: "mistralai/mixtral-8x22b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "mistralai/voxtral-small-24b-2507",
+					DisplayName: "mistralai/voxtral-small-24b-2507",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2",
+					DisplayName: "moonshotai/kimi-k2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-0905",
+					DisplayName: "moonshotai/kimi-k2-0905",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2-thinking",
+					DisplayName: "moonshotai/kimi-k2-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.5",
+					DisplayName: "moonshotai/kimi-k2.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.6",
+					DisplayName: "moonshotai/kimi-k2.6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k2.7-code",
+					DisplayName: "moonshotai/kimi-k2.7-code",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "moonshotai/kimi-k3",
+					DisplayName: "moonshotai/kimi-k3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "morph/morph-v3-fast",
+					DisplayName: "morph/morph-v3-fast",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "morph/morph-v3-large",
+					DisplayName: "morph/morph-v3-large",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nex-agi/nex-n2.5-mini",
+					DisplayName: "nex-agi/nex-n2.5-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nex-agi/nex-n2.5-pro",
+					DisplayName: "nex-agi/nex-n2.5-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nousresearch/hermes-4-405b",
+					DisplayName: "nousresearch/hermes-4-405b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-nano-30b-a3b",
+					DisplayName: "nvidia/nemotron-3-nano-30b-a3b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super-120b-a12b",
+					DisplayName: "nvidia/nemotron-3-super-120b-a12b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-ultra-550b-a55b",
+					DisplayName: "nvidia/nemotron-3-ultra-550b-a55b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-content-safety",
+					DisplayName: "nvidia/nemotron-3.5-content-safety",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3.5-lightning",
+					DisplayName: "nvidia/nemotron-3.5-lightning",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-3.5-turbo",
+					DisplayName: "openai/gpt-3.5-turbo",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4",
+					DisplayName: "openai/gpt-4",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4-turbo",
+					DisplayName: "openai/gpt-4-turbo",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1",
+					DisplayName: "openai/gpt-4.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-2025-04-14",
+					DisplayName: "openai/gpt-4.1-2025-04-14",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini",
+					DisplayName: "openai/gpt-4.1-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-mini-2025-04-14",
+					DisplayName: "openai/gpt-4.1-mini-2025-04-14",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano",
+					DisplayName: "openai/gpt-4.1-nano",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4.1-nano-2025-04-14",
+					DisplayName: "openai/gpt-4.1-nano-2025-04-14",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-05-13",
+					DisplayName: "openai/gpt-4o-2024-05-13",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-08-06",
+					DisplayName: "openai/gpt-4o-2024-08-06",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-2024-11-20",
+					DisplayName: "openai/gpt-4o-2024-11-20",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini-2024-07-18",
+					DisplayName: "openai/gpt-4o-mini-2024-07-18",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5",
+					DisplayName: "openai/gpt-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-2025-08-07",
+					DisplayName: "openai/gpt-5-2025-08-07",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini",
+					DisplayName: "openai/gpt-5-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-mini-2025-08-07",
+					DisplayName: "openai/gpt-5-mini-2025-08-07",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano",
+					DisplayName: "openai/gpt-5-nano",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-nano-2025-08-07",
+					DisplayName: "openai/gpt-5-nano-2025-08-07",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-pro",
+					DisplayName: "openai/gpt-5-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5-pro-2025-10-06",
+					DisplayName: "openai/gpt-5-pro-2025-10-06",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1",
+					DisplayName: "openai/gpt-5.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.1-2025-11-13",
+					DisplayName: "openai/gpt-5.1-2025-11-13",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2",
+					DisplayName: "openai/gpt-5.2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-2025-12-11",
+					DisplayName: "openai/gpt-5.2-2025-12-11",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-pro",
+					DisplayName: "openai/gpt-5.2-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.2-pro-2025-12-11",
+					DisplayName: "openai/gpt-5.2-pro-2025-12-11",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.3-codex",
+					DisplayName: "openai/gpt-5.3-codex",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-2026-03-05",
+					DisplayName: "openai/gpt-5.4-2026-03-05",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini-2026-03-17",
+					DisplayName: "openai/gpt-5.4-mini-2026-03-17",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano-2026-03-17",
+					DisplayName: "openai/gpt-5.4-nano-2026-03-17",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-pro",
+					DisplayName: "openai/gpt-5.4-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-pro-2026-03-05",
+					DisplayName: "openai/gpt-5.4-pro-2026-03-05",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-2026-04-23",
+					DisplayName: "openai/gpt-5.5-2026-04-23",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro",
+					DisplayName: "openai/gpt-5.5-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro-2026-04-23",
+					DisplayName: "openai/gpt-5.5-pro-2026-04-23",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/gpt-oss-20b",
+					DisplayName: "openai/gpt-oss-20b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o1",
+					DisplayName: "openai/o1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o1-2024-12-17",
+					DisplayName: "openai/o1-2024-12-17",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o1-pro",
+					DisplayName: "openai/o1-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3",
+					DisplayName: "openai/o3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-2025-04-16",
+					DisplayName: "openai/o3-2025-04-16",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-mini",
+					DisplayName: "openai/o3-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-mini-2025-01-31",
+					DisplayName: "openai/o3-mini-2025-01-31",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-pro",
+					DisplayName: "openai/o3-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o3-pro-2025-06-10",
+					DisplayName: "openai/o3-pro-2025-06-10",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o4-mini",
+					DisplayName: "openai/o4-mini",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "openai/o4-mini-2025-04-16",
+					DisplayName: "openai/o4-mini-2025-04-16",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perceptron/perceptron-mk1",
+					DisplayName: "perceptron/perceptron-mk1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perplexity/sonar",
+					DisplayName: "perplexity/sonar",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-deep-research",
+					DisplayName: "perplexity/sonar-deep-research",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-pro",
+					DisplayName: "perplexity/sonar-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-pro-search",
+					DisplayName: "perplexity/sonar-pro-search",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "perplexity/sonar-reasoning-pro",
+					DisplayName: "perplexity/sonar-reasoning-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "poolside/laguna-s-2.1",
+					DisplayName: "poolside/laguna-s-2.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "poolside/laguna-xs-2.1",
+					DisplayName: "poolside/laguna-xs-2.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "prism-ml/ternary-bonsai-2-27b",
+					DisplayName: "prism-ml/ternary-bonsai-2-27b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-2.5-72b-instruct",
+					DisplayName: "qwen/qwen-2.5-72b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-2.5-7b-instruct",
+					DisplayName: "qwen/qwen-2.5-7b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus",
+					DisplayName: "qwen/qwen-plus",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen-plus-2025-07-28",
+					DisplayName: "qwen/qwen-plus-2025-07-28",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen2.5-vl-72b-instruct",
+					DisplayName: "qwen/qwen2.5-vl-72b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-14b",
+					DisplayName: "qwen/qwen3-14b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b",
+					DisplayName: "qwen/qwen3-235b-a22b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-2507",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-235b-a22b-thinking-2507",
+					DisplayName: "qwen/qwen3-235b-a22b-thinking-2507",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b",
+					DisplayName: "qwen/qwen3-30b-a3b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-instruct-2507",
+					DisplayName: "qwen/qwen3-30b-a3b-instruct-2507",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-30b-a3b-thinking-2507",
+					DisplayName: "qwen/qwen3-30b-a3b-thinking-2507",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-32b",
+					DisplayName: "qwen/qwen3-32b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-8b",
+					DisplayName: "qwen/qwen3-8b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder",
+					DisplayName: "qwen/qwen3-coder",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-30b-a3b-instruct",
+					DisplayName: "qwen/qwen3-coder-30b-a3b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-flash",
+					DisplayName: "qwen/qwen3-coder-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-next",
+					DisplayName: "qwen/qwen3-coder-next",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder-plus",
+					DisplayName: "qwen/qwen3-coder-plus",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max",
+					DisplayName: "qwen/qwen3-max",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-max-thinking",
+					DisplayName: "qwen/qwen3-max-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-instruct",
+					DisplayName: "qwen/qwen3-next-80b-a3b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-next-80b-a3b-thinking",
+					DisplayName: "qwen/qwen3-next-80b-a3b-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-instruct",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-235b-a22b-thinking",
+					DisplayName: "qwen/qwen3-vl-235b-a22b-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-30b-a3b-instruct",
+					DisplayName: "qwen/qwen3-vl-30b-a3b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-30b-a3b-thinking",
+					DisplayName: "qwen/qwen3-vl-30b-a3b-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-8b-instruct",
+					DisplayName: "qwen/qwen3-vl-8b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3-vl-8b-thinking",
+					DisplayName: "qwen/qwen3-vl-8b-thinking",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-122b-a10b",
+					DisplayName: "qwen/qwen3.5-122b-a10b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-27b",
+					DisplayName: "qwen/qwen3.5-27b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-35b-a3b",
+					DisplayName: "qwen/qwen3.5-35b-a3b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-397b-a17b",
+					DisplayName: "qwen/qwen3.5-397b-a17b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-9b",
+					DisplayName: "qwen/qwen3.5-9b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-flash-02-23",
+					DisplayName: "qwen/qwen3.5-flash-02-23",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus-02-15",
+					DisplayName: "qwen/qwen3.5-plus-02-15",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.5-plus-20260420",
+					DisplayName: "qwen/qwen3.5-plus-20260420",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-27b",
+					DisplayName: "qwen/qwen3.6-27b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-35b-a3b",
+					DisplayName: "qwen/qwen3.6-35b-a3b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-flash",
+					DisplayName: "qwen/qwen3.6-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-max-preview",
+					DisplayName: "qwen/qwen3.6-max-preview",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-flash",
+					DisplayName: "qwen/qwen3.7-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-2.4t-a95b",
+					DisplayName: "qwen/qwen3.8-2.4t-a95b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-27b",
+					DisplayName: "qwen/qwen3.8-27b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-flash",
+					DisplayName: "qwen/qwen3.8-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max-0902",
+					DisplayName: "qwen/qwen3.8-max-0902",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "rekaai/reka-edge",
+					DisplayName: "rekaai/reka-edge",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "relace/relace-search",
+					DisplayName: "relace/relace-search",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "sao10k/l3-lunaris-8b",
+					DisplayName: "sao10k/l3-lunaris-8b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "sao10k/l3.1-euryale-70b",
+					DisplayName: "sao10k/l3.1-euryale-70b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "sao10k/l3.3-euryale-70b",
+					DisplayName: "sao10k/l3.3-euryale-70b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.5-flash",
+					DisplayName: "stepfun/step-3.5-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "stepfun/step-3.7-flash",
+					DisplayName: "stepfun/step-3.7-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hunyuan-a13b-instruct",
+					DisplayName: "tencent/hunyuan-a13b-instruct",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-1.8b",
+					DisplayName: "tencent/hy-mt2-1.8b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-30b-a3b",
+					DisplayName: "tencent/hy-mt2-30b-a3b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy-mt2-7b",
+					DisplayName: "tencent/hy-mt2-7b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy3",
+					DisplayName: "tencent/hy3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy3-preview",
+					DisplayName: "tencent/hy3-preview",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "tencent/hy4-preview",
+					DisplayName: "tencent/hy4-preview",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "thedrummer/skyfall-36b-v2",
+					DisplayName: "thedrummer/skyfall-36b-v2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "thedrummer/unslopnemo-12b",
+					DisplayName: "thedrummer/unslopnemo-12b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling",
+					DisplayName: "thinkingmachines/inkling",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "thinkingmachines/inkling-small",
+					DisplayName: "thinkingmachines/inkling-small",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "unbiased/pareto",
+					DisplayName: "unbiased/pareto",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "undi95/remm-slerp-l2-13b",
+					DisplayName: "undi95/remm-slerp-l2-13b",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "upstage/solar-pro4",
+					DisplayName: "upstage/solar-pro4",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "writer/palmyra-x5",
+					DisplayName: "writer/palmyra-x5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.20-multi-agent",
+					DisplayName: "x-ai/grok-4.20-multi-agent",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.20-non-reasoning",
+					DisplayName: "x-ai/grok-4.20-non-reasoning",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.20-reasoning",
+					DisplayName: "x-ai/grok-4.20-reasoning",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.3",
+					DisplayName: "x-ai/grok-4.3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.5",
+					DisplayName: "x-ai/grok-4.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.6",
+					DisplayName: "x-ai/grok-4.6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.7",
+					DisplayName: "x-ai/grok-4.7",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "x-ai/grok-build-0.1",
+					DisplayName: "x-ai/grok-build-0.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5",
+					DisplayName: "xiaomi/mimo-v2.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5-pro",
+					DisplayName: "xiaomi/mimo-v2.5-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-flash",
+					DisplayName: "xiaomi/mimo-v2.6-flash",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-pro",
+					DisplayName: "xiaomi/mimo-v2.6-pro",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-pro-ultraspeed",
+					DisplayName: "xiaomi/mimo-v2.6-pro-ultraspeed",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.5",
+					DisplayName: "z-ai/glm-4.5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.5-air",
+					DisplayName: "z-ai/glm-4.5-air",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.6",
+					DisplayName: "z-ai/glm-4.6",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.7",
+					DisplayName: "z-ai/glm-4.7",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5",
+					DisplayName: "z-ai/glm-5",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.1",
+					DisplayName: "z-ai/glm-5.1",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3",
+					DisplayName: "z-ai/glm-5.3",
+					Description: "Martian Gateway model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "Martian Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "truefoundry",
+			DisplayName: "TrueFoundry AI Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://gateway.truefoundry.ai",
+			DocsURL: "https://www.truefoundry.com/docs/ai-gateway/making-llm-requests-via-gateway",
+			Summary: "SaaS gateway. Base URL has no /v1 suffix; model ids are provider_account/model.",
+			Models: []Model{
+				{
+					UpstreamID: "openai-main/gpt-4o-mini",
+					DisplayName: "openai-main/gpt-4o-mini",
+					Description: "TrueFoundry AI Gateway model",
+				},
+				{
+					UpstreamID: "anthropic-main/claude-4-sonnet",
+					DisplayName: "anthropic-main/claude-4-sonnet",
+					Description: "TrueFoundry AI Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "cometapi",
+			DisplayName: "CometAPI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.cometapi.com/v1",
+			DocsURL: "https://apidoc.cometapi.com/guides/change-base-url-to-cometapi",
+			Summary: "CometAPI OpenAI-compatible aggregator.",
+			Models: []Model{
+				{
+					UpstreamID: "auto",
+					DisplayName: "auto",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro-ultraspeed",
+					DisplayName: "mimo-v2.6-pro-ultraspeed",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-6-sol",
+					DisplayName: "gpt-6-sol",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-6-luna",
+					DisplayName: "gpt-6-luna",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-flash",
+					DisplayName: "mimo-v2.6-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "mimo-v2.6-pro",
+					DisplayName: "mimo-v2.6-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-build-0.1",
+					DisplayName: "grok-build-0.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-5-5",
+					DisplayName: "claude-opus-5-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-fable-5-1",
+					DisplayName: "claude-fable-5-1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-5",
+					DisplayName: "grok-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-4.7",
+					DisplayName: "grok-4.7",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-5-2",
+					DisplayName: "claude-opus-5-2",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-4.20-0309-reasoning",
+					DisplayName: "grok-4.20-0309-reasoning",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-6-astra",
+					DisplayName: "gpt-6-astra",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "Jev",
+					DisplayName: "Jev",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.3-flashx",
+					DisplayName: "glm-5.3-flashx",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.8-omni-flash",
+					DisplayName: "qwen3.8-omni-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-imagine-image-quality",
+					DisplayName: "grok-imagine-image-quality",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.8-flash",
+					DisplayName: "gemini-3.8-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "minimax-m2.7",
+					DisplayName: "minimax-m2.7",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-oss-20b-free",
+					DisplayName: "gpt-oss-20b-free",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-4.6",
+					DisplayName: "grok-4.6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-fable-5",
+					DisplayName: "claude-fable-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-8",
+					DisplayName: "claude-opus-4-8",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash",
+					DisplayName: "gemini-3.5-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5-nano",
+					DisplayName: "gpt-5-nano",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-6",
+					DisplayName: "claude-sonnet-4-6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5-mini",
+					DisplayName: "gpt-5-mini",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.7-plus",
+					DisplayName: "qwen3.7-plus",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.3",
+					DisplayName: "gpt-5.3",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.7-max",
+					DisplayName: "qwen3.7-max",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.4-pro",
+					DisplayName: "gpt-5.4-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.2",
+					DisplayName: "gpt-5.2",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.7-flash",
+					DisplayName: "gemini-3.7-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "mimo-v2.5",
+					DisplayName: "mimo-v2.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "o3-pro-2025-06-10",
+					DisplayName: "o3-pro-2025-06-10",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "mimo-v2.5-pro",
+					DisplayName: "mimo-v2.5-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.5-pro",
+					DisplayName: "gpt-5.5-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash-next",
+					DisplayName: "qwen3.8-flash-next",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-image-2-all",
+					DisplayName: "gpt-image-2-all",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-mythos-5",
+					DisplayName: "claude-mythos-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-pro-preview",
+					DisplayName: "gemini-3.1-pro-preview",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.2-pro",
+					DisplayName: "gpt-5.2-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash",
+					DisplayName: "qwen3.8-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-7",
+					DisplayName: "claude-opus-4-7",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.1",
+					DisplayName: "gpt-5.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-vision-exp",
+					DisplayName: "deepseek-v4-flash-vision-exp",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.3-chat-latest",
+					DisplayName: "gpt-5.3-chat-latest",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.6-plus",
+					DisplayName: "qwen3.6-plus",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.6-flash",
+					DisplayName: "gemini-3.6-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.1",
+					DisplayName: "glm-5.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5",
+					DisplayName: "gpt-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "minimax-m2.5",
+					DisplayName: "minimax-m2.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.6",
+					DisplayName: "gpt-5.6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5-turbo",
+					DisplayName: "glm-5-turbo",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.7-magnesium",
+					DisplayName: "gpt-5.7-magnesium",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash-lite-preview",
+					DisplayName: "gemini-3.1-flash-lite-preview",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.7-zinc",
+					DisplayName: "gpt-5.7-zinc",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-6",
+					DisplayName: "claude-opus-4-6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-5.6-cyber",
+					DisplayName: "gpt-5.6-cyber",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-haiku-4-5-20251001",
+					DisplayName: "claude-haiku-4-5-20251001",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-4o-mini-2024-07-18",
+					DisplayName: "gpt-4o-mini-2024-07-18",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-4.1-nano-2025-04-14",
+					DisplayName: "gpt-4.1-nano-2025-04-14",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-4.1-mini-2025-04-14",
+					DisplayName: "gpt-4.1-mini-2025-04-14",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gpt-4.1-2025-04-14",
+					DisplayName: "gpt-4.1-2025-04-14",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-0-mini-260215",
+					DisplayName: "doubao-seed-2-0-mini-260215",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5",
+					DisplayName: "glm-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "kimi-k2.5",
+					DisplayName: "kimi-k2.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "doubao-seed-1-8-251228",
+					DisplayName: "doubao-seed-1-8-251228",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3-flash",
+					DisplayName: "gemini-3-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash",
+					DisplayName: "deepseek-v4.1-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-flash",
+					DisplayName: "deepseek-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.1-flash",
+					DisplayName: "gemini-3.1-flash",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-r2",
+					DisplayName: "deepseek-r2",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.5-pro",
+					DisplayName: "gemini-3.5-pro",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3-vl-235b-a22b",
+					DisplayName: "qwen3-vl-235b-a22b",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-5-20251101",
+					DisplayName: "claude-opus-4-5-20251101",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4-5",
+					DisplayName: "claude-sonnet-4-5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "llama-4-maverick",
+					DisplayName: "llama-4-maverick",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash-lite",
+					DisplayName: "gemini-3.5-flash-lite",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-chat",
+					DisplayName: "deepseek-chat",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-4-1-20250805",
+					DisplayName: "claude-opus-4-1-20250805",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-5.1",
+					DisplayName: "claude-opus-5.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "doubao-seed-evolving",
+					DisplayName: "doubao-seed-evolving",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-turbo-260628",
+					DisplayName: "doubao-seed-2-1-turbo-260628",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "doubao-seed-2-1-pro-260628",
+					DisplayName: "doubao-seed-2-1-pro-260628",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1",
+					DisplayName: "deepseek-v4.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-mythos-5.1",
+					DisplayName: "claude-mythos-5.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "glm-5.5",
+					DisplayName: "glm-5.5",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "kimi-k3.1",
+					DisplayName: "kimi-k3.1",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "claude-opus-6",
+					DisplayName: "claude-opus-6",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen-4",
+					DisplayName: "qwen-4",
+					Description: "CometAPI model",
+				},
+				{
+					UpstreamID: "qwen3.6-max-preview",
+					DisplayName: "qwen3.6-max-preview",
+					Description: "CometAPI model",
+				},
+			},
+		},
+		{
+			Slug: "orq",
+			DisplayName: "Orq.ai AI Gateway",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.orq.ai/v3/router",
+			DocsURL: "https://docs.orq.ai/reference/models/list-router-models",
+			Summary: "Orq router. https://my.orq.ai/v3/router accepts the same API.",
+			Models: []Model{
+				{
+					UpstreamID: "openai/gpt-4o",
+					DisplayName: "openai/gpt-4o",
+					Description: "Orq.ai AI Gateway model",
+				},
+			},
+		},
+		{
+			Slug: "crossmodel",
+			DisplayName: "CrossModel",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.crossmodel.ai/v1",
+			DocsURL: "https://www.crossmodel.ai/docs",
+			Summary: "CrossModel multi-provider router.",
+			Models: []Model{
+				{
+					UpstreamID: "anthropic/claude-haiku-4-5",
+					DisplayName: "anthropic/claude-haiku-4-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5-5",
+					DisplayName: "anthropic/claude-opus-5-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5-1",
+					DisplayName: "anthropic/claude-fable-5-1",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-5",
+					DisplayName: "anthropic/claude-opus-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-fable-5",
+					DisplayName: "anthropic/claude-fable-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-8",
+					DisplayName: "anthropic/claude-opus-4-8",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-5",
+					DisplayName: "anthropic/claude-sonnet-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-sonnet-4-6",
+					DisplayName: "anthropic/claude-sonnet-4-6",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "anthropic/claude-opus-4-7",
+					DisplayName: "anthropic/claude-opus-4-7",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4.1-flash",
+					DisplayName: "deepseek/deepseek-v4.1-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash-vision-exp",
+					DisplayName: "deepseek/deepseek-v4-flash-vision-exp",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-pro",
+					DisplayName: "deepseek/deepseek-v4-pro",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "deepseek/deepseek-v4-flash",
+					DisplayName: "deepseek/deepseek-v4-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "tencent/hy3",
+					DisplayName: "tencent/hy3",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "tencent/hy4-preview",
+					DisplayName: "tencent/hy4-preview",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3-flash",
+					DisplayName: "z-ai/glm-5.3-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5",
+					DisplayName: "z-ai/glm-5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-4.7",
+					DisplayName: "z-ai/glm-4.7",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.2",
+					DisplayName: "z-ai/glm-5.2",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.1",
+					DisplayName: "z-ai/glm-5.1",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5-turbo",
+					DisplayName: "z-ai/glm-5-turbo",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "z-ai/glm-5.3",
+					DisplayName: "z-ai/glm-5.3",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.7",
+					DisplayName: "x-ai/grok-4.7",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.3",
+					DisplayName: "x-ai/grok-4.3",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.5",
+					DisplayName: "x-ai/grok-4.5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "x-ai/grok-build-0.1",
+					DisplayName: "x-ai/grok-build-0.1",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "x-ai/grok-4.6",
+					DisplayName: "x-ai/grok-4.6",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-pro",
+					DisplayName: "xiaomi/mimo-v2.6-pro",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5",
+					DisplayName: "xiaomi/mimo-v2.5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.5-pro",
+					DisplayName: "xiaomi/mimo-v2.5-pro",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "xiaomi/mimo-v2.6-flash",
+					DisplayName: "xiaomi/mimo-v2.6-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m2.7",
+					DisplayName: "minimax/minimax-m2.7",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "minimax/minimax-m3",
+					DisplayName: "minimax/minimax-m3",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.6-flash",
+					DisplayName: "gemini/gemini-3.6-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.5-flash-lite",
+					DisplayName: "gemini/gemini-3.5-flash-lite",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.1-pro-preview",
+					DisplayName: "gemini/gemini-3.1-pro-preview",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.5-flash",
+					DisplayName: "gemini/gemini-3.5-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-2.5-pro",
+					DisplayName: "gemini/gemini-2.5-pro",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-2.5-flash",
+					DisplayName: "gemini/gemini-2.5-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.7-flash",
+					DisplayName: "gemini/gemini-3.7-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3-flash-preview",
+					DisplayName: "gemini/gemini-3-flash-preview",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-3.8-flash",
+					DisplayName: "gemini/gemini-3.8-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "gemini/gemini-2.5-flash-lite",
+					DisplayName: "gemini/gemini-2.5-flash-lite",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-max",
+					DisplayName: "qwen/qwen3.7-max",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-max",
+					DisplayName: "qwen/qwen3.8-max",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-flash",
+					DisplayName: "qwen/qwen3.7-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-omni-flash",
+					DisplayName: "qwen/qwen3.8-omni-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-flash",
+					DisplayName: "qwen/qwen3.6-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.8-flash",
+					DisplayName: "qwen/qwen3.8-flash",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.6-plus",
+					DisplayName: "qwen/qwen3.6-plus",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "qwen/qwen3.7-plus",
+					DisplayName: "qwen/qwen3.7-plus",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4",
+					DisplayName: "openai/gpt-5.4",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5-pro",
+					DisplayName: "openai/gpt-5.5-pro",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-nano",
+					DisplayName: "openai/gpt-5.4-nano",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-astra",
+					DisplayName: "openai/gpt-6-astra",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-4o-mini",
+					DisplayName: "openai/gpt-4o-mini",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.4-mini",
+					DisplayName: "openai/gpt-5.4-mini",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-luna",
+					DisplayName: "openai/gpt-5.6-luna",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.5",
+					DisplayName: "openai/gpt-5.5",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-luna",
+					DisplayName: "openai/gpt-6-luna",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-terra",
+					DisplayName: "openai/gpt-5.6-terra",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-5.6-sol",
+					DisplayName: "openai/gpt-5.6-sol",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "openai/gpt-6-sol",
+					DisplayName: "openai/gpt-6-sol",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k3",
+					DisplayName: "moonshot/kimi-k3",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.6",
+					DisplayName: "moonshot/kimi-k2.6",
+					Description: "CrossModel model",
+				},
+				{
+					UpstreamID: "moonshot/kimi-k2.7-code",
+					DisplayName: "moonshot/kimi-k2.7-code",
+					Description: "CrossModel model",
+				},
+			},
+		},
+		{
+			Slug: "routing-run",
+			DisplayName: "routing.run",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "https://api.routing.run/v1",
+			DocsURL: "https://docs.routing.run/api-reference/models",
+			Summary: "routing.run model router.",
+			Models: []Model{
+				{
+					UpstreamID: "gpt-5.6-sol",
+					DisplayName: "gpt-5.6-sol",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.6-terra",
+					DisplayName: "gpt-5.6-terra",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.6-luna",
+					DisplayName: "gpt-5.6-luna",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash",
+					DisplayName: "deepseek-v4-flash",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro",
+					DisplayName: "deepseek-v4-pro",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "kimi-k3",
+					DisplayName: "kimi-k3",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "kimi-k2.7-code",
+					DisplayName: "kimi-k2.7-code",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "glm-5.2",
+					DisplayName: "glm-5.2",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731",
+					DisplayName: "deepseek-v4-flash-0731",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4-pro-0813",
+					DisplayName: "deepseek-v4-pro-0813",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4-flash-0731-fast",
+					DisplayName: "deepseek-v4-flash-0731-fast",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-fable-5.1",
+					DisplayName: "claude-fable-5.1",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-opus-5",
+					DisplayName: "claude-opus-5",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-opus-4.6",
+					DisplayName: "claude-opus-4.6",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-opus-4.7",
+					DisplayName: "claude-opus-4.7",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-opus-4.8",
+					DisplayName: "claude-opus-4.8",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-sonnet-5",
+					DisplayName: "claude-sonnet-5",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-sonnet-4.6",
+					DisplayName: "claude-sonnet-4.6",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "claude-haiku-4.5",
+					DisplayName: "claude-haiku-4.5",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-6-astra",
+					DisplayName: "gpt-6-astra",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.5",
+					DisplayName: "gpt-5.5",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.4",
+					DisplayName: "gpt-5.4",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.4-mini",
+					DisplayName: "gpt-5.4-mini",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.4-nano",
+					DisplayName: "gpt-5.4-nano",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-5.3-codex",
+					DisplayName: "gpt-5.3-codex",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gemini-3.8-flash",
+					DisplayName: "gemini-3.8-flash",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "gemini-3.5-flash-lite",
+					DisplayName: "gemini-3.5-flash-lite",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "grok-4.5",
+					DisplayName: "grok-4.5",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "grok-4.3",
+					DisplayName: "grok-4.3",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "qwen3.8-max",
+					DisplayName: "qwen3.8-max",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "qwen3.8-flash",
+					DisplayName: "qwen3.8-flash",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "qwen3-coder",
+					DisplayName: "qwen3-coder",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "deepseek-v4.1-flash",
+					DisplayName: "deepseek-v4.1-flash",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "minimax-m3",
+					DisplayName: "minimax-m3",
+					Description: "routing.run model",
+				},
+				{
+					UpstreamID: "mistral-small-4",
+					DisplayName: "mistral-small-4",
+					Description: "routing.run model",
+				},
+			},
+		},
+		{
+			Slug: "sglang",
+			DisplayName: "SGLang",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:30000/v1",
+			DocsURL: "https://docs.sglang.io",
+			Summary: "Local OpenAI-compatible server. Default port 30000. Model id is the served model.",
+			Models: []Model{
+				{
+					UpstreamID: "meta-llama/Meta-Llama-3-8B-Instruct",
+					DisplayName: "meta-llama/Meta-Llama-3-8B-Instruct",
+					Description: "SGLang model",
+				},
+			},
+		},
+		{
+			Slug: "lmdeploy",
+			DisplayName: "LMDeploy",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:23333/v1",
+			DocsURL: "https://lmdeploy.readthedocs.io/en/stable/llm/api_server.html",
+			Summary: "Local OpenAI-compatible api_server. Default port 23333.",
+			Models: []Model{
+				{
+					UpstreamID: "internlm/internlm2_5-7b-chat",
+					DisplayName: "internlm/internlm2_5-7b-chat",
+					Description: "LMDeploy model",
+				},
+			},
+		},
+		{
+			Slug: "privatemode",
+			DisplayName: "Privatemode AI",
+			Protocol: ProtocolOpenAIChat,
+			DefaultBaseURL: "http://localhost:8080/v1",
+			DocsURL: "https://docs.privatemode.ai",
+			Summary: "Confidential inference. The OpenAI client talks to the local encryption proxy on port 8080, not the hosted URL directly.",
+			Models: []Model{
+				{
+					UpstreamID: "glm-flash-latest",
+					DisplayName: "glm-flash-latest",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "glm-5.3-flash",
+					DisplayName: "glm-5.3-flash",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "kimi-k2.6",
+					DisplayName: "kimi-k2.6",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "deepseek-ocr-2",
+					DisplayName: "deepseek-ocr-2",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "voxtral-mini-3b",
+					DisplayName: "voxtral-mini-3b",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "kimi-latest",
+					DisplayName: "kimi-latest",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "gpt-oss-120b",
+					DisplayName: "gpt-oss-120b",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "glm-5.3",
+					DisplayName: "glm-5.3",
+					Description: "Privatemode AI model",
+				},
+				{
+					UpstreamID: "glm-latest",
+					DisplayName: "glm-latest",
+					Description: "Privatemode AI model",
+				},
+			},
+		},
+	}
+}

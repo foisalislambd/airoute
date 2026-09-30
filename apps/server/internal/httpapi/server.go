@@ -44,7 +44,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("PUT /api/providers/{slug}", s.updateProvider)
 	mux.HandleFunc("POST /api/providers/{slug}/test", s.testProvider)
 	mux.HandleFunc("GET /api/providers/{slug}/models", s.listModels)
-	mux.HandleFunc("PUT /api/providers/{slug}/models/{model}", s.setModelActive)
+	mux.HandleFunc("PUT /api/providers/{slug}/models/{model...}", s.setModelActive)
 	mux.HandleFunc("GET /api/keys", s.listKeys)
 	mux.HandleFunc("POST /api/keys", s.createKey)
 	mux.HandleFunc("DELETE /api/keys/{id}", s.deleteKey)

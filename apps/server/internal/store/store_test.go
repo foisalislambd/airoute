@@ -24,9 +24,22 @@ func TestProviderKeyAndModelRoute(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(providers) != 1 || providers[0].Slug != "openai" {
-		t.Fatalf("providers = %+v", providers)
+	if len(providers) < 2 {
+		t.Fatalf("expected openai plus compatible providers, got %d", len(providers))
 	}
+	if providers[0].Slug == "" {
+		t.Fatal("empty provider slug")
+	}
+	var openai Provider
+	for _, provider := range providers {
+		if provider.Slug == "openai" {
+			openai = provider
+		}
+	}
+	if openai.Slug != "openai" {
+		t.Fatal("openai provider missing")
+	}
+	providers = []Provider{openai}
 	if providers[0].TotalModels < 8 {
 		t.Fatalf("expected curated openai models, got %d", providers[0].TotalModels)
 	}
