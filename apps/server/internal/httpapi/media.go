@@ -187,6 +187,7 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 		endpoint = adapt.AnthropicURL(route.BaseURL)
 		upstream, err = adapt.AnthropicBody(body, route.Model.UpstreamID)
 		header.Set("x-api-key", route.APIKey)
+		header.Set("Authorization", "Bearer "+route.APIKey)
 		header.Set("anthropic-version", "2023-06-01")
 	default:
 		endpoint = adapt.GeminiURL(route.BaseURL, route.Model.UpstreamID)

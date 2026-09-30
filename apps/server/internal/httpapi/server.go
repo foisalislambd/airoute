@@ -388,12 +388,52 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		return
 	}
 
-	resp, err := s.OpenAI.ChatCompletions(r.Context(), route.BaseURL, route.APIKey, upstreamBody)
+	path := "/chat/completions"
+	responsesAPI := false
+	if route.Model.ProviderSlug == "opencode" && openai.OpencodeFree(route.Model.UpstreamID) {
+		upstreamBody, path, err = openai.PrepareOpencode(upstreamBody, route.Model.UpstreamID)
+		if err != nil {
+			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
+			return
+		}
+		responsesAPI = path == "/responses"
+		stream = true
+	}
+
+	var resp *http.Response
+	if route.Model.ProviderSlug == "opencode" && openai.OpencodeFree(route.Model.UpstreamID) {
+		header := http.Header{}
+		for key, value := range openai.OpencodeHeaders(route.APIKey) {
+			header.Set(key, value)
+		}
+		resp, err = s.OpenAI.Send(r.Context(), http.MethodPost, strings.TrimRight(route.BaseURL, "/")+path, upstreamBody, header)
+	} else {
+		resp, err = s.OpenAI.ChatCompletions(r.Context(), route.BaseURL, route.APIKey, upstreamBody)
+	}
 	if err != nil {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
 		return
 	}
 	defer resp.Body.Close()
+
+	if responsesAPI && resp.StatusCode >= 200 && resp.StatusCode < 300 {
+		payload, err := io.ReadAll(io.LimitReader(resp.Body, 20<<20))
+		if err != nil {
+			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
+			return
+		}
+		text := openai.ResponsesText(payload)
+		_ = s.Store.AddLog(store.LogInput{
+			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
+		})
+		if stream || source == "playground" {
+			writeChatChunk(w, route.Model.ID, text)
+			return
+		}
+		writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, 0, 0))
+		return
+	}
 
 	if stream && resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		format := streamFormat(route.Protocol)

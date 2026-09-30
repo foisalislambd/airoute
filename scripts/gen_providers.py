@@ -1,4 +1,7 @@
-"""Generate catalog_generated.go from the local provider list. Not part of the app runtime."""
+"""Generate apps/server/internal/catalog/catalog_generated.go from the local provider list.
+
+Run from the repo root: python scripts/gen_providers.py
+"""
 
 from __future__ import annotations
 
@@ -7,9 +10,9 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "docs" / "all-llm-provider-list" / "data"
-OUT = Path(__file__).resolve().parent / "catalog_generated.go"
+OUT = ROOT / "apps" / "server" / "internal" / "catalog" / "catalog_generated.go"
 
 URL_FIXES = {
     "google-ai-studio": "https://generativelanguage.googleapis.com/v1beta/openai",
@@ -55,10 +58,10 @@ EMBED_PARTS = ("embedding", "embed-", "rerank", "moderation")
 
 def usable_url(slug: str, raw: str) -> str:
     raw = URL_FIXES.get(slug, raw or "").strip().rstrip("/")
-    for suffix in ("/chat/completions", "/chat-completions"):
+    for suffix in ("/chat/completions", "/chat-completions", "/chat"):
         if raw.endswith(suffix):
             raw = raw[: -len(suffix)].rstrip("/")
-    if not raw or "${" in raw:
+    if not raw or "${" in raw or "{" in raw or "}" in raw:
         return ""
     parsed = urlparse(raw)
     host = parsed.hostname or ""
@@ -75,6 +78,21 @@ def protocol_name(provider: dict, base: str) -> str:
     notes = (provider.get("notes") or "").lower()
     raw_url = (provider.get("api_base_url") or "").lower()
     category = provider.get("category") or ""
+    # These slugs are browser, websocket, or CLI sessions. They are not chat-completions APIs.
+    if slug in {
+        "duckduckgo-web",
+        "cloudflare-playground",
+        "chipotle",
+        "lmarena",
+        "notion-web",
+        "promptql",
+        "hyperagent",
+        "conol-web",
+    }:
+        return "ProtocolUnsupported"
+    # Wafer's published route is Anthropic messages, not chat completions.
+    if slug == "wafer":
+        return "ProtocolAnthropic"
     if slug in {"anthropic", "claude", "claude-code"} or "api.anthropic.com" in lowered or "/anthropic" in lowered:
         return "ProtocolAnthropic"
     if "generativelanguage.googleapis.com" in lowered and "/openai" not in lowered:
