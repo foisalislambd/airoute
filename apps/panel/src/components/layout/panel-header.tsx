@@ -24,7 +24,6 @@ export function PanelHeader() {
           </span>
           <span className="text-base font-semibold text-gray-900 dark:text-white">{panelConfig.brand.name}</span>
         </Link>
-        <p className="hidden text-sm text-gray-500 lg:block dark:text-gray-400">Local router for your own provider keys</p>
         <div className="ml-auto">
           <ThemeToggle />
         </div>
