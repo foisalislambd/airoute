@@ -250,9 +250,6 @@ export default function ProviderPage() {
                 autoComplete="off"
                 className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
               />
-              {provider?.category === "Web Cookie" && (
-                <span className="mt-1.5 block text-xs text-gray-500">An API key is not used. Paste the cookie or token described above.</span>
-              )}
             </label>
           )}
         </div>
