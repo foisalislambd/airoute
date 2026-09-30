@@ -3,6 +3,8 @@ dist
 *.tsbuildinfo
 .DS_Store
 
+docs/all-llm-provider-list/
+
 # local-first data
 *.db
 *.db-wal

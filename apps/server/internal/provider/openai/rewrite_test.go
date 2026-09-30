@@ -2,7 +2,9 @@ package openai
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
+	"errors"
 	"testing"
 )
 
@@ -24,6 +26,19 @@ func TestRewriteChatModel(t *testing.T) {
 	}
 	if !bytes.Contains(next, []byte(`"content":"hi"`)) {
 		t.Fatalf("body lost content: %s", next)
+	}
+}
+
+func TestRetryableTransportError(t *testing.T) {
+	err := errors.New(`Post "https://api.openai.com/v1/chat/completions": http2: server sent GOAWAY and closed the connection; LastStreamID=3, ErrCode=NO_ERROR, debug=""`)
+	if !retryableTransportError(err) {
+		t.Fatal("expected GOAWAY to be retried")
+	}
+	if retryableTransportError(errors.New("provider returned 401")) {
+		t.Fatal("http status errors must not be retried")
+	}
+	if retryableTransportError(context.Canceled) {
+		t.Fatal("canceled requests must not be retried")
 	}
 }
 
