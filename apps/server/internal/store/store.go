@@ -10,6 +10,7 @@ import (
 	"fmt"
 	"net/url"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -33,6 +34,8 @@ type Provider struct {
 	BaseURL      string `json:"baseUrl"`
 	DocsURL      string `json:"docsUrl"`
 	Summary      string `json:"summary"`
+	Category     string `json:"category"`
+	Free         bool   `json:"free"`
 	HasAPIKey    bool   `json:"hasApiKey"`
 	APIKeyHint   string `json:"apiKeyHint"`
 	Enabled      bool   `json:"enabled"`
@@ -242,21 +245,29 @@ ON CONFLICT(id) DO UPDATE SET
 }
 
 func (s *Store) ListProviders() ([]Provider, error) {
-	page, err := s.ListProvidersPage("", 0, 0)
+	page, err := s.ListProvidersPage("", "", 0, 0)
 	if err != nil {
 		return nil, err
 	}
 	return page.Providers, nil
 }
 
-type ProviderPage struct {
-	Providers []Provider
-	Total     int
-	Limit     int
-	Offset    int
+type CategoryStat struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
+	Total int    `json:"total"`
+	Ready int    `json:"ready"`
 }
 
-func (s *Store) ListProvidersPage(query string, limit, offset int) (ProviderPage, error) {
+type ProviderPage struct {
+	Providers  []Provider
+	Categories []CategoryStat
+	Total      int
+	Limit      int
+	Offset     int
+}
+
+func (s *Store) ListProvidersPage(query, category string, limit, offset int) (ProviderPage, error) {
 	unlimited := limit <= 0
 	if limit < 0 {
 		limit = 24
@@ -267,13 +278,17 @@ func (s *Store) ListProvidersPage(query string, limit, offset int) (ProviderPage
 	if offset < 0 {
 		offset = 0
 	}
-	page := ProviderPage{Providers: []Provider{}, Limit: limit, Offset: offset}
+	page := ProviderPage{Providers: []Provider{}, Categories: []CategoryStat{}, Limit: limit, Offset: offset}
+	stats, err := s.categoryStats()
+	if err != nil {
+		return ProviderPage{}, err
+	}
+	page.Categories = stats
 
 	where := "1 = 1"
 	args := []any{}
-	needle := strings.TrimSpace(query)
-	if needle != "" {
-		slugs := providerSearchSlugs(needle)
+	slugs, filtered := providerFilterSlugs(query, category)
+	if filtered {
 		if len(slugs) == 0 {
 			return page, nil
 		}
@@ -327,17 +342,116 @@ ORDER BY
 	return page, rows.Err()
 }
 
-func providerSearchSlugs(query string) []string {
+func providerFilterSlugs(query, category string) ([]string, bool) {
 	needle := strings.ToLower(strings.TrimSpace(query))
+	category = strings.TrimSpace(category)
+	wantAll := category == "" || strings.EqualFold(category, "all")
+	wantFree := strings.EqualFold(category, "free")
+	if needle == "" && wantAll {
+		return nil, false
+	}
 	var slugs []string
 	for _, provider := range catalog.All() {
-		if strings.Contains(strings.ToLower(provider.DisplayName), needle) ||
-			strings.Contains(strings.ToLower(provider.Slug), needle) ||
-			strings.Contains(strings.ToLower(provider.Summary), needle) {
-			slugs = append(slugs, provider.Slug)
+		if needle != "" &&
+			!strings.Contains(strings.ToLower(provider.DisplayName), needle) &&
+			!strings.Contains(strings.ToLower(provider.Slug), needle) &&
+			!strings.Contains(strings.ToLower(provider.Summary), needle) {
+			continue
+		}
+		if wantFree && !provider.Free {
+			continue
+		}
+		if !wantAll && !wantFree && !strings.EqualFold(provider.Category, category) {
+			continue
+		}
+		slugs = append(slugs, provider.Slug)
+	}
+	return slugs, true
+}
+
+func (s *Store) categoryStats() ([]CategoryStat, error) {
+	rows, err := s.db.Query(`SELECT slug, enabled, api_key_cipher FROM providers`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	type tally struct{ total, ready int }
+	counts := map[string]*tally{}
+	all := tally{}
+	free := tally{}
+	for rows.Next() {
+		var slug, cipher string
+		var enabled int
+		if err := rows.Scan(&slug, &enabled, &cipher); err != nil {
+			return nil, err
+		}
+		ready := enabled == 1 && cipher != ""
+		all.total++
+		if ready {
+			all.ready++
+		}
+		def, ok := catalog.BySlug(slug)
+		if !ok {
+			continue
+		}
+		name := def.Category
+		if name == "" {
+			name = "Other"
+		}
+		item := counts[name]
+		if item == nil {
+			item = &tally{}
+			counts[name] = item
+		}
+		item.total++
+		if ready {
+			item.ready++
+		}
+		if def.Free {
+			free.total++
+			if ready {
+				free.ready++
+			}
 		}
 	}
-	return slugs
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	stats := []CategoryStat{{ID: "all", Label: "All", Total: all.total, Ready: all.ready}}
+	if free.total > 0 {
+		stats = append(stats, CategoryStat{ID: "free", Label: "Free", Total: free.total, Ready: free.ready})
+	}
+	for _, name := range categoryOrder {
+		item := counts[name]
+		if item == nil || item.total == 0 {
+			continue
+		}
+		stats = append(stats, CategoryStat{ID: name, Label: name, Total: item.total, Ready: item.ready})
+		delete(counts, name)
+	}
+	var rest []string
+	for name, item := range counts {
+		if item.total > 0 {
+			rest = append(rest, name)
+		}
+	}
+	sort.Strings(rest)
+	for _, name := range rest {
+		item := counts[name]
+		stats = append(stats, CategoryStat{ID: name, Label: name, Total: item.total, Ready: item.ready})
+	}
+	return stats, nil
+}
+
+var categoryOrder = []string{
+	"Frontier",
+	"Gateway",
+	"Aggregator",
+	"IaaS",
+	"Sovereign / Cloud",
+	"Specialized",
 }
 
 func (s *Store) GetProvider(slug string) (Provider, error) {
@@ -692,6 +806,8 @@ func scanProvider(row scanner) (Provider, error) {
 	if ok {
 		item.DocsURL = def.DocsURL
 		item.Summary = def.Summary
+		item.Category = def.Category
+		item.Free = def.Free
 	}
 	item.HasAPIKey = cipher != ""
 	item.Enabled = enabled == 1

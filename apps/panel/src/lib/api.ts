@@ -5,6 +5,8 @@ export type Provider = {
   baseUrl: string
   docsUrl: string
   summary: string
+  category: string
+  free: boolean
   hasApiKey: boolean
   apiKeyHint: string
   enabled: boolean
@@ -79,16 +81,25 @@ export function getOverview() {
   return request<Overview>("/api/overview")
 }
 
+export type ProviderCategory = {
+  id: string
+  label: string
+  total: number
+  ready: number
+}
+
 export type ProviderPage = {
   providers: Provider[]
+  categories: ProviderCategory[]
   total: number
   limit: number
   offset: number
 }
 
-export function listProviders(params?: { q?: string; limit?: number; offset?: number }) {
+export function listProviders(params?: { q?: string; category?: string; limit?: number; offset?: number }) {
   const search = new URLSearchParams()
   if (params?.q) search.set("q", params.q)
+  if (params?.category && params.category !== "all") search.set("category", params.category)
   if (params?.limit) search.set("limit", String(params.limit))
   if (params?.offset) search.set("offset", String(params.offset))
   const query = search.toString()

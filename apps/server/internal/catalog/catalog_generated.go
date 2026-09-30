@@ -10,6 +10,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
 			DocsURL: "https://aistudio.google.com",
 			Summary: "Up to 2M context; free tier on Flash variants",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gemini-3.5-pro",
@@ -85,6 +87,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.deepseek.com/v1",
 			DocsURL: "https://platform.deepseek.com",
 			Summary: "OpenAI + Anthropic format; context caching",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-chat",
@@ -115,6 +118,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.mistral.ai/v1",
 			DocsURL: "https://console.mistral.ai",
 			Summary: "EU-hosted; generous experiment tier",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "mistral-large-latest",
@@ -175,6 +179,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.x.ai/v1",
 			DocsURL: "https://x.ai",
 			Summary: "Real-time streaming & agent workflows",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "grok-3",
@@ -245,6 +250,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.ai21.com/studio/v1",
 			DocsURL: "https://studio.ai21.com",
 			Summary: "Long-context hybrid architecture",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "jamba-1.5-large",
@@ -270,6 +276,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.baiduqianfan.ai/v1",
 			DocsURL: "https://cloud.baidu.com/product/wenxinworkshop",
 			Summary: "Chinese-language optimized",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "ernie-4.0-turbo-8k",
@@ -360,6 +367,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.stepfun.com/v1",
 			DocsURL: "https://platform.stepfun.com",
 			Summary: "Multilingual agent pipelines",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "step-3.5-flash",
@@ -410,6 +418,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://open.bigmodel.cn/api/paas/v4",
 			DocsURL: "https://open.bigmodel.cn",
 			Summary: "Strong bilingual CN/EN performance",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5",
@@ -480,6 +489,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.xiaomimimo.com/v1",
 			DocsURL: "https://xiaomi.com",
 			Summary: "On-device & edge deployments",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "mimo-v2-pro",
@@ -505,6 +515,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.reka.ai/v1",
 			DocsURL: "https://reka.ai",
 			Summary: "Video, audio & text multimodal",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "reka-core",
@@ -540,6 +551,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.minimax.io/v1",
 			DocsURL: "https://platform.minimax.io",
 			Summary: "OpenAI + Anthropic compatible; agentic",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "MiniMax-M3",
@@ -595,6 +607,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
 			DocsURL: "https://www.alibabacloud.com",
 			Summary: "Alibaba Cloud Model Studio; Qwen family",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3-max",
@@ -725,6 +738,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.upstage.ai/v1/solar",
 			DocsURL: "https://console.upstage.ai",
 			Summary: "Korean AI lab; strong document AI",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "solar-pro3",
@@ -750,6 +764,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.perplexity.ai",
 			DocsURL: "https://docs.perplexity.ai",
 			Summary: "Search-grounded answers with citations",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "sonar",
@@ -785,6 +800,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.groq.com/openai/v1",
 			DocsURL: "https://console.groq.com",
 			Summary: "LPU hardware; extremely fast TTFT",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-versatile",
@@ -875,6 +891,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cerebras.ai/v1",
 			DocsURL: "https://cerebras.ai",
 			Summary: "Wafer-scale engine throughput",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b",
@@ -920,6 +937,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.sambanova.ai/v1",
 			DocsURL: "https://sambanova.ai",
 			Summary: "RDU serving for large models",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Meta-Llama-3.1-405B-Instruct",
@@ -955,6 +973,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.together.xyz/v1",
 			DocsURL: "https://together.ai",
 			Summary: "Large catalog + fine-tuning",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct-Turbo",
@@ -1015,6 +1034,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.fireworks.ai/inference/v1",
 			DocsURL: "https://fireworks.ai",
 			Summary: "Serverless low-latency serving",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "accounts/fireworks/models/llama-v3p3-70b-instruct",
@@ -1095,6 +1115,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.deepinfra.com/v1/openai",
 			DocsURL: "https://deepinfra.com",
 			Summary: "Aggressive open-model pricing",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "BAAI/bge-base-en-v1.5",
@@ -1905,6 +1926,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.studio.nebius.ai/v1",
 			DocsURL: "https://studio.nebius.ai",
 			Summary: "EU infrastructure; Token Factory",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
@@ -1935,6 +1957,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.siliconflow.cn/v1",
 			DocsURL: "https://siliconflow.com",
 			Summary: "Excellent cost/performance (CN)",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-ai/DeepSeek-R1",
@@ -2300,6 +2323,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.inceptionlabs.ai/v1",
 			DocsURL: "https://inceptionlabs.ai",
 			Summary: "Diffusion language models (dLLMs)",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "mercury-2",
@@ -2320,6 +2344,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.liquid.ai/v1",
 			DocsURL: "https://liquid.ai",
 			Summary: "Hybrid efficient architectures",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "lfm2.5-instruct",
@@ -2350,6 +2375,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.friendli.ai/serverless/v1",
 			DocsURL: "https://friendli.ai",
 			Summary: "Custom checkpoints & private instances",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama-3.3-70b-instruct",
@@ -2375,6 +2401,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.totalgpt.ai",
 			DocsURL: "https://infermatic.ai",
 			Summary: "Flat-rate community checkpoints",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "rocinante-12b",
@@ -2400,6 +2427,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://mancer.tech/oai/v1",
 			DocsURL: "https://mancer.tech",
 			Summary: "Creative / roleplay fine-tunes",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "goliath-120b",
@@ -2425,6 +2453,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.morphllm.com/v1",
 			DocsURL: "https://morphllm.com",
 			Summary: "Fast code editing & routing",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "morph-qwen35-397b",
@@ -2465,6 +2494,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.aionlabs.ai/v1",
 			DocsURL: "https://aionlabs.ai",
 			Summary: "Creative multi-turn fine-tunes",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "aion-2.0",
@@ -2510,6 +2540,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://router.huggingface.co/v1",
 			DocsURL: "https://huggingface.co",
 			Summary: "Huge model catalog; free tier available",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "CohereLabs/aya-expanse-32b",
@@ -3220,6 +3252,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://integrate.api.nvidia.com/v1",
 			DocsURL: "https://build.nvidia.com",
 			Summary: "NVIDIA inference microservices",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "moonshotai/kimi-k3",
@@ -3290,6 +3323,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.hyperbolic.xyz/v1",
 			DocsURL: "https://app.hyperbolic.xyz",
 			Summary: "Decentralized GPU compute",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-ai/DeepSeek-V3",
@@ -3340,6 +3374,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.lepton.ai/v1",
 			DocsURL: "https://lepton.ai",
 			Summary: "Fast serverless inference",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct",
@@ -3360,6 +3395,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.kluster.ai/v1",
 			DocsURL: "https://kluster.ai",
 			Summary: "Batch inference specialist",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Meta-Llama-3.1-405B-Instruct",
@@ -3380,6 +3416,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.endpoints.anyscale.com/v1",
 			DocsURL: "https://app.endpoints.anyscale.com",
 			Summary: "Ray-based model serving",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
@@ -3400,6 +3437,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.inference.net/v1",
 			DocsURL: "https://inference.net",
 			Summary: "Decentralized inference network",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-ai/DeepSeek-R1",
@@ -3420,6 +3458,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://conductor.arcee.ai/v1",
 			DocsURL: "https://arcee.ai",
 			Summary: "Enterprise fine-tuned models",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "arcee-ai/trinity-large-preview",
@@ -3440,6 +3479,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://glhf.chat/api/openai/v1",
 			DocsURL: "https://glhf.chat",
 			Summary: "vLLM-backed; run any HF model with hf: prefix",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "hf:meta-llama/Llama-3.3-70B-Instruct",
@@ -3465,6 +3505,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.akashml.com/v1",
 			DocsURL: "https://akash.network",
 			Summary: "Decentralized GPU marketplace",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct",
@@ -3490,6 +3531,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.atlascloud.ai/v1",
 			DocsURL: "https://atlascloud.ai",
 			Summary: "Language + image + video APIs",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-v3",
@@ -3515,6 +3557,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://llm.chutes.ai/v1",
 			DocsURL: "https://chutes.ai",
 			Summary: "Serverless custom model deploy",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "moonshotai/kimi-k2.5",
@@ -3545,6 +3588,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cloudflare.com/client/v4/accounts/{id}/ai/v1",
 			DocsURL: "https://cloudflare.com",
 			Summary: "Edge inference; neuron-second billing; needs account ID",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
@@ -3610,6 +3654,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.do-ai.run/v1",
 			DocsURL: "https://digitalocean.com",
 			Summary: "Integrates with App Platform",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "llama3-8b-instruct",
@@ -3625,6 +3670,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.gmi-serving.com/v1",
 			DocsURL: "https://gmicloud.ai",
 			Summary: "Enterprise H100 GPU cloud",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5.1-fp8",
@@ -3650,6 +3696,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.intelligence.io.solutions/api/v1",
 			DocsURL: "https://io.net",
 			Summary: "DePIN GPU clusters",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "glm-4.5-air",
@@ -3675,6 +3722,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.nextbit256.com/v1",
 			DocsURL: "https://nextbit256.com",
 			Summary: "EU data centers (Spain)",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "qwen:3.5-35b",
@@ -3700,6 +3748,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.novita.ai/openai/v1",
 			DocsURL: "https://novita.ai",
 			Summary: "Model APIs + agent sandboxes",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "moonshotai/kimi-k2.5",
@@ -3820,6 +3869,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.saas.parasail.io/v1",
 			DocsURL: "https://parasail.io",
 			Summary: "Serverless + dedicated instances",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-r1",
@@ -3840,6 +3890,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://divers.poolsi.de/openai/v1",
 			DocsURL: "https://poolside.ai",
 			Summary: "Code generation focus",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "laguna-xs.2",
@@ -3870,6 +3921,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.venice.ai/api/v1",
 			DocsURL: "https://venice.ai",
 			Summary: "Privacy-first; web3 auth",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b",
@@ -3895,6 +3947,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://pass.wafer.ai/v1",
 			DocsURL: "https://wafer.ai",
 			Summary: "Fast serverless; Claude Code compatible",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen3.5-397B-A17B",
@@ -3930,6 +3983,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://<resource>.openai.azure.com/openai/v1",
 			DocsURL: "https://azure.microsoft.com",
 			Summary: "Enterprise Microsoft integration",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.5",
@@ -3965,6 +4019,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://us-central1-aiplatform.googleapis.com/v1/projects",
 			DocsURL: "https://cloud.google.com/vertex-ai",
 			Summary: "VPC, IAM, enterprise procurement",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "gemini-3.5-pro",
@@ -4095,6 +4150,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://model-{id}.api.baseten.co/v1",
 			DocsURL: "https://baseten.co",
 			Summary: "MLOps with Truss packaging",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct",
@@ -4115,6 +4171,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.scaleway.ai/v1",
 			DocsURL: "https://console.scaleway.com",
 			Summary: "European cloud; GDPR-compliant",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct",
@@ -4165,6 +4222,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://oai.endpoints.kepler.ai.cloud.ovh.net/v1",
 			DocsURL: "https://www.ovhcloud.com/en/public-cloud/ai-endpoints/",
 			Summary: "EU-hosted open models",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "Meta-Llama-3_1-70B-Instruct",
@@ -4185,6 +4243,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://models.inference.ai.azure.com",
 			DocsURL: "https://github.com/marketplace/models",
 			Summary: "Free tier with GitHub PAT",
+			Category: "Sovereign / Cloud",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -4220,6 +4280,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://<app>.modal.run/v1",
 			DocsURL: "https://modal.com",
 			Summary: "Serverless GPU; deploy your own models",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "google/gemini-2.0-flash",
@@ -4235,6 +4296,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://openrouter.ai/api/v1",
 			DocsURL: "https://openrouter.ai",
 			Summary: "Auto fallback & provider selection",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "aion-labs/aion-2.0",
@@ -6525,6 +6587,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.ppq.ai",
 			DocsURL: "https://switchpoint.ai",
 			Summary: "Request-aware provider selection",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "switchpoint/router",
@@ -6540,6 +6603,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.relace.ai/v1",
 			DocsURL: "https://relace.ai",
 			Summary: "Coding APIs; zero data retention default",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "relace-apply-3",
@@ -6560,6 +6624,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.moonshot.ai/v1",
 			DocsURL: "https://api.moonshot.ai/v1",
 			Summary: "First-party Kimi gateway",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k2.7-code",
@@ -6605,6 +6670,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.inference.wandb.ai/v1",
 			DocsURL: "https://wandb.ai",
 			Summary: "Experiment tracking",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "evaluation-registry",
@@ -6620,6 +6686,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://router.requesty.ai/v1",
 			DocsURL: "https://requesty.ai",
 			Summary: "Auto-failover between providers",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "multi-provider-routed",
@@ -6635,6 +6702,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.unify.ai/v0",
 			DocsURL: "https://unify.ai",
 			Summary: "Picks optimal provider per query",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "ml-routed-models",
@@ -6650,6 +6718,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.aimlapi.com/v1",
 			DocsURL: "https://aimlapi.com",
 			Summary: "300+ models; free tier available",
+			Category: "Aggregator",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -6705,6 +6775,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.lemondata.ai/v1",
 			DocsURL: "https://lemondata.ai",
 			Summary: "300+ models; $1 free credits",
+			Category: "Aggregator",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -6730,6 +6802,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.coze.com/v1",
 			DocsURL: "https://coze.com",
 			Summary: "Bot-builder platform with LLM backends",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "bot-backed-gpt-4o",
@@ -6760,6 +6833,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:11434/v1",
 			DocsURL: "https://ollama.com",
 			Summary: "Easiest local setup; 50+ models",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "llama3.3",
@@ -6820,6 +6894,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.302.ai/v1",
 			DocsURL: "https://302.ai",
 			Summary: "OpenCode-supported; unified OpenAI-compatible gateway for 100+ models",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5",
@@ -6850,6 +6925,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://127.0.0.1:1337/v1",
 			DocsURL: "https://atomicchat.ai",
 			Summary: "OpenCode-supported; desktop app with local OpenAI-compatible server",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "qwen-coder",
@@ -6870,6 +6946,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://<resource>.cognitiveservices.azure.com/openai/v1",
 			DocsURL: "https://azure.microsoft.com/products/ai-services",
 			Summary: "OpenCode-supported; separate from Azure OpenAI; set AZURE_COGNITIVE_SERVICES_RESOURCE_NAME",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -6895,6 +6972,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cortecs.ai/v1",
 			DocsURL: "https://cortecs.ai",
 			Summary: "OpenCode-supported; EU GDPR-compliant LLM router with speed/cost/balanced routing",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k2-instruct",
@@ -6915,6 +6993,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://app.frogbot.ai/api",
 			DocsURL: "https://frogbot.ai",
 			Summary: "OpenCode-supported; unified AI subscription for chat, embeddings, audio, and images",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "claude-sonnet-4",
@@ -6940,6 +7019,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.githubcopilot.com",
 			DocsURL: "https://github.com/features/copilot",
 			Summary: "OpenCode-supported; OAuth via /connect; separate from GitHub Models marketplace API",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -7135,6 +7215,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://opencode.ai/zen/v1",
 			DocsURL: "https://opencode.ai/zen",
 			Summary: "OpenCode-curated models verified for coding agents; use opencode/<model-id> prefix",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.5",
@@ -7350,6 +7431,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://opencode.ai/zen/go/v1",
 			DocsURL: "https://opencode.ai/docs/go/",
 			Summary: "OpenCode-supported; low-cost subscription for open coding models; use opencode-go/<model-id>",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k2.7",
@@ -7625,6 +7707,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.llmgateway.io/v1",
 			DocsURL: "https://llmgateway.io",
 			Summary: "OpenCode-supported; unified API with provider/model routing",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -7655,6 +7738,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.openai-compat.model-serving.eu01.onstackit.cloud/v1",
 			DocsURL: "https://www.stackit.de/en/product/stackit-ai-model-serving",
 			Summary: "OpenCode-supported; EU sovereign hosting for Llama, Mistral, Qwen",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3-vl-235b",
@@ -7680,6 +7764,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://<account>.snowflakecomputing.com/api/v2/cortex/v1",
 			DocsURL: "https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-llm-rest-api",
 			Summary: "OpenCode-supported; OAuth or PAT; Claude/OpenAI families with tool calling",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "claude-sonnet-4-6",
@@ -7705,6 +7790,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://zenmux.ai/api/v1",
 			DocsURL: "https://zenmux.ai",
 			Summary: "OpenCode-supported; enterprise routing across 200+ models",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "openai/gpt-5",
@@ -7770,6 +7856,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.sakana.ai/v1",
 			DocsURL: "https://console.sakana.ai",
 			Summary: "Trained multi-agent orchestrator; routes to frontier LLM pool via single OpenAI-compatible API",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "fugu",
@@ -7795,6 +7882,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://sub2api.558686.xyz/v1",
 			DocsURL: "https://go165.github.io/prism-api-promo/",
 			Summary: "Independent OpenAI-compatible gateway for overseas developers; low-cost GPT-5.5 access and crypto-friendly recharge/voucher options",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.5",
@@ -7825,6 +7913,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://discountedtokens.com/v1",
 			DocsURL: "https://discountedtokens.com",
 			Summary: "Budget resale of GPT-5.x family; OpenAI/Anthropic/Responses compatible; ~80% below retail",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "GPT-5.5",
@@ -7850,6 +7939,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://router-api.xiu.ai/v1",
 			DocsURL: "https://router.xiu.ai/",
 			Summary: "Usage-based gateway with OpenAI Chat Completions and Responses, Anthropic Messages, Gemini GenerateContent, scoped keys, and request-level usage and cost records",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.6-sol",
@@ -7880,6 +7970,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.privatedeskai.com/v1",
 			DocsURL: "https://api.privatedeskai.com",
 			Summary: "Multi-provider failover gateway; a flat-rate Super Deal tier ($0.028/1M tokens, separate key) is also available",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-ai/DeepSeek-V4-Flash-0731",
@@ -7895,6 +7986,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://aiwave.live/v1",
 			DocsURL: "https://aiwave.live/",
 			Summary: "Chinese AI providers with USD billing, dated pricing, and request-level usage records",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-v4-pro",
@@ -7930,6 +8022,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://opencode.ai/zen/v1",
 			DocsURL: "https://opencode.ai",
 			Summary: "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models.; No API key required — uses OpenCode's public free endpoint.; OpenCode Free uses the public OpenCode endpoint (https://opencode.ai/zen/v1). No signup or API key needed. Rate limits apply.",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "big-pickle",
@@ -7990,6 +8084,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://duck.ai/duckchat/v1/chat",
 			DocsURL: "https://duckduckgo.com/duckchat",
 			Summary: "Free — anonymous access to multiple AI models via DuckDuckGo.; No credentials required — DuckDuckGo AI Chat is anonymous and free.",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.4-mini",
@@ -8030,6 +8126,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://playground.ai.cloudflare.com",
 			DocsURL: "https://playground.ai.cloudflare.com",
 			Summary: "Free — Cloudflare's AI Playground: GLM 5.2, Kimi K2.7 Code, DeepSeek V4 Pro, gpt-oss-120B and 16 more. No account, no API key.; No credentials required — anonymous browser sessions over a reverse-engineered cf_agent WebSocket protocol (Playwright transport).; Cloudflare AI Playground uses a reverse-engineered anonymous WebSocket protocol (no official API). Requires Playwright with a Chromium browser on first reque…",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "zai-org/glm-5.2",
@@ -8140,6 +8238,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://amelia.chipotle.com",
 			DocsURL: "https://amelia.chipotle.com",
 			Summary: "Free — Chipotle's Pepper AI (IPsoft Amelia). Anonymous sessions, no API key. Rate-limited.; No credentials required. Uses Chipotle's public support chatbot via reverse-engineered SockJS/STOMP protocol.",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "pepper-1",
@@ -8155,6 +8255,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://hermes.ai.unturf.com/v1",
 			DocsURL: "https://uncloseai.com",
 			Summary: "Free forever — no signup, no credit card. OpenAI-compatible endpoints.; No auth required. API accepts any non-empty string as key for identification. If older built-in models return 404, use Available Models → Import from /models or Auto-Sync; verified live model: solidrust/Hermes-3-Llama-3.1-8B-AWQ.; UncloseAI needs no API key. API accepts any non-empty string as key for identification. If older built-in models r…",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "adamo1139/Hermes-3-Llama-3.1-8B-FP8-Dynamic",
@@ -8180,6 +8282,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://oai.aihorde.net/v1",
 			DocsURL: "https://aihorde.net",
 			Summary: "Crowdsourced inference from volunteer GPUs. Throughput is a shared queue, not a quota: there is no RPM/RPD cap, but waits grow when the network is busy.; No API key required — uses AI Horde's documented anonymous key. Adding a free aihorde.net key is optional and only buys higher queue priority (kudos).; AI Horde routes to volunteer-run workers, so chat and image jobs can take minutes and tool calling is unavailab…",
+			Category: "No-auth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "aphrodite/TheDrummer/Cydonia-24B-v4.3",
@@ -8205,6 +8309,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.openference.com/v1",
 			DocsURL: "https://openference.com",
 			Summary: "Free plan: 3-day trial with open-source models — no credit card required; Sign in with your Openference account to route requests through api.openference.com. An active plan is required for inference — OAuth may authenticate but return 402 without one.",
+			Category: "OAuth",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "GLM-5.2",
@@ -8220,6 +8326,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://cli-chat-proxy.grok.com/v1",
 			DocsURL: "https://x.ai",
 			Summary: "Sign in with your browser, or paste your ~/.grok/auth.json (or the JWT access token) from the Grok Build CLI; refresh_token is rotated automatically either way.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "grok-4.6",
@@ -8245,6 +8352,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.qoder.com/v1",
 			DocsURL: "https://qoder.com",
 			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.8-max-preview",
@@ -8300,6 +8408,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://chatgpt.com/backend-api/codex",
 			DocsURL: "https://developers.openai.com/codex",
 			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-6-astra",
@@ -8475,6 +8584,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://core-normal.trae.ai/api/remote/v1",
 			DocsURL: "https://trae.ai",
 			Summary: "Trae is an AI-native IDE by ByteDance (SOLO remote agent). Authorize via trae.ai in the popup, or sign in at solo.trae.ai and paste the Cloud-IDE-JWT (sent as 'Authorization: Cloud-IDE-JWT <token>', ~14-day lifetime) as the access token; web_id/biz_user_id/user_unique_id/scope/tenant/region propagate via providerSpecificData. No headless refresh for pasted tokens — re-paste on expiry.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "auto",
@@ -8530,6 +8640,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.kilo.ai/api/openrouter",
 			DocsURL: "https://kilocode.ai",
 			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "openrouter/free",
@@ -8615,6 +8726,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cline.bot/api/v1",
 			DocsURL: "https://cline.bot",
 			Summary: "OAuth / IDE subscription. Sign in through the official CLI or app; no separate API key in most cases.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "z-ai/glm-5.2",
@@ -8690,6 +8802,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cline.bot/api/v1",
 			DocsURL: "https://cline.bot/cline-pass",
 			Summary: "ClinePass is Cline's $9.99/mo subscription bundling 10 open coding models. Sign in with your Cline account (same login as the Cline CLI/IDE), or paste a direct ClinePass API key (app.cline.bot → Settings → API Keys). A ClinePass subscription unlocks the cline-pass/* models. Reuses the Cline WorkOS OAuth flow.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "cline-pass/glm-5.2",
@@ -8755,6 +8868,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://copilot.tencent.com/v2",
 			DocsURL: "https://copilot.tencent.com",
 			Summary: "Tencent CodeBuddy CN (copilot.tencent.com). Sign in via the official CLI device-code flow, or paste a direct API key (sent as Authorization: Bearer). Catalog: GLM / Kimi / MiniMax / DeepSeek / Hunyuan.",
+			Category: "OAuth",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5.2",
@@ -8840,6 +8954,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.pioneer.ai/v1",
 			DocsURL: "https://pioneer.ai",
 			Summary: "$75 free usage credits — no credit card required; Pioneer AI by Fastino Labs. Free $75 usage credits, no credit card required. Use API key auth with a pio_sk_... key. Only open-tier models (Qwen3, Llama, Gemma, SmolLM) work directly — gated models (Claude/GPT/Gemini) require prior fine-tuning via the Pioneer platform.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "Qwen/Qwen3-32B",
@@ -8900,6 +9016,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.uncensored.com/api/v1",
 			DocsURL: "https://uncensored.com",
 			Summary: "Use your uncensored.com Developer API key (uai_sk_live_...). The key never expires. This is the metered/credits surface; the un-metered subscription chat is the separate 'uc' provider.; UC Direct is OpenAI-compatible on /api/v1.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "claude-opus-5",
@@ -9320,6 +9437,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.blackbox.ai/v1",
 			DocsURL: "https://blackbox.ai",
 			Summary: "Limited free access is available through Blackbox; model availability and account limits apply",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "claude-fable-5",
@@ -9385,6 +9504,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.perplexity.ai/v1",
 			DocsURL: "https://www.perplexity.ai",
 			Summary: "Use your Perplexity API key.; Use Agent API model IDs with the pplx-agent/ prefix, for example pplx-agent/openai/gpt-5.6-sol or pplx-agent/anthropic/claude-opus-4-5.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "openai/gpt-5.6-sol",
@@ -9405,6 +9525,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference-api.nousresearch.com/v1",
 			DocsURL: "https://portal.nousresearch.com/help",
 			Summary: "Free tier: 50 RPM, 500,000 TPM — no credit card; Use your Nous Portal API key.; Nous exposes an OpenAI-compatible /v1 surface with a large remote /models catalog. The /chat/completions endpoint requires a valid API key for programmatic inference.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "Hermes-4-405B",
@@ -9425,6 +9547,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.writer.com/v1",
 			DocsURL: "https://dev.writer.com",
 			Summary: "Writer Palmyra is OpenAI-compatible at https://api.writer.com/v1. palmyra-x5 offers a 1M-token context window.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "palmyra-x5",
@@ -9445,6 +9568,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:8321/v1",
 			DocsURL: "https://github.com/meta-llama/llama-stack",
 			Summary: "Use your META_API_KEY env var as a Bearer token. Muse Code CLI uses the OpenAI Responses API wire format (POST /responses).; Muse Code is OpenAI-compatible.",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "llama-4-maverick",
@@ -9495,6 +9619,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.openvecta.com/v1",
 			DocsURL: "https://openvecta.com",
 			Summary: "Free credits on signup for OpenAI-compatible inference across LLMs, embeddings, and reasoning models",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "glm-4.7-flash",
@@ -9550,6 +9676,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.openference.com/v1",
 			DocsURL: "https://openference.com",
 			Summary: "Free plan: 3-day trial with open-source models — no credit card required",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "GLM-5.2",
@@ -9565,6 +9693,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.monsterapi.ai/v1",
 			DocsURL: "https://monsterapi.ai",
 			Summary: "One-time signup trial credits for decentralized GPU inference (no recurring free plan). No credit card required.; Get API key at monsterapi.ai",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct",
@@ -9585,6 +9715,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ark.ap-southeast.bytepluses.com/api/v3",
 			DocsURL: "https://console.byteplus.com/ark",
 			Summary: "Free credits for new accounts. Seed 2.0, Kimi K2 Thinking, GLM 4.7, GPT-OSS-120B available.",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "seed-2.0",
@@ -9615,6 +9747,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.1min.ai/api/chat-with-ai",
 			DocsURL: "https://1min.ai",
 			Summary: "Create an API key at https://docs.1min.ai/docs/api/create-api-key, then paste it here.; 1min.ai uses a proprietary chat API (single prompt string + SSE) instead of OpenAI chat/completions.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o-mini",
@@ -9630,6 +9763,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cheaperinference.com/v1",
 			DocsURL: "https://cheaperinference.com",
 			Summary: "Create an API key at https://cheaperinference.com/ (needs the `inference` scope), then paste the ir_live_… token here.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "aion-labs.aion-2-0",
@@ -9835,6 +9969,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://www.codebuff.com/api/v1",
 			DocsURL: "https://freebuff.com",
 			Summary: "Free Codebuff / Freebuff AI models.; Enter Freebuff / Codebuff Auth Token (obtained via CLI login or automated harvester).; Token is authenticated against Codebuff upstream session pool.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "deepseek/deepseek-v4-flash",
@@ -9890,6 +10026,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://hyper.charm.land/v1",
 			DocsURL: "https://hyper.charm.land",
 			Summary: "100 free monthly Hypercredits on signup; Create an API key at https://hyper.charm.land, then paste it here as a Bearer token.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "hyper/auto",
@@ -9905,6 +10043,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.commandcode.ai",
 			DocsURL: "https://commandcode.ai",
 			Summary: "Use a Command Code API key. Requests are sent to Command Code's /provider/v1/chat/completions endpoint.; Create or copy an API key from Command Code, then paste it here as a Bearer token.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "claude-opus-4-7",
@@ -10005,6 +10144,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.llm.kiwi/v1",
 			DocsURL: "https://llm.kiwi",
 			Summary: "Free plan exposes auto and hrLLM; the published 40 requests/hour limit applies to hrLLM.; Create a free LLM.Kiwi key, then use https://api.llm.kiwi/v1 as the OpenAI-compatible base URL.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "auto",
@@ -10025,6 +10166,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://models.mixlayer.ai/v1",
 			DocsURL: "https://www.mixlayer.com",
 			Summary: "The qwen/qwen3.5-4b-free model is free for prototyping and rate-limited; no fixed public RPM or daily quota is confirmed.; Create a Mixlayer API key, then use https://models.mixlayer.ai/v1 as the OpenAI-compatible base URL.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "qwen/qwen3.5-4b-free",
@@ -10040,6 +10183,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://yolo-auto.com/v1",
 			DocsURL: "https://yolo-auto.com",
 			Summary: "Free API access is request-limited and intended for testing; no numeric daily quota is published and free access is not promised indefinitely.; Create a yolo_ API key, then use https://yolo-auto.com/v1 as the OpenAI-compatible base URL.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.6-35b-a3b",
@@ -10055,6 +10200,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cloudcode.one/v1",
 			DocsURL: "https://cloudcode.one",
 			Summary: "Published free models include glm-4.7-flash and glm-4.6v-flash; no numeric quota is published, and key creation may require credit or a coupon.; Create a CloudCode.ONE key, then use https://api.cloudcode.one/v1 as the OpenAI-compatible base URL. Key issuance may require credit or a coupon.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "glm-4.7-flash",
@@ -10075,6 +10222,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.dgrid.ai/v1",
 			DocsURL: "https://dgrid.ai",
 			Summary: "DGrid Free Models Router: 10 requests/minute and 100 requests/day. A $5 lifetime top-up unlocks up to 20 requests/minute and 1,000 requests/day.; Create a DGrid API key at https://dgrid.ai, then use https://api.dgrid.ai/v1 as the OpenAI-compatible base URL.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "dgridai/free",
@@ -10090,6 +10239,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.orcarouter.ai/v1",
 			DocsURL: "https://www.orcarouter.ai",
 			Summary: "Create an API key (starts with sk-orca-) at https://www.orcarouter.ai, then paste it as a Bearer token. OpenAI-compatible endpoint at https://api.orcarouter.ai/v1.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "orcarouter/auto",
@@ -10140,6 +10290,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.airforce/v1",
 			DocsURL: "https://api.airforce",
 			Summary: "55 free tier models including Grok-3, Claude 3.7, Qwen3, Kimi-K2, Gemini 2.5 Flash, DeepSeek-V3; Get your API key from https://panel.api.airforce — OpenAI-compatible endpoint at https://api.airforce/v1",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "x-ai/grok-3",
@@ -10185,6 +10337,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://crof.ai/v1",
 			DocsURL: "https://crof.ai",
 			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-v4-pro",
@@ -10270,6 +10423,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://bazaarlink.ai/api/v1",
 			DocsURL: "https://bazaarlink.ai",
 			Summary: "Free tier: 4M tokens/day per account with auto:free routing — zero-cost inference, no credit card required.; Use your BazaarLink API key (starts with sk-bl-) in Authorization: Bearer <key>. OpenAI SDK works with base URL https://bazaarlink.ai/api/v1. Models use provider/model-name format.; Create a free API key at https://bazaarlink.ai — model 'auto:free' routes to zero-cost inference. All models use the provider/…",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "auto:free",
@@ -10445,6 +10600,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.synthetic.new/openai/v1",
 			DocsURL: "https://synthetic.new",
 			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "hf:openai/gpt-oss-120b",
@@ -10490,6 +10646,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.kilo.ai/api/gateway",
 			DocsURL: "https://kilo.ai",
 			Summary: "OpenAI-compatible multi-provider gateway or local proxy.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kilo-auto/frontier",
@@ -10530,6 +10687,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.dahl.global/v1",
 			DocsURL: "https://inference.dahl.global",
 			Summary: "Free — MiniMax M2.7, Kimi K2.6. Click 'Add Account' to auto-generate a token, or add your own API key.; Click 'Add Account' to auto-generate a token, or add a manual API key.; Auto-generate a token or paste your own API key.; Dahl auto-generates tokens via https://inference.dahl.global/tokens. No signup needed. Rate limits apply. You can also add your own API key.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
@@ -10550,6 +10709,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.freetheai.xyz/v1",
 			DocsURL: "https://freetheai.xyz",
 			Summary: "Free OpenAI-compatible gateway — sign up via Discord for an API key.; Join the FreeTheAi Discord to get your free API key.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o-mini",
@@ -10575,6 +10736,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://g4f.space/api/groq/v1",
 			DocsURL: "https://g4f.space",
 			Summary: "Anonymous access to Groq requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last verified…",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-versatile",
@@ -10595,6 +10757,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://g4f.space/api/gemini/v1",
 			DocsURL: "https://g4f.space",
 			Summary: "Anonymous access to Gemini requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last verifi…",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "models/gemini-2.5-flash",
@@ -10615,6 +10778,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://g4f.space/api/pollinations/v1",
 			DocsURL: "https://g4f.space",
 			Summary: "Anonymous access to Pollinations requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last…",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "openai",
@@ -10635,6 +10799,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://g4f.space/api/ollama/v1",
 			DocsURL: "https://g4f.space",
 			Summary: "Anonymous access to hosted Ollama requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last…",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gemma3:4b",
@@ -10650,6 +10815,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://g4f.space/api/nvidia/v1",
 			DocsURL: "https://g4f.space",
 			Summary: "Anonymous access to NVIDIA NIM requires proof-of-work cake credits from g4f.dev/chat; alternatively, use a g4f.dev member API key. Limits vary.; Bake anonymous cake credits at g4f.dev/chat, or use a g4f.dev member key (create one at g4f.dev/members.html).; Its Terms and Privacy links were unavailable when last ve…",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "nvidia/nemotron-3-nano-30b-a3b",
@@ -10675,6 +10841,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.llm7.io/v1",
 			DocsURL: "https://llm7.io",
 			Summary: "No signup required - 2 req/s, 20 RPM, 100 req/hr free tier; Use any non-empty key (for example 'unused'). If older built-in models return model_unavailable, use Available Models → Import from /models or Auto-Sync; verified live model: gemini-3.1-flash-lite.; Works without API key (use 'unused' as key). Get free token at token.llm7.io for higher limits.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o-mini-2024-07-18",
@@ -10705,6 +10873,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/xiaomi-mimo",
 			DocsURL: "https://opengateway.gitlawb.com",
 			Summary: "Free MiMo (xiaomi/mimo-v2.5) revoked 2026-05 — Opengateway is now a pay-as-you-go credit gateway; no recurring free model.; Get your API key from Gitlawb Opengateway dashboard.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "mimo-v2.5-pro",
@@ -10740,6 +10910,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/gmi-cloud",
 			DocsURL: "https://opengateway.gitlawb.com",
 			Summary: "Free Nemotron promo ended 2026-06 — the GMI Cloud route is now pay-as-you-go credit only.; Get your API key from Gitlawb Opengateway dashboard.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "XiaomiMiMo/MiMo-V2.5-Pro",
@@ -10950,6 +11122,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.poe.com",
 			DocsURL: "https://creator.poe.com/api-reference",
 			Summary: "Bearer API key for the Poe OpenAI-compatible API.; Poe exposes OpenAI-compatible chat and responses on https://api.poe.com/v1, with authenticated balance checks on /usage/current_balance.",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.2",
@@ -10975,6 +11148,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.factory.ai/v1",
 			DocsURL: "https://factory.ai",
 			Summary: "Bearer API key for the Factory OpenAI-compatible gateway.; Get your Factory API key at https://app.factory.ai/settings/api-keys, then paste it as a Bearer token. OpenAI-compatible endpoint at https://api.factory.ai/v1.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "auto",
@@ -10990,6 +11164,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.bluesminds.com/v1",
 			DocsURL: "https://www.bluesminds.com",
 			Summary: "Free daily pi credits — supports 200+ models including GPT-4o, GPT-4.1, Claude Sonnet 4.5, Gemini 2.0 Flash, DeepSeek V4, Qwen, Kimi K2; Get your API key at https://www.bluesminds.com — OpenAI-compatible endpoint at https://api.bluesminds.com/v1 with free daily credits. VIP models (Claude Opus 4.5, Gemini 2.5 Pro) consume pi credits.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-4o",
@@ -11110,6 +11286,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.freemodel.dev/v1",
 			DocsURL: "https://freemodel.dev",
 			Summary: "$300 free credits on signup — no credit card required. Access GPT-5.4 and GPT-5.5 (OpenAI's latest flagship models) through an OpenAI-compatible API.; Get $300 free API credits at https://freemodel.dev — no payment info required. OpenAI-compatible endpoint. GPT-5.4 and GPT-5.5 models available.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.5",
@@ -11140,6 +11318,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.freeaiapikey.com/v1",
 			DocsURL: "https://freeaiapikey.com",
 			Summary: "Discounted API proxy for 40+ models including GPT-5, Claude Opus 4.6, Claude Sonnet 4.6, Qwen 3.5. Get your API key at https://freeaiapikey.com/dashboard. Base URL: https://freeaiapikey.com/v1.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "openai/gpt-4o",
@@ -11200,6 +11379,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.openadapter.in/v1",
 			DocsURL: "https://openadapter.dev",
 			Summary: "Free tier with a generous quota and no credit card — 15+ open-source models with daily quota. Get your API key at https://dashboard.openadapter.in.; Use your OpenAdapter API key in Authorization: Bearer sk-cv-<key>. Fully OpenAI-compatible. API base URL: https://api.openadapter.in/v1.; OpenAdapter exposes an OpenAI-compatible chat completions endpoint at https://api.openadapter.in/v1/chat/completions, aggregating…",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "glm-4.7",
@@ -11215,6 +11396,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.dit.ai/v1",
 			DocsURL: "https://dit.ai",
 			Summary: "Use your dit.ai API key in Authorization: Bearer <key>. Fully OpenAI-compatible — a drop-in replacement, just change the base URL to https://api.dit.ai/v1.; dit.ai (Distributed Intelligence Trade) is an OpenAI-compatible router/gateway with dynamic per-request pricing, exposing /v1/chat/completions at https://api.dit.ai/v1.; spend/savings analytics live in the dit.ai dashboard.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.4",
@@ -11235,6 +11417,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.tokenrouter.com/v1",
 			DocsURL: "https://tokenrouter.com",
 			Summary: "Free tier includes the MiniMax 3 model. Get your API key at https://tokenrouter.com.; Use your TokenRouter API key in Authorization: Bearer <key>. Fully OpenAI-compatible. API base URL: https://api.tokenrouter.com/v1.; TokenRouter exposes an OpenAI-compatible chat completions endpoint at https://api.tokenrouter.com/v1/chat/completions, plus a working /v1/models catalog.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "minimax-3",
@@ -11260,6 +11444,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://agent-router.gaib.ai/v1",
 			DocsURL: "https://agent-router.gaib.ai",
 			Summary: "Use your Token Kiosk API key in Authorization: Bearer <key>. Fully OpenAI-compatible gateway. API base URL: https://agent-router.gaib.ai/v1.; Token Kiosk is a multi-provider agent LLM routing infrastructure exposing an OpenAI-compatible endpoint at https://agent-router.gaib.ai/v1/chat/completions with auto-fallback and latency routing.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "claude-3-5-sonnet",
@@ -11295,6 +11480,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.navy/v1",
 			DocsURL: "https://api.navy",
 			Summary: "Free plan is one shared 150K tokens/day pool at 20 RPM. Each model carries a token multiplier, so heavier models drain the pool faster (grok-4 at 10x is ~15K real tokens/day).; Create a free API key from the NavyAI dashboard, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.navy/v1 with a live /v1/models catalog that exposes per-model token_multiplier and premium flags. Upstream req…",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct",
@@ -11335,6 +11522,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.ainative.studio/api/v1",
 			DocsURL: "https://ainative.studio",
 			Summary: "Free tier ~10M tokens/month (claimed) across Qwen3, Llama 4, DeepSeek R1 and more.; Create a free API key at ainative.studio (no card), then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.ainative.studio/api/v1 with a public /models catalog (84 models).",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "qwen3-235b-cerebras",
@@ -11390,6 +11579,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.routeway.ai/v1",
 			DocsURL: "https://routeway.ai",
 			Summary: "Free models (:free suffix) at ~5 RPM / 200 RPD across Llama, Nemotron, Step and Laguna.; Create a free API key at routeway.ai, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.routeway.ai/v1 with a public /models catalog (236 models). Cloudflare fronts the API and requires a browser-style User-Agent.",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "llama-3.3-70b-instruct:free",
@@ -11440,6 +11631,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://router.bynara.id/v1",
 			DocsURL: "https://bynara.id",
 			Summary: "Free plan: one 7M tokens/day bucket per account (15 req/min) across the plan's 8 models; others need credit.; Create a free NaraRouter account, link your Telegram (required before /v1 answers), then paste the key here as a Bearer token.; OpenAI-compatible endpoint at https://router.bynara.id/v1. Free-tier models are pinned",
+			Category: "Gateway",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "agnes-2.0-flash",
@@ -11490,6 +11683,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.regolo.ai",
 			DocsURL: "https://regolo.ai",
 			Summary: "Get your Regolo API key from regolo.ai, then paste it here as a Bearer token.; OpenAI-compatible endpoint at https://api.regolo.ai/v1 with dynamic model discovery (19 models).",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "regolo-chat",
@@ -11510,6 +11704,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.z.ai/api/coding/paas/v4",
 			DocsURL: "https://z.ai/subscribe",
 			Summary: "First-party model lab API.; Preset GLM profile with higher token budget, thinking enabled, and longer timeout.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5.3-flash",
@@ -11625,6 +11820,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://open.bigmodel.cn/api/coding/paas/v4",
 			DocsURL: "https://open.bigmodel.cn",
 			Summary: "First-party model lab API.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5.3-flash",
@@ -11740,6 +11936,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
 			DocsURL: "https://www.qwencloud.com",
 			Summary: "Use a Qwen Cloud API key and select its Global or Beijing region.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.8-max",
@@ -11820,6 +12017,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://token-plan.ap-southeast-1.maas.aliyuncs.com/compatible-mode/v1",
 			DocsURL: "https://www.qwencloud.com/pricing/token-plan",
 			Summary: "Use a Qwen Cloud Token Plan key and select its Singapore or Beijing region.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.8-max",
@@ -11865,6 +12063,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.minimaxi.com/v1",
 			DocsURL: "https://www.minimaxi.com",
 			Summary: "First-party model lab API.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "MiniMax-M3",
@@ -11900,6 +12099,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.longcat.chat/openai/v1",
 			DocsURL: "https://longcat.chat/platform/docs",
 			Summary: "Free: one-time 10M-token grant after account signup + KYC verification (LongCat-2.0). One-time only — not a recurring daily/monthly allowance.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "LongCat-2.0",
@@ -11915,6 +12116,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/plan/v3",
 			DocsURL: "https://console.volcengine.com/ark/region:cn-beijing/subscription/agent-plan",
 			Summary: "Connect your Volcano Engine account or use an Ark Agent Plan subscription API key.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "doubao-seed-evolving",
@@ -11985,6 +12187,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/coding/v3",
 			DocsURL: "https://console.volcengine.com/ark/region:cn-beijing/subscription/coding-plan",
 			Summary: "Connect your Volcano Engine account or use an Ark Coding Plan subscription API key.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "doubao-seed-2-1-turbo",
@@ -12040,6 +12243,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://token-plan-sgp.xiaomimimo.com/v1",
 			DocsURL: "https://mimo.mi.com",
 			Summary: "First-party model lab API.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "mimo-v2.5-pro",
@@ -12060,6 +12264,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.hunyuan.cloud.tencent.com/v1",
 			DocsURL: "https://hunyuan.tencent.com",
 			Summary: "Free Hunyuan Lite models. WeChat ecosystem.; Get API key at console.cloud.tencent.com",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "hunyuan-turbos-latest",
@@ -12100,6 +12306,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://spark-api-open.xf-yun.com/v1",
 			DocsURL: "https://xinghuo.xfyun.cn",
 			Summary: "Spark Lite is free (2 QPS rate-limited), but iFlytek ToS §2.4(3) prohibits programmatic extraction and requires Chinese real-name auth — use with caution.; Get API key at console.xfyun.cn",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "4.0Ultra",
@@ -12140,6 +12348,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.baichuan-ai.com/v1",
 			DocsURL: "https://www.baichuan-ai.com",
 			Summary: "Free Baichuan models. Popular Chinese LLM startup.; Get API key at platform.baichuan-ai.com",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "Baichuan4-Turbo",
@@ -12175,6 +12385,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.lingyiwanwu.com/v1",
 			DocsURL: "https://01.ai",
 			Summary: "No free API tier (2026) — Yi-Light retired; platform.01.ai is pay-as-you-go (Yi-Lightning paid). Open weights are download-only.; Get API key at platform.lingyiwanwu.com",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "yi-large",
@@ -12190,6 +12402,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ark.cn-beijing.volces.com/api/v3",
 			DocsURL: "https://doubao.com",
 			Summary: "Free Doubao models. ByteDance's chatbot.; Get API key at console.volcengine.com",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "doubao-seed-2-0-pro-260215",
@@ -12245,6 +12459,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://token.sensenova.cn/v1",
 			DocsURL: "https://platform.sensenova.cn",
 			Summary: "Free SenseTime models. Computer vision leader.; Get API key at platform.sensenova.cn; SenseNova registration appears to require a Chinese (+86) phone number for SMS verification — no international sign-up path is documented, so users outside mainland China may be unable to obtain an API key.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "sensenova-6.7-flash-lite",
@@ -12270,6 +12486,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.sea-lion.ai/v1",
 			DocsURL: "https://sea-lion.ai",
 			Summary: "Permanently free at 10 RPM — AI Singapore's Southeast-Asian models (Llama/Qwen/Gemma SEA-LION).; Sign in at sea-lion.ai with Google (no card, no region wall), create an API key, then paste it here.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "aisingapore/Llama-SEA-LION-v3.5-70B-R",
@@ -12305,6 +12523,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://chat.intern-ai.org.cn/api/v1",
 			DocsURL: "https://internlm.intern-ai.org.cn",
 			Summary: "Free monthly quota ~1M input / 3M output tokens (~10 RPM)",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "intern-s1-pro",
@@ -12340,6 +12560,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.ant-ling.com/v1",
 			DocsURL: "https://developer.ant-ling.com/en/docs",
 			Summary: "500,000 free tokens per day per account (resets 02:00 UTC+8, no rollover); Register and create an API key at the Ant Ling API console (https://chat.ant-ling.com/open), then paste it here.; the provider is OpenAI-compatible and also exposes an Anthropic-compatible surface.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "Ling-2.6-1T",
@@ -12365,6 +12587,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.sarvam.ai/v1",
 			DocsURL: "https://docs.sarvam.ai",
 			Summary: "₹1,000 in free signup credits — never expire; Sarvam AI is OpenAI-compatible on /v1. Models are tuned for Indic languages.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "sarvam-105b",
@@ -12385,6 +12609,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.platform.preferredai.jp/v1",
 			DocsURL: "https://plamo.preferredai.jp/api",
 			Summary: "PLaMo is OpenAI-compatible at https://api.platform.preferredai.jp/v1. Built by Preferred Networks and optimized for Japanese. Docs are primarily in Japanese.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "plamo-3.0-prime",
@@ -12400,6 +12625,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.opentyphoon.ai/v1",
 			DocsURL: "https://docs.opentyphoon.ai",
 			Summary: "Free API key with a 5 req/s and 200 req/m rate limit.; Typhoon is OpenAI-compatible on /v1. Built by SCB 10X (Thailand); typhoon-v2.5-30b-a3b-instruct is a thai-first, multilingual model.",
+			Category: "Frontier",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "typhoon-v2.5-30b-a3b-instruct",
@@ -12415,6 +12642,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://gen.pollinations.ai/v1",
 			DocsURL: "https://pollinations.ai",
 			Summary: "Free keyless tier: openai, openai-fast, openai-large, qwen-coder, mistral, deepseek, grok, gemini-flash-lite-3.1, perplexity-fast, perplexity-reasoning. Premium models (claude, gemini, midijourney) require a Pollinations API key from enter.pollinations.ai.; Anonymous/keyless access to the documented free models is best-effort.",
+			Category: "IaaS",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "openai",
@@ -12580,6 +12809,8 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.dify.ai",
 			DocsURL: "https://dify.ai",
 			Summary: "Free open-source AI app builder + RAG platform.; Get API key from your Dify instance.",
+			Category: "Specialized",
+			Free: true,
 			Models: []Model{
 				{
 					UpstreamID: "auto",
@@ -12595,6 +12826,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:3000/v1",
 			DocsURL: "https://github.com/diegosouzapw/OmniRoute",
 			Summary: "Open-source MIT AI gateway (352 providers, 1200+ models). Self-hosted OpenAI-compatible endpoint; quota-aware auto-fallback.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k2.7-code",
@@ -12625,6 +12857,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.nova.amazon.com/v1",
 			DocsURL: "https://nova.amazon.com",
 			Summary: "Amazon's first-party Nova API, separate from Bedrock.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "nova-2-pro-v1",
@@ -12645,6 +12878,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.meta.ai/v1",
 			DocsURL: "https://dev.meta.ai",
 			Summary: "Meta Muse Spark models on api.meta.ai (distinct from the Llama API).",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "muse-spark-1.3",
@@ -12680,6 +12914,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.moonshot.cn/v1",
 			DocsURL: "https://platform.moonshot.cn",
 			Summary: "Kimi models on Moonshot's China endpoint.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k2.7-code",
@@ -12710,6 +12945,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://cloud.olakrutrim.com/v1",
 			DocsURL: "https://cloud.olakrutrim.com",
 			Summary: "Ola Krutrim OpenAI-compatible inference API.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "krutrim-1",
@@ -12730,6 +12966,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.kimi.ai/coding/v1",
 			DocsURL: "https://www.kimi.ai/code",
 			Summary: "Kimi coding plan on kimi.ai (distinct from api.kimi.com).",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-for-coding-highspeed",
@@ -12760,6 +12997,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://coding-intl.dashscope.aliyuncs.com/v1",
 			DocsURL: "https://www.alibabacloud.com/help/en/model-studio/coding-plan",
 			Summary: "International Alibaba Model Studio coding-plan endpoint.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.7-max",
@@ -12830,6 +13068,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://coding.dashscope.aliyuncs.com/v1",
 			DocsURL: "https://help.aliyun.com/zh/model-studio/coding-plan",
 			Summary: "China Alibaba Model Studio coding-plan endpoint.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.7-max",
@@ -12900,6 +13139,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1",
 			DocsURL: "https://www.alibabacloud.com/help/zh/model-studio/token-plan-overview",
 			Summary: "China-region Alibaba token plan (Beijing MaaS).",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "happyhorse-1.1-r2v",
@@ -13050,6 +13290,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.stepfun.com/step_plan/v1",
 			DocsURL: "https://platform.stepfun.com/docs/zh/step-plan/integrations/reasoning-api",
 			Summary: "StepFun Step Plan on the China platform.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "step-5-preview",
@@ -13085,6 +13326,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.stepfun.ai/step_plan/v1",
 			DocsURL: "https://platform.stepfun.ai/docs/en/step-plan/integrations/reasoning-api",
 			Summary: "StepFun Step Plan on the global platform.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "step-5-preview",
@@ -13115,6 +13357,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://tokenhub.tencentmaas.com/v1",
 			DocsURL: "https://cloud.tencent.com/document/product/1823/130050",
 			Summary: "Tencent MaaS TokenHub for Hunyuan models.",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "hy3-preview",
@@ -13140,6 +13383,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.lkeap.cloud.tencent.com/plan/v3",
 			DocsURL: "https://cloud.tencent.com/document/product/1823/130060",
 			Summary: "Tencent Cloud token-plan endpoint (LKEAP).",
+			Category: "Frontier",
 			Models: []Model{
 				{
 					UpstreamID: "hy3",
@@ -13160,6 +13404,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.inference.crusoecloud.com/v1",
 			DocsURL: "https://docs.crusoecloud.com/managed-inference/overview",
 			Summary: "Crusoe managed inference for open-weight models.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "zai/GLM-5.1",
@@ -13225,6 +13470,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.vultrinference.com/v1",
 			DocsURL: "https://www.vultr.com",
 			Summary: "Vultr serverless inference, OpenAI-compatible.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-v4-flash-0731",
@@ -13325,6 +13571,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.coralbricks.ai/v1",
 			DocsURL: "https://www.coralbricks.ai",
 			Summary: "CoralBricks serverless inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5.3-fp4",
@@ -13355,6 +13602,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.jalapeno-cloud.ai/v1",
 			DocsURL: "https://www.jalapeno-cloud.ai",
 			Summary: "Jalapeno Cloud hosted open-weight models.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen3-VL-235B-A22B-Instruct",
@@ -13450,6 +13698,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.berget.ai/v1",
 			DocsURL: "https://berget.ai",
 			Summary: "Swedish inference API for open-weight models.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen/Qwen3.5-2B",
@@ -13510,6 +13759,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://developer.amd.com.cn/radeon/api/v1",
 			DocsURL: "https://developer.amd.com.cn/radeon/tokenfactory",
 			Summary: "AMD Radeon Token Factory OpenAI-compatible API.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen3.8-27B",
@@ -13550,6 +13800,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://maas-api.ebcloud.com/v1",
 			DocsURL: "https://www.ebcloud.com",
 			Summary: "EBCloud MaaS inference endpoint.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Kimi-K2.6",
@@ -13580,6 +13831,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://chat.d.run/v1",
 			DocsURL: "https://www.d.run",
 			Summary: "D.Run public model inference (China).",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "public/deepseek-v3",
@@ -13605,6 +13857,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.getlilac.com/v1",
 			DocsURL: "https://docs.getlilac.com/inference/models",
 			Summary: "Lilac hosted open-weight inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "google/gemma-4-31b-it",
@@ -13635,6 +13888,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.runinfra.ai/v1",
 			DocsURL: "https://runinfra.ai",
 			Summary: "RunInfra gateway for open-weight models.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Inferact/Qwen3.8-2.4T-A95B-NVFP4",
@@ -13680,6 +13934,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://aki.io/v1",
 			DocsURL: "https://aki.io",
 			Summary: "AKI.IO OpenAI-compatible inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.8-27b",
@@ -13725,6 +13980,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.dinference.com/v1",
 			DocsURL: "https://dinference.com",
 			Summary: "DInference hosted chat models.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "glm-5",
@@ -13765,6 +14021,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.hetzner.com/api/v1",
 			DocsURL: "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
 			Summary: "Hetzner experimental OpenAI-compatible inference API.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen3.8-27B",
@@ -13785,6 +14042,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://models.think.evroc.com/v1",
 			DocsURL: "https://docs.evroc.com/products/think/",
 			Summary: "evroc Think sovereign inference in the EU.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "google/gemma-4-26B-A4B-it",
@@ -13850,6 +14108,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api-sherlock.cloudferro.com/openai/v1",
 			DocsURL: "https://docs.sherlock.cloudferro.com/",
 			Summary: "CloudFerro Sherlock EU inference, including Bielik.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Llama-3.3-70B-Instruct",
@@ -13885,6 +14144,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.scnet.cn/api/llm/v1",
 			DocsURL: "https://www.scnet.cn/ac/openapi/doc/2.0/moduleapi/plans/token-plan.html",
 			Summary: "China SCNet supercomputing token-plan LLM API.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "DeepSeek-V4-Flash-0731",
@@ -13990,6 +14250,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://routellm.abacus.ai/v1",
 			DocsURL: "https://abacus.ai",
 			Summary: "Abacus RouteLLM multi-model router.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "MiniMaxAI/MiniMax-M2.7",
@@ -14800,6 +15061,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api-gateway.merge.dev/v1",
 			DocsURL: "https://docs.merge.dev/merge-gateway",
 			Summary: "Merge.dev gateway: one key for OpenAI, Anthropic, Google, and Bedrock.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "zai/glm-4.5",
@@ -15760,6 +16022,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://cloud-api.near.ai/v1",
 			DocsURL: "https://docs.near.ai/",
 			Summary: "NEAR AI Cloud multi-provider inference API.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen/Qwen3-VL-30B-A3B-Instruct",
@@ -16025,6 +16288,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.scx.ai/v1",
 			DocsURL: "https://platform.scx.ai",
 			Summary: "SCX.ai OpenAI-compatible model API.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "GLM-5.2",
@@ -16055,6 +16319,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://apis.iflow.cn/v1",
 			DocsURL: "https://platform.iflow.cn",
 			Summary: "iFlow multi-model API (Qwen, GLM, DeepSeek).",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3-vl-plus",
@@ -16135,6 +16400,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://llmtr.com/v1",
 			DocsURL: "https://llmtr.com",
 			Summary: "Turkish and multilingual models plus routed open weights.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "agnes/agnes-2.5-flash",
@@ -17690,6 +17956,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.jiekou.ai/openai",
 			DocsURL: "https://docs.jiekou.ai",
 			Summary: "Jiekou.AI multi-vendor model catalog.",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "grok-4-1-fast-reasoning",
@@ -18005,6 +18272,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://aihubmix.com/v1",
 			DocsURL: "https://aihubmix.com",
 			Summary: "AIHubMix OpenAI-compatible aggregator for text, image, and audio models.",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "AiHubmix-Phi-4-mini-reasoning",
@@ -20085,6 +20353,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.empiriolabs.ai/v1",
 			DocsURL: "https://docs.empiriolabs.ai",
 			Summary: "EmpirioLabs multi-model inference API.",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "ace-step-1-5-xl",
@@ -20975,6 +21244,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.aiand.com/v1",
 			DocsURL: "https://docs.aiand.com/",
 			Summary: "ai& API, including Motif Technologies models.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "zai-org/glm-5.3",
@@ -21040,6 +21310,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.ambient.xyz/v1",
 			DocsURL: "https://ambient.xyz",
 			Summary: "Ambient.xyz hosted inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "ambient/large",
@@ -21070,6 +21341,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.inco.ai/v1",
 			DocsURL: "https://platform.inco.ai",
 			Summary: "Inco routed inference for Kimi, GLM, MiniMax, and DeepSeek.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "kimi-k3:fast",
@@ -21115,6 +21387,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.pendra.ai/api/v1",
 			DocsURL: "https://pendra.ai",
 			Summary: "Pendra OpenAI-compatible router.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "llama3.3:70b",
@@ -21155,6 +21428,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://openai.inference.de-txl.ionos.com/v1",
 			DocsURL: "https://docs.ionos.com/cloud/ai/ai-model-hub/how-tos/tool-integration",
 			Summary: "IONOS Cloud OpenAI-compatible Model Hub in Germany.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Meta-Llama-3.1-8B-Instruct",
@@ -21175,6 +21449,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.infomaniak.com/2/ai/{product_id}/openai/v1",
 			DocsURL: "https://www.infomaniak.com/en/hosting/ai-services/open-source-models",
 			Summary: "Swiss AI Services. Replace {product_id} with your AI product id.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "mini_lm_l12_v2",
@@ -21235,6 +21510,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ai.api.cloud.yandex.net/v1",
 			DocsURL: "https://yandex.cloud/en/docs/ai-studio/",
 			Summary: "OpenAI-compatible. Model URIs look like gpt://<folder_ID>/yandexgpt/latest.",
+			Category: "Sovereign / Cloud",
 			Models: []Model{
 				{
 					UpstreamID: "gpt://<folder_ID>/yandexgpt/latest",
@@ -21265,6 +21541,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://model-<deployment>-<project>-<account>.ai.gcore.dev/v1",
 			DocsURL: "https://docs.gcore.com/edge-ai/everywhere-inference/ai-models/query-deployed-model",
 			Summary: "Per-deployment OpenAI endpoint. When auth is on, send the key in X-API-Key.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Llama-3.2-1B-Instruct",
@@ -21280,6 +21557,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.tinfoil.sh/v1",
 			DocsURL: "https://docs.tinfoil.sh",
 			Summary: "Confidential inference with an OpenAI-compatible chat API.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek-v4-1-flash",
@@ -21355,6 +21633,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://ai.salad.cloud/v1",
 			DocsURL: "https://docs.salad.com/ai-gateway/explanation/overview",
 			Summary: "Salad pay-per-token AI Gateway (beta).",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "qwen3.5-35b-a3b",
@@ -21385,6 +21664,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.infercom.ai/v1",
 			DocsURL: "https://api.infercom.ai",
 			Summary: "Infercom hosted OpenAI-compatible inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "DeepSeek-V3.1",
@@ -21430,6 +21710,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.tensorx.ai/v1",
 			DocsURL: "https://docs.tensorx.ai/",
 			Summary: "TensorX multi-model API.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek/deepseek-v4-flash-0731",
@@ -21565,6 +21846,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.lyceum.technology/openai/v1",
 			DocsURL: "https://docs.lyceum.technology/docs/inference/serverless",
 			Summary: "Lyceum serverless OpenAI-compatible inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "z-ai/glm-5.2",
@@ -21580,6 +21862,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://model.inferx.net/v1",
 			DocsURL: "https://www.inferx.net",
 			Summary: "InferX serverless endpoints. Requests need a tenant-scoped API key.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "gemma-4-31B-it-fp8",
@@ -21645,6 +21928,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.iteracompute.com/v1",
 			DocsURL: "https://iteracompute.com/docs.html",
 			Summary: "IteraCompute hosted models. Access depends on the API key or contract.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "deepseek/deepseek-v4-pro-0813",
@@ -21700,6 +21984,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://inference.cloudrift.ai/v1",
 			DocsURL: "https://www.cloudrift.ai",
 			Summary: "CloudRift OpenAI-compatible inference.",
+			Category: "IaaS",
 			Models: []Model{
 				{
 					UpstreamID: "Qwen/Qwen3.8-27B-FP8",
@@ -21715,6 +22000,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://gateway.braintrust.dev/v1",
 			DocsURL: "https://www.braintrust.dev/docs/deploy/gateway",
 			Summary: "Hosted Braintrust gateway for multi-provider models, caching, and logs.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "claude-haiku-4-5",
@@ -21735,6 +22021,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.withmartian.com/v1",
 			DocsURL: "https://withmartian.com",
 			Summary: "Martian model router.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "aion-labs/aion-2.0",
@@ -23250,6 +23537,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://gateway.truefoundry.ai",
 			DocsURL: "https://www.truefoundry.com/docs/ai-gateway/making-llm-requests-via-gateway",
 			Summary: "SaaS gateway. Base URL has no /v1 suffix; model ids are provider_account/model.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "openai-main/gpt-4o-mini",
@@ -23270,6 +23558,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.cometapi.com/v1",
 			DocsURL: "https://apidoc.cometapi.com/guides/change-base-url-to-cometapi",
 			Summary: "CometAPI OpenAI-compatible aggregator.",
+			Category: "Aggregator",
 			Models: []Model{
 				{
 					UpstreamID: "auto",
@@ -23840,6 +24129,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.orq.ai/v3/router",
 			DocsURL: "https://docs.orq.ai/reference/models/list-router-models",
 			Summary: "Orq router. https://my.orq.ai/v3/router accepts the same API.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "openai/gpt-4o",
@@ -23855,6 +24145,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.crossmodel.ai/v1",
 			DocsURL: "https://www.crossmodel.ai/docs",
 			Summary: "CrossModel multi-provider router.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "anthropic/claude-haiku-4-5",
@@ -24195,6 +24486,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "https://api.routing.run/v1",
 			DocsURL: "https://docs.routing.run/api-reference/models",
 			Summary: "routing.run model router.",
+			Category: "Gateway",
 			Models: []Model{
 				{
 					UpstreamID: "gpt-5.6-sol",
@@ -24400,6 +24692,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:30000/v1",
 			DocsURL: "https://docs.sglang.io",
 			Summary: "Local OpenAI-compatible server. Default port 30000. Model id is the served model.",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "meta-llama/Meta-Llama-3-8B-Instruct",
@@ -24415,6 +24708,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:23333/v1",
 			DocsURL: "https://lmdeploy.readthedocs.io/en/stable/llm/api_server.html",
 			Summary: "Local OpenAI-compatible api_server. Default port 23333.",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "internlm/internlm2_5-7b-chat",
@@ -24430,6 +24724,7 @@ func generatedProviders() []Provider {
 			DefaultBaseURL: "http://localhost:8080/v1",
 			DocsURL: "https://docs.privatemode.ai",
 			Summary: "Confidential inference. The OpenAI client talks to the local encryption proxy on port 8080, not the hosted URL directly.",
+			Category: "Local",
 			Models: []Model{
 				{
 					UpstreamID: "glm-flash-latest",

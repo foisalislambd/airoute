@@ -86,16 +86,17 @@ func (s *Server) listProviders(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	offset, _ := strconv.Atoi(r.URL.Query().Get("offset"))
-	page, err := s.Store.ListProvidersPage(r.URL.Query().Get("q"), limit, offset)
+	page, err := s.Store.ListProvidersPage(r.URL.Query().Get("q"), r.URL.Query().Get("category"), limit, offset)
 	if err != nil {
 		writeAPIError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
-		"providers": page.Providers,
-		"total":     page.Total,
-		"limit":     page.Limit,
-		"offset":    page.Offset,
+		"providers":  page.Providers,
+		"categories": page.Categories,
+		"total":      page.Total,
+		"limit":      page.Limit,
+		"offset":     page.Offset,
 	})
 }
 

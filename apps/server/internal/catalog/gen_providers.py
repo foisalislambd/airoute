@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -65,6 +66,13 @@ def chat_models(ids: list[str]) -> list[str]:
     return kept
 
 
+def is_free(provider: dict) -> bool:
+    text = " ".join(
+        str(provider.get(key) or "") for key in ("name", "slug", "notes")
+    )
+    return re.search(r"\bfree\b", text, re.I) is not None
+
+
 def go_string(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
@@ -103,6 +111,9 @@ def main() -> None:
         lines.append(f"\t\t\tDefaultBaseURL: {go_string(base)},")
         lines.append(f"\t\t\tDocsURL: {go_string(website)},")
         lines.append(f"\t\t\tSummary: {go_string(summary)},")
+        lines.append(f"\t\t\tCategory: {go_string(provider.get('category') or 'Other')},")
+        if is_free(provider):
+            lines.append("\t\t\tFree: true,")
         lines.append("\t\t\tModels: []Model{")
         for model_id in model_ids:
             lines.append("\t\t\t\t{")

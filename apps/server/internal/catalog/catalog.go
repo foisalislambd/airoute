@@ -23,6 +23,8 @@ type Provider struct {
 	DefaultBaseURL string
 	DocsURL        string
 	Summary        string
+	Category       string
+	Free           bool
 	Models         []Model
 }
 
@@ -49,6 +51,7 @@ func OpenAI() Provider {
 		DefaultBaseURL: "https://api.openai.com/v1",
 		DocsURL:        "https://developers.openai.com/api/docs/models",
 		Summary:        "Official OpenAI chat API. Requests use your key on this computer.",
+		Category:       "Frontier",
 		Models: []Model{
 			{
 				UpstreamID:          "gpt-6-astra",

@@ -1,5 +1,5 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
-import { listProviders, type Provider } from "@/lib/api";
+import { listProviders, type Provider, type ProviderCategory } from "@/lib/api";
 import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -9,6 +9,8 @@ const PAGE_SIZE = 18;
 export default function ProvidersPage() {
   const [query, setQuery] = useState("");
   const [debounced, setDebounced] = useState("");
+  const [category, setCategory] = useState("all");
+  const [categories, setCategories] = useState<ProviderCategory[]>([]);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -27,10 +29,11 @@ export default function ProvidersPage() {
     setLoading(true);
     setPaging(false);
     setError("");
-    listProviders({ q: debounced, limit: PAGE_SIZE, offset: 0 })
+    listProviders({ q: debounced, category, limit: PAGE_SIZE, offset: 0 })
       .then((page) => {
         if (generation.current !== request) return;
         setProviders(page.providers);
+        setCategories(page.categories ?? []);
         setTotal(page.total);
       })
       .catch((err: Error) => {
@@ -39,7 +42,7 @@ export default function ProvidersPage() {
       .finally(() => {
         if (generation.current === request) setLoading(false);
       });
-  }, [debounced]);
+  }, [debounced, category]);
 
   useEffect(() => {
     const node = bottomRef.current;
@@ -53,7 +56,7 @@ export default function ProvidersPage() {
         started = true;
         observer.disconnect();
         setPaging(true);
-        listProviders({ q: debounced, limit: PAGE_SIZE, offset: providers.length })
+        listProviders({ q: debounced, category, limit: PAGE_SIZE, offset: providers.length })
           .then((page) => {
             if (generation.current !== request) return;
             setProviders((current) => appendUnique(current, page.providers));
@@ -70,7 +73,7 @@ export default function ProvidersPage() {
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, [debounced, loading, providers.length, total]);
+  }, [category, debounced, loading, providers.length, total]);
 
   return (
     <div>
@@ -90,6 +93,30 @@ export default function ProvidersPage() {
           </label>
         }
       />
+      {categories.length > 0 && (
+        <div className="mb-4 flex flex-wrap gap-2">
+          {categories.map((item) => {
+            const active = category === item.id;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setCategory(item.id)}
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
+                  active
+                    ? "border-brand-500 bg-brand-500 text-white"
+                    : "border-gray-200 bg-white text-gray-600 hover:border-brand-300 dark:border-gray-700 dark:bg-white/5 dark:text-gray-300"
+                }`}
+              >
+                {item.label}
+                <span className={active ? "text-white/80" : "text-gray-400"}>
+                  {item.ready}/{item.total}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      )}
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       {(debounced || total > 0) && (
         <p className="mb-4 text-sm text-gray-500">
@@ -99,7 +126,9 @@ export default function ProvidersPage() {
       {loading && providers.length === 0 ? (
         <div className="panel-card panel-card-body text-sm text-gray-500">Loading providers…</div>
       ) : providers.length === 0 ? (
-        <div className="panel-card panel-card-body text-sm text-gray-500">No providers match that search.</div>
+        <div className="panel-card panel-card-body text-sm text-gray-500">
+          {debounced ? "No providers match that search." : "No providers in this category."}
+        </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {providers.map((provider) => (
