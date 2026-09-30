@@ -199,7 +199,7 @@ export default function PlaygroundPage() {
   }
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col bg-white dark:bg-gray-900">
+    <div className="relative flex min-h-0 flex-1 flex-col bg-white dark:bg-gray-900">
       <div className="flex h-14 shrink-0 items-center gap-3 border-b border-gray-200 px-4 dark:border-gray-800">
         <ModelMenu models={models} names={names} value={modelId} onChange={setModelId} />
         <button
@@ -223,7 +223,7 @@ export default function PlaygroundPage() {
           const el = event.currentTarget;
           stick.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
         }}
-        className="panel-scrollbar min-h-0 flex-1 overflow-y-auto"
+        className="panel-scrollbar min-h-0 flex-1 overflow-y-auto pb-20"
       >
         {loadError ? (
           <p className="px-6 py-8 text-sm text-error-500">{loadError}</p>
@@ -261,11 +261,11 @@ export default function PlaygroundPage() {
           event.preventDefault();
           void send();
         }}
-        className="shrink-0 border-t border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 px-4 pb-4"
       >
-        <div className="mx-auto w-full max-w-3xl rounded-2xl border border-gray-200 bg-gray-50 p-2 dark:border-gray-700 dark:bg-white/5">
+        <div className="pointer-events-auto mx-auto w-full max-w-3xl rounded-3xl border border-gray-200 bg-white px-2 py-1.5 shadow-lg dark:border-gray-700 dark:bg-gray-900">
           {files.length > 0 && (
-            <div className="mb-2 flex flex-wrap gap-2 px-1">
+            <div className="mb-1.5 flex flex-wrap gap-2 px-1 pt-1">
               {files.map((file) => (
                 <button
                   key={file.url}
@@ -275,9 +275,9 @@ export default function PlaygroundPage() {
                   title={`Remove ${file.name}`}
                 >
                   {file.mime.startsWith("image/") ? (
-                    <img src={file.url} alt="" className="h-14 w-14 object-cover" />
+                    <img src={file.url} alt="" className="h-12 w-12 object-cover" />
                   ) : (
-                    <span className="flex h-14 max-w-36 items-center px-2 text-left text-[11px] text-gray-600 dark:text-gray-300">{file.name}</span>
+                    <span className="flex h-12 max-w-36 items-center px-2 text-left text-[11px] text-gray-600 dark:text-gray-300">{file.name}</span>
                   )}
                   <span className="absolute right-1 top-1 rounded-full bg-gray-900/70 p-0.5 text-white opacity-0 group-hover:opacity-100">
                     <X className="h-3 w-3" />
@@ -286,24 +286,10 @@ export default function PlaygroundPage() {
               ))}
             </div>
           )}
-          <textarea
-            value={prompt}
-            onChange={(event) => setPrompt(event.target.value)}
-            ref={inputRef}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
-                event.preventDefault();
-                void send();
-              }
-            }}
-            rows={1}
-            placeholder={mediaKind ? "Describe what to generate" : "Message"}
-            className="max-h-40 min-h-11 w-full resize-none bg-transparent px-2 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-400 dark:text-white"
-          />
-          <div className="flex items-center gap-2 px-1 pb-1">
-            <label className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg px-2 text-xs text-gray-500 hover:bg-gray-200/70 dark:hover:bg-white/10">
-              <Paperclip className="h-3.5 w-3.5" />
-              Attach
+          <div className="flex items-end gap-1">
+            <label className="mb-0.5 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full text-gray-500 hover:bg-gray-100 dark:hover:bg-white/10" title="Attach">
+              <Paperclip className="h-4 w-4" />
+              <span className="sr-only">Attach</span>
               <input
                 type="file"
                 multiple
@@ -314,16 +300,29 @@ export default function PlaygroundPage() {
                 }}
               />
             </label>
-            <span className="text-[11px] text-gray-400">{mediaKind ? kind : "Enter to send"}</span>
+            <textarea
+              value={prompt}
+              onChange={(event) => setPrompt(event.target.value)}
+              ref={inputRef}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
+                  event.preventDefault();
+                  void send();
+                }
+              }}
+              rows={1}
+              placeholder={mediaKind ? "Describe what to generate" : "Message"}
+              className="max-h-32 min-h-8 w-full resize-none bg-transparent px-1 py-1.5 text-sm leading-5 text-gray-900 outline-none placeholder:text-gray-400 dark:text-white"
+            />
             {busy ? (
-              <button type="button" onClick={stop} className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900" aria-label="Stop">
+              <button type="button" onClick={stop} className="mb-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900" aria-label="Stop">
                 <Square className="h-3.5 w-3.5 fill-current" />
               </button>
             ) : (
               <button
                 type="submit"
                 disabled={!modelId || (!prompt.trim() && files.length === 0)}
-                className="ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-brand-500 text-white hover:bg-brand-600 disabled:opacity-40"
+                className="mb-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-500 text-white hover:bg-brand-600 disabled:opacity-40"
                 aria-label="Send"
               >
                 <ArrowUp className="h-4 w-4" />
