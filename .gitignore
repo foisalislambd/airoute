@@ -17,4 +17,9 @@ apps/desktop/data
 bin
 coverage.out
 
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
 OmniRoute

@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Compare package version with published releases
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/release_plan.py
+
+      - uses: actions/setup-node@v4
+        if: steps.plan.outputs.release == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-go@v5
+        if: steps.plan.outputs.release == 'true'
+        with:
+          go-version-file: go.work
+
+      - name: Build the panel
+        if: steps.plan.outputs.release == 'true'
+        run: |
+          npm ci
+          npm run build:panel
+
+      - name: Build Windows, Linux, and macOS apps
+        if: steps.plan.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.plan.outputs.version }}
+        run: bash .github/scripts/build_apps.sh
+
+      - name: Create the GitHub release and tag
+        if: steps.plan.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.plan.outputs.tag }}
+        run: |
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "AIRoute $TAG" \
+            --notes-file dist/release/notes.md \
+            dist/release/AIRoute-*.zip
