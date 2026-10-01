@@ -322,7 +322,9 @@ export default function ProviderPage() {
                         )}
                       </p>
                       <p className="font-mono text-xs text-gray-500">{model.id}</p>
-                      <p className="mt-1 max-w-md text-xs text-gray-500">{model.description}</p>
+                      <p title={model.description} className="mt-1 max-w-[16rem] truncate text-xs text-gray-500 sm:max-w-xs lg:max-w-sm">
+                        {model.description}
+                      </p>
                     </td>
                     <td className="px-4 py-3">
                       <Modalities inputs={model.inputs} outputs={model.outputs} />
