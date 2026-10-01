@@ -53,7 +53,7 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 		if source == "playground" {
 			_ = s.Store.AddLog(store.LogInput{
 				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
 			})
 			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
 			return
@@ -71,7 +71,7 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 		message := upstreamErrorMessage(payload)
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message,
+			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message, Request: string(request),
 		})
 		if source == "playground" {
 			writePlaygroundFailure(w, resp.StatusCode, message, request)
@@ -85,7 +85,7 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 	text := textForProtocol(route.Protocol, payload)
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
+		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), Request: string(request),
 	})
 	if source == "playground" {
 		writeChatChunk(w, route.Model.ID, text, request)

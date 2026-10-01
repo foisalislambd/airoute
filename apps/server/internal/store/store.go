@@ -94,6 +94,7 @@ type RequestLog struct {
 	PromptTokens     int    `json:"promptTokens"`
 	CompletionTokens int    `json:"completionTokens"`
 	ErrorMessage     string `json:"errorMessage"`
+	RequestJSON      string `json:"requestJson,omitempty"`
 }
 
 type LogInput struct {
@@ -105,6 +106,24 @@ type LogInput struct {
 	PromptTokens     int
 	CompletionTokens int
 	ErrorMessage     string
+	Request          string
+}
+
+type UsageRow struct {
+	ModelID          string  `json:"modelId"`
+	Requests         int     `json:"requests"`
+	Errors           int     `json:"errors"`
+	PromptTokens     int     `json:"promptTokens"`
+	CompletionTokens int     `json:"completionTokens"`
+	CostUSD          float64 `json:"costUsd"`
+}
+
+type Fallback struct {
+	ID        string   `json:"id"`
+	Name      string   `json:"name"`
+	ModelID   string   `json:"modelId"`
+	Models    []string `json:"models"`
+	CreatedAt string   `json:"createdAt"`
 }
 
 func Open(path string, key []byte) (*Store, error) {
@@ -208,7 +227,23 @@ CREATE TABLE IF NOT EXISTS request_logs (
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
 	}
-	return nil
+	_, err = s.db.Exec(`ALTER TABLE request_logs ADD COLUMN request_json TEXT NOT NULL DEFAULT ''`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
+	_, err = s.db.Exec(`
+CREATE TABLE IF NOT EXISTS fallbacks (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS fallback_steps (
+  fallback_id TEXT NOT NULL,
+  position INTEGER NOT NULL,
+  model_id TEXT NOT NULL,
+  PRIMARY KEY (fallback_id, position)
+);`)
+	return err
 }
 
 func (s *Store) syncCatalog() error {
@@ -946,10 +981,10 @@ func (s *Store) AddLog(input LogInput) error {
 	_, err := s.db.Exec(`
 INSERT INTO request_logs (
   created_at, source, router_key_id, model_id, status_code, latency_ms,
-  prompt_tokens, completion_tokens, error_message
-) VALUES (?, ?, NULLIF(?, ''), ?, ?, ?, ?, ?, ?)`,
+  prompt_tokens, completion_tokens, error_message, request_json
+) VALUES (?, ?, NULLIF(?, ''), ?, ?, ?, ?, ?, ?, ?)`,
 		time.Now().UTC().Format(time.RFC3339), input.Source, input.RouterKeyID, input.ModelID,
-		input.StatusCode, input.LatencyMS, input.PromptTokens, input.CompletionTokens, input.ErrorMessage)
+		input.StatusCode, input.LatencyMS, input.PromptTokens, input.CompletionTokens, input.ErrorMessage, input.Request)
 	return err
 }
 

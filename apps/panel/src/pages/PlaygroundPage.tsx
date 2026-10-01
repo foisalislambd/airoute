@@ -76,6 +76,7 @@ export default function PlaygroundPage() {
     let cancel = false;
     Promise.all(
       slugs.map(async (slug) => {
+        if (slug === "fallback") return ["fallback", "Fallback"] as const;
         try {
           const provider = await getProvider(slug);
           return [slug, provider.displayName] as const;

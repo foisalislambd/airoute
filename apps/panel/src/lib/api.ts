@@ -185,6 +185,57 @@ export function listActivity() {
   return request<{ activity: ActivityItem[] }>("/api/activity")
 }
 
+export function getActivity(id: string) {
+  return request<ActivityItem & { requestJson?: string }>(`/api/activity/${id}`)
+}
+
+export function clearActivity() {
+  return request<void>("/api/activity", { method: "DELETE" })
+}
+
+export type UsageRow = {
+  modelId: string
+  requests: number
+  errors: number
+  promptTokens: number
+  completionTokens: number
+  costUsd: number
+}
+
+export function getUsage() {
+  return request<{
+    rows: UsageRow[]
+    totals: { requests: number; errors: number; promptTokens: number; completionTokens: number; costUsd: number }
+  }>("/api/usage")
+}
+
+export function getSettings() {
+  return request<{ dataDir: string; address: string; logCount: number }>("/api/settings")
+}
+
+export type FallbackChain = {
+  id: string
+  name: string
+  modelId: string
+  models: string[]
+  createdAt: string
+}
+
+export function listFallbacks() {
+  return request<{ fallbacks: FallbackChain[] }>("/api/fallbacks")
+}
+
+export function saveFallback(name: string, models: string[]) {
+  return request<FallbackChain>("/api/fallbacks", {
+    method: "POST",
+    body: JSON.stringify({ name, models }),
+  })
+}
+
+export function deleteFallback(id: string) {
+  return request<void>(`/api/fallbacks/${id}`, { method: "DELETE" })
+}
+
 export function formatTokens(value: number) {
   if (!value) return "—"
   if (value >= 1_000_000) {

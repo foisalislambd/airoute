@@ -19,21 +19,23 @@ import (
 )
 
 type Server struct {
-	Store  *Store
-	OpenAI *openai.Client
-	WebDir string
-	Addr   string
+	Store   *Store
+	OpenAI  *openai.Client
+	WebDir  string
+	Addr    string
+	DataDir string
 }
 
 // Store is the persistence surface the HTTP layer needs.
 type Store = store.Store
 
-func New(db *store.Store, webDir, addr string) *Server {
+func New(db *store.Store, webDir, addr, dataDir string) *Server {
 	return &Server{
-		Store:  db,
-		OpenAI: openai.NewClient(),
-		WebDir: webDir,
-		Addr:   addr,
+		Store:   db,
+		OpenAI:  openai.NewClient(),
+		WebDir:  webDir,
+		Addr:    addr,
+		DataDir: dataDir,
 	}
 }
 
@@ -53,6 +55,13 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("DELETE /api/keys/{id}", s.deleteKey)
 	mux.HandleFunc("GET /api/models", s.listActiveModels)
 	mux.HandleFunc("GET /api/activity", s.activity)
+	mux.HandleFunc("GET /api/activity/{id}", s.activityItem)
+	mux.HandleFunc("DELETE /api/activity", s.clearActivity)
+	mux.HandleFunc("GET /api/usage", s.usage)
+	mux.HandleFunc("GET /api/settings", s.settings)
+	mux.HandleFunc("GET /api/fallbacks", s.listFallbacks)
+	mux.HandleFunc("POST /api/fallbacks", s.saveFallback)
+	mux.HandleFunc("DELETE /api/fallbacks/{id}", s.deleteFallback)
 	mux.HandleFunc("POST /api/playground/chat", s.playground)
 	mux.HandleFunc("POST /api/playground/media", s.playgroundMedia)
 	mux.HandleFunc("GET /v1/models", s.gatewayModels)
@@ -203,6 +212,24 @@ func (s *Server) listActiveModels(w http.ResponseWriter, _ *http.Request) {
 		writeAPIError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	if chains, err := s.Store.ListFallbacks(); err == nil {
+		for _, chain := range chains {
+			if len(chain.Models) < 2 {
+				continue
+			}
+			items = append(items, store.Model{
+				ID:           chain.ModelID,
+				ProviderSlug: "fallback",
+				UpstreamID:   chain.ID,
+				DisplayName:  chain.Name,
+				Description:  strings.Join(chain.Models, " → "),
+				Kind:         catalog.KindChat,
+				Inputs:       "text",
+				Outputs:      "text",
+				Active:       true,
+			})
+		}
+	}
 	writeJSON(w, http.StatusOK, map[string]any{"models": items})
 }
 
@@ -309,6 +336,16 @@ func (s *Server) gatewayModels(w http.ResponseWriter, r *http.Request) {
 			"owned_by": item.ProviderSlug,
 		})
 	}
+	if chains, err := s.Store.ListFallbacks(); err == nil {
+		for _, chain := range chains {
+			data = append(data, map[string]any{
+				"id":       chain.ModelID,
+				"object":   "model",
+				"created":  0,
+				"owned_by": "fallback",
+			})
+		}
+	}
 	writeJSON(w, http.StatusOK, map[string]any{"object": "list", "data": data})
 }
 
@@ -357,16 +394,25 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		return
 	}
 
-	route, err := s.Store.ResolveRoute(meta.Model)
+	routes, err := s.Store.ResolveChain(meta.Model)
 	if errors.Is(err, store.ErrNotFound) {
 		message := "The model `" + meta.Model + "` does not exist."
 		s.failChat(w, source, keyID, meta.Model, http.StatusNotFound, "invalid_request_error", "model_not_found", message, started)
+		return
+	}
+	if errors.Is(err, store.ErrFallbackEmpty) {
+		s.failChat(w, source, keyID, meta.Model, http.StatusBadRequest, "invalid_request_error", "model_not_found", err.Error(), started)
 		return
 	}
 	if err != nil {
 		s.failChat(w, source, keyID, meta.Model, http.StatusInternalServerError, "server_error", "internal_error", err.Error(), started)
 		return
 	}
+	if len(routes) > 1 {
+		s.proxyFallback(w, r, source, keyID, routes, body, started)
+		return
+	}
+	route := routes[0]
 	route.APIKey = providerCredential(route.Model.ProviderSlug, route.APIKey)
 	if !routeReady(route) {
 		message := routeBlockedMessage(meta.Model, route)
@@ -390,10 +436,14 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		return
 	}
 
+	s.finishOpenAI(w, r, source, keyID, route, body, started, false)
+}
+
+func (s *Server) finishOpenAI(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time, retry bool) bool {
 	upstreamBody, stream, err := openai.RewriteChatModel(body, route.Model.UpstreamID)
 	if err != nil {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
-		return
+		return true
 	}
 
 	path := "/chat/completions"
@@ -401,8 +451,15 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	if route.Model.ProviderSlug == "opencode" && openai.OpencodeFree(route.Model.UpstreamID) {
 		upstreamBody, path, err = openai.PrepareOpencode(upstreamBody, route.Model.UpstreamID)
 		if err != nil {
+			if retry {
+				_ = s.Store.AddLog(store.LogInput{
+					Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+					StatusCode: http.StatusBadRequest, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+				})
+				return false
+			}
 			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
-			return
+			return true
 		}
 		responsesAPI = path == "/responses"
 		stream = true
@@ -423,36 +480,55 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	request := providerRequest(http.MethodPost, endpoint, header, upstreamBody)
 	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, upstreamBody, header)
 	if err != nil {
-		if source == "playground" {
-			_ = s.Store.AddLog(store.LogInput{
-				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
-			})
-			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
-			return
+		_ = s.Store.AddLog(store.LogInput{
+			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+			StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+		})
+		if retry {
+			return false
 		}
-		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
-		return
+		if source == "playground" {
+			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
+			return true
+		}
+		writeOpenAIError(w, http.StatusBadGateway, err.Error(), "server_error", "upstream_error")
+		return true
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode >= 400 && retry {
+		payload, _ := io.ReadAll(io.LimitReader(resp.Body, 1<<20))
+		message := upstreamErrorMessage(payload)
+		_ = s.Store.AddLog(store.LogInput{
+			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message, Request: string(request),
+		})
+		return false
+	}
 
 	if responsesAPI && resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		payload, err := io.ReadAll(io.LimitReader(resp.Body, 20<<20))
 		if err != nil {
+			if retry {
+				_ = s.Store.AddLog(store.LogInput{
+					Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+					StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+				})
+				return false
+			}
 			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
-			return
+			return true
 		}
 		text := openai.ResponsesText(payload)
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
+			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), Request: string(request),
 		})
 		if stream || source == "playground" {
 			writeChatChunk(w, route.Model.ID, text, request)
-			return
+			return true
 		}
 		writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, 0, 0))
-		return
+		return true
 	}
 
 	if stream && resp.StatusCode >= 200 && resp.StatusCode < 300 {
@@ -471,15 +547,22 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
-			PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message,
+			PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message, Request: string(request),
 		})
-		return
+		return true
 	}
 
 	payload, err := io.ReadAll(io.LimitReader(resp.Body, 20<<20))
 	if err != nil {
+		if retry {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+			})
+			return false
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
-		return
+		return true
 	}
 	prompt, completion := openai.UsageFromCompletion(payload)
 	message := ""
@@ -489,11 +572,11 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
-		PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message,
+		PromptTokens: prompt, CompletionTokens: completion, ErrorMessage: message, Request: string(request),
 	})
 	if source == "playground" && resp.StatusCode >= 400 {
 		writePlaygroundFailure(w, resp.StatusCode, message, request)
-		return
+		return true
 	}
 	if contentType := resp.Header.Get("Content-Type"); contentType != "" {
 		w.Header().Set("Content-Type", contentType)
@@ -502,6 +585,7 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	}
 	w.WriteHeader(resp.StatusCode)
 	_, _ = w.Write(payload)
+	return true
 }
 
 func (s *Server) failChat(w http.ResponseWriter, source, keyID, modelID string, status int, typ, code, message string, started time.Time) {

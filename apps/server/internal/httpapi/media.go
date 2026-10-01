@@ -86,7 +86,7 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 		if source == "playground" {
 			_ = s.Store.AddLog(store.LogInput{
 				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
 			})
 			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
 			return
@@ -100,7 +100,7 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 	}
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-		StatusCode: status, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message,
+		StatusCode: status, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message, Request: string(request),
 	})
 	if status >= 400 {
 		if source == "playground" {
@@ -225,7 +225,7 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 		if source == "playground" {
 			_ = s.Store.AddLog(store.LogInput{
 				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(),
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
 			})
 			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
 			return
@@ -243,7 +243,7 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 		message := upstreamErrorMessage(payload)
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
-			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message,
+			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message, Request: string(request),
 		})
 		if source == "playground" {
 			writePlaygroundFailure(w, resp.StatusCode, message, request)
@@ -261,7 +261,7 @@ func (s *Server) proxyNativeChat(w http.ResponseWriter, r *http.Request, source,
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
-		PromptTokens: prompt, CompletionTokens: completion,
+		PromptTokens: prompt, CompletionTokens: completion, Request: string(request),
 	})
 	if meta.Stream || source == "playground" {
 		var shown json.RawMessage

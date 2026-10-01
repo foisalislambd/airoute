@@ -1,6 +1,7 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
 import { listActivity, type ActivityItem } from "@/lib/api";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ActivityPage() {
   const [items, setItems] = useState<ActivityItem[]>([]);
@@ -37,8 +38,12 @@ export default function ActivityPage() {
               </thead>
               <tbody>
                 {items.map((item) => (
-                  <tr key={item.id} className="border-b border-gray-100 last:border-0 dark:border-gray-800">
-                    <td className="px-4 py-3 text-gray-500">{item.createdAt.replace("T", " ").replace("Z", "")}</td>
+                  <tr key={item.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-white/5">
+                    <td className="px-4 py-3 text-gray-500">
+                      <Link to={`/activity/${item.id}`} className="hover:text-brand-500">
+                        {item.createdAt.replace("T", " ").replace("Z", "")}
+                      </Link>
+                    </td>
                     <td className="px-4 py-3">{item.source}</td>
                     <td className="px-4 py-3 font-mono text-xs">{item.modelId || "—"}</td>
                     <td className={`px-4 py-3 ${item.statusCode >= 400 ? "text-error-500" : "text-success-600"}`}>

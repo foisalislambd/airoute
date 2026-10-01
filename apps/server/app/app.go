@@ -48,7 +48,7 @@ func Run(ctx context.Context, opt Options) error {
 	defer db.Close()
 
 	webDir := FindWebDir(opt.WebDir)
-	api := httpapi.New(db, webDir, opt.Addr)
+	api := httpapi.New(db, webDir, opt.Addr, opt.DataDir)
 	server := &http.Server{
 		Addr:              opt.Addr,
 		Handler:           api.Handler(),
