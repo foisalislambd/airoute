@@ -14,7 +14,7 @@ export function PanelShell() {
       <div className="hidden shrink-0 transition-[width] duration-300 ease-in-out lg:block" style={{ width: sidebarWidth }} />
       <PanelSidebar />
       <PanelBackdrop />
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+      <div className="contain-paint flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
         <PanelHeader />
         <main className={chat ? "flex min-h-0 flex-1 flex-col overflow-hidden" : "panel-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden"}>
           {chat ? (
