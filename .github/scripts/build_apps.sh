@@ -52,4 +52,6 @@ Each archive is the desktop app plus the panel folder it serves.
 The app listens on \`127.0.0.1:8787\`. Data stays in the local airoute-router folder.
 
 Install the same version from npm with \`npm install -g airoute\`, then run \`airoute\`. The web panel opens in the browser. GitHub Packages has \`@foisalislambd/airoute\`.
+
+Docker: \`docker run -d --name airoute -p 127.0.0.1:8787:8787 -v airoute-data:/data foisalislambd/airoute:latest\`. The panel is at http://127.0.0.1:8787.
 EOF

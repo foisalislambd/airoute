@@ -8,6 +8,7 @@ permissions:
   contents: write
   id-token: write
   packages: write
+  actions: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -20,6 +21,7 @@ jobs:
       contents: write
       id-token: write
       packages: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,6 +60,43 @@ jobs:
       - name: Build the npm package
         if: steps.plan.outputs.release == 'true'
         run: node scripts/build_npm.mjs
+
+      - name: Publish the Docker image
+        if: steps.plan.outputs.release == 'true'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        if: steps.plan.outputs.release == 'true'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Log in to GitHub Container Registry
+        if: steps.plan.outputs.release == 'true'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push linux/amd64 and linux/arm64
+        if: steps.plan.outputs.release == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            foisalislambd/airoute:latest
+            foisalislambd/airoute:${{ steps.plan.outputs.version }}
+            ghcr.io/foisalislambd/airoute:latest
+            ghcr.io/foisalislambd/airoute:${{ steps.plan.outputs.version }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/foisalislambd/airoute
+            org.opencontainers.image.licenses=MIT
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Publish to npm and GitHub Packages
         if: steps.plan.outputs.release == 'true'

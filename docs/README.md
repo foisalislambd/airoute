@@ -5,6 +5,7 @@ AIRoute runs on your computer and gives Cursor, scripts, and other tools one loc
 | Guide | Read this when you want to |
 | --- | --- |
 | [Install](install.md) | Get the router running from npm or a desktop download |
+| [Docker](docker.md) | Run the panel and API in a container |
 | [Panel](panel.md) | Add keys, turn models on, and look around the web page |
 | [Use with Cursor](use-with-cursor.md) | Point Cursor, or any OpenAI client, at AIRoute |
 | [Command line](command-line.md) | Start, stop, and check the npm command |

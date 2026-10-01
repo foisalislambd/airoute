@@ -1,0 +1,15 @@
+.git
+.github
+node_modules
+**/node_modules
+apps/panel/dist
+apps/desktop
+docs
+dist
+packages/cli/vendor
+packages/cli/panel
+**/*_test.go
+*.db
+*.db-wal
+*.db-shm
+secret.key

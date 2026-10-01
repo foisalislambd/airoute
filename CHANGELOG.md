@@ -2,6 +2,11 @@
 
 Versions follow the `version` field in the root `package.json`. Releases are published from `main`.
 
+## 1.1.2
+
+- Run AIRoute with Docker. The image is `foisalislambd/airoute` on Docker Hub and `ghcr.io/foisalislambd/airoute` on GitHub.
+- The container listens on port 8787. Data is stored in `/data`.
+
 ## 1.1.0
 
 This is the first release of the local Go router and the web panel.

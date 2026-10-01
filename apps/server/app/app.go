@@ -109,6 +109,9 @@ func validateListenAddr(addr string) error {
 	if strings.EqualFold(host, "localhost") {
 		return nil
 	}
+	if os.Getenv("AIROUTE_IN_DOCKER") == "1" && (host == "0.0.0.0" || host == "::") {
+		return nil
+	}
 	ip := net.ParseIP(host)
 	if ip == nil || !ip.IsLoopback() {
 		return errors.New("listen address must stay on this computer")

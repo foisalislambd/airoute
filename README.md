@@ -26,6 +26,17 @@ That starts the router and opens the panel in your browser. The same version is 
 
 Desktop builds are attached to each [GitHub release](https://github.com/foisalislambd/airoute/releases). Unzip the archive for your system and run `AIRoute` (`AIRoute.exe` on Windows). The panel folder in that archive is the page the app serves.
 
+Docker uses the same panel and API. The host port stays on this computer:
+
+```bash
+docker run -d --name airoute \
+  -p 127.0.0.1:8787:8787 \
+  -v airoute-data:/data \
+  foisalislambd/airoute:latest
+```
+
+The image is also `ghcr.io/foisalislambd/airoute`. Details are in [docs/docker.md](docs/docker.md).
+
 ## First setup
 
 1. Open the panel.
