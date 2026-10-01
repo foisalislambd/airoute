@@ -11,6 +11,8 @@ The router listens only on this machine, at `http://127.0.0.1:8787`. Nothing in 
 
 The panel is where you add provider keys, turn models on, and create the router key your tools will use. The API is what Cursor calls.
 
+Longer guides for install, the panel, Cursor, the desktop app, the API, and development are in [docs](docs/README.md).
+
 ## Install
 
 Node.js 20 or newer is required for the npm package.
