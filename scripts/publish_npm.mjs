@@ -125,7 +125,7 @@ try {
   staged.name = `@${owner}/airoute`;
   staged.repository = {
     type: "git",
-    url: `git+https://github.com/${repo}.git`,
+    url: `https://github.com/${repo}.git`,
   };
   staged.publishConfig = {
     registry: "https://npm.pkg.github.com",
