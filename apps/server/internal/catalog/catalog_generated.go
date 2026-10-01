@@ -10595,7 +10595,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://opencode.ai/zen/v1",
 			DocsURL: "https://opencode.ai",
-			Summary: "No API key required — public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models.; No API key required — uses OpenCode's public free endpoint.; OpenCode Free uses the public OpenCode endpoint (https://opencode.ai/zen/v1). No signup or API key needed. Rate limits apply.",
+			Summary: "No API key required public OpenCode endpoint with Kimi, GLM, Qwen, MiMo, MiniMax models.; No API key required uses OpenCode's public free endpoint.; OpenCode Free uses the public OpenCode endpoint (https://opencode.ai/zen/v1). No signup or API key needed. Rate limits apply.",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -10668,7 +10668,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "https://duck.ai/duckchat/v1",
 			DocsURL: "https://duckduckgo.com/duckchat",
-			Summary: "Free — anonymous access to multiple AI models via DuckDuckGo.; No credentials required — DuckDuckGo AI Chat is anonymous and free.",
+			Summary: "Free anonymous access to multiple AI models via DuckDuckGo.; No credentials required DuckDuckGo AI Chat is anonymous and free.",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -10717,7 +10717,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "https://playground.ai.cloudflare.com",
 			DocsURL: "https://playground.ai.cloudflare.com",
-			Summary: "Free — Cloudflare's AI Playground: GLM 5.2, Kimi K2.7 Code, DeepSeek V4 Pro, gpt-oss-120B and 16 more. No account, no API key.; No credentials required — anonymous browser sessions over a reverse-engineered cf_agent WebSocket protocol (Playwright transport).; Cloudflare AI Playground uses a reverse-engineered anonymous WebSocket protocol (no official API). Requires Playwright with a Chromium browser on first reque…",
+			Summary: "Free Cloudflare's AI Playground: GLM 5.2, Kimi K2.7 Code, DeepSeek V4 Pro, gpt-oss-120B and 16 more. No account, no API key.; No credentials required anonymous browser sessions over a reverse-engineered cf_agent WebSocket protocol (Playwright transport).; Cloudflare AI Playground uses a reverse-engineered anonymous WebSocket protocol (no official API). Requires Playwright with a Chromium browser on first reque…",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -10850,7 +10850,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "https://amelia.chipotle.com",
 			DocsURL: "https://amelia.chipotle.com",
-			Summary: "Free — Chipotle's Pepper AI (IPsoft Amelia). Anonymous sessions, no API key. Rate-limited.; No credentials required. Uses Chipotle's public support chatbot via reverse-engineered SockJS/STOMP protocol.",
+			Summary: "Free Chipotle's Pepper AI (IPsoft Amelia). Anonymous sessions, no API key. Rate-limited.; No credentials required. Uses Chipotle's public support chatbot via reverse-engineered SockJS/STOMP protocol.",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -10869,7 +10869,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://veoaifree.com/wp-admin/admin-ajax.php",
 			DocsURL: "https://veoaifree.com",
-			Summary: "Free video generation — VEO 3.1, Seedance. 6 requests/hour.; No auth required. Rate limited to 6 requests/hour per IP.",
+			Summary: "Free video generation VEO 3.1, Seedance. 6 requests/hour.; No auth required. Rate limited to 6 requests/hour per IP.",
 			Category: "Image / Video",
 			Free: true,
 			KeyOptional: true,
@@ -10894,7 +10894,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "auggie://cli/stdio",
 			DocsURL: "https://augmentcode.com",
-			Summary: "Local passthrough — runs the Augment CLI (`auggie`) on this machine.; Augment (Auggie CLI) requires the `auggie` binary installed and authenticated locally (`auggie login`).",
+			Summary: "Local passthrough runs the Augment CLI (`auggie`) on this machine.; Augment (Auggie CLI) requires the `auggie` binary installed and authenticated locally (`auggie login`).",
 			Category: "No-auth",
 			KeyOptional: true,
 			Models: []Model{
@@ -11098,7 +11098,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://hermes.ai.unturf.com/v1",
 			DocsURL: "https://uncloseai.com",
-			Summary: "Free forever — no signup, no credit card. OpenAI-compatible endpoints.; No auth required. API accepts any non-empty string as key for identification. If older built-in models return 404, use Available Models → Import from /models or Auto-Sync; verified live model: solidrust/Hermes-3-Llama-3.1-8B-AWQ.; UncloseAI needs no API key. API accepts any non-empty string as key for identification. If older built-in models r…",
+			Summary: "Free forever no signup, no credit card. OpenAI-compatible endpoints.; No auth required. API accepts any non-empty string as key for identification. If older built-in models return 404, use Available Models → Import from /models or Auto-Sync; verified live model: solidrust/Hermes-3-Llama-3.1-8B-AWQ.; UncloseAI needs no API key. API accepts any non-empty string as key for identification. If older built-in models r…",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -11130,7 +11130,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://oai.aihorde.net/v1",
 			DocsURL: "https://aihorde.net",
-			Summary: "Crowdsourced inference from volunteer GPUs. Throughput is a shared queue, not a quota: there is no RPM/RPD cap, but waits grow when the network is busy.; No API key required — uses AI Horde's documented anonymous key. Adding a free aihorde.net key is optional and only buys higher queue priority (kudos).; AI Horde routes to volunteer-run workers, so chat and image jobs can take minutes and tool calling is unavailab…",
+			Summary: "Crowdsourced inference from volunteer GPUs. Throughput is a shared queue, not a quota: there is no RPM/RPD cap, but waits grow when the network is busy.; No API key required uses AI Horde's documented anonymous key. Adding a free aihorde.net key is optional and only buys higher queue priority (kudos).; AI Horde routes to volunteer-run workers, so chat and image jobs can take minutes and tool calling is unavailab…",
 			Category: "No-auth",
 			Free: true,
 			KeyOptional: true,
@@ -11346,7 +11346,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.openference.com/v1",
 			DocsURL: "https://openference.com",
-			Summary: "Free plan: 3-day trial with open-source models — no credit card required; Sign in with your Openference account to route requests through api.openference.com. An active plan is required for inference — OAuth may authenticate but return 402 without one.",
+			Summary: "Free plan: 3-day trial with open-source models no credit card required; Sign in with your Openference account to route requests through api.openference.com. An active plan is required for inference OAuth may authenticate but return 402 without one.",
 			Category: "OAuth",
 			Free: true,
 			Models: []Model{
@@ -12044,7 +12044,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://core-normal.trae.ai/api/remote/v1",
 			DocsURL: "https://trae.ai",
-			Summary: "Trae is an AI-native IDE by ByteDance (SOLO remote agent). Authorize via trae.ai in the popup, or sign in at solo.trae.ai and paste the Cloud-IDE-JWT (sent as 'Authorization: Cloud-IDE-JWT <token>', ~14-day lifetime) as the access token; web_id/biz_user_id/user_unique_id/scope/tenant/region propagate via providerSpecificData. No headless refresh for pasted tokens — re-paste on expiry.",
+			Summary: "Trae is an AI-native IDE by ByteDance (SOLO remote agent). Authorize via trae.ai in the popup, or sign in at solo.trae.ai and paste the Cloud-IDE-JWT (sent as 'Authorization: Cloud-IDE-JWT <token>', ~14-day lifetime) as the access token; web_id/biz_user_id/user_unique_id/scope/tenant/region propagate via providerSpecificData. No headless refresh for pasted tokens re-paste on expiry.",
 			Category: "OAuth",
 			Models: []Model{
 				{
@@ -12622,7 +12622,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://grok.com/rest/app-chat/conversations/new",
 			DocsURL: "https://grok.com",
-			Summary: "Paste the full grok.com cookie line from DevTools → Application → Cookies. Include both `sso` and `sso-rw` (e.g. `sso=...; sso-rw=...`) — Grok's anti-bot rejects `sso` on its own.",
+			Summary: "Paste the full grok.com cookie line from DevTools → Application → Cookies. Include both `sso` and `sso-rw` (e.g. `sso=...; sso-rw=...`) Grok's anti-bot rejects `sso` on its own.",
 			Category: "Web Cookie",
 			Models: []Model{
 				{
@@ -12811,7 +12811,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://www.meta.ai/api/graphql",
 			DocsURL: "https://www.meta.ai",
-			Summary: "Free with login — Meta AI platform with Llama models.; Paste your ecto_1_sess cookie AND the ecto1:... WS auth token from meta.ai. Capture the ecto1: token in DevTools → Network → WS → the clippy request's Authorization query param. Example: ecto_1_sess=4240a308...NVDg0; ecto1:ABCD...",
+			Summary: "Free with login Meta AI platform with Llama models.; Paste your ecto_1_sess cookie AND the ecto1:... WS auth token from meta.ai. Capture the ecto1: token in DevTools → Network → WS → the clippy request's Authorization query param. Example: ecto_1_sess=4240a308...NVDg0; ecto1:ABCD...",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -12906,7 +12906,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://chat.deepseek.com/api/v0/chat/completion",
 			DocsURL: "https://chat.deepseek.com",
-			Summary: "Paste your userToken from chat.deepseek.com — DevTools → Application → Local Storage → userToken",
+			Summary: "Paste your userToken from chat.deepseek.com DevTools → Application → Local Storage → userToken",
 			Category: "Web Cookie",
 			Models: []Model{
 				{
@@ -13393,7 +13393,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "https://arena.ai/nextjs-api/stream/create-evaluation",
 			DocsURL: "https://arena.ai",
-			Summary: "Free model comparison platform (formerly LMArena) at arena.ai — Direct-chat catalog of chat models (GPT, Claude, Gemini, Llama, …). No subscription required.; Paste the full Cookie header from arena.ai (DevTools → Network → request → Cookie). Include arena-auth-prod-v1.0/.1… and cf_clearance/__cf_bm when present.; if Arena still 403s, set providerSpecificData.recaptchaV3Toke…",
+			Summary: "Free model comparison platform (formerly LMArena) at arena.ai Direct-chat catalog of chat models (GPT, Claude, Gemini, Llama, …). No subscription required.; Paste the full Cookie header from arena.ai (DevTools → Network → request → Cookie). Include arena-auth-prod-v1.0/.1… and cf_clearance/__cf_bm when present.; if Arena still 403s, set providerSpecificData.recaptchaV3Toke…",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -13405,7 +13405,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://yuanbao.tencent.com/api",
 			DocsURL: "https://yuanbao.tencent.com",
-			Summary: "Free consumer web session — DeepSeek V3/R1 and Hunyuan / Hunyuan-T1, optional web search. No subscription required. Rate limits apply.; Log in to yuanbao.tencent.com, then paste the full Cookie header (DevTools → Network → any /api request → Request Headers → Cookie). It must contain hy_user and hy_token.",
+			Summary: "Free consumer web session DeepSeek V3/R1 and Hunyuan / Hunyuan-T1, optional web search. No subscription required. Rate limits apply.; Log in to yuanbao.tencent.com, then paste the full Cookie header (DevTools → Network → any /api request → Request Headers → Cookie). It must contain hy_user and hy_token.",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -13465,7 +13465,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://aistudio.tencent.ai/api",
 			DocsURL: "https://aistudio.tencent.ai",
-			Summary: "Free web session on Tencent AI Studio (aistudio.tencent.ai) — Direct chat with Hunyuan models (hy3-g, HunyuanDefault, Hunyuan3D). Cookie authentication.; Log in to aistudio.tencent.ai, open DevTools -> Network, copy any request Cookie header containing session tokens.",
+			Summary: "Free web session on Tencent AI Studio (aistudio.tencent.ai) Direct chat with Hunyuan models (hy3-g, HunyuanDefault, Hunyuan3D). Cookie authentication.; Log in to aistudio.tencent.ai, open DevTools -> Network, copy any request Cookie header containing session tokens.",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -13495,7 +13495,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://huggingface.co/chat/conversation",
 			DocsURL: "https://huggingface.co/chat",
-			Summary: "Free LLM chat — no subscription required. Rate limits apply.; Paste the full Cookie header from huggingface.co/chat (DevTools → Network → /chat/conversation → Request Headers → Cookie). It should include hf-chat and may also include token / aws-waf-token.",
+			Summary: "Free LLM chat no subscription required. Rate limits apply.; Paste the full Cookie header from huggingface.co/chat (DevTools → Network → /chat/conversation → Request Headers → Cookie). It should include hf-chat and may also include token / aws-waf-token.",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -13730,7 +13730,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://business.gemini.google/home",
 			DocsURL: "https://business.gemini.google",
-			Summary: "Free for Google Workspace enterprise accounts — enterprise Gemini models (Pro, Flash, image, video) via direct StreamGenerate HTTP API. No subscription required, just enterprise SSO.; From your enterprise account: open business.gemini.google/home/cid/{your-cid}, then copy __Secure-1PSID and __Secure-1PSIDTS cookies from DevTools → Application → Cookies. Paste as a cookie header below.",
+			Summary: "Free for Google Workspace enterprise accounts enterprise Gemini models (Pro, Flash, image, video) via direct StreamGenerate HTTP API. No subscription required, just enterprise SSO.; From your enterprise account: open business.gemini.google/home/cid/{your-cid}, then copy __Secure-1PSID and __Secure-1PSIDTS cookies from DevTools → Application → Cookies. Paste as a cookie header below.",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -13814,7 +13814,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolAnthropic,
 			DefaultBaseURL: "https://zenmux.ai/api/anthropic/v1",
 			DocsURL: "https://zenmux.ai",
-			Summary: "Free tier (5 Flows/5h, 38.64 Flows/week) — DeepSeek V3.2, GLM 4.7 Flash Free and more. No subscription required.; Login at zenmux.ai, then export all cookies using EditThisCookie or Cookie-Editor and paste the full Cookie header string here. Refresh every ~30 days.",
+			Summary: "Free tier (5 Flows/5h, 38.64 Flows/week) DeepSeek V3.2, GLM 4.7 Flash Free and more. No subscription required.; Login at zenmux.ai, then export all cookies using EditThisCookie or Cookie-Editor and paste the full Cookie header string here. Refresh every ~30 days.",
 			Category: "Web Cookie",
 			Free: true,
 			Models: []Model{
@@ -14541,7 +14541,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolSearch,
 			DefaultBaseURL: "https://context7.com",
 			DocsURL: "https://context7.com",
-			Summary: "API key optional (ctx7sk-...) — anonymous tier works without a key; a key raises the rate limit",
+			Summary: "API key optional (ctx7sk-...) anonymous tier works without a key; a key raises the rate limit",
 			Category: "Search",
 			KeyOptional: true,
 			Models: []Model{
@@ -14746,7 +14746,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolAudio,
 			DefaultBaseURL: "https://asr.api.speechmatics.com/v2",
 			DocsURL: "https://www.speechmatics.com",
-			Summary: "Free tier — 8 hours/month, no credit card required. Batch (async) mode only.",
+			Summary: "Free tier 8 hours/month, no credit card required. Batch (async) mode only.",
 			Category: "Audio",
 			Free: true,
 			Models: []Model{
@@ -14819,7 +14819,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.pioneer.ai/v1",
 			DocsURL: "https://pioneer.ai",
-			Summary: "$75 free usage credits — no credit card required; Pioneer AI by Fastino Labs. Free $75 usage credits, no credit card required. Use API key auth with a pio_sk_... key. Only open-tier models (Qwen3, Llama, Gemma, SmolLM) work directly — gated models (Claude/GPT/Gemini) require prior fine-tuning via the Pioneer platform.",
+			Summary: "$75 free usage credits no credit card required; Pioneer AI by Fastino Labs. Free $75 usage credits, no credit card required. Use API key auth with a pio_sk_... key. Only open-tier models (Qwen3, Llama, Gemma, SmolLM) work directly gated models (Claude/GPT/Gemini) require prior fine-tuning via the Pioneer platform.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -15539,7 +15539,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://inference-api.nousresearch.com/v1",
 			DocsURL: "https://portal.nousresearch.com/help",
-			Summary: "Free tier: 50 RPM, 500,000 TPM — no credit card; Use your Nous Portal API key.; Nous exposes an OpenAI-compatible /v1 surface with a large remote /models catalog. The /chat/completions endpoint requires a valid API key for programmatic inference.",
+			Summary: "Free tier: 50 RPM, 500,000 TPM no credit card; Use your Nous Portal API key.; Nous exposes an OpenAI-compatible /v1 surface with a large remote /models catalog. The /chat/completions endpoint requires a valid API key for programmatic inference.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -15711,7 +15711,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.openference.com/v1",
 			DocsURL: "https://openference.com",
-			Summary: "Free plan: 3-day trial with open-source models — no credit card required",
+			Summary: "Free plan: 3-day trial with open-source models no credit card required",
 			Category: "IaaS",
 			Free: true,
 			Models: []Model{
@@ -15729,7 +15729,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://ai.nube.sh/api/v1",
 			DocsURL: "https://nube.sh",
-			Summary: "OpenAI-compatible gateway (LiteLLM). Bring your own API key — models are resolved live from the account (passthrough).",
+			Summary: "OpenAI-compatible gateway (LiteLLM). Bring your own API key models are resolved live from the account (passthrough).",
 			Category: "IaaS",
 			Models: []Model{
 			},
@@ -15763,7 +15763,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.publicai.co/v1",
 			DocsURL: "https://publicai.co",
-			Summary: "Requires an API key — one-time signup credit, then paid",
+			Summary: "Requires an API key one-time signup credit, then paid",
 			Category: "IaaS",
 			Models: []Model{
 			},
@@ -15774,7 +15774,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.featherless.ai/v1",
 			DocsURL: "https://featherless.ai",
-			Summary: "Free tier available — no credit card required",
+			Summary: "Free tier available no credit card required",
 			Category: "IaaS",
 			Free: true,
 			Models: []Model{
@@ -15834,7 +15834,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api-inference.modelscope.cn/v1",
 			DocsURL: "https://modelscope.cn",
-			Summary: "Free tier via ModelScope API-Inference — Alibaba account required.",
+			Summary: "Free tier via ModelScope API-Inference Alibaba account required.",
 			Category: "IaaS",
 			Free: true,
 			Models: []Model{
@@ -16228,7 +16228,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://agentrouter.org/v1",
 			DocsURL: "https://agentrouter.org",
-			Summary: "$200 free credits on signup - multi-model routing gateway; Get $200 free credits at https://agentrouter.org/register — no credit card required.",
+			Summary: "$200 free credits on signup - multi-model routing gateway; Get $200 free credits at https://agentrouter.org/register no credit card required.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -16810,7 +16810,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.airforce/v1",
 			DocsURL: "https://api.airforce",
-			Summary: "55 free tier models including Grok-3, Claude 3.7, Qwen3, Kimi-K2, Gemini 2.5 Flash, DeepSeek-V3; Get your API key from https://panel.api.airforce — OpenAI-compatible endpoint at https://api.airforce/v1",
+			Summary: "55 free tier models including Grok-3, Claude 3.7, Qwen3, Kimi-K2, Gemini 2.5 Flash, DeepSeek-V3; Get your API key from https://panel.api.airforce OpenAI-compatible endpoint at https://api.airforce/v1",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -16965,7 +16965,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://bazaarlink.ai/api/v1",
 			DocsURL: "https://bazaarlink.ai",
-			Summary: "Free tier: 4M tokens/day per account with auto:free routing — zero-cost inference, no credit card required.; Use your BazaarLink API key (starts with sk-bl-) in Authorization: Bearer <key>. OpenAI SDK works with base URL https://bazaarlink.ai/api/v1. Models use provider/model-name format.; Create a free API key at https://bazaarlink.ai — model 'auto:free' routes to zero-cost inference. All models use the provider/…",
+			Summary: "Free tier: 4M tokens/day per account with auto:free routing zero-cost inference, no credit card required.; Use your BazaarLink API key (starts with sk-bl-) in Authorization: Bearer <key>. OpenAI SDK works with base URL https://bazaarlink.ai/api/v1. Models use provider/model-name format.; Create a free API key at https://bazaarlink.ai model 'auto:free' routes to zero-cost inference. All models use the provider/…",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -17275,7 +17275,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://inference.dahl.global/v1",
 			DocsURL: "https://inference.dahl.global",
-			Summary: "Free — MiniMax M2.7, Kimi K2.6. Click 'Add Account' to auto-generate a token, or add your own API key.; Click 'Add Account' to auto-generate a token, or add a manual API key.; Auto-generate a token or paste your own API key.; Dahl auto-generates tokens via https://inference.dahl.global/tokens. No signup needed. Rate limits apply. You can also add your own API key.",
+			Summary: "Free MiniMax M2.7, Kimi K2.6. Click 'Add Account' to auto-generate a token, or add your own API key.; Click 'Add Account' to auto-generate a token, or add a manual API key.; Auto-generate a token or paste your own API key.; Dahl auto-generates tokens via https://inference.dahl.global/tokens. No signup needed. Rate limits apply. You can also add your own API key.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -17299,7 +17299,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.freetheai.xyz/v1",
 			DocsURL: "https://freetheai.xyz",
-			Summary: "Free OpenAI-compatible gateway — sign up via Discord for an API key.; Join the FreeTheAi Discord to get your free API key.",
+			Summary: "Free OpenAI-compatible gateway sign up via Discord for an API key.; Join the FreeTheAi Discord to get your free API key.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -17325,7 +17325,7 @@ func generatedProviders() []Provider {
 		},
 		{
 			Slug: "g4f-groq",
-			DisplayName: "g4f.space — Groq",
+			DisplayName: "g4f.space Groq",
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://g4f.space/api/groq/v1",
 			DocsURL: "https://g4f.space",
@@ -17335,20 +17335,20 @@ func generatedProviders() []Provider {
 				{
 					UpstreamID: "llama-3.3-70b-versatile",
 					DisplayName: "llama-3.3-70b-versatile",
-					Description: "g4f.space — Groq model",
+					Description: "g4f.space Groq model",
 					Kind: KindChat,
 				},
 				{
 					UpstreamID: "llama-3.1-8b-instant",
 					DisplayName: "llama-3.1-8b-instant",
-					Description: "g4f.space — Groq model",
+					Description: "g4f.space Groq model",
 					Kind: KindChat,
 				},
 			},
 		},
 		{
 			Slug: "g4f-gemini",
-			DisplayName: "g4f.space — Gemini",
+			DisplayName: "g4f.space Gemini",
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://g4f.space/api/gemini/v1",
 			DocsURL: "https://g4f.space",
@@ -17358,20 +17358,20 @@ func generatedProviders() []Provider {
 				{
 					UpstreamID: "models/gemini-2.5-flash",
 					DisplayName: "models/gemini-2.5-flash",
-					Description: "g4f.space — Gemini model",
+					Description: "g4f.space Gemini model",
 					Kind: KindChat,
 				},
 				{
 					UpstreamID: "models/gemini-2.5-pro",
 					DisplayName: "models/gemini-2.5-pro",
-					Description: "g4f.space — Gemini model",
+					Description: "g4f.space Gemini model",
 					Kind: KindChat,
 				},
 			},
 		},
 		{
 			Slug: "g4f-pollinations",
-			DisplayName: "g4f.space — Pollinations",
+			DisplayName: "g4f.space Pollinations",
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://g4f.space/api/pollinations/v1",
 			DocsURL: "https://g4f.space",
@@ -17381,20 +17381,20 @@ func generatedProviders() []Provider {
 				{
 					UpstreamID: "openai",
 					DisplayName: "openai",
-					Description: "g4f.space — Pollinations model",
+					Description: "g4f.space Pollinations model",
 					Kind: KindChat,
 				},
 				{
 					UpstreamID: "openai-fast",
 					DisplayName: "openai-fast",
-					Description: "g4f.space — Pollinations model",
+					Description: "g4f.space Pollinations model",
 					Kind: KindChat,
 				},
 			},
 		},
 		{
 			Slug: "g4f-ollama",
-			DisplayName: "g4f.space — Ollama",
+			DisplayName: "g4f.space Ollama",
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://g4f.space/api/ollama/v1",
 			DocsURL: "https://g4f.space",
@@ -17404,14 +17404,14 @@ func generatedProviders() []Provider {
 				{
 					UpstreamID: "gemma3:4b",
 					DisplayName: "gemma3:4b",
-					Description: "g4f.space — Ollama model",
+					Description: "g4f.space Ollama model",
 					Kind: KindChat,
 				},
 			},
 		},
 		{
 			Slug: "g4f-nvidia",
-			DisplayName: "g4f.space — NVIDIA",
+			DisplayName: "g4f.space NVIDIA",
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://g4f.space/api/nvidia/v1",
 			DocsURL: "https://g4f.space",
@@ -17421,19 +17421,19 @@ func generatedProviders() []Provider {
 				{
 					UpstreamID: "nvidia/nemotron-3-nano-30b-a3b",
 					DisplayName: "nvidia/nemotron-3-nano-30b-a3b",
-					Description: "g4f.space — NVIDIA model",
+					Description: "g4f.space NVIDIA model",
 					Kind: KindChat,
 				},
 				{
 					UpstreamID: "z-ai/glm-5.2",
 					DisplayName: "z-ai/glm-5.2",
-					Description: "g4f.space — NVIDIA model",
+					Description: "g4f.space NVIDIA model",
 					Kind: KindChat,
 				},
 				{
 					UpstreamID: "minimaxai/minimax-m2.7",
 					DisplayName: "minimaxai/minimax-m2.7",
-					Description: "g4f.space — NVIDIA model",
+					Description: "g4f.space NVIDIA model",
 					Kind: KindChat,
 				},
 			},
@@ -17491,7 +17491,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/xiaomi-mimo",
 			DocsURL: "https://opengateway.gitlawb.com",
-			Summary: "Free MiMo (xiaomi/mimo-v2.5) revoked 2026-05 — Opengateway is now a pay-as-you-go credit gateway; no recurring free model.; Get your API key from Gitlawb Opengateway dashboard.",
+			Summary: "Free MiMo (xiaomi/mimo-v2.5) revoked 2026-05 Opengateway is now a pay-as-you-go credit gateway; no recurring free model.; Get your API key from Gitlawb Opengateway dashboard.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -17533,7 +17533,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://opengateway.gitlawb.com/v1/gmi-cloud",
 			DocsURL: "https://opengateway.gitlawb.com",
-			Summary: "Free Nemotron promo ended 2026-06 — the GMI Cloud route is now pay-as-you-go credit only.; Get your API key from Gitlawb Opengateway dashboard.",
+			Summary: "Free Nemotron promo ended 2026-06 the GMI Cloud route is now pay-as-you-go credit only.; Get your API key from Gitlawb Opengateway dashboard.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -17919,7 +17919,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.bluesminds.com/v1",
 			DocsURL: "https://www.bluesminds.com",
-			Summary: "Free daily pi credits — supports 200+ models including GPT-4o, GPT-4.1, Claude Sonnet 4.5, Gemini 2.0 Flash, DeepSeek V4, Qwen, Kimi K2; Get your API key at https://www.bluesminds.com — OpenAI-compatible endpoint at https://api.bluesminds.com/v1 with free daily credits. VIP models (Claude Opus 4.5, Gemini 2.5 Pro) consume pi credits.",
+			Summary: "Free daily pi credits supports 200+ models including GPT-4o, GPT-4.1, Claude Sonnet 4.5, Gemini 2.0 Flash, DeepSeek V4, Qwen, Kimi K2; Get your API key at https://www.bluesminds.com OpenAI-compatible endpoint at https://api.bluesminds.com/v1 with free daily credits. VIP models (Claude Opus 4.5, Gemini 2.5 Pro) consume pi credits.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -18063,7 +18063,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.freemodel.dev/v1",
 			DocsURL: "https://freemodel.dev",
-			Summary: "$300 free credits on signup — no credit card required. Access GPT-5.4 and GPT-5.5 (OpenAI's latest flagship models) through an OpenAI-compatible API.; Get $300 free API credits at https://freemodel.dev — no payment info required. OpenAI-compatible endpoint. GPT-5.4 and GPT-5.5 models available.",
+			Summary: "$300 free credits on signup no credit card required. Access GPT-5.4 and GPT-5.5 (OpenAI's latest flagship models) through an OpenAI-compatible API.; Get $300 free API credits at https://freemodel.dev no payment info required. OpenAI-compatible endpoint. GPT-5.4 and GPT-5.5 models available.",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -18170,7 +18170,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.openadapter.in/v1",
 			DocsURL: "https://openadapter.dev",
-			Summary: "Free tier with a generous quota and no credit card — 15+ open-source models with daily quota. Get your API key at https://dashboard.openadapter.in.; Use your OpenAdapter API key in Authorization: Bearer sk-cv-<key>. Fully OpenAI-compatible. API base URL: https://api.openadapter.in/v1.; OpenAdapter exposes an OpenAI-compatible chat completions endpoint at https://api.openadapter.in/v1/chat/completions, aggregating…",
+			Summary: "Free tier with a generous quota and no credit card 15+ open-source models with daily quota. Get your API key at https://dashboard.openadapter.in.; Use your OpenAdapter API key in Authorization: Bearer sk-cv-<key>. Fully OpenAI-compatible. API base URL: https://api.openadapter.in/v1.; OpenAdapter exposes an OpenAI-compatible chat completions endpoint at https://api.openadapter.in/v1/chat/completions, aggregating…",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -18188,7 +18188,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.dit.ai/v1",
 			DocsURL: "https://dit.ai",
-			Summary: "Use your dit.ai API key in Authorization: Bearer <key>. Fully OpenAI-compatible — a drop-in replacement, just change the base URL to https://api.dit.ai/v1.; dit.ai (Distributed Intelligence Trade) is an OpenAI-compatible router/gateway with dynamic per-request pricing, exposing /v1/chat/completions at https://api.dit.ai/v1.; spend/savings analytics live in the dit.ai dashboard.",
+			Summary: "Use your dit.ai API key in Authorization: Bearer <key>. Fully OpenAI-compatible a drop-in replacement, just change the base URL to https://api.dit.ai/v1.; dit.ai (Distributed Intelligence Trade) is an OpenAI-compatible router/gateway with dynamic per-request pricing, exposing /v1/chat/completions at https://api.dit.ai/v1.; spend/savings analytics live in the dit.ai dashboard.",
 			Category: "Gateway",
 			Models: []Model{
 				{
@@ -18583,7 +18583,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.naga.ac/v1",
 			DocsURL: "https://naga.ac",
-			Summary: "Free models include Nemotron 3 Ultra (free) and Llama 3.3 70B Instruct (Free). Paid models require credits. Google/GitHub/Discord signup.; Get API key at naga.ac — Google/GitHub/Discord signup available.; Models marked :free are publicly listed, but no numeric quota is confirmed. Naga's policy warns that free-tier prompts and outputs may be collected or used for training.; Create a Naga AI Bearer key, then use https://api.naga.ac/v1 as the OpenAI-compatible base URL. Never send sensitive data to the free tier without accepting its training policy.",
+			Summary: "Free models include Nemotron 3 Ultra (free) and Llama 3.3 70B Instruct (Free). Paid models require credits. Google/GitHub/Discord signup.; Get API key at naga.ac Google/GitHub/Discord signup available.; Models marked :free are publicly listed, but no numeric quota is confirmed. Naga's policy warns that free-tier prompts and outputs may be collected or used for training.; Create a Naga AI Bearer key, then use https://api.naga.ac/v1 as the OpenAI-compatible base URL. Never send sensitive data to the free tier without accepting its training policy.",
 			Category: "Aggregator",
 			Free: true,
 			Models: []Model{
@@ -18618,7 +18618,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://logfare.ai/v1",
 			DocsURL: "https://logfare.ai",
-			Summary: "Free OpenAI-compatible inference — no rate limits, no card. Logfare logs every request (prompts, completions, metadata) for internal research; opt out at /consent. Read https://logfare.ai/tos and https://logfare.ai/privacy before use.; Create a free account at https://logfare.ai/register (username/password, no email verification) to get an instant API key, then paste it here as a Bearer token.; Create a free API k…",
+			Summary: "Free OpenAI-compatible inference no rate limits, no card. Logfare logs every request (prompts, completions, metadata) for internal research; opt out at /consent. Read https://logfare.ai/tos and https://logfare.ai/privacy before use.; Create a free account at https://logfare.ai/register (username/password, no email verification) to get an instant API key, then paste it here as a Bearer token.; Create a free API k…",
 			Category: "Gateway",
 			Free: true,
 			Models: []Model{
@@ -19376,7 +19376,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.longcat.chat/openai/v1",
 			DocsURL: "https://longcat.chat/platform/docs",
-			Summary: "Free: one-time 10M-token grant after account signup + KYC verification (LongCat-2.0). One-time only — not a recurring daily/monthly allowance.",
+			Summary: "Free: one-time 10M-token grant after account signup + KYC verification (LongCat-2.0). One-time only not a recurring daily/monthly allowance.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -19624,7 +19624,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://spark-api-open.xf-yun.com/v1",
 			DocsURL: "https://xinghuo.xfyun.cn",
-			Summary: "Spark Lite is free (2 QPS rate-limited), but iFlytek ToS §2.4(3) prohibits programmatic extraction and requires Chinese real-name auth — use with caution.; Get API key at console.xfyun.cn",
+			Summary: "Spark Lite is free (2 QPS rate-limited), but iFlytek ToS §2.4(3) prohibits programmatic extraction and requires Chinese real-name auth use with caution.; Get API key at console.xfyun.cn",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -19714,7 +19714,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.lingyiwanwu.com/v1",
 			DocsURL: "https://01.ai",
-			Summary: "No free API tier (2026) — Yi-Light retired; platform.01.ai is pay-as-you-go (Yi-Lightning paid). Open weights are download-only.; Get API key at platform.lingyiwanwu.com",
+			Summary: "No free API tier (2026) Yi-Light retired; platform.01.ai is pay-as-you-go (Yi-Lightning paid). Open weights are download-only.; Get API key at platform.lingyiwanwu.com",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -19810,7 +19810,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://token.sensenova.cn/v1",
 			DocsURL: "https://platform.sensenova.cn",
-			Summary: "Free SenseTime models. Computer vision leader.; Get API key at platform.sensenova.cn; SenseNova registration appears to require a Chinese (+86) phone number for SMS verification — no international sign-up path is documented, so users outside mainland China may be unable to obtain an API key.",
+			Summary: "Free SenseTime models. Computer vision leader.; Get API key at platform.sensenova.cn; SenseNova registration appears to require a Chinese (+86) phone number for SMS verification no international sign-up path is documented, so users outside mainland China may be unable to obtain an API key.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -19882,7 +19882,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.sea-lion.ai/v1",
 			DocsURL: "https://sea-lion.ai",
-			Summary: "Permanently free at 10 RPM — AI Singapore's Southeast-Asian models (Llama/Qwen/Gemma SEA-LION).; Sign in at sea-lion.ai with Google (no card, no region wall), create an API key, then paste it here.",
+			Summary: "Permanently free at 10 RPM AI Singapore's Southeast-Asian models (Llama/Qwen/Gemma SEA-LION).; Sign in at sea-lion.ai with Google (no card, no region wall), create an API key, then paste it here.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -19924,7 +19924,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolUnsupported,
 			DefaultBaseURL: "https://clovastudio.stream.ntruss.com/v3",
 			DocsURL: "https://api.ncloud-docs.com/docs/en/ai-naver-clovastudio-summary",
-			Summary: "All three v3 models are served: HCX-007 (reasoning, text only), HCX-005 (vision — accepts both public image URLs and inline base64 images), and HCX-DASH-002 (lightweight, text only). Requests stream upstream and are accumulated into a JSON body when the client asks for a non-stream…",
+			Summary: "All three v3 models are served: HCX-007 (reasoning, text only), HCX-005 (vision accepts both public image URLs and inline base64 images), and HCX-DASH-002 (lightweight, text only). Requests stream upstream and are accumulated into a JSON body when the client asks for a non-stream…",
 			Category: "Frontier",
 			Models: []Model{
 				{
@@ -20025,7 +20025,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolOpenAIChat,
 			DefaultBaseURL: "https://api.sarvam.ai/v1",
 			DocsURL: "https://docs.sarvam.ai",
-			Summary: "₹1,000 in free signup credits — never expire; Sarvam AI is OpenAI-compatible on /v1. Models are tuned for Indic languages.",
+			Summary: "₹1,000 in free signup credits never expire; Sarvam AI is OpenAI-compatible on /v1. Models are tuned for Indic languages.",
 			Category: "Frontier",
 			Free: true,
 			Models: []Model{
@@ -20549,7 +20549,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolEmbedding,
 			DefaultBaseURL: "https://api.jina.ai/v1",
 			DocsURL: "https://jina.ai",
-			Summary: "10M free tokens on signup (non-commercial), no credit card required; Bearer API key for api.jina.ai — embeddings, rerank, classify, segment, and search. Dashboard keys take precedence over JINA_AI_API_KEY. This is not the Reader / r.jina.ai card and does not fetch URLs.",
+			Summary: "10M free tokens on signup (non-commercial), no credit card required; Bearer API key for api.jina.ai embeddings, rerank, classify, segment, and search. Dashboard keys take precedence over JINA_AI_API_KEY. This is not the Reader / r.jina.ai card and does not fetch URLs.",
 			Category: "Embeddings",
 			Free: true,
 			Models: []Model{
@@ -20724,7 +20724,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolSearch,
 			DefaultBaseURL: "https://r.jina.ai",
 			DocsURL: "https://jina.ai/reader",
-			Summary: "Bearer API key for r.jina.ai URL-to-markdown (/v1/web/fetch only). Does not serve /v1/embeddings or /v1/rerank. The same Jina token as Foundation API works; Reader / r.jina.ai only — not embeddings or rerank. Free tier: 1M fetches/month.",
+			Summary: "Bearer API key for r.jina.ai URL-to-markdown (/v1/web/fetch only). Does not serve /v1/embeddings or /v1/rerank. The same Jina token as Foundation API works; Reader / r.jina.ai only not embeddings or rerank. Free tier: 1M fetches/month.",
 			Category: "Search",
 			Free: true,
 			Models: []Model{
@@ -20759,7 +20759,7 @@ func generatedProviders() []Provider {
 			Protocol: ProtocolMedia,
 			DefaultBaseURL: "https://api.deepai.org",
 			DocsURL: "https://deepai.org",
-			Summary: "Use your DeepAI API key. Get one at deepai.org — requires a Pro subscription ($9.99/mo).; DeepAI uses per-endpoint REST calls (e.g. /api/text2img) instead of OpenAI chat/completions.",
+			Summary: "Use your DeepAI API key. Get one at deepai.org requires a Pro subscription ($9.99/mo).; DeepAI uses per-endpoint REST calls (e.g. /api/text2img) instead of OpenAI chat/completions.",
 			Category: "Image / Video",
 			Models: []Model{
 				{

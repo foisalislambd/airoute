@@ -220,14 +220,19 @@ def default_models(provider: dict, protocol: str, category: str) -> list[str]:
     return []
 
 
+def plain(value: str) -> str:
+    value = value.replace("\u2014", " ")
+    return re.sub(r"\s{2,}", " ", value).strip()
+
+
 def go_string(value: str) -> str:
-    return json.dumps(value, ensure_ascii=False)
+    return json.dumps(plain(value), ensure_ascii=False)
 
 
 def summary_for(provider: dict, protocol: str) -> str:
     notes = (provider.get("notes") or "").strip()
     if notes:
-        return notes
+        return plain(notes)
     if protocol == "ProtocolOpenAIChat":
         return "OpenAI-compatible API."
     if protocol == "ProtocolAnthropic":
