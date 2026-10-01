@@ -1,4 +1,5 @@
 import { panelConfig, panelNavItems, isNavActive } from "@/config/panel.config";
+import { providersListPath } from "@/lib/provider-list-view";
 import {
   SIDEBAR_WIDTH_COLLAPSED,
   SIDEBAR_WIDTH_EXPANDED,
@@ -68,7 +69,7 @@ export function PanelSidebar() {
               return (
                 <Link
                   key={item.href}
-                  to={item.href}
+                  to={item.href === "/providers" ? providersListPath() : item.href}
                   title={showLabels ? undefined : item.name}
                   aria-current={active ? "page" : undefined}
                   className={`group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 ${

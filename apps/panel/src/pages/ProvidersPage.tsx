@@ -1,16 +1,22 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
 import { ProviderMark } from "@/components/provider-mark";
 import { listProviders, type Provider, type ProviderCategory } from "@/lib/api";
-import { Search } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { readProviderListView, writeProviderListView } from "@/lib/provider-list-view";
+import { Search, X } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 const PAGE_SIZE = 18;
 
 export default function ProvidersPage() {
-  const [query, setQuery] = useState("");
-  const [debounced, setDebounced] = useState("");
-  const [category, setCategory] = useState("all");
+  const [params, setParams] = useSearchParams();
+  const saved = useRef(readProviderListView());
+  const urlQuery = params.get("q") ?? "";
+  const urlCategory = params.get("category") || "all";
+  const sameView = saved.current.q === urlQuery && saved.current.category === urlCategory;
+  const [query, setQuery] = useState(urlQuery);
+  const [debounced, setDebounced] = useState(urlQuery);
+  const [category, setCategory] = useState(urlCategory);
   const [categories, setCategories] = useState<ProviderCategory[]>([]);
   const [providers, setProviders] = useState<Provider[]>([]);
   const [total, setTotal] = useState(0);
@@ -19,6 +25,9 @@ export default function ProvidersPage() {
   const [error, setError] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const generation = useRef(0);
+  const restoreScroll = useRef(sameView ? saved.current.scroll : 0);
+  const firstLimit = useRef(sameView ? Math.min(60, Math.max(PAGE_SIZE, saved.current.count)) : PAGE_SIZE);
+  const filters = useRef({ q: urlQuery, category: urlCategory });
 
   useEffect(() => {
     const timer = window.setTimeout(() => setDebounced(query.trim()), 200);
@@ -26,11 +35,33 @@ export default function ProvidersPage() {
   }, [query]);
 
   useEffect(() => {
+    const next = new URLSearchParams();
+    if (debounced) next.set("q", debounced);
+    if (category !== "all") next.set("category", category);
+    if (next.toString() !== params.toString()) setParams(next, { replace: true });
+    const changed = filters.current.q !== debounced || filters.current.category !== category;
+    filters.current = { q: debounced, category };
+    const view = readProviderListView();
+    if (changed) {
+      restoreScroll.current = 0;
+      firstLimit.current = PAGE_SIZE;
+      const main = document.querySelector("main");
+      if (main) main.scrollTop = 0;
+    }
+    writeProviderListView({
+      q: debounced,
+      category,
+      scroll: changed ? 0 : view.scroll,
+      count: providers.length || (changed ? PAGE_SIZE : view.count),
+    });
+  }, [category, debounced, params, providers.length, setParams]);
+
+  useEffect(() => {
     const request = ++generation.current;
     setLoading(true);
     setPaging(false);
     setError("");
-    listProviders({ q: debounced, category, limit: PAGE_SIZE, offset: 0 })
+    listProviders({ q: debounced, category, limit: firstLimit.current, offset: 0 })
       .then((page) => {
         if (generation.current !== request) return;
         setProviders(page.providers);
@@ -41,9 +72,33 @@ export default function ProvidersPage() {
         if (generation.current === request) setError(err.message);
       })
       .finally(() => {
-        if (generation.current === request) setLoading(false);
+        if (generation.current === request) {
+          setLoading(false);
+          firstLimit.current = PAGE_SIZE;
+        }
       });
   }, [debounced, category]);
+
+  useLayoutEffect(() => {
+    const top = restoreScroll.current;
+    if (!top || loading || providers.length === 0) return;
+    const main = document.querySelector("main");
+    if (!main) return;
+    main.scrollTop = top;
+    if (main.scrollTop > 0) restoreScroll.current = 0;
+  }, [loading, providers.length]);
+
+  useEffect(() => {
+    const main = document.querySelector("main");
+    if (!main) return;
+    const onScroll = () => {
+      const view = readProviderListView();
+      view.scroll = main.scrollTop;
+      writeProviderListView(view);
+    };
+    main.addEventListener("scroll", onScroll, { passive: true });
+    return () => main.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     const node = bottomRef.current;
@@ -78,6 +133,7 @@ export default function ProvidersPage() {
 
   return (
     <div>
+      <div className="sticky top-0 z-10 -mx-4 mb-4 bg-[#f9fafb]/95 px-4 pt-1 pb-3 backdrop-blur-sm sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 dark:bg-[#101828]/95">
       <PanelPageHeader
         title="Providers"
         actions={
@@ -88,12 +144,23 @@ export default function ProvidersPage() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search providers"
-              className="h-10 w-full rounded-lg border border-gray-200 bg-white py-2 pr-3 pl-9 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+              className="h-10 w-full rounded-lg border border-gray-200 bg-white py-2 pr-9 pl-9 text-sm text-gray-900 outline-none placeholder:text-gray-400 focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
               aria-label="Search providers"
             />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-1 text-gray-400 hover:text-gray-700 dark:hover:text-white"
+                aria-label="Clear search"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </label>
         }
       />
+      </div>
       {categories.length > 0 && (
         <div className="mb-4 flex flex-wrap gap-2">
           {categories.map((item) => {

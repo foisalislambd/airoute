@@ -13,7 +13,8 @@ import {
   type Model,
   type Provider,
 } from "@/lib/api";
-import { ArrowLeft, ExternalLink, Search } from "lucide-react";
+import { providersListPath, readModelSearch, writeModelSearch } from "@/lib/provider-list-view";
+import { ArrowLeft, ExternalLink, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -26,8 +27,10 @@ export default function ProviderPage() {
   const [modelTotal, setModelTotal] = useState(0);
   const [modelsLoading, setModelsLoading] = useState(true);
   const [modelsPaging, setModelsPaging] = useState(false);
-  const [query, setQuery] = useState("");
-  const [debounced, setDebounced] = useState("");
+  const remembered = useRef(readModelSearch(slug));
+  const restoreModelScroll = useRef(remembered.current.scroll);
+  const [query, setQuery] = useState(remembered.current.q);
+  const [debounced, setDebounced] = useState(remembered.current.q);
   const [modelReload, setModelReload] = useState(0);
   const [baseUrl, setBaseUrl] = useState("");
   const [apiKey, setApiKey] = useState("");
@@ -56,9 +59,22 @@ export default function ProviderPage() {
   }, [slug]);
 
   useEffect(() => {
-    setQuery("");
-    setDebounced("");
+    const next = readModelSearch(slug);
+    remembered.current = next;
+    setQuery(next.q);
+    setDebounced(next.q);
   }, [slug]);
+
+  useEffect(() => {
+    const current = readModelSearch(slug);
+    if (current.q !== debounced) restoreModelScroll.current = 0;
+    writeModelSearch(slug, debounced, current.q === debounced ? current.scroll : 0);
+    const main = document.querySelector("main");
+    if (!main) return;
+    const onScroll = () => writeModelSearch(slug, debounced, main.scrollTop);
+    main.addEventListener("scroll", onScroll, { passive: true });
+    return () => main.removeEventListener("scroll", onScroll);
+  }, [debounced, slug]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setDebounced(query.trim()), 200);
@@ -79,9 +95,23 @@ export default function ProviderPage() {
         if (generation.current === request) setError(err.message);
       })
       .finally(() => {
-        if (generation.current === request) setModelsLoading(false);
+        if (generation.current !== request) return;
+        setModelsLoading(false);
       });
   }, [slug, debounced, modelReload]);
+
+  useEffect(() => {
+    const top = restoreModelScroll.current;
+    if (!top || modelsLoading || models.length === 0) return;
+    const main = document.querySelector("main");
+    if (!main) return;
+    const frame = requestAnimationFrame(() => {
+      if (restoreModelScroll.current <= 0) return;
+      main.scrollTop = restoreModelScroll.current;
+      if (main.scrollTop > 0) restoreModelScroll.current = 0;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [modelsLoading, models.length]);
 
   useEffect(() => {
     const node = bottomRef.current;
@@ -195,7 +225,7 @@ export default function ProviderPage() {
 
   return (
     <div>
-      <Link to="/providers" className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-900 dark:hover:text-white">
+      <Link to={providersListPath()} className="mb-4 inline-flex items-center gap-1 text-sm font-medium text-gray-500 hover:text-gray-900 dark:hover:text-white">
         <ArrowLeft className="h-4 w-4" />
         Providers
       </Link>
@@ -278,8 +308,18 @@ export default function ProviderPage() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search models"
-              className="h-10 w-full rounded-lg border border-gray-200 bg-white pr-3 pl-9 text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+              className="h-10 w-full rounded-lg border border-gray-200 bg-white pr-9 pl-9 text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
             />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                className="absolute top-1/2 right-2 -translate-y-1/2 rounded-md p-1 text-gray-400 hover:text-gray-700 dark:hover:text-white"
+                aria-label="Clear model search"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </label>
         </div>
         <p className="mb-3 text-sm text-gray-500">
