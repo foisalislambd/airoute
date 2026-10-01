@@ -287,14 +287,14 @@ export default function ProviderPage() {
         </p>
         <div className="panel-card overflow-hidden">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[720px] text-left text-sm">
+            <table className="w-full table-fixed text-left text-sm">
               <thead className="border-b border-gray-200 text-xs tracking-wide text-gray-500 uppercase dark:border-gray-800">
                 <tr>
-                  <th className="px-4 py-3 font-medium">Model</th>
-                  <th className="px-4 py-3 font-medium">Input → output</th>
-                  <th className="px-4 py-3 font-medium">Context</th>
-                  <th className="px-4 py-3 font-medium">Price / 1M</th>
-                  <th className="px-4 py-3 font-medium">Active</th>
+                  <th className="w-[34%] px-4 py-3 font-medium">Model</th>
+                  <th className="w-[26%] px-4 py-3 font-medium">Input → output</th>
+                  <th className="w-[14%] px-4 py-3 font-medium">Context</th>
+                  <th className="w-[16%] px-4 py-3 font-medium">Price / 1M</th>
+                  <th className="w-[10%] px-4 py-3 font-medium">Active</th>
                 </tr>
               </thead>
               <tbody>
@@ -311,21 +311,27 @@ export default function ProviderPage() {
                     </td>
                   </tr>
                 ) : null}
-                {models.map((model) => (
+                {models.map((model) => {
+                  const blurb = modelNote(model.description);
+                  return (
                   <tr key={model.id} className="border-b border-gray-100 last:border-0 dark:border-gray-800">
-                    <td className="px-4 py-3">
-                      <p className="font-medium text-gray-900 dark:text-white">
-                        {model.displayName}
+                    <td className="max-w-0 px-4 py-3">
+                      <div className="flex min-w-0 items-center gap-2">
+                        <p title={model.displayName} className="truncate font-medium text-gray-900 dark:text-white">
+                          {model.displayName}
+                        </p>
                         {model.kind && model.kind !== "chat" && (
-                          <span className="ml-2 align-middle rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium tracking-wide text-gray-500 uppercase dark:bg-white/10 dark:text-gray-300">
+                          <span className="shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium tracking-wide text-gray-500 uppercase dark:bg-white/10 dark:text-gray-300">
                             {model.kind}
                           </span>
                         )}
-                      </p>
-                      <p className="font-mono text-xs text-gray-500">{model.id}</p>
-                      <p title={model.description} className="mt-1 max-w-[16rem] truncate text-xs text-gray-500 sm:max-w-xs lg:max-w-sm">
-                        {model.description}
-                      </p>
+                      </div>
+                      <p title={model.id} className="truncate font-mono text-xs text-gray-500">{model.id}</p>
+                      {blurb && (
+                        <p title={blurb} className="mt-1 truncate text-xs text-gray-500">
+                          {blurb}
+                        </p>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <ModalityFlow inputs={model.inputs} outputs={model.outputs} />
@@ -353,7 +359,8 @@ export default function ProviderPage() {
                       </button>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -363,6 +370,12 @@ export default function ProviderPage() {
       </section>
     </div>
   );
+}
+
+function modelNote(description: string) {
+  const text = description.trim();
+  if (!text || text === "Loaded from the provider." || /^.+ model$/i.test(text)) return "";
+  return text;
 }
 
 function appendModels(current: Model[], next: Model[]) {
