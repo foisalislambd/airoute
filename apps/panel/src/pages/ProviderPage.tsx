@@ -12,7 +12,7 @@ import {
   type Model,
   type Provider,
 } from "@/lib/api";
-import { ArrowLeft, AudioLines, Braces, ExternalLink, Image, Search, Type, Video } from "lucide-react";
+import { ArrowLeft, AudioLines, Braces, ExternalLink, Image, Scale, Search, Type, Video } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -368,6 +368,7 @@ const modalityMeta = {
   audio: { icon: AudioLines, label: "Audio" },
   video: { icon: Video, label: "Video" },
   embedding: { icon: Braces, label: "Embedding" },
+  decisions: { icon: Scale, label: "Decisions" },
 } as const
 
 function Modalities({ inputs, outputs }: { inputs: string; outputs: string }) {

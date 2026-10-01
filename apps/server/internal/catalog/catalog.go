@@ -44,6 +44,7 @@ const (
 	ProtocolAudio       = "audio_speech"
 	ProtocolMedia       = "native_media"
 	ProtocolSDWebUI     = "sdwebui"
+	ProtocolSystemOne   = "systemone"
 	ProtocolUnsupported = "unsupported"
 	KindChat            = "chat"
 	KindImage           = "image"
@@ -51,10 +52,11 @@ const (
 	KindAudio           = "audio"
 	KindEmbedding       = "embedding"
 	KindSearch          = "search"
+	KindDecision        = "decisions"
 )
 
 func All() []Provider {
-	return append([]Provider{OpenAI()}, generatedProviders()...)
+	return append(append([]Provider{OpenAI()}, generatedProviders()...), decisionProviders()...)
 }
 
 // KindFromID guesses a model kind from an upstream id returned by a model list.
@@ -113,6 +115,8 @@ func Modalities(id, kind string) (string, string) {
 		return "text", "audio"
 	case KindEmbedding:
 		return "text", "embedding"
+	case KindDecision:
+		return "text", "decisions"
 	default:
 		inputs := "text"
 		if strings.Contains(lowered, "vision") || strings.Contains(lowered, "gpt-4o") || strings.Contains(lowered, "-image") {
@@ -264,6 +268,89 @@ func OpenAI() Provider {
 				DisplayName: "Sora 2",
 				Description: "OpenAI video generation.",
 				Kind:        KindVideo,
+			},
+		},
+	}
+}
+
+// decisionProviders are System One decision models. A request sends state plus
+// typed questions and the model returns calibrated answers, not chat text.
+func decisionProviders() []Provider {
+	return []Provider{
+		{
+			Slug:           "typesafe",
+			DisplayName:    "TypeSafe",
+			Protocol:       ProtocolSystemOne,
+			DefaultBaseURL: "https://api.typesafe.ai/v1",
+			DocsURL:        "https://api.typesafe.ai/v1/systemone",
+			Summary:        "Jev System One decisions. POST /systemone with state and questions. Answers are a choice, a score, or a yes/no probability.",
+			Category:       "Decisions",
+			Models: []Model{
+				{
+					UpstreamID:          "jev-1.13",
+					DisplayName:         "Jev 1.13",
+					Description:         "Returns answers keyed by your question ids. A noul answer is a probability from 0 to 1. A choice answer names the winning option and its probabilities.",
+					ContextWindow:       32000,
+					InputUSDPerMillion:  0.042,
+					OutputUSDPerMillion: 0,
+					Kind:                KindDecision,
+				},
+				{
+					UpstreamID:          "jev-latest",
+					DisplayName:         "Jev Latest",
+					Description:         "Alias of the current Jev System One model. The response model field names the version that answered.",
+					ContextWindow:       32000,
+					InputUSDPerMillion:  0.042,
+					OutputUSDPerMillion: 0,
+					Kind:                KindDecision,
+				},
+			},
+		},
+		{
+			Slug:           "respan",
+			DisplayName:    "Respan",
+			Protocol:       ProtocolSystemOne,
+			DefaultBaseURL: "",
+			DocsURL:        "https://openrouter.ai/models?output_modalities=decisions",
+			Summary:        "Span scores each behavior you name. Paste the System One base URL, then POST /systemone. The answer is a probability, not generated text.",
+			Category:       "Decisions",
+			Models: []Model{
+				{
+					UpstreamID:          "span-01",
+					DisplayName:         "Span-01",
+					Description:         "Reads a conversation span and returns the probability that each behavior you define is present.",
+					InputUSDPerMillion:  0.02,
+					OutputUSDPerMillion: 0,
+					Kind:                KindDecision,
+				},
+				{
+					UpstreamID:          "span-01-lite",
+					DisplayName:         "Span-01 Lite",
+					Description:         "Lighter Span model. Same probability answers, for higher volume.",
+					InputUSDPerMillion:  0,
+					OutputUSDPerMillion: 0,
+					Kind:                KindDecision,
+				},
+			},
+		},
+		{
+			Slug:           "jaredpalmer",
+			DisplayName:    "Jared Palmer",
+			Protocol:       ProtocolSystemOne,
+			DefaultBaseURL: "",
+			DocsURL:        "https://github.com/jaredpalmer/kev",
+			Summary:        "Kev uses the same /systemone contract as Jev. Paste the host base URL that serves POST /systemone.",
+			Category:       "Decisions",
+			Models: []Model{
+				{
+					UpstreamID:          "kev-4b",
+					DisplayName:         "Kev 4B",
+					Description:         "One forward pass. Each question returns a calibrated probability and no generated text.",
+					ContextWindow:       8192,
+					InputUSDPerMillion:  0.042,
+					OutputUSDPerMillion: 0,
+					Kind:                KindDecision,
+				},
 			},
 		},
 	}

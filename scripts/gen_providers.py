@@ -127,7 +127,42 @@ def protocol_name(provider: dict, base: str) -> str:
     return "ProtocolUnsupported"
 
 
+DECISION_MODELS = {
+    "together": [
+        (
+            "togethercomputer/Tev1-4B-experimental",
+            "Tev1 4B Experimental",
+            "Chat decision model. Send state, one question, and 2 to 24 options. It returns a single option letter, which the router maps back to the option name.",
+            32768,
+            0.042,
+        ),
+    ],
+    "inception": [
+        (
+            "mercury-decide",
+            "Mercury Decide",
+            "System One model. Send state and typed questions. The answers object holds a choice, a score, or a yes/no probability. Output tokens are free.",
+            32768,
+            0,
+        ),
+    ],
+    "upstage": [
+        (
+            "solar-decide",
+            "Solar Decide",
+            "System One model on Solar Mini. Send state and typed questions. One forward pass returns calibrated answers, not prose.",
+            524288,
+            0.05,
+        ),
+    ],
+}
+
+DECISION_IDS = {item[0] for rows in DECISION_MODELS.values() for item in rows}
+
+
 def model_kind(model_id: str, category: str) -> str:
+    if model_id in DECISION_IDS:
+        return "KindDecision"
     lowered = model_id.lower()
     if any(part in lowered for part in VIDEO_PARTS):
         return "KindVideo"
@@ -268,7 +303,7 @@ def main() -> None:
     ]
     count = 0
     model_count = 0
-    kinds = {"KindChat": 0, "KindImage": 0, "KindVideo": 0, "KindAudio": 0, "KindEmbedding": 0, "KindSearch": 0}
+    kinds = {"KindChat": 0, "KindImage": 0, "KindVideo": 0, "KindAudio": 0, "KindEmbedding": 0, "KindSearch": 0, "KindDecision": 0}
     protocols: dict[str, int] = {}
     for provider in providers:
         if provider.get("slug") == "openai":
@@ -295,6 +330,10 @@ def main() -> None:
             lines.append(f"\t\t\tAnonymousKey: {go_string(anon)},")
         if not ids:
             ids = default_models(provider, protocol, category)
+        extras = {item[0]: item for item in DECISION_MODELS.get(provider["slug"], [])}
+        for extra_id in extras:
+            if extra_id not in ids:
+                ids.append(extra_id)
         lines.append("\t\t\tModels: []Model{")
         for model_id in ids:
             kind = model_kind(model_id, category)
@@ -306,10 +345,22 @@ def main() -> None:
                 "KindEmbedding": "Embedding model",
                 "KindSearch": "Search",
             }.get(kind, provider["name"] + " model")
+            display = model_id
+            context = 0
+            price = 0.0
+            if extra := extras.get(model_id):
+                display = extra[1]
+                label = extra[2]
+                context = extra[3]
+                price = extra[4]
             lines.append("\t\t\t\t{")
             lines.append(f"\t\t\t\t\tUpstreamID: {go_string(model_id)},")
-            lines.append(f"\t\t\t\t\tDisplayName: {go_string(model_id)},")
+            lines.append(f"\t\t\t\t\tDisplayName: {go_string(display)},")
             lines.append(f"\t\t\t\t\tDescription: {go_string(label)},")
+            if context:
+                lines.append(f"\t\t\t\t\tContextWindow: {context},")
+            if price:
+                lines.append(f"\t\t\t\t\tInputUSDPerMillion: {price},")
             lines.append(f"\t\t\t\t\tKind: {kind},")
             lines.append("\t\t\t\t},")
             model_count += 1

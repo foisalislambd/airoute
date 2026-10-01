@@ -134,6 +134,7 @@ export default function PlaygroundPage() {
   const selected = models.find((model) => model.id === modelId);
   const kind = selected?.kind || "chat";
   const mediaKind = kind === "image" || kind === "video" || kind === "audio";
+  const decisionKind = kind === "decisions";
 
   async function onFiles(list: FileList | null) {
     if (!list) return;
@@ -219,6 +220,22 @@ export default function PlaygroundPage() {
     const controller = new AbortController();
     abortRef.current = controller;
     try {
+      if (decisionKind) {
+        const response = await fetch("/api/playground/decision", {
+          method: "POST",
+          signal: controller.signal,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(decisionRequest(modelId, text)),
+        });
+        const data = (await response.json().catch(() => ({}))) as { error?: string; request?: unknown; response?: unknown };
+        if (!response.ok) {
+          patch(assistant.id, { request: data.request ?? null });
+          throw new Error(data.error || response.statusText);
+        }
+        patch(assistant.id, { request: data.request ?? null, text: JSON.stringify(data.response ?? {}, null, 2) });
+        return;
+      }
+
       if (mediaKind) {
         const image = attached.find((file) => file.mime.startsWith("image/"))?.url ?? "";
         const notes = attached
@@ -439,7 +456,7 @@ export default function PlaygroundPage() {
                 }
               }}
               rows={1}
-              placeholder={mediaKind ? "Describe what to generate" : "Message"}
+              placeholder={decisionKind ? "State to decide, or JSON with state and questions" : mediaKind ? "Describe what to generate" : "Message"}
               className="max-h-32 min-h-8 w-full resize-none bg-transparent px-1 py-1.5 text-sm leading-5 text-gray-900 outline-none placeholder:text-gray-400 dark:text-white"
             />
             {busy ? (
@@ -679,6 +696,30 @@ function readFile(file: File) {
     reader.onerror = () => reject(reader.error);
     reader.readAsDataURL(file);
   });
+}
+
+function decisionRequest(modelId: string, text: string) {
+  const trimmed = text.trim();
+  if (trimmed.startsWith("{")) {
+    try {
+      const parsed = JSON.parse(trimmed) as { state?: unknown; questions?: unknown };
+      if (parsed && typeof parsed === "object" && parsed.questions) {
+        return { ...parsed, model: modelId };
+      }
+    } catch {
+      // Plain text is the state.
+    }
+  }
+  return {
+    model: modelId,
+    state: text,
+    questions: {
+      decision: {
+        type: "noul",
+        instructions: "Is the answer yes?",
+      },
+    },
+  };
 }
 
 function newId() {

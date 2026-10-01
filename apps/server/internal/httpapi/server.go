@@ -64,8 +64,10 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("DELETE /api/fallbacks/{id}", s.deleteFallback)
 	mux.HandleFunc("POST /api/playground/chat", s.playground)
 	mux.HandleFunc("POST /api/playground/media", s.playgroundMedia)
+	mux.HandleFunc("POST /api/playground/decision", s.playgroundDecision)
 	mux.HandleFunc("GET /v1/models", s.gatewayModels)
 	mux.HandleFunc("POST /v1/chat/completions", s.gatewayChat)
+	mux.HandleFunc("POST /v1/systemone", s.gatewayDecision)
 	mux.HandleFunc("POST /v1/images/generations", s.gatewayImages)
 	mux.HandleFunc("POST /v1/videos/generations", s.gatewayVideos)
 	mux.HandleFunc("/", s.spa)
@@ -432,6 +434,10 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 			return
 		}
 	default:
+		if route.Model.Kind == catalog.KindDecision || route.Protocol == catalog.ProtocolSystemOne {
+			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "wrong_endpoint", kindEndpointMessage(catalog.KindDecision), started)
+			return
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "unsupported_protocol", "This provider protocol is not supported yet.", started)
 		return
 	}

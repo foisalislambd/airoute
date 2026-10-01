@@ -322,6 +322,8 @@ func kindEndpointMessage(kind string) string {
 		return "This is an audio model. Chat completions cannot play it."
 	case catalog.KindEmbedding:
 		return "This is an embedding model. Chat completions cannot play it."
+	case catalog.KindDecision:
+		return "This is a decision model. Call POST /v1/systemone with state and questions."
 	default:
 		return "This model cannot be called through chat completions."
 	}

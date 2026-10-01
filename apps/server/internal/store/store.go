@@ -572,6 +572,7 @@ var categoryOrder = []string{
 	"IaaS",
 	"Sovereign / Cloud",
 	"Specialized",
+	"Decisions",
 }
 
 func (s *Store) GetProvider(slug string) (Provider, error) {
