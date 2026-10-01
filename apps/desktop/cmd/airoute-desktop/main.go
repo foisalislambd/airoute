@@ -5,12 +5,13 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"syscall"
 
 	"airoute/server/app"
 )
 
 func main() {
-	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
 	const addr = "127.0.0.1:8787"

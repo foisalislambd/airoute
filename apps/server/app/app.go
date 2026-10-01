@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"airoute/server/internal/httpapi"
@@ -34,6 +35,9 @@ func Run(ctx context.Context, opt Options) error {
 		}
 		opt.DataDir = dir
 	}
+	if err := validateListenAddr(opt.Addr); err != nil {
+		return err
+	}
 	if err := os.MkdirAll(opt.DataDir, 0o700); err != nil {
 		return err
 	}
@@ -53,6 +57,8 @@ func Run(ctx context.Context, opt Options) error {
 		Addr:              opt.Addr,
 		Handler:           api.Handler(),
 		ReadHeaderTimeout: 10 * time.Second,
+		IdleTimeout:       2 * time.Minute,
+		MaxHeaderBytes:    1 << 20,
 		BaseContext: func(_ net.Listener) context.Context {
 			return ctx
 		},
@@ -90,6 +96,21 @@ func Run(ctx context.Context, opt Options) error {
 	case err := <-errCh:
 		return err
 	}
+}
+
+func validateListenAddr(addr string) error {
+	host, _, err := net.SplitHostPort(addr)
+	if err != nil {
+		return fmt.Errorf("listen address: %w", err)
+	}
+	if strings.EqualFold(host, "localhost") {
+		return nil
+	}
+	ip := net.ParseIP(host)
+	if ip == nil || !ip.IsLoopback() {
+		return errors.New("listen address must stay on this computer")
+	}
+	return nil
 }
 
 func DefaultDataDir() (string, error) {

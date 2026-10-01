@@ -7,7 +7,9 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 )
@@ -21,7 +23,36 @@ type Client struct {
 
 func NewClient() *Client {
 	transport := http.DefaultTransport.(*http.Transport).Clone()
-	return &Client{HTTP: &http.Client{Transport: transport}}
+	transport.DialContext = (&net.Dialer{Timeout: 20 * time.Second, KeepAlive: 30 * time.Second}).DialContext
+	transport.TLSHandshakeTimeout = 20 * time.Second
+	transport.ResponseHeaderTimeout = 2 * time.Minute
+	transport.ExpectContinueTimeout = time.Second
+	return &Client{HTTP: &http.Client{Transport: transport, CheckRedirect: sameHostRedirect}}
+}
+
+func sameHostRedirect(req *http.Request, via []*http.Request) error {
+	if len(via) == 0 || len(via) >= 5 || req.URL == nil || via[0].URL == nil {
+		return errors.New("refusing redirect")
+	}
+	if endpointHost(req.URL) != endpointHost(via[0].URL) {
+		return errors.New("refusing redirect to a different host")
+	}
+	if via[0].URL.Scheme == "https" && req.URL.Scheme != "https" {
+		return errors.New("refusing redirect from https to an insecure URL")
+	}
+	return nil
+}
+
+func endpointHost(target *url.URL) string {
+	port := target.Port()
+	if port == "" {
+		if target.Scheme == "https" {
+			port = "443"
+		} else {
+			port = "80"
+		}
+	}
+	return strings.ToLower(target.Hostname()) + ":" + port
 }
 
 func (c *Client) ChatCompletions(ctx context.Context, baseURL, apiKey string, body []byte, cookie bool) (*http.Response, error) {

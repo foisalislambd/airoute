@@ -8,6 +8,16 @@ import (
 	"airoute/server/internal/secret"
 )
 
+func TestClipTextKeepsWholeRunes(t *testing.T) {
+	got := clipText("héllo", 3)
+	if got != "hé\n… truncated" {
+		t.Fatalf("clip = %q", got)
+	}
+	if clipText("abcd", 4) != "abcd" {
+		t.Fatal("short text was clipped")
+	}
+}
+
 func TestFallbackChainUsageAndLog(t *testing.T) {
 	dir := t.TempDir()
 	key, err := secret.LoadKey(dir)

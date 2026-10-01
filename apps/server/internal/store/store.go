@@ -13,6 +13,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"airoute/server/internal/catalog"
 	"airoute/server/internal/secret"
@@ -977,6 +978,8 @@ func (s *Store) AuthenticateRouterKey(token string) (string, error) {
 	return id, nil
 }
 
+const maxStoredLogs = 5000
+
 func (s *Store) AddLog(input LogInput) error {
 	_, err := s.db.Exec(`
 INSERT INTO request_logs (
@@ -984,8 +987,23 @@ INSERT INTO request_logs (
   prompt_tokens, completion_tokens, error_message, request_json
 ) VALUES (?, ?, NULLIF(?, ''), ?, ?, ?, ?, ?, ?, ?)`,
 		time.Now().UTC().Format(time.RFC3339), input.Source, input.RouterKeyID, input.ModelID,
-		input.StatusCode, input.LatencyMS, input.PromptTokens, input.CompletionTokens, input.ErrorMessage, input.Request)
+		input.StatusCode, input.LatencyMS, input.PromptTokens, input.CompletionTokens, clipText(input.ErrorMessage, 2000), clipText(input.Request, 100000))
+	if err != nil {
+		return err
+	}
+	_, err = s.db.Exec(`DELETE FROM request_logs WHERE id <= (SELECT MAX(id) FROM request_logs) - ?`, maxStoredLogs)
 	return err
+}
+
+func clipText(value string, max int) string {
+	if max < 0 || len(value) <= max {
+		return value
+	}
+	cut := max
+	for cut > 0 && !utf8.RuneStart(value[cut]) {
+		cut--
+	}
+	return value[:cut] + "\n… truncated"
 }
 
 func (s *Store) ListLogs(limit int) ([]RequestLog, error) {
