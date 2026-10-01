@@ -1,4 +1,5 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
+import { ModalityFlow } from "@/components/modalities";
 import { ProviderMark } from "@/components/provider-mark";
 import {
   formatPrice,
@@ -12,7 +13,7 @@ import {
   type Model,
   type Provider,
 } from "@/lib/api";
-import { ArrowLeft, AudioLines, Braces, ExternalLink, Image, Scale, Search, Type, Video } from "lucide-react";
+import { ArrowLeft, ExternalLink, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -290,7 +291,7 @@ export default function ProviderPage() {
               <thead className="border-b border-gray-200 text-xs tracking-wide text-gray-500 uppercase dark:border-gray-800">
                 <tr>
                   <th className="px-4 py-3 font-medium">Model</th>
-                  <th className="px-4 py-3 font-medium">I/O</th>
+                  <th className="px-4 py-3 font-medium">Input → output</th>
                   <th className="px-4 py-3 font-medium">Context</th>
                   <th className="px-4 py-3 font-medium">Price / 1M</th>
                   <th className="px-4 py-3 font-medium">Active</th>
@@ -327,7 +328,7 @@ export default function ProviderPage() {
                       </p>
                     </td>
                     <td className="px-4 py-3">
-                      <Modalities inputs={model.inputs} outputs={model.outputs} />
+                      <ModalityFlow inputs={model.inputs} outputs={model.outputs} />
                     </td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
                       {formatTokens(model.contextWindow)}
@@ -362,43 +363,6 @@ export default function ProviderPage() {
       </section>
     </div>
   );
-}
-
-const modalityMeta = {
-  text: { icon: Type, label: "Text" },
-  image: { icon: Image, label: "Image" },
-  audio: { icon: AudioLines, label: "Audio" },
-  video: { icon: Video, label: "Video" },
-  embedding: { icon: Braces, label: "Embedding" },
-  decisions: { icon: Scale, label: "Decisions" },
-} as const
-
-function Modalities({ inputs, outputs }: { inputs: string; outputs: string }) {
-  return (
-    <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-300">
-      <ModalityIcons value={inputs} />
-      <span aria-hidden="true" className="text-gray-300 dark:text-gray-600">→</span>
-      <ModalityIcons value={outputs} />
-    </div>
-  )
-}
-
-function ModalityIcons({ value }: { value: string }) {
-  const names = (value || "text").split(",").filter(Boolean)
-  return (
-    <span className="inline-flex items-center gap-1">
-      {names.map((name) => {
-        const meta = modalityMeta[name as keyof typeof modalityMeta] ?? modalityMeta.text
-        const Icon = meta.icon
-        return (
-          <span key={name} title={meta.label} className="inline-flex">
-            <Icon className="h-3.5 w-3.5" />
-            <span className="sr-only">{meta.label}</span>
-          </span>
-        )
-      })}
-    </span>
-  )
 }
 
 function appendModels(current: Model[], next: Model[]) {

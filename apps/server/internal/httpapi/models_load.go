@@ -60,16 +60,16 @@ func (s *Server) loadProviderModels(w http.ResponseWriter, r *http.Request) {
 	}
 	ctx, cancel := context.WithTimeout(r.Context(), 60*time.Second)
 	defer cancel()
-	ids, err := s.collectModelIDs(ctx, endpoint, header)
+	listed, err := s.collectModelIDs(ctx, endpoint, header)
 	if err != nil {
 		writeAPIError(w, http.StatusBadGateway, err.Error())
 		return
 	}
-	if len(ids) == 0 {
+	if len(listed) == 0 {
 		writeAPIError(w, http.StatusBadGateway, "the provider returned no models")
 		return
 	}
-	count, err := s.Store.ReplaceProviderModels(slug, ids)
+	count, err := s.Store.ReplaceLoadedModels(slug, listedModels(listed))
 	if err != nil {
 		writeAPIError(w, http.StatusInternalServerError, err.Error())
 		return
@@ -77,9 +77,21 @@ func (s *Server) loadProviderModels(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"models": count})
 }
 
-func (s *Server) collectModelIDs(ctx context.Context, endpoint string, header http.Header) ([]string, error) {
+func listedModels(items []openai.ListedModel) []store.LoadedModel {
+	loaded := make([]store.LoadedModel, len(items))
+	for i, item := range items {
+		loaded[i] = store.LoadedModel{
+			UpstreamID: item.ID,
+			Inputs:     catalog.NormalizeModalities(item.Inputs),
+			Outputs:    catalog.NormalizeModalities(item.Outputs),
+		}
+	}
+	return loaded
+}
+
+func (s *Server) collectModelIDs(ctx context.Context, endpoint string, header http.Header) ([]openai.ListedModel, error) {
 	seen := map[string]struct{}{}
-	var ids []string
+	var listed []openai.ListedModel
 	next := endpoint
 	previous := ""
 	for page := 0; page < 40; page++ {
@@ -104,12 +116,12 @@ func (s *Server) collectModelIDs(ctx context.Context, endpoint string, header ht
 		}
 		parsed := openai.ParseModelListPage(payload)
 		added := 0
-		for _, id := range parsed.IDs {
-			if _, ok := seen[id]; ok {
+		for _, item := range parsed.Models {
+			if _, ok := seen[item.ID]; ok {
 				continue
 			}
-			seen[id] = struct{}{}
-			ids = append(ids, id)
+			seen[item.ID] = struct{}{}
+			listed = append(listed, item)
 			added++
 		}
 		cursor := parsed.NextPageToken
@@ -126,7 +138,7 @@ func (s *Server) collectModelIDs(ctx context.Context, endpoint string, header ht
 		}
 		next = withQuery(withQuery(endpoint, "limit", "100"), "after_id", parsed.LastID)
 	}
-	return ids, nil
+	return listed, nil
 }
 
 func withQuery(raw, key, value string) string {

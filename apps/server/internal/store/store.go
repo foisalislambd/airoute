@@ -224,6 +224,10 @@ CREATE TABLE IF NOT EXISTS request_logs (
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
 	}
+	_, err = s.db.Exec(`ALTER TABLE models ADD COLUMN modalities_explicit INTEGER NOT NULL DEFAULT 0`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
 	_, err = s.db.Exec(`ALTER TABLE providers ADD COLUMN models_from_upstream INTEGER NOT NULL DEFAULT 0`)
 	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
 		return err
@@ -334,7 +338,7 @@ ON CONFLICT(id) DO UPDATE SET
 }
 
 func (s *Store) refreshModalities() error {
-	rows, err := s.db.Query(`SELECT id, upstream_id, kind FROM models`)
+	rows, err := s.db.Query(`SELECT id, upstream_id, kind FROM models WHERE modalities_explicit = 0`)
 	if err != nil {
 		return err
 	}
@@ -669,9 +673,25 @@ func (s *Store) ProviderSecret(slug string) (baseURL, apiKey, protocol string, e
 	return baseURL, apiKey, protocol, enabledInt == 1, nil
 }
 
+// LoadedModel is one upstream model id, with modalities when the provider listed them.
+type LoadedModel struct {
+	UpstreamID string
+	Inputs     string
+	Outputs    string
+}
+
 // ReplaceProviderModels stores the provider's live model list and keeps it across catalog syncs.
 // Active flags stay on for ids that are still in the new list.
 func (s *Store) ReplaceProviderModels(slug string, upstreamIDs []string) (int, error) {
+	loaded := make([]LoadedModel, len(upstreamIDs))
+	for i, id := range upstreamIDs {
+		loaded[i] = LoadedModel{UpstreamID: id}
+	}
+	return s.ReplaceLoadedModels(slug, loaded)
+}
+
+// ReplaceLoadedModels stores a live model list. Modalities reported by the provider are kept across restarts.
+func (s *Store) ReplaceLoadedModels(slug string, loaded []LoadedModel) (int, error) {
 	if _, err := s.GetProvider(slug); err != nil {
 		return 0, err
 	}
@@ -720,7 +740,8 @@ FROM models WHERE provider_slug = ?`, slug)
 	if _, err := tx.Exec(`DELETE FROM models WHERE provider_slug = ?`, slug); err != nil {
 		return 0, err
 	}
-	for _, upstreamID := range upstreamIDs {
+	for _, loadedModel := range loaded {
+		upstreamID := loadedModel.UpstreamID
 		item, ok := kept[upstreamID]
 		if !ok {
 			item = keptModel{
@@ -730,15 +751,24 @@ FROM models WHERE provider_slug = ?`, slug)
 			}
 		}
 		inputs, outputs := catalog.Modalities(upstreamID, item.kind)
+		explicit := 0
+		if loadedModel.Inputs != "" {
+			inputs = loadedModel.Inputs
+			explicit = 1
+		}
+		if loadedModel.Outputs != "" {
+			outputs = loadedModel.Outputs
+			explicit = 1
+		}
 		if _, err := tx.Exec(`
 INSERT INTO models (
   id, provider_slug, upstream_id, display_name, description,
   context_window, max_output_tokens, input_usd_per_million, output_usd_per_million,
-  knowledge_cutoff, reasoning, kind, inputs, outputs, active
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+  knowledge_cutoff, reasoning, kind, inputs, outputs, modalities_explicit, active
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 			slug+"/"+upstreamID, slug, upstreamID, item.displayName, item.description,
 			item.context, item.maxOutput, item.inputPrice, item.outputPrice,
-			item.cutoff, item.reasoning, item.kind, inputs, outputs, item.active); err != nil {
+			item.cutoff, item.reasoning, item.kind, inputs, outputs, explicit, item.active); err != nil {
 			return 0, err
 		}
 	}
@@ -749,7 +779,7 @@ INSERT INTO models (
 	if err := tx.Commit(); err != nil {
 		return 0, err
 	}
-	return len(upstreamIDs), nil
+	return len(loaded), nil
 }
 
 type ModelPage struct {

@@ -61,15 +61,15 @@ func All() []Provider {
 
 // KindFromID guesses a model kind from an upstream id returned by a model list.
 func KindFromID(id string) string {
-	lowered := strings.ToLower(id)
+	name := modelName(id)
 	switch {
-	case strings.Contains(lowered, "embed"):
+	case strings.Contains(name, "embed"):
 		return KindEmbedding
-	case strings.Contains(lowered, "whisper"), strings.Contains(lowered, "tts"), strings.Contains(lowered, "transcri"):
+	case containsAny(name, "whisper", "tts", "transcri"):
 		return KindAudio
-	case strings.Contains(lowered, "dall-e"), strings.Contains(lowered, "gpt-image"), strings.Contains(lowered, "flux"):
+	case containsAny(name, "dall-e", "gpt-image", "flux", "stable-diffusion", "imagen", "sdxl", "ideogram", "recraft", "kandinsky", "kolors", "midjourney", "hidream", "qwen-image", "nano-banana"):
 		return KindImage
-	case strings.Contains(lowered, "sora"):
+	case containsAny(name, "sora", "veo", "kling", "runway", "luma", "hailuo", "cogvideo", "mochi", "i2v", "t2v", "r2v", "seedance", "wan-", "wan/"):
 		return KindVideo
 	default:
 		return KindChat
@@ -92,42 +92,9 @@ func UsesSessionCookie(slug string) bool {
 }
 
 // Modalities reports what a model accepts and what it returns.
-// Values are comma-separated: text, image, audio, video, embedding.
+// Values are comma-separated: text, file, image, audio, video, embedding, decisions.
 func Modalities(id, kind string) (string, string) {
-	lowered := strings.ToLower(id)
-	switch kind {
-	case KindImage:
-		inputs := "text"
-		if strings.Contains(lowered, "edit") || strings.Contains(lowered, "i2i") || strings.Contains(lowered, "variation") {
-			inputs = "text,image"
-		}
-		return inputs, "image"
-	case KindVideo:
-		inputs := "text"
-		if strings.Contains(lowered, "i2v") || strings.Contains(lowered, "image") {
-			inputs = "text,image"
-		}
-		return inputs, "video"
-	case KindAudio:
-		if strings.Contains(lowered, "whisper") || strings.Contains(lowered, "transcri") {
-			return "audio", "text"
-		}
-		return "text", "audio"
-	case KindEmbedding:
-		return "text", "embedding"
-	case KindDecision:
-		return "text", "decisions"
-	default:
-		inputs := "text"
-		if strings.Contains(lowered, "vision") || strings.Contains(lowered, "gpt-4o") || strings.Contains(lowered, "-image") {
-			inputs = "text,image"
-		}
-		outputs := "text"
-		if strings.Contains(lowered, "image-preview") || strings.Contains(lowered, "-image") {
-			outputs = "text,image"
-		}
-		return inputs, outputs
-	}
+	return modalitiesFor(modelName(id), kind)
 }
 
 func BySlug(slug string) (Provider, bool) {
