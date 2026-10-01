@@ -50,7 +50,6 @@ export default function KeysPage() {
     <div>
       <PanelPageHeader
         title="API keys"
-        description="Apps on this computer use these keys. The provider key stays on this machine and is never sent back to the panel."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       {created && (

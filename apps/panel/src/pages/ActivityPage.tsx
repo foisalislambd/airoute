@@ -17,7 +17,6 @@ export default function ActivityPage() {
     <div>
       <PanelPageHeader
         title="Activity"
-        description="Local request log. Prompts are not stored, only the model, status, latency, and token counts when the provider returns them."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       <div className="panel-card overflow-hidden">

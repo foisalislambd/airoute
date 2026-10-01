@@ -20,7 +20,6 @@ export default function ActivityDetailPage() {
     <div>
       <PanelPageHeader
         title="Request"
-        description="The provider call that was sent, with secrets masked. The prompt text is not stored separately."
       />
       <Link to="/activity" className="mb-4 inline-block text-sm text-brand-500 hover:underline">
         Back to activity

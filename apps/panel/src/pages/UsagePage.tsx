@@ -24,7 +24,6 @@ export default function UsagePage() {
     <div>
       <PanelPageHeader
         title="Usage"
-        description="Counts from the local request log. Cost uses the price stored on each model. Unknown prices stay at $0.00."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       <div className="mb-4 grid gap-3 sm:grid-cols-4">

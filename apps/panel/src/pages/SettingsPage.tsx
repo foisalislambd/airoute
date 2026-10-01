@@ -37,7 +37,6 @@ export default function SettingsPage() {
     <div>
       <PanelPageHeader
         title="Settings"
-        description="This router stays on this computer. Provider keys and the request log live in the data folder below."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       <div className="panel-card panel-card-body space-y-4">

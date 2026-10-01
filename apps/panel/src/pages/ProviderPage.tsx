@@ -200,7 +200,6 @@ export default function ProviderPage() {
       </Link>
       <PanelPageHeader
         title={provider?.displayName ?? "Provider"}
-        description={provider?.summary}
         leading={provider ? <ProviderMark slug={provider.slug} name={provider.displayName} /> : undefined}
         actions={
           provider?.docsUrl ? (

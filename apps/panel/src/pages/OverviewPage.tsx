@@ -37,7 +37,6 @@ export default function OverviewPage() {
     <div>
       <PanelPageHeader
         title="Overview"
-        description="Point any OpenAI-compatible app at this machine. Requests go out with the provider key you save locally."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">

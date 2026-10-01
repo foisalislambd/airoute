@@ -61,7 +61,6 @@ export default function FallbackPage() {
     <div>
       <PanelPageHeader
         title="Fallback"
-        description="A chain tries the next chat model when the current one returns an error. Clients call the public id, for example fallback/daily."
       />
       {error && <p className="mb-4 text-sm text-error-500">{error}</p>}
       <form onSubmit={onSave} className="panel-card panel-card-body mb-4 space-y-3">
