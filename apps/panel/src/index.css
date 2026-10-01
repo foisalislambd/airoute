@@ -46,6 +46,9 @@
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 0 0% 100%;
+    --color-gray-400: #c5ced9;
+    --color-gray-500: #a8b3c2;
+    --color-gray-600: #93a0b3;
   }
 
   body {

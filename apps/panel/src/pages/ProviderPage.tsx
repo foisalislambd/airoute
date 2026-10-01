@@ -341,8 +341,14 @@ export default function ProviderPage() {
                       <span className="block text-xs text-gray-400">out {formatTokens(model.maxOutputTokens)}</span>
                     </td>
                     <td className="px-4 py-3 text-gray-600 dark:text-gray-300">
-                      {formatPrice(model.inputUsdPerMillion)} in
-                      <span className="block">{formatPrice(model.outputUsdPerMillion)} out</span>
+                      {model.inputUsdPerMillion || model.outputUsdPerMillion || model.contextWindow ? (
+                        <>
+                          {formatPrice(model.inputUsdPerMillion)} in
+                          <span className="block">{formatPrice(model.outputUsdPerMillion)} out</span>
+                        </>
+                      ) : (
+                        "—"
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <button

@@ -81,9 +81,13 @@ func listedModels(items []openai.ListedModel) []store.LoadedModel {
 	loaded := make([]store.LoadedModel, len(items))
 	for i, item := range items {
 		loaded[i] = store.LoadedModel{
-			UpstreamID: item.ID,
-			Inputs:     catalog.NormalizeModalities(item.Inputs),
-			Outputs:    catalog.NormalizeModalities(item.Outputs),
+			UpstreamID:          item.ID,
+			Inputs:              catalog.NormalizeModalities(item.Inputs),
+			Outputs:             catalog.NormalizeModalities(item.Outputs),
+			ContextWindow:       item.ContextWindow,
+			MaxOutput:           item.MaxOutput,
+			InputUSDPerMillion:  item.InputUSDPerMillion,
+			OutputUSDPerMillion: item.OutputUSDPerMillion,
 		}
 	}
 	return loaded

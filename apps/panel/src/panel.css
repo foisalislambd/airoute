@@ -83,3 +83,19 @@
 .dark .text-white\/90 {
   color: #ffffff;
 }
+
+.dark .text-gray-400,
+.dark .dark\:text-gray-400,
+.dark .placeholder\:text-gray-400::placeholder {
+  color: #c5ced9;
+}
+
+.dark .text-gray-500,
+.dark .dark\:text-gray-500 {
+  color: #a8b3c2;
+}
+
+.dark .text-gray-600,
+.dark .dark\:text-gray-600 {
+  color: #93a0b3;
+}

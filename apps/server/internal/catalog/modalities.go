@@ -28,8 +28,11 @@ func modalitiesFor(name, kind string) (string, string) {
 		}
 		return formatModalities(in), "image"
 	case KindVideo:
+		if containsAny(name, "t2i", "text-to-image", "text2img") && !containsAny(name, "t2v", "i2v") {
+			return "text", "image"
+		}
 		in := map[string]bool{"text": true}
-		if containsAny(name, "i2v", "image", "img2vid", "reference", "r2v") {
+		if containsAny(name, "i2v", "img2vid", "image-to-video", "r2v") || strings.Contains(name, "image") {
 			in["image"] = true
 		}
 		if containsAny(name, "v2v", "video-to-video") {
@@ -37,8 +40,11 @@ func modalitiesFor(name, kind string) (string, string) {
 		}
 		return formatModalities(in), "video"
 	case KindAudio:
-		if containsAny(name, "whisper", "transcri", "stt", "asr") {
+		if containsAny(name, "whisper", "transcri", "stt", "asr", "speech-to-text") {
 			return "audio", "text"
+		}
+		if containsAny(name, "gpt-audio", "audio-preview", "-omni") || strings.Contains(name, "realtime") {
+			return "text,audio", "text,audio"
 		}
 		return "text", "audio"
 	case KindEmbedding:
@@ -97,12 +103,11 @@ func acceptsImage(name string) bool {
 		"nova-pro", "nova-lite", "nova-premier", "nova-2",
 		"glm-4v", "glm-4.5v", "glm-4.6v", "glm-4.1v", "glm-4.7v",
 		"step-1v", "step-3v",
-		"sonar",
 		"mistral-small-3", "mistral-medium", "mistral-small-250",
 	) {
 		return true
 	}
-	if containsAny(name, "o1", "o3", "o4") && !containsAny(name, "o1-mini", "o3-mini") {
+	if (hasToken(name, "o1") || hasToken(name, "o3") || hasToken(name, "o4")) && !hasToken(name, "o1-mini") && !hasToken(name, "o3-mini") {
 		return true
 	}
 	return strings.Contains(name, "-image") && !containsAny(name, "image-to-text", "img2text")
@@ -157,6 +162,28 @@ func modelName(id string) string {
 		name = name[i+1:]
 	}
 	return name
+}
+
+func hasToken(name, token string) bool {
+	for start := 0; start < len(name); {
+		i := strings.Index(name[start:], token)
+		if i < 0 {
+			return false
+		}
+		i += start
+		before := i == 0 || !isAlphaNum(name[i-1])
+		end := i + len(token)
+		after := end == len(name) || !isAlphaNum(name[end])
+		if before && after {
+			return true
+		}
+		start = i + 1
+	}
+	return false
+}
+
+func isAlphaNum(b byte) bool {
+	return (b >= 'a' && b <= 'z') || (b >= '0' && b <= '9')
 }
 
 func containsAny(value string, parts ...string) bool {

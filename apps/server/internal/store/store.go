@@ -150,6 +150,10 @@ func Open(path string, key []byte) (*Store, error) {
 		db.Close()
 		return nil, err
 	}
+	if err := s.refreshFacts(); err != nil {
+		db.Close()
+		return nil, err
+	}
 	return s, nil
 }
 
@@ -362,6 +366,56 @@ func (s *Store) refreshModalities() error {
 	for _, item := range items {
 		inputs, outputs := catalog.Modalities(item.upstream, item.kind)
 		if _, err := s.db.Exec(`UPDATE models SET inputs = ?, outputs = ? WHERE id = ?`, inputs, outputs, item.id); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (s *Store) refreshFacts() error {
+	rows, err := s.db.Query(`SELECT id, upstream_id, context_window, max_output_tokens, input_usd_per_million, output_usd_per_million FROM models`)
+	if err != nil {
+		return err
+	}
+	type row struct {
+		id, upstream       string
+		context, maxOutput int
+		input, output      float64
+	}
+	var items []row
+	for rows.Next() {
+		var item row
+		if err := rows.Scan(&item.id, &item.upstream, &item.context, &item.maxOutput, &item.input, &item.output); err != nil {
+			rows.Close()
+			return err
+		}
+		items = append(items, item)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return err
+	}
+	rows.Close()
+	for _, item := range items {
+		facts := catalog.LookupFacts(item.upstream)
+		context, maxOut, input, output := item.context, item.maxOutput, item.input, item.output
+		if context == 0 {
+			context = facts.ContextWindow
+		}
+		if maxOut == 0 {
+			maxOut = facts.MaxOutput
+		}
+		if input == 0 {
+			input = facts.InputUSDPerMillion
+		}
+		if output == 0 {
+			output = facts.OutputUSDPerMillion
+		}
+		if context == item.context && maxOut == item.maxOutput && input == item.input && output == item.output {
+			continue
+		}
+		if _, err := s.db.Exec(`UPDATE models SET context_window = ?, max_output_tokens = ?, input_usd_per_million = ?, output_usd_per_million = ? WHERE id = ?`,
+			context, maxOut, input, output, item.id); err != nil {
 			return err
 		}
 	}
@@ -675,9 +729,13 @@ func (s *Store) ProviderSecret(slug string) (baseURL, apiKey, protocol string, e
 
 // LoadedModel is one upstream model id, with modalities when the provider listed them.
 type LoadedModel struct {
-	UpstreamID string
-	Inputs     string
-	Outputs    string
+	UpstreamID          string
+	Inputs              string
+	Outputs             string
+	ContextWindow       int
+	MaxOutput           int
+	InputUSDPerMillion  float64
+	OutputUSDPerMillion float64
 }
 
 // ReplaceProviderModels stores the provider's live model list and keeps it across catalog syncs.
@@ -759,6 +817,27 @@ FROM models WHERE provider_slug = ?`, slug)
 		if loadedModel.Outputs != "" {
 			outputs = loadedModel.Outputs
 			explicit = 1
+		}
+		facts := catalog.LookupFacts(upstreamID)
+		if loadedModel.ContextWindow > 0 {
+			item.context = loadedModel.ContextWindow
+		} else if item.context == 0 {
+			item.context = facts.ContextWindow
+		}
+		if loadedModel.MaxOutput > 0 {
+			item.maxOutput = loadedModel.MaxOutput
+		} else if item.maxOutput == 0 {
+			item.maxOutput = facts.MaxOutput
+		}
+		if loadedModel.InputUSDPerMillion > 0 {
+			item.inputPrice = loadedModel.InputUSDPerMillion
+		} else if item.inputPrice == 0 {
+			item.inputPrice = facts.InputUSDPerMillion
+		}
+		if loadedModel.OutputUSDPerMillion > 0 {
+			item.outputPrice = loadedModel.OutputUSDPerMillion
+		} else if item.outputPrice == 0 {
+			item.outputPrice = facts.OutputUSDPerMillion
 		}
 		if _, err := tx.Exec(`
 INSERT INTO models (

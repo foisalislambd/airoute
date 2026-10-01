@@ -21,6 +21,12 @@ func TestModalities(t *testing.T) {
 		{"phi-4", KindChat, "text", "text"},
 		{"qwen2.5-vl-72b", KindChat, "text,image,video", "text"},
 		{"llama-3.1-70b", KindChat, "text", "text"},
+		{"sonar-deep-research", KindChat, "text", "text"},
+		{"nova-micro-v1", KindChat, "text", "text"},
+		{"nova-lite-v1", KindChat, "text,image", "text"},
+		{"photo1", KindChat, "text", "text"},
+		{"openai/gpt-audio", KindAudio, "text,audio", "text,audio"},
+		{"Wan-AI/Wan2.6-T2I", KindVideo, "text", "image"},
 		{"whisper-1", KindAudio, "audio", "text"},
 		{"gpt-4o-mini-tts", KindAudio, "text", "audio"},
 		{"dall-e-3", KindImage, "text", "image"},
@@ -38,6 +44,10 @@ func TestModalities(t *testing.T) {
 	}
 	if got := NormalizeModalities([]string{"text", "pdf", "image"}); got != "text,file,image" {
 		t.Fatal(got)
+	}
+	facts := LookupFacts("openai/gpt-4o")
+	if facts.ContextWindow != 128_000 || facts.InputUSDPerMillion != 2.5 || facts.OutputUSDPerMillion != 10 {
+		t.Fatalf("gpt-4o facts %+v", facts)
 	}
 }
 

@@ -63,11 +63,11 @@ func All() []Provider {
 func KindFromID(id string) string {
 	name := modelName(id)
 	switch {
-	case strings.Contains(name, "embed"):
+	case strings.Contains(name, "embed") || containsAny(name, "rerank", "voyage"):
 		return KindEmbedding
-	case containsAny(name, "whisper", "tts", "transcri"):
+	case containsAny(name, "whisper", "tts", "transcri", "speech"):
 		return KindAudio
-	case containsAny(name, "dall-e", "gpt-image", "flux", "stable-diffusion", "imagen", "sdxl", "ideogram", "recraft", "kandinsky", "kolors", "midjourney", "hidream", "qwen-image", "nano-banana"):
+	case containsAny(name, "dall-e", "gpt-image", "flux", "stable-diffusion", "imagen", "sdxl", "ideogram", "recraft", "kandinsky", "kolors", "midjourney", "hidream", "qwen-image", "nano-banana", "t2i", "text2img", "text-to-image"):
 		return KindImage
 	case containsAny(name, "sora", "veo", "kling", "runway", "luma", "hailuo", "cogvideo", "mochi", "i2v", "t2v", "r2v", "seedance", "wan-", "wan/"):
 		return KindVideo
