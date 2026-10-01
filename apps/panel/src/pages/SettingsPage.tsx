@@ -1,11 +1,13 @@
 import { PanelPageHeader } from "@/components/layout/panel-page-header";
-import { clearActivity, getSettings } from "@/lib/api";
+import { clearActivity, getDesktop, getSettings, saveDesktop } from "@/lib/api";
 import { useEffect, useState } from "react";
 
 export default function SettingsPage() {
   const [dataDir, setDataDir] = useState("");
   const [address, setAddress] = useState("");
   const [logCount, setLogCount] = useState(0);
+  const [osName, setOsName] = useState("");
+  const [startWithWindows, setStartWithWindows] = useState(true);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -17,7 +19,24 @@ export default function SettingsPage() {
         setLogCount(result.logCount);
       })
       .catch((err: Error) => setError(err.message));
+    getDesktop()
+      .then((result) => {
+        setOsName(result.os);
+        setStartWithWindows(result.startWithWindows);
+      })
+      .catch((err: Error) => setError(err.message));
   }, []);
+
+  async function onStartup(next: boolean) {
+    setStartWithWindows(next);
+    setError("");
+    try {
+      await saveDesktop(next);
+    } catch (err) {
+      setStartWithWindows(!next);
+      setError(err instanceof Error ? err.message : "Could not save the startup setting");
+    }
+  }
 
   async function onClear() {
     if (!window.confirm("Delete every request log on this computer?")) return;
@@ -47,6 +66,16 @@ export default function SettingsPage() {
         <div>
           <p className="text-xs tracking-wide text-gray-500 uppercase">Listen address</p>
           <p className="mt-1 font-mono text-sm text-gray-900 dark:text-white">{address || "—"}</p>
+        </div>
+        <div className="border-t border-gray-100 pt-4 dark:border-gray-800">
+          <p className="text-xs tracking-wide text-gray-500 uppercase">Background</p>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">The router keeps running after you close the window. Quit it from the tray icon.</p>
+          {osName === "windows" ? (
+            <label className="mt-3 flex items-center gap-2 text-sm text-gray-800 dark:text-gray-100">
+              <input type="checkbox" checked={startWithWindows} onChange={(event) => onStartup(event.target.checked)} />
+              Start when Windows starts
+            </label>
+          ) : null}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-4 dark:border-gray-800">
           <p className="text-sm text-gray-600 dark:text-gray-300">{logCount} request logs stored</p>

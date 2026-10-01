@@ -9,6 +9,11 @@ import (
 )
 
 func openWindow(url string) error {
+	release, ok := acquireUILock()
+	if !ok {
+		return nil
+	}
+	defer release()
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "darwin":

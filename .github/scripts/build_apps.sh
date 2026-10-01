@@ -26,8 +26,12 @@ for spec in "${targets[@]}"; do
   if [[ "${goos}" == "windows" ]]; then
     bin="AIRoute.exe"
   fi
+  ldflags="-s -w"
+  if [[ "${goos}" == "windows" ]]; then
+    ldflags="${ldflags} -H windowsgui"
+  fi
   CGO_ENABLED=0 GOOS="${goos}" GOARCH="${goarch}" \
-    go build -trimpath -ldflags "-s -w" -o "${work}/${bin}" ./apps/desktop/cmd/airoute-desktop
+    go build -trimpath -ldflags "${ldflags}" -o "${work}/${bin}" ./apps/desktop/cmd/airoute-desktop
   chmod +x "${work}/${bin}" || true
   mkdir -p "${work}/panel"
   cp -a apps/panel/dist/. "${work}/panel/"
@@ -42,8 +46,8 @@ AIRoute ${version}
 
 Each archive is the desktop app plus the panel folder it serves.
 
-- Windows: unzip and run \`AIRoute.exe\`. WebView2 comes with current Windows 10 and 11.
-- macOS and Linux: unzip, run \`./AIRoute\`. It opens the panel in your browser.
+- Windows: unzip and run \`AIRoute.exe\`. Closing the window leaves the router running. The tray icon opens it again or quits it. WebView2 comes with current Windows 10 and 11.
+- macOS and Linux: unzip, run \`./AIRoute\`. Closing the browser tab leaves the router running until you stop the process.
 
 The app listens on \`127.0.0.1:8787\`. Data stays in the local airoute-router folder.
 EOF

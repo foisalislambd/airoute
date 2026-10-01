@@ -122,17 +122,25 @@ func DefaultDataDir() (string, error) {
 }
 
 func FindWebDir(explicit string) string {
+	exeDir := ""
+	if exe, err := os.Executable(); err == nil {
+		exeDir = filepath.Dir(exe)
+	}
+	return pickWebDir(webDirCandidates(explicit, exeDir))
+}
+
+func webDirCandidates(explicit, exeDir string) []string {
 	var candidates []string
 	if explicit != "" {
 		candidates = append(candidates, explicit)
 	}
-	candidates = append(candidates,
-		filepath.Join("apps", "panel", "dist"),
-		"dist",
-	)
-	if exe, err := os.Executable(); err == nil {
-		candidates = append(candidates, filepath.Join(filepath.Dir(exe), "panel"))
+	if exeDir != "" {
+		candidates = append(candidates, filepath.Join(exeDir, "panel"))
 	}
+	return append(candidates, filepath.Join("apps", "panel", "dist"), "dist")
+}
+
+func pickWebDir(candidates []string) string {
 	for _, candidate := range candidates {
 		info, err := os.Stat(filepath.Join(candidate, "index.html"))
 		if err == nil && !info.IsDir() {
@@ -148,14 +156,9 @@ func FindWebDir(explicit string) string {
 
 func WaitHealthy(addr string) error {
 	deadline := time.Now().Add(8 * time.Second)
-	url := fmt.Sprintf("http://%s/health", addr)
 	for time.Now().Before(deadline) {
-		resp, err := http.Get(url)
-		if err == nil {
-			resp.Body.Close()
-			if resp.StatusCode == http.StatusOK {
-				return nil
-			}
+		if Probe(addr) {
+			return nil
 		}
 		time.Sleep(100 * time.Millisecond)
 	}

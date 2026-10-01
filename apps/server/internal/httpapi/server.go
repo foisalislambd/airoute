@@ -59,6 +59,8 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("DELETE /api/activity", s.clearActivity)
 	mux.HandleFunc("GET /api/usage", s.usage)
 	mux.HandleFunc("GET /api/settings", s.settings)
+	mux.HandleFunc("GET /api/desktop", s.getDesktop)
+	mux.HandleFunc("PUT /api/desktop", s.saveDesktop)
 	mux.HandleFunc("GET /api/fallbacks", s.listFallbacks)
 	mux.HandleFunc("POST /api/fallbacks", s.saveFallback)
 	mux.HandleFunc("DELETE /api/fallbacks/{id}", s.deleteFallback)
@@ -75,7 +77,7 @@ func (s *Server) Handler() http.Handler {
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "service": "airoute"})
 }
 
 func (s *Server) overview(w http.ResponseWriter, _ *http.Request) {

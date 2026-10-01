@@ -2,8 +2,10 @@ package httpapi
 
 import (
 	"net/http"
+	"runtime"
 	"strconv"
 
+	"airoute/server/desktoppref"
 	"airoute/server/internal/store"
 )
 
@@ -68,6 +70,29 @@ func (s *Server) settings(w http.ResponseWriter, _ *http.Request) {
 		"address":  s.Addr,
 		"logCount": count,
 	})
+}
+
+func (s *Server) getDesktop(w http.ResponseWriter, _ *http.Request) {
+	pref := desktoppref.Load(s.DataDir)
+	writeJSON(w, http.StatusOK, map[string]any{
+		"os":               runtime.GOOS,
+		"startWithWindows": pref.StartWithWindows,
+	})
+}
+
+func (s *Server) saveDesktop(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		StartWithWindows bool `json:"startWithWindows"`
+	}
+	if err := readJSON(r, &body); err != nil {
+		writeAPIError(w, http.StatusBadRequest, "invalid JSON body")
+		return
+	}
+	if err := desktoppref.Save(s.DataDir, desktoppref.Pref{StartWithWindows: body.StartWithWindows}); err != nil {
+		writeAPIError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
 }
 
 func (s *Server) listFallbacks(w http.ResponseWriter, _ *http.Request) {

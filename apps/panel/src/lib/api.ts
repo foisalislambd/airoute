@@ -213,6 +213,14 @@ export function getSettings() {
   return request<{ dataDir: string; address: string; logCount: number }>("/api/settings")
 }
 
+export function getDesktop() {
+  return request<{ os: string; startWithWindows: boolean }>("/api/desktop")
+}
+
+export function saveDesktop(startWithWindows: boolean) {
+  return request<void>("/api/desktop", { method: "PUT", body: JSON.stringify({ startWithWindows }) })
+}
+
 export type FallbackChain = {
   id: string
   name: string
