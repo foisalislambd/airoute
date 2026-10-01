@@ -34,18 +34,53 @@ for (const folder of ["win32-x64", "linux-x64", "darwin-x64", "darwin-arm64"]) {
 }
 
 function run(args, cwd, env) {
-  const result = spawnSync("npm", args, { cwd, env, encoding: "utf8" });
-  return result;
+  return spawnSync("npm", args, { cwd, env, encoding: "utf8" });
+}
+
+function runInherit(args, cwd, env) {
+  const result = spawnSync("npm", args, { cwd, env, stdio: "inherit" });
+  if (result.status !== 0) process.exit(result.status ?? 1);
+}
+
+async function npmToken() {
+  const requestUrl = process.env.ACTIONS_ID_TOKEN_REQUEST_URL || "";
+  const requestToken = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || "";
+  if (!requestUrl || !requestToken) {
+    console.error("GitHub did not provide an OIDC token. The release job needs id-token: write.");
+    process.exit(1);
+  }
+  const url = new URL(requestUrl);
+  url.searchParams.set("audience", "npm:registry.npmjs.org");
+  const idResponse = await fetch(url, {
+    headers: { Accept: "application/json", Authorization: `Bearer ${requestToken}` },
+  });
+  const idBody = await idResponse.json().catch(() => ({}));
+  if (!idResponse.ok || !idBody.value) {
+    console.error(`GitHub refused the OIDC token (${idResponse.status}).`);
+    process.exit(1);
+  }
+  const exchange = await fetch("https://registry.npmjs.org/-/npm/v1/oidc/token/exchange/package/airoute", {
+    method: "POST",
+    headers: { Accept: "application/json", Authorization: `Bearer ${idBody.value}` },
+  });
+  const text = await exchange.text();
+  if (!exchange.ok) {
+    console.error(`npm trusted publisher rejected the release (${exchange.status}).`);
+    console.error(text.slice(0, 500));
+    console.error("On https://www.npmjs.com/package/airoute/access add Trusted Publisher: user foisalislambd, repository airoute, workflow filename release.yml, environment blank, allowed action npm publish.");
+    process.exit(1);
+  }
+  const payload = JSON.parse(text);
+  if (!payload.token) {
+    console.error("npm trusted publisher did not return a publish token.");
+    process.exit(1);
+  }
+  return payload.token;
 }
 
 function fail(result) {
   process.stderr.write(result.stderr || result.stdout || "npm failed\n");
   process.exit(result.status ?? 1);
-}
-
-function show(result) {
-  if (result.stdout) process.stdout.write(result.stdout);
-  if (result.stderr) process.stderr.write(result.stderr);
 }
 
 const publicEnv = { ...process.env };
@@ -63,9 +98,17 @@ function missing(spec, registry, env) {
 }
 
 if (missing(`airoute@${version}`, "https://registry.npmjs.org", publicEnv)) {
-  const published = run(["publish", "--access", "public", "--provenance"], cli, publicEnv);
-  show(published);
-  if (published.status !== 0) fail(published);
+  const tokenFile = path.join(tmpdir(), `airoute-npm-${process.pid}.npmrc`);
+  const publishToken = await npmToken();
+  writeFileSync(tokenFile, `//registry.npmjs.org/:_authToken=${publishToken}\n`);
+  try {
+    runInherit(["publish", "--access", "public"], cli, {
+      ...publicEnv,
+      NPM_CONFIG_USERCONFIG: tokenFile,
+    });
+  } finally {
+    rmSync(tokenFile, { force: true });
+  }
   console.log(`published airoute@${version} to npm`);
 } else {
   console.log(`airoute@${version} is already on npm`);
@@ -93,12 +136,14 @@ try {
     path.join(stage, ".npmrc"),
     `@${owner}:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}\n`,
   );
-  const ghEnv = { ...process.env, NODE_AUTH_TOKEN: token };
+  const ghEnv = {
+    ...process.env,
+    NODE_AUTH_TOKEN: token,
+    NPM_CONFIG_USERCONFIG: path.join(stage, ".npmrc"),
+  };
   const spec = `@${owner}/airoute@${version}`;
   if (missing(spec, "https://npm.pkg.github.com", ghEnv)) {
-    const published = run(["publish", "--access", "public"], stage, ghEnv);
-    show(published);
-    if (published.status !== 0) fail(published);
+    runInherit(["publish", "--access", "public"], stage, ghEnv);
     console.log(`published ${spec} to GitHub Packages`);
   } else {
     console.log(`${spec} is already on GitHub Packages`);
