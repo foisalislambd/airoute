@@ -52,7 +52,10 @@ func Run(ctx context.Context, opt Options) error {
 	defer db.Close()
 
 	webDir := FindWebDir(opt.WebDir)
+	runCtx, stop := context.WithCancel(ctx)
+	defer stop()
 	api := httpapi.New(db, webDir, opt.Addr, opt.DataDir)
+	api.Stop = stop
 	server := &http.Server{
 		Addr:              opt.Addr,
 		Handler:           api.Handler(),
@@ -60,7 +63,7 @@ func Run(ctx context.Context, opt Options) error {
 		IdleTimeout:       2 * time.Minute,
 		MaxHeaderBytes:    1 << 20,
 		BaseContext: func(_ net.Listener) context.Context {
-			return ctx
+			return runCtx
 		},
 	}
 
@@ -88,7 +91,7 @@ func Run(ctx context.Context, opt Options) error {
 	}
 
 	select {
-	case <-ctx.Done():
+	case <-runCtx.Done():
 		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		_ = server.Shutdown(shutdownCtx)

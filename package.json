@@ -1,7 +1,7 @@
 {
   "name": "airoute",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Local-first OpenAI-compatible AI router",
   "workspaces": [
     "apps/panel",
@@ -11,7 +11,8 @@
     "dev:panel": "npm run dev -w @airoute/panel",
     "build:panel": "npm run build -w @airoute/panel",
     "dev:server": "go run ./apps/server/cmd/airoute",
-    "dev:desktop": "go run ./apps/desktop/cmd/airoute-desktop"
+    "dev:desktop": "go run ./apps/desktop/cmd/airoute-desktop",
+    "build:npm": "node scripts/build_npm.mjs"
   },
   "engines": {
     "node": ">=20"

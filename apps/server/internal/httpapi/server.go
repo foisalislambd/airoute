@@ -24,6 +24,7 @@ type Server struct {
 	WebDir  string
 	Addr    string
 	DataDir string
+	Stop    func()
 }
 
 // Store is the persistence surface the HTTP layer needs.
@@ -42,6 +43,7 @@ func New(db *store.Store, webDir, addr, dataDir string) *Server {
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /health", s.health)
+	mux.HandleFunc("POST /api/shutdown", s.shutdown)
 	mux.HandleFunc("GET /api/overview", s.overview)
 	mux.HandleFunc("GET /api/providers", s.listProviders)
 	mux.HandleFunc("GET /api/providers/{slug}", s.getProvider)
@@ -78,6 +80,18 @@ func (s *Server) Handler() http.Handler {
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "service": "airoute"})
+}
+
+func (s *Server) shutdown(w http.ResponseWriter, _ *http.Request) {
+	if s.Stop == nil {
+		writeAPIError(w, http.StatusInternalServerError, "shutdown is not available")
+		return
+	}
+	w.WriteHeader(http.StatusNoContent)
+	if flusher, ok := w.(http.Flusher); ok {
+		flusher.Flush()
+	}
+	go s.Stop()
 }
 
 func (s *Server) overview(w http.ResponseWriter, _ *http.Request) {

@@ -14,8 +14,12 @@ apps/server/data
 apps/desktop/data
 
 # go
-bin
+/bin
 coverage.out
+
+# npm package build output
+packages/cli/vendor/
+packages/cli/panel/
 
 # python
 __pycache__/

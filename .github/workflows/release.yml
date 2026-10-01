@@ -6,6 +6,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  packages: write
 
 concurrency:
   group: release-${{ github.ref }}
@@ -48,6 +50,18 @@ jobs:
         env:
           VERSION: ${{ steps.plan.outputs.version }}
         run: bash .github/scripts/build_apps.sh
+
+      - name: Build the npm package
+        if: steps.plan.outputs.release == 'true'
+        run: node scripts/build_npm.mjs
+
+      - name: Publish to npm and GitHub Packages
+        if: steps.plan.outputs.release == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          npm install -g npm@11
+          node scripts/publish_npm.mjs
 
       - name: Create the GitHub release and tag
         if: steps.plan.outputs.release == 'true'

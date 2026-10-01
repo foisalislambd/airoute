@@ -1,0 +1,29 @@
+{
+  "name": "airoute",
+  "version": "1.1.0",
+  "description": "Local OpenAI-compatible AI router. Manage providers, keys, and models in the web panel.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foisalislambd/airoute.git"
+  },
+  "keywords": [
+    "ai",
+    "openai",
+    "router",
+    "llm"
+  ],
+  "bin": {
+    "airoute": "bin/airoute.js"
+  },
+  "files": [
+    "bin/airoute.js",
+    "panel",
+    "vendor"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
