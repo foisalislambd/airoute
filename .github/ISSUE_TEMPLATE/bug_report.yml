@@ -1,0 +1,52 @@
+name: Bug report
+description: Something in AIRoute failed
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Do not paste provider keys, router keys, or secret.key.
+        For a security issue, use Security advisories instead of this form.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to repeat it
+      placeholder: |
+        1. Start AIRoute
+        2. Open the panel
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AIRoute version
+      description: The version from package.json, the release, or `npm list -g airoute`.
+      placeholder: 1.1.0
+    validations:
+      required: true
+  - type: dropdown
+    id: how
+    attributes:
+      label: How you run it
+      options:
+        - npm package
+        - Desktop app
+        - From source
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: Windows 11
+    validations:
+      required: true

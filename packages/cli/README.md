@@ -25,3 +25,7 @@ airoute --addr 127.0.0.1:8787 --no-open
 ```
 
 Closing the browser tab does not stop the router. `airoute stop` does.
+
+Source and guides: https://github.com/foisalislambd/airoute
+
+MIT licensed.

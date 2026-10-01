@@ -3,6 +3,15 @@
   "private": true,
   "version": "1.1.1",
   "description": "Local-first OpenAI-compatible AI router",
+  "license": "MIT",
+  "homepage": "https://github.com/foisalislambd/airoute#readme",
+  "bugs": {
+    "url": "https://github.com/foisalislambd/airoute/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foisalislambd/airoute.git"
+  },
   "workspaces": [
     "apps/panel",
     "packages/sse"

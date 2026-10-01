@@ -153,3 +153,11 @@ npm run dev:desktop
 | `packages/sse` | Parser for OpenAI server-sent chat streams |
 
 The version in the root `package.json` is the release version. Pushing `main` with a higher version builds the desktop archives, publishes `airoute` to npm and `@foisalislambd/airoute` to GitHub Packages, and creates the GitHub release. A commit message that contains `skip release` skips that.
+
+## Contributing
+
+Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start. Report vulnerabilities in private, as described in [SECURITY.md](SECURITY.md).
+
+## License
+
+AIRoute is [MIT](LICENSE) licensed. Copyright 2026 foisalislambd.

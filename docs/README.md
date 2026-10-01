@@ -23,3 +23,5 @@ The two addresses you will use most:
 | API for Cursor and scripts | `http://127.0.0.1:8787/v1` |
 
 The router only listens on this computer. Another machine on your network cannot open it.
+
+To change the code, start with [Develop](develop.md) and [CONTRIBUTING.md](../CONTRIBUTING.md). The license is [MIT](../LICENSE).

@@ -2,6 +2,12 @@
   "name": "airoute",
   "version": "1.1.0",
   "description": "Local OpenAI-compatible AI router. Manage providers, keys, and models in the web panel.",
+  "license": "MIT",
+  "homepage": "https://github.com/foisalislambd/airoute#readme",
+  "bugs": {
+    "url": "https://github.com/foisalislambd/airoute/issues"
+  },
+  "author": "foisalislambd",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/foisalislambd/airoute.git"
