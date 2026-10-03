@@ -11,6 +11,19 @@ A provider is an account you already have: OpenAI, Anthropic, a gateway, a local
 
 Until those steps are done, a client that asks for the model gets an error.
 
+## More than one account
+
+A provider can hold several accounts. On the provider page, add each key or session cookie under **Accounts**, then turn the ones you want on.
+
+**Account order** decides which one is called first:
+
+| Order | What happens |
+| --- | --- |
+| Fill first | The lowest priority number is used until that call fails. The next enabled account is tried in the same request. |
+| Round robin | Calls spread across the enabled accounts. The one used least recently goes first. |
+
+Priority `0` is first in fill-first order. A new account is added after the ones you already have. If the provider is on and it needs a key, the last remaining account cannot be removed until you turn the provider off.
+
 ## Model ids
 
 Clients always use a public id:

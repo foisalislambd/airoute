@@ -44,27 +44,40 @@ func (s *Server) serveDecision(w http.ResponseWriter, r *http.Request, source, k
 		s.failChat(w, source, keyID, meta.Model, http.StatusNotFound, "invalid_request_error", "model_not_found", "The model `"+meta.Model+"` does not exist.", started)
 		return
 	}
-	route.APIKey = providerCredential(route.Model.ProviderSlug, route.APIKey)
-	if !routeReady(route) {
-		s.failChat(w, source, keyID, route.Model.ID, http.StatusNotFound, "invalid_request_error", "model_not_found", routeBlockedMessage(meta.Model, route), started)
-		return
-	}
 	if route.Model.Kind != catalog.KindDecision && route.Protocol != catalog.ProtocolSystemOne {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "wrong_endpoint", "This model is not a decision model.", started)
 		return
 	}
-	s.proxyDecision(w, r, source, keyID, route, body, started)
+	parts, err := s.Store.ExpandAccounts(route)
+	if err != nil {
+		s.failChat(w, source, keyID, route.Model.ID, http.StatusInternalServerError, "server_error", "internal_error", err.Error(), started)
+		return
+	}
+	for i, part := range parts {
+		part.APIKey = providerCredential(part.Model.ProviderSlug, part.APIKey)
+		last := i == len(parts)-1
+		if !routeReady(part) {
+			if last {
+				s.failChat(w, source, keyID, part.Model.ID, http.StatusNotFound, "invalid_request_error", "model_not_found", routeBlockedMessage(meta.Model, part), started)
+				return
+			}
+			continue
+		}
+		if s.proxyDecision(w, r, source, keyID, part, body, started, !last) {
+			return
+		}
+	}
 }
 
-func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time) {
+func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time, retry bool) bool {
 	if strings.TrimSpace(route.BaseURL) == "" {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "base_url_required", "Set a base URL for this provider before calling it.", started)
-		return
+		return true
 	}
 	upstreamBody, err := rewriteDecisionModel(body, route.Model.UpstreamID)
 	if err != nil {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
-		return
+		return true
 	}
 
 	var endpoint string
@@ -74,7 +87,7 @@ func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, k
 		payload, letters, err = tevChatBody(route.Model.UpstreamID, upstreamBody)
 		if err != nil {
 			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
-			return
+			return true
 		}
 		endpoint = strings.TrimRight(route.BaseURL, "/") + "/chat/completions"
 	} else {
@@ -91,22 +104,42 @@ func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, k
 	request := providerRequest(http.MethodPost, endpoint, header, payload)
 	resp, err := s.OpenAI.Send(r.Context(), http.MethodPost, endpoint, payload, header)
 	if err != nil {
+		if retry {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+			})
+			return false
+		}
 		s.failDecision(w, source, keyID, route.Model.ID, http.StatusBadGateway, err.Error(), request, started)
-		return
+		return true
 	}
 	defer resp.Body.Close()
 	raw, err := io.ReadAll(io.LimitReader(resp.Body, 4<<20))
 	if err != nil {
+		if retry {
+			return false
+		}
 		s.failDecision(w, source, keyID, route.Model.ID, http.StatusBadGateway, err.Error(), request, started)
-		return
+		return true
 	}
 	if resp.StatusCode >= 400 {
+		if retry {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: upstreamErrorMessage(raw), Request: string(request),
+			})
+			return false
+		}
 		s.failDecision(w, source, keyID, route.Model.ID, resp.StatusCode, upstreamErrorMessage(raw), request, started)
-		return
+		return true
 	}
 	if !json.Valid(raw) {
+		if retry {
+			return false
+		}
 		s.failDecision(w, source, keyID, route.Model.ID, http.StatusBadGateway, "The provider returned a decision that is not JSON.", request, started)
-		return
+		return true
 	}
 
 	out := raw
@@ -114,6 +147,7 @@ func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, k
 	if letters != nil {
 		out, prompt, completion = tevAnswer(raw, letters)
 	}
+	s.noteAccount(route)
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 		StatusCode: http.StatusOK, LatencyMS: int(time.Since(started).Milliseconds()),
@@ -124,11 +158,12 @@ func (s *Server) proxyDecision(w http.ResponseWriter, r *http.Request, source, k
 			"response": json.RawMessage(out),
 			"request":  json.RawMessage(request),
 		})
-		return
+		return true
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(out)
+	return true
 }
 
 func (s *Server) failDecision(w http.ResponseWriter, source, keyID, modelID string, status int, message string, request []byte, started time.Time) {

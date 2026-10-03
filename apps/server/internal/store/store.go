@@ -38,12 +38,14 @@ type Provider struct {
 	Category     string `json:"category"`
 	Free         bool   `json:"free"`
 	KeyOptional  bool   `json:"keyOptional"`
-	HasAPIKey    bool   `json:"hasApiKey"`
-	APIKeyHint   string `json:"apiKeyHint"`
-	Enabled      bool   `json:"enabled"`
-	ActiveModels int    `json:"activeModels"`
-	TotalModels  int    `json:"totalModels"`
-	UpdatedAt    string `json:"updatedAt"`
+	HasAPIKey       bool   `json:"hasApiKey"`
+	APIKeyHint      string `json:"apiKeyHint"`
+	Enabled         bool   `json:"enabled"`
+	AccountStrategy string `json:"accountStrategy"`
+	AccountCount    int    `json:"accountCount"`
+	ActiveModels    int    `json:"activeModels"`
+	TotalModels     int    `json:"totalModels"`
+	UpdatedAt       string `json:"updatedAt"`
 }
 
 type Model struct {
@@ -68,8 +70,10 @@ type Route struct {
 	Model      Model
 	Protocol   string
 	BaseURL    string
-	APIKey     string
-	ProviderOn bool
+	APIKey      string
+	AccountID   string
+	AccountName string
+	ProviderOn  bool
 }
 
 type RouterKey struct {
@@ -252,7 +256,30 @@ CREATE TABLE IF NOT EXISTS fallback_steps (
   model_id TEXT NOT NULL,
   PRIMARY KEY (fallback_id, position)
 );`)
-	return err
+	if err != nil {
+		return err
+	}
+	_, err = s.db.Exec(`ALTER TABLE providers ADD COLUMN account_strategy TEXT NOT NULL DEFAULT 'fill-first'`)
+	if err != nil && !strings.Contains(err.Error(), "duplicate column") {
+		return err
+	}
+	if _, err = s.db.Exec(`
+CREATE TABLE IF NOT EXISTS provider_accounts (
+  id TEXT PRIMARY KEY,
+  provider_slug TEXT NOT NULL,
+  name TEXT NOT NULL,
+  api_key_cipher TEXT NOT NULL DEFAULT '',
+  api_key_hint TEXT NOT NULL DEFAULT '',
+  priority INTEGER NOT NULL DEFAULT 0,
+  enabled INTEGER NOT NULL DEFAULT 1,
+  last_used_at TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_provider_accounts_slug ON provider_accounts(provider_slug, priority, created_at);`); err != nil {
+		return err
+	}
+	return s.importLegacyAccounts()
 }
 
 func (s *Store) syncCatalog() error {
@@ -482,10 +509,7 @@ func (s *Store) ListProvidersPage(query, category string, limit, offset int) (Pr
 	}
 
 	listSQL := `
-SELECT p.slug, p.display_name, p.protocol, p.base_url, p.api_key_cipher, p.api_key_hint,
-       p.enabled, p.updated_at,
-       (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug),
-       (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug AND m.active = 1)
+SELECT ` + providerColumns + `
 FROM providers p
 WHERE ` + where + `
 ORDER BY
@@ -634,12 +658,7 @@ var categoryOrder = []string{
 }
 
 func (s *Store) GetProvider(slug string) (Provider, error) {
-	row := s.db.QueryRow(`
-SELECT p.slug, p.display_name, p.protocol, p.base_url, p.api_key_cipher, p.api_key_hint,
-       p.enabled, p.updated_at,
-       (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug),
-       (SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug AND m.active = 1)
-FROM providers p WHERE p.slug = ?`, slug)
+	row := s.db.QueryRow(`SELECT `+providerColumns+` FROM providers p WHERE p.slug = ?`, slug)
 	item, err := scanProvider(row)
 	if errors.Is(err, sql.ErrNoRows) {
 		return Provider{}, ErrNotFound
@@ -648,9 +667,10 @@ FROM providers p WHERE p.slug = ?`, slug)
 }
 
 type ProviderUpdate struct {
-	APIKey  *string
-	BaseURL *string
-	Enabled *bool
+	APIKey          *string
+	BaseURL         *string
+	Enabled         *bool
+	AccountStrategy *string
 }
 
 func (s *Store) UpdateProvider(slug string, update ProviderUpdate) (Provider, error) {
@@ -667,43 +687,45 @@ func (s *Store) UpdateProvider(slug string, update ProviderUpdate) (Provider, er
 	if update.Enabled != nil {
 		enabled = *update.Enabled
 	}
-
-	cipher := ""
-	hint := current.APIKeyHint
-	hasKey := current.HasAPIKey
+	strategy := current.AccountStrategy
+	if strategy == "" {
+		strategy = strategyFillFirst
+	}
+	if update.AccountStrategy != nil {
+		strategy, err = normalizeStrategy(*update.AccountStrategy)
+		if err != nil {
+			return Provider{}, err
+		}
+	}
 	if update.APIKey != nil {
 		trimmed := strings.TrimSpace(*update.APIKey)
-		if trimmed == "" {
-			hasKey = false
-			hint = ""
-			cipher = ""
-		} else {
-			sealed, err := secret.Seal(s.key, trimmed)
+		if trimmed == "" && enabled && !current.KeyOptional {
+			keep, err := s.providerHasKeyBesidesPrimary(slug)
 			if err != nil {
 				return Provider{}, err
 			}
-			cipher = sealed
-			hint = keyHint(trimmed)
-			hasKey = true
+			if !keep {
+				if current.Category == "Web Cookie" {
+					return Provider{}, errors.New("paste a session cookie before enabling this provider")
+				}
+				return Provider{}, errors.New("add an API key before enabling this provider")
+			}
+		}
+		if err = s.upsertPrimaryAccount(slug, trimmed); err != nil {
+			return Provider{}, err
 		}
 	}
-
+	hasKey, err := s.providerHasKey(slug)
+	if err != nil {
+		return Provider{}, err
+	}
 	if enabled && !hasKey && !current.KeyOptional {
 		if current.Category == "Web Cookie" {
 			return Provider{}, errors.New("paste a session cookie before enabling this provider")
 		}
 		return Provider{}, errors.New("add an API key before enabling this provider")
 	}
-
-	now := time.Now().UTC().Format(time.RFC3339)
-	if update.APIKey != nil {
-		_, err = s.db.Exec(`UPDATE providers SET base_url = ?, enabled = ?, api_key_cipher = ?, api_key_hint = ?, updated_at = ? WHERE slug = ?`,
-			baseURL, boolInt(enabled), cipher, hint, now, slug)
-	} else {
-		_, err = s.db.Exec(`UPDATE providers SET base_url = ?, enabled = ?, updated_at = ? WHERE slug = ?`,
-			baseURL, boolInt(enabled), now, slug)
-	}
-	if err != nil {
+	if err = s.writeProviderSettings(slug, baseURL, enabled, strategy); err != nil {
 		return Provider{}, err
 	}
 	return s.GetProvider(slug)
@@ -1179,14 +1201,25 @@ type scanner interface {
 	Scan(dest ...any) error
 }
 
+const providerColumns = `
+p.slug, p.display_name, p.protocol, p.base_url, p.api_key_cipher, p.api_key_hint,
+p.enabled, p.updated_at,
+(SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug),
+(SELECT COUNT(*) FROM models m WHERE m.provider_slug = p.slug AND m.active = 1),
+COALESCE(p.account_strategy, 'fill-first'),
+(SELECT COUNT(*) FROM provider_accounts a WHERE a.provider_slug = p.slug)`
+
 func scanProvider(row scanner) (Provider, error) {
 	var item Provider
 	var cipher string
 	var enabled int
 	err := row.Scan(&item.Slug, &item.DisplayName, &item.Protocol, &item.BaseURL, &cipher, &item.APIKeyHint,
-		&enabled, &item.UpdatedAt, &item.TotalModels, &item.ActiveModels)
+		&enabled, &item.UpdatedAt, &item.TotalModels, &item.ActiveModels, &item.AccountStrategy, &item.AccountCount)
 	if err != nil {
 		return Provider{}, err
+	}
+	if item.AccountStrategy == "" {
+		item.AccountStrategy = strategyFillFirst
 	}
 	def, ok := catalog.BySlug(item.Slug)
 	if ok {

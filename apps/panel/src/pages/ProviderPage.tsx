@@ -2,16 +2,21 @@ import { PanelPageHeader } from "@/components/layout/panel-page-header";
 import { ModalityFlow } from "@/components/modalities";
 import { ProviderMark } from "@/components/provider-mark";
 import {
+  createAccount,
+  deleteAccount,
   formatPrice,
   formatTokens,
   getProvider,
+  listAccounts,
   listProviderModels,
-  setModelActive,
   loadProviderModels,
+  setModelActive,
   testProvider,
+  updateAccount,
   updateProvider,
   type Model,
   type Provider,
+  type ProviderAccount,
 } from "@/lib/api";
 import { providersListPath, readModelSearch, writeModelSearch } from "@/lib/provider-list-view";
 import { ArrowLeft, ExternalLink, Search, X } from "lucide-react";
@@ -33,7 +38,10 @@ export default function ProviderPage() {
   const [debounced, setDebounced] = useState(remembered.current.q);
   const [modelReload, setModelReload] = useState(0);
   const [baseUrl, setBaseUrl] = useState("");
-  const [apiKey, setApiKey] = useState("");
+  const [strategy, setStrategy] = useState("fill-first");
+  const [accounts, setAccounts] = useState<ProviderAccount[]>([]);
+  const [accountName, setAccountName] = useState("");
+  const [accountKey, setAccountKey] = useState("");
   const [enabled, setEnabled] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -48,6 +56,7 @@ export default function ProviderPage() {
         if (cancel) return;
         setProvider(nextProvider);
         setBaseUrl(nextProvider.baseUrl);
+        setStrategy(nextProvider.accountStrategy || "fill-first");
         setEnabled(nextProvider.enabled);
       })
       .catch((err: Error) => {
@@ -57,6 +66,20 @@ export default function ProviderPage() {
       cancel = true;
     };
   }, [slug]);
+
+  useEffect(() => {
+    let cancel = false;
+    listAccounts(slug)
+      .then((page) => {
+        if (!cancel) setAccounts(page.accounts);
+      })
+      .catch((err: Error) => {
+        if (!cancel) setError(err.message);
+      });
+    return () => {
+      cancel = true;
+    };
+  }, [slug, provider?.accountCount]);
 
   useEffect(() => {
     const next = readModelSearch(slug);
@@ -149,13 +172,8 @@ export default function ProviderPage() {
     setError("");
     setNotice("");
     try {
-      const next = await updateProvider(slug, {
-        baseUrl,
-        enabled,
-        ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
-      });
+      const next = await updateProvider(slug, { baseUrl, enabled, accountStrategy: strategy });
       setProvider(next);
-      setApiKey("");
       setNotice("Saved.");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not save");
@@ -169,10 +187,7 @@ export default function ProviderPage() {
     setError("");
     setNotice("");
     try {
-      const result = await testProvider(slug, {
-        baseUrl,
-        ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
-      });
+      const result = await testProvider(slug, { baseUrl, accountId: accounts.find((account) => account.enabled)?.id });
       setNotice(`Key works. OpenAI listed ${result.upstreamModels} models.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Connection failed");
@@ -186,16 +201,78 @@ export default function ProviderPage() {
     setError("");
     setNotice("");
     try {
-      const result = await loadProviderModels(slug, {
-        baseUrl,
-        ...(apiKey.trim() ? { apiKey: apiKey.trim() } : {}),
-      });
+      const result = await loadProviderModels(slug, { baseUrl });
       const nextProvider = await getProvider(slug);
       setProvider(nextProvider);
       setModelReload((current) => current + 1);
       setNotice(`Loaded ${result.models} models.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not load models");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function addAccount() {
+    if (!accountKey.trim()) {
+      setError(provider?.category === "Web Cookie" ? "Paste a session cookie." : "Paste an API key.");
+      return;
+    }
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      await createAccount(slug, {
+        name: accountName.trim() || undefined,
+        apiKey: accountKey.trim(),
+        priority: accounts.length,
+      });
+      setAccountName("");
+      setAccountKey("");
+      const nextProvider = await getProvider(slug);
+      setProvider(nextProvider);
+      setAccounts((await listAccounts(slug)).accounts);
+      setNotice("Account added.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not add account");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function toggleAccount(account: ProviderAccount) {
+    setError("");
+    try {
+      const next = await updateAccount(slug, account.id, { enabled: !account.enabled });
+      setAccounts((current) => current.map((item) => (item.id === next.id ? next : item)));
+      setProvider(await getProvider(slug));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not update account");
+    }
+  }
+
+  async function removeAccount(account: ProviderAccount) {
+    setError("");
+    setNotice("");
+    try {
+      await deleteAccount(slug, account.id);
+      setAccounts((current) => current.filter((item) => item.id !== account.id));
+      setProvider(await getProvider(slug));
+      setNotice("Account removed.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not remove account");
+    }
+  }
+
+  async function testAccount(account: ProviderAccount) {
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      const result = await testProvider(slug, { baseUrl, accountId: account.id });
+      setNotice(`${account.name} works. OpenAI listed ${result.upstreamModels} models.`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Connection failed");
     } finally {
       setBusy(false);
     }
@@ -250,7 +327,7 @@ export default function ProviderPage() {
       {notice && <p className="mb-4 text-sm text-success-600">{notice}</p>}
 
       <section className="panel-card panel-card-body">
-        <div className={`grid gap-4 ${provider?.keyOptional ? "" : "lg:grid-cols-2"}`}>
+        <div className="grid gap-4 lg:grid-cols-2">
           <label className="block text-sm">
             <span className="font-medium text-gray-700 dark:text-gray-200">Base URL</span>
             <input
@@ -259,27 +336,17 @@ export default function ProviderPage() {
               className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
             />
           </label>
-          {provider?.keyOptional ? null : (
-            <label className="block text-sm">
-              <span className="font-medium text-gray-700 dark:text-gray-200">
-                {provider?.category === "Web Cookie" ? "Session cookie" : "API key"}
-              </span>
-              <input
-                type="password"
-                value={apiKey}
-                onChange={(event) => setApiKey(event.target.value)}
-                placeholder={
-                  provider?.hasApiKey
-                    ? `Saved ${provider.apiKeyHint}`
-                    : provider?.category === "Web Cookie"
-                      ? "Paste the session cookie"
-                      : "sk-..."
-                }
-                autoComplete="off"
-                className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
-              />
-            </label>
-          )}
+          <label className="block text-sm">
+            <span className="font-medium text-gray-700 dark:text-gray-200">Account order</span>
+            <select
+              value={strategy}
+              onChange={(event) => setStrategy(event.target.value)}
+              className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+            >
+              <option value="fill-first">Fill first — use the lowest priority until it fails</option>
+              <option value="round-robin">Round robin — spread calls across accounts</option>
+            </select>
+          </label>
         </div>
         <label className="mt-4 flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
           <input type="checkbox" checked={enabled} onChange={(event) => setEnabled(event.target.checked)} />
@@ -294,6 +361,92 @@ export default function ProviderPage() {
           </button>
           <button type="button" onClick={loadModels} disabled={busy} className="rounded-lg border border-gray-200 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-60 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-white/5">
             Load models
+          </button>
+        </div>
+      </section>
+
+      <section className="panel-card panel-card-body mt-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-sm font-semibold text-gray-900 dark:text-white">Accounts</h2>
+          <p className="text-xs text-gray-500">{accounts.length} saved</p>
+        </div>
+        <div className="mt-4 space-y-2">
+          {accounts.length === 0 ? (
+            <p className="text-sm text-gray-500">
+              {provider?.keyOptional ? "No account yet. This provider can run without one." : "No account yet."}
+            </p>
+          ) : (
+            accounts.map((account) => (
+              <div key={account.id} className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-gray-200 px-3 py-2 dark:border-gray-700">
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-medium text-gray-900 dark:text-white">{account.name}</p>
+                  <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                    <label className="inline-flex items-center gap-1">
+                      Priority
+                      <input
+                        type="number"
+                        min={0}
+                        max={1000}
+                        defaultValue={account.priority}
+                        key={`${account.id}-${account.priority}`}
+                        onBlur={(event) => {
+                          const priority = Number(event.target.value);
+                          if (!Number.isFinite(priority) || priority === account.priority) return;
+                          updateAccount(slug, account.id, { priority })
+                            .then((next) => {
+                              setAccounts((current) =>
+                                current.map((item) => (item.id === next.id ? next : item)).sort((a, b) => a.priority - b.priority || a.createdAt.localeCompare(b.createdAt)),
+                              );
+                            })
+                            .catch((err: Error) => setError(err.message));
+                        }}
+                        className="h-7 w-16 rounded-md border border-gray-200 bg-white px-2 text-xs text-gray-900 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+                      />
+                    </label>
+                    {account.apiKeyHint ? <span>{account.apiKeyHint}</span> : null}
+                    {account.lastUsedAt ? <span>used {account.lastUsedAt.slice(0, 16).replace("T", " ")}</span> : null}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button type="button" onClick={() => toggleAccount(account)} className={`rounded-full px-3 py-1 text-xs font-medium ${account.enabled ? "bg-brand-500 text-white" : "bg-gray-100 text-gray-600 dark:bg-white/10 dark:text-gray-300"}`}>
+                    {account.enabled ? "On" : "Off"}
+                  </button>
+                  <button type="button" onClick={() => testAccount(account)} disabled={busy} className="rounded-lg border border-gray-200 px-3 py-1 text-xs font-medium text-gray-700 disabled:opacity-60 dark:border-gray-700 dark:text-gray-200">
+                    Test
+                  </button>
+                  <button type="button" onClick={() => removeAccount(account)} className="rounded-lg border border-gray-200 px-3 py-1 text-xs font-medium text-gray-700 dark:border-gray-700 dark:text-gray-200">
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+        <div className="mt-4 grid gap-3 lg:grid-cols-[1fr_1.4fr_auto] lg:items-end">
+          <label className="block text-sm">
+            <span className="font-medium text-gray-700 dark:text-gray-200">Name</span>
+            <input
+              value={accountName}
+              onChange={(event) => setAccountName(event.target.value)}
+              placeholder={`Account ${accounts.length + 1}`}
+              className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+            />
+          </label>
+          <label className="block text-sm">
+            <span className="font-medium text-gray-700 dark:text-gray-200">
+              {provider?.category === "Web Cookie" ? "Session cookie" : "API key"}
+            </span>
+            <input
+              type="password"
+              value={accountKey}
+              onChange={(event) => setAccountKey(event.target.value)}
+              placeholder={provider?.category === "Web Cookie" ? "Paste the session cookie" : "sk-..."}
+              autoComplete="off"
+              className="mt-1.5 h-10 w-full rounded-lg border border-gray-200 bg-white px-3 font-mono text-sm text-gray-900 outline-none focus:border-brand-400 dark:border-gray-700 dark:bg-white/5 dark:text-white"
+            />
+          </label>
+          <button type="button" onClick={addAccount} disabled={busy} className="h-10 rounded-lg bg-brand-500 px-3 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-60">
+            Add account
           </button>
         </div>
       </section>

@@ -48,6 +48,10 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /api/providers", s.listProviders)
 	mux.HandleFunc("GET /api/providers/{slug}", s.getProvider)
 	mux.HandleFunc("PUT /api/providers/{slug}", s.updateProvider)
+	mux.HandleFunc("GET /api/providers/{slug}/accounts", s.listAccounts)
+	mux.HandleFunc("POST /api/providers/{slug}/accounts", s.createAccount)
+	mux.HandleFunc("PUT /api/providers/{slug}/accounts/{id}", s.updateAccount)
+	mux.HandleFunc("DELETE /api/providers/{slug}/accounts/{id}", s.deleteAccount)
 	mux.HandleFunc("POST /api/providers/{slug}/test", s.testProvider)
 	mux.HandleFunc("POST /api/providers/{slug}/models/load", s.loadProviderModels)
 	mux.HandleFunc("GET /api/providers/{slug}/models", s.listModels)
@@ -151,9 +155,10 @@ func (s *Server) updateProvider(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	var body struct {
-		APIKey  *string `json:"apiKey"`
-		BaseURL *string `json:"baseUrl"`
-		Enabled *bool   `json:"enabled"`
+		APIKey          *string `json:"apiKey"`
+		BaseURL         *string `json:"baseUrl"`
+		Enabled         *bool   `json:"enabled"`
+		AccountStrategy *string `json:"accountStrategy"`
 	}
 	if err := readJSON(r, &body); err != nil {
 		writeAPIError(w, http.StatusBadRequest, "invalid JSON body")
@@ -166,9 +171,10 @@ func (s *Server) updateProvider(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	item, err := s.Store.UpdateProvider(slug, store.ProviderUpdate{
-		APIKey:  body.APIKey,
-		BaseURL: body.BaseURL,
-		Enabled: body.Enabled,
+		APIKey:          body.APIKey,
+		BaseURL:         body.BaseURL,
+		Enabled:         body.Enabled,
+		AccountStrategy: body.AccountStrategy,
 	})
 	if err != nil {
 		writeAPIError(w, http.StatusBadRequest, err.Error())
@@ -180,8 +186,9 @@ func (s *Server) updateProvider(w http.ResponseWriter, r *http.Request) {
 func (s *Server) testProvider(w http.ResponseWriter, r *http.Request) {
 	slug := r.PathValue("slug")
 	var body struct {
-		APIKey  *string `json:"apiKey"`
-		BaseURL *string `json:"baseUrl"`
+		APIKey    *string `json:"apiKey"`
+		BaseURL   *string `json:"baseUrl"`
+		AccountID *string `json:"accountId"`
 	}
 	if err := readJSON(r, &body); err != nil && !errors.Is(err, io.EOF) {
 		writeAPIError(w, http.StatusBadRequest, "invalid JSON body")
@@ -202,6 +209,17 @@ func (s *Server) testProvider(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		baseURL = strings.TrimRight(strings.TrimSpace(*body.BaseURL), "/")
+	}
+	if body.AccountID != nil && strings.TrimSpace(*body.AccountID) != "" && (body.APIKey == nil || strings.TrimSpace(*body.APIKey) == "") {
+		apiKey, err = s.Store.AccountSecret(slug, strings.TrimSpace(*body.AccountID))
+		if errors.Is(err, store.ErrNotFound) {
+			writeAPIError(w, http.StatusNotFound, "account not found")
+			return
+		}
+		if err != nil {
+			writeAPIError(w, http.StatusInternalServerError, err.Error())
+			return
+		}
 	}
 	if body.APIKey != nil && strings.TrimSpace(*body.APIKey) != "" {
 		apiKey = strings.TrimSpace(*body.APIKey)
@@ -426,8 +444,13 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 		s.failChat(w, source, keyID, meta.Model, http.StatusInternalServerError, "server_error", "internal_error", err.Error(), started)
 		return
 	}
+	routes, err = s.expandRoutes(routes)
+	if err != nil {
+		s.failChat(w, source, keyID, meta.Model, http.StatusInternalServerError, "server_error", "internal_error", err.Error(), started)
+		return
+	}
 	if len(routes) > 1 {
-		s.proxyFallback(w, r, source, keyID, routes, body, started)
+		s.tryChatRoutes(w, r, source, keyID, routes, body, started)
 		return
 	}
 	route := routes[0]
@@ -439,10 +462,10 @@ func (s *Server) proxyChat(w http.ResponseWriter, r *http.Request, source, keyID
 	}
 	switch route.Protocol {
 	case catalog.ProtocolAnthropic, catalog.ProtocolGemini:
-		s.proxyNativeChat(w, r, source, keyID, route, body, started)
+		s.proxyNativeChat(w, r, source, keyID, route, body, started, false)
 		return
 	case catalog.ProtocolOllama, catalog.ProtocolCohere, catalog.ProtocolSearch, catalog.ProtocolEmbedding:
-		s.proxySpecial(w, r, source, keyID, route, body, started)
+		s.proxySpecial(w, r, source, keyID, route, body, started, false)
 		return
 	case catalog.ProtocolOpenAIChat:
 		if route.Model.Kind != "" && route.Model.Kind != catalog.KindChat {
@@ -541,6 +564,7 @@ func (s *Server) finishOpenAI(w http.ResponseWriter, r *http.Request, source, ke
 			return true
 		}
 		text := openai.ResponsesText(payload)
+		s.noteAccount(route)
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), Request: string(request),
@@ -566,6 +590,7 @@ func (s *Server) finishOpenAI(w http.ResponseWriter, r *http.Request, source, ke
 			prompt, completion = format.Usage()
 			message = format.Err()
 		}
+		s.noteAccount(route)
 		_ = s.Store.AddLog(store.LogInput{
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()),
@@ -590,6 +615,9 @@ func (s *Server) finishOpenAI(w http.ResponseWriter, r *http.Request, source, ke
 	message := ""
 	if resp.StatusCode >= 400 {
 		message = upstreamErrorMessage(payload)
+	}
+	if resp.StatusCode < 400 {
+		s.noteAccount(route)
 	}
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,

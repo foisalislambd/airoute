@@ -11,8 +11,23 @@ export type Provider = {
   hasApiKey: boolean
   apiKeyHint: string
   enabled: boolean
+  accountStrategy: string
+  accountCount: number
   activeModels: number
   totalModels: number
+  updatedAt: string
+}
+
+export type ProviderAccount = {
+  id: string
+  providerSlug: string
+  name: string
+  hasApiKey: boolean
+  apiKeyHint: string
+  priority: number
+  enabled: boolean
+  lastUsedAt: string | null
+  createdAt: string
   updatedAt: string
 }
 
@@ -116,7 +131,7 @@ export function getProvider(slug: string) {
 
 export function updateProvider(
   slug: string,
-  body: { apiKey?: string; baseUrl?: string; enabled?: boolean },
+  body: { apiKey?: string; baseUrl?: string; enabled?: boolean; accountStrategy?: string },
 ) {
   return request<Provider>(`/api/providers/${slug}`, {
     method: "PUT",
@@ -124,7 +139,36 @@ export function updateProvider(
   })
 }
 
-export function testProvider(slug: string, body: { apiKey?: string; baseUrl?: string }) {
+export function listAccounts(slug: string) {
+  return request<{ accounts: ProviderAccount[] }>(`/api/providers/${slug}/accounts`)
+}
+
+export function createAccount(
+  slug: string,
+  body: { name?: string; apiKey: string; priority?: number; enabled?: boolean },
+) {
+  return request<ProviderAccount>(`/api/providers/${slug}/accounts`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+}
+
+export function updateAccount(
+  slug: string,
+  id: string,
+  body: { name?: string; apiKey?: string; priority?: number; enabled?: boolean },
+) {
+  return request<ProviderAccount>(`/api/providers/${slug}/accounts/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(body),
+  })
+}
+
+export function deleteAccount(slug: string, id: string) {
+  return request<void>(`/api/providers/${slug}/accounts/${id}`, { method: "DELETE" })
+}
+
+export function testProvider(slug: string, body: { apiKey?: string; baseUrl?: string; accountId?: string }) {
   return request<{ ok: boolean; upstreamModels: number }>(`/api/providers/${slug}/test`, {
     method: "POST",
     body: JSON.stringify(body),

@@ -13,7 +13,7 @@ import (
 	"airoute/server/internal/store"
 )
 
-func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time) {
+func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, keyID string, route store.Route, body []byte, started time.Time, retry bool) bool {
 	var call adapt.SimpleChat
 	var err error
 	switch route.Protocol {
@@ -29,19 +29,19 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 		call, note, ok = adapt.SearchCall(route.Model.ProviderSlug, route.BaseURL, promptText(body), route.APIKey)
 		if !ok {
 			s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "provider_setup", note, started)
-			return
+			return true
 		}
 	default:
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "unsupported_protocol", "This provider protocol is not supported yet.", started)
-		return
+		return true
 	}
 	if err != nil {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "invalid_body", err.Error(), started)
-		return
+		return true
 	}
 	if strings.TrimSpace(route.BaseURL) == "" {
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadRequest, "invalid_request_error", "base_url_required", "Set a base URL for this provider before calling it.", started)
-		return
+		return true
 	}
 	method := http.MethodPost
 	if call.Body == nil {
@@ -50,22 +50,36 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 	request := providerRequest(method, call.URL, call.Header, call.Body)
 	resp, err := s.OpenAI.Send(r.Context(), method, call.URL, call.Body, call.Header)
 	if err != nil {
+		if retry {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+			})
+			return false
+		}
 		if source == "playground" {
 			_ = s.Store.AddLog(store.LogInput{
 				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
 			})
 			writePlaygroundFailure(w, http.StatusBadGateway, err.Error(), request)
-			return
+			return true
 		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
-		return
+		return true
 	}
 	defer resp.Body.Close()
 	payload, err := io.ReadAll(io.LimitReader(resp.Body, 8<<20))
 	if err != nil {
+		if retry {
+			_ = s.Store.AddLog(store.LogInput{
+				Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
+				StatusCode: http.StatusBadGateway, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: err.Error(), Request: string(request),
+			})
+			return false
+		}
 		s.failChat(w, source, keyID, route.Model.ID, http.StatusBadGateway, "server_error", "upstream_error", err.Error(), started)
-		return
+		return true
 	}
 	if resp.StatusCode >= 400 {
 		message := upstreamErrorMessage(payload)
@@ -73,25 +87,30 @@ func (s *Server) proxySpecial(w http.ResponseWriter, r *http.Request, source, ke
 			Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 			StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), ErrorMessage: message, Request: string(request),
 		})
+		if retry {
+			return false
+		}
 		if source == "playground" {
 			writePlaygroundFailure(w, resp.StatusCode, message, request)
-			return
+			return true
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(resp.StatusCode)
 		_, _ = w.Write(payload)
-		return
+		return true
 	}
 	text := textForProtocol(route.Protocol, payload)
+	s.noteAccount(route)
 	_ = s.Store.AddLog(store.LogInput{
 		Source: source, RouterKeyID: keyID, ModelID: route.Model.ID,
 		StatusCode: resp.StatusCode, LatencyMS: int(time.Since(started).Milliseconds()), Request: string(request),
 	})
 	if source == "playground" {
 		writeChatChunk(w, route.Model.ID, text, request)
-		return
+		return true
 	}
 	writeJSON(w, http.StatusOK, openAICompletion(route.Model.ID, text, 0, 0))
+	return true
 }
 
 func textForProtocol(protocol string, payload []byte) string {
