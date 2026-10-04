@@ -16440,6 +16440,66 @@ func generatedProviders() []Provider {
 			Category: "Aggregator",
 			Free: true,
 			Models: []Model{
+				{
+					UpstreamID: "meta-llama/llama-3.3-70b-instruct",
+					DisplayName: "meta-llama/llama-3.3-70b-instruct",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "qwen/qwen3-coder",
+					DisplayName: "qwen/qwen3-coder",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "qwen/qwq-32b",
+					DisplayName: "qwen/qwq-32b",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "google/gemma-4-it",
+					DisplayName: "google/gemma-4-it",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "nvidia/nemotron-3-super",
+					DisplayName: "nvidia/nemotron-3-super",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "mistralai/mistral-small-3.1",
+					DisplayName: "mistralai/mistral-small-3.1",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "deepseek/deepseek-chat",
+					DisplayName: "deepseek/deepseek-chat",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "cohere/north-mini-code",
+					DisplayName: "cohere/north-mini-code",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "liquid/lfm-2.5",
+					DisplayName: "liquid/lfm-2.5",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
+				{
+					UpstreamID: "openai/gpt-oss-120b",
+					DisplayName: "openai/gpt-oss-120b",
+					Description: "AnyAPI AI model",
+					Kind: KindChat,
+				},
 			},
 		},
 		{

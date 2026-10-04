@@ -94,6 +94,12 @@ func (s *Server) proxyMedia(w http.ResponseWriter, r *http.Request, source, keyI
 			}
 			continue
 		}
+		switch part.Protocol {
+		case catalog.ProtocolOpenAIChat, catalog.ProtocolAudio, catalog.ProtocolSDWebUI, catalog.ProtocolMedia:
+		default:
+			s.failChat(w, source, keyID, part.Model.ID, http.StatusBadRequest, "invalid_request_error", "unsupported_protocol", "This provider protocol is not supported yet.", started)
+			return
+		}
 		status, payload, request, err = s.callMedia(r, part, req.Prompt, req.Size, req.Image, req.N)
 		message := ""
 		if err != nil {

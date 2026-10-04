@@ -56,7 +56,8 @@ const (
 )
 
 func All() []Provider {
-	return append(append([]Provider{OpenAI()}, generatedProviders()...), decisionProviders()...)
+	providers := append(append([]Provider{OpenAI()}, generatedProviders()...), decisionProviders()...)
+	return append(providers, nocostProviders()...)
 }
 
 // KindFromID guesses a model kind from an upstream id returned by a model list.

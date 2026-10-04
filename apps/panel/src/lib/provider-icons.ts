@@ -529,6 +529,18 @@ const aliases: Record<string, string> = {
   "volcengine-agent-plan": "volcengine",
   "volcengine-coding-plan": "volcengine",
   "xai-oauth": "xai",
+  "g4f-grok": "grok",
+  g4f: "g4f-groq",
+  ollamafreeapi: "ollama",
+  sharedchat: "openai",
+  "free2gpt-gemini": "gemini",
+  free2gpt: "openai",
+  netfly: "openai",
+  ai365vip: "openai",
+  perchance: "pollinations",
+  "bing-create": "copilot",
+  "microsoft-designer": "copilot",
+  "stable-audio": "stability-ai",
 }
 
 export function providerIcon(slug: string): ProviderIcon | null {
