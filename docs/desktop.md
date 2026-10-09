@@ -1,6 +1,6 @@
 # Desktop app
 
-The desktop download is the same router as the npm package, plus a native window. Download it from the [releases](https://github.com/foisalislambd/airoute/releases) page and keep the program next to the `panel` folder.
+The desktop download is the same router as the npm package, plus a native window. Download it from the [releases](https://github.com/foisalislambd/wowrouter/releases) page and keep the program next to the `panel` folder.
 
 ## Windows
 

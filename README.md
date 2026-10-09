@@ -24,7 +24,7 @@ wowrouter
 
 `npm install -g airoute` and the `airoute` command are the same program. The same version is also published as `@foisalislambd/wowrouter` and `@foisalislambd/airoute` on GitHub Packages.
 
-Desktop builds are attached to each [GitHub release](https://github.com/foisalislambd/airoute/releases). Unzip the archive for your system and run `WowRouter` (`WowRouter.exe` on Windows). The panel folder in that archive is the page the app serves.
+Desktop builds are attached to each [GitHub release](https://github.com/foisalislambd/wowrouter/releases). Unzip the archive for your system and run `WowRouter` (`WowRouter.exe` on Windows). The panel folder in that archive is the page the app serves.
 
 Docker uses the same panel and API. The host port stays on this computer:
 

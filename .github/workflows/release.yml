@@ -97,7 +97,7 @@ jobs:
             ghcr.io/foisalislambd/airoute:latest
             ghcr.io/foisalislambd/airoute:${{ steps.plan.outputs.version }}
           labels: |
-            org.opencontainers.image.source=https://github.com/foisalislambd/airoute
+            org.opencontainers.image.source=https://github.com/foisalislambd/wowrouter
             org.opencontainers.image.licenses=MIT
           cache-from: type=gha
           cache-to: type=gha,mode=max

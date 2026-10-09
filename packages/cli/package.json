@@ -3,14 +3,14 @@
   "version": "1.1.2",
   "description": "Local OpenAI-compatible AI router. Manage providers, keys, and models in the web panel.",
   "license": "MIT",
-  "homepage": "https://github.com/foisalislambd/airoute#readme",
+  "homepage": "https://github.com/foisalislambd/wowrouter#readme",
   "bugs": {
-    "url": "https://github.com/foisalislambd/airoute/issues"
+    "url": "https://github.com/foisalislambd/wowrouter/issues"
   },
   "author": "foisalislambd",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foisalislambd/airoute.git"
+    "url": "git+https://github.com/foisalislambd/wowrouter.git"
   },
   "keywords": [
     "ai",

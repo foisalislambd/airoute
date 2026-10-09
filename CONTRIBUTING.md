@@ -13,8 +13,8 @@ Do not open a pull request that contains API keys, router keys, database files, 
 You need Go 1.26 or newer and Node.js 20 or newer.
 
 ```bash
-git clone https://github.com/foisalislambd/airoute.git
-cd airoute
+git clone https://github.com/foisalislambd/wowrouter.git
+cd wowrouter
 npm install
 ```
 

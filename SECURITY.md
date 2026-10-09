@@ -6,7 +6,7 @@ WowRouter stores provider keys on your computer and listens only on loopback. If
 
 Use GitHub private vulnerability reporting:
 
-https://github.com/foisalislambd/airoute/security/advisories/new
+https://github.com/foisalislambd/wowrouter/security/advisories/new
 
 Include what you did, what you expected, and what happened. If you can, add the WowRouter version from the root `package.json` and your operating system.
 

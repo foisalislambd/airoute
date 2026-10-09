@@ -25,7 +25,7 @@ More commands are in the [command line](command-line.md) guide.
 
 ## From a desktop download
 
-1. Open the [releases](https://github.com/foisalislambd/airoute/releases) page.
+1. Open the [releases](https://github.com/foisalislambd/wowrouter/releases) page.
 2. Download the zip for your system. The names look like `WowRouter-1.1.6-windows-amd64.zip`.
 3. Unzip it. Keep the `WowRouter` program and the `panel` folder side by side.
 4. Run `WowRouter` (`WowRouter.exe` on Windows).

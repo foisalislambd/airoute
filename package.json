@@ -4,13 +4,13 @@
   "version": "1.1.6",
   "description": "Local-first OpenAI-compatible AI router",
   "license": "MIT",
-  "homepage": "https://github.com/foisalislambd/airoute#readme",
+  "homepage": "https://github.com/foisalislambd/wowrouter#readme",
   "bugs": {
-    "url": "https://github.com/foisalislambd/airoute/issues"
+    "url": "https://github.com/foisalislambd/wowrouter/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/foisalislambd/airoute.git"
+    "url": "git+https://github.com/foisalislambd/wowrouter.git"
   },
   "workspaces": [
     "apps/panel",

@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security issue
-    url: https://github.com/foisalislambd/airoute/security/advisories/new
+    url: https://github.com/foisalislambd/wowrouter/security/advisories/new
     about: Report a vulnerability in private. Do not open a public issue for it.
   - name: Guides
-    url: https://github.com/foisalislambd/airoute/tree/main/docs
+    url: https://github.com/foisalislambd/wowrouter/tree/main/docs
     about: Install, the panel, Cursor, the API, and development.

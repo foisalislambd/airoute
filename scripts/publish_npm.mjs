@@ -67,7 +67,7 @@ async function npmToken(packageName) {
   if (!exchange.ok) {
     console.error(`npm trusted publisher rejected the release (${exchange.status}).`);
     console.error(text.slice(0, 500));
-    console.error(`On https://www.npmjs.com/package/${packageName}/access add Trusted Publisher: user foisalislambd, repository airoute, workflow filename release.yml, environment blank, allowed action npm publish.`);
+    console.error(`On https://www.npmjs.com/package/${packageName}/access add Trusted Publisher: user foisalislambd, repository wowrouter, workflow filename release.yml, environment blank, allowed action npm publish.`);
     process.exit(1);
   }
   const payload = JSON.parse(text);
