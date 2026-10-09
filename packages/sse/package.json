@@ -1,5 +1,5 @@
 {
-  "name": "@airoute/sse",
+  "name": "@wowrouter/sse",
   "version": "0.1.0",
   "private": true,
   "type": "module",

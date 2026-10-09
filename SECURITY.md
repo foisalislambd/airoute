@@ -1,6 +1,6 @@
 # Security
 
-AIRoute stores provider keys on your computer and listens only on loopback. If you believe you found a way to leak those keys, bypass the router key, or make the server accept a non-local address, please report it in private.
+WowRouter stores provider keys on your computer and listens only on loopback. If you believe you found a way to leak those keys, bypass the router key, or make the server accept a non-local address, please report it in private.
 
 ## Report a vulnerability
 
@@ -8,7 +8,7 @@ Use GitHub private vulnerability reporting:
 
 https://github.com/foisalislambd/airoute/security/advisories/new
 
-Include what you did, what you expected, and what happened. If you can, add the AIRoute version from the root `package.json` and your operating system.
+Include what you did, what you expected, and what happened. If you can, add the WowRouter version from the root `package.json` and your operating system.
 
 Do not include live provider keys, router keys, or your `secret.key` file. A redacted log is enough.
 

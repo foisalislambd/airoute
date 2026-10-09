@@ -1,6 +1,6 @@
 # Code of conduct
 
-AIRoute is a small open source project. People who use it, report bugs, or send changes are expected to treat each other decently.
+WowRouter is a small open source project. People who use it, report bugs, or send changes are expected to treat each other decently.
 
 ## Expected
 

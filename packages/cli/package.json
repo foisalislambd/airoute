@@ -1,5 +1,5 @@
 {
-  "name": "airoute",
+  "name": "wowrouter",
   "version": "1.1.2",
   "description": "Local OpenAI-compatible AI router. Manage providers, keys, and models in the web panel.",
   "license": "MIT",
@@ -19,10 +19,11 @@
     "llm"
   ],
   "bin": {
-    "airoute": "bin/airoute.js"
+    "wowrouter": "bin/wowrouter.js",
+    "airoute": "bin/wowrouter.js"
   },
   "files": [
-    "bin/airoute.js",
+    "bin/wowrouter.js",
     "panel",
     "vendor"
   ],

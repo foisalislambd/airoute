@@ -2,7 +2,7 @@ import { MarkdownView } from "@/components/markdown-view";
 import { ModalityFlow } from "@/components/modalities";
 import { getProvider, listActiveModels, type Model } from "@/lib/api";
 import { providerIcon } from "@/lib/provider-icons";
-import { chatDeltaFromSSE, readSSE } from "@airoute/sse";
+import { chatDeltaFromSSE, readSSE } from "@wowrouter/sse";
 import { ArrowUp, ChevronDown, PanelLeft, Paperclip, Plus, Search, Square, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";

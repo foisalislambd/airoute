@@ -83,7 +83,7 @@ func (s *Server) Handler() http.Handler {
 }
 
 func (s *Server) health(w http.ResponseWriter, _ *http.Request) {
-	writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "service": "airoute"})
+	writeJSON(w, http.StatusOK, map[string]string{"status": "ok", "service": "wowrouter"})
 }
 
 func (s *Server) shutdown(w http.ResponseWriter, _ *http.Request) {
@@ -400,7 +400,7 @@ func (s *Server) playground(w http.ResponseWriter, r *http.Request) {
 func (s *Server) authorize(w http.ResponseWriter, r *http.Request) (string, bool) {
 	token := bearerToken(r)
 	if token == "" {
-		writeOpenAIError(w, http.StatusUnauthorized, "Missing API key. Create one in the AIRoute panel and send it as a Bearer token.", "authentication_error", "invalid_api_key")
+		writeOpenAIError(w, http.StatusUnauthorized, "Missing API key. Create one in the WowRouter panel and send it as a Bearer token.", "authentication_error", "invalid_api_key")
 		return "", false
 	}
 	id, err := s.Store.AuthenticateRouterKey(token)

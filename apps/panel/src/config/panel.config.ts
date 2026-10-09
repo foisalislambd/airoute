@@ -3,8 +3,8 @@ import { Activity, Boxes, CircleDollarSign, GitBranch, KeyRound, LayoutDashboard
 
 export const panelConfig = {
   brand: {
-    name: "AIRoute",
-    letter: "A",
+    name: "WowRouter",
+    letter: "W",
   },
 };
 

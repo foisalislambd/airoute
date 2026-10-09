@@ -29,7 +29,7 @@ func openWindow(url string) error {
 		Debug:     false,
 		AutoFocus: true,
 		WindowOptions: webview2.WindowOptions{
-			Title:  "AIRoute",
+			Title:  "WowRouter",
 			Width:  1280,
 			Height: 840,
 			Center: true,
@@ -45,7 +45,7 @@ func openWindow(url string) error {
 }
 
 func focusExistingWindow() {
-	title, err := syscall.UTF16PtrFromString("AIRoute")
+	title, err := syscall.UTF16PtrFromString("WowRouter")
 	if err != nil {
 		return
 	}

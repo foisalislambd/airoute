@@ -17,15 +17,25 @@ func setStartWithWindows(on bool) error {
 	}
 	defer key.Close()
 	if !on {
-		err = key.DeleteValue("AIRoute")
-		if errors.Is(err, registry.ErrNotExist) {
-			return nil
+		if err = deleteRunValue(key, "WowRouter"); err != nil {
+			return err
 		}
+		return deleteRunValue(key, "AIRoute")
+	}
+	if err = deleteRunValue(key, "AIRoute"); err != nil {
 		return err
 	}
 	exe, err := os.Executable()
 	if err != nil {
 		return err
 	}
-	return key.SetStringValue("AIRoute", fmt.Sprintf(`"%s" --agent`, exe))
+	return key.SetStringValue("WowRouter", fmt.Sprintf(`"%s" --agent`, exe))
+}
+
+func deleteRunValue(key registry.Key, name string) error {
+	err := key.DeleteValue(name)
+	if errors.Is(err, registry.ErrNotExist) {
+		return nil
+	}
+	return err
 }

@@ -1,10 +1,10 @@
 # Contributing
 
-Thanks for wanting to improve AIRoute. The project is open source under the MIT license.
+Thanks for wanting to improve WowRouter. The project is open source under the MIT license.
 
 ## What to know first
 
-AIRoute runs only on the local machine. Changes should keep provider keys on disk, and the server should keep refusing addresses that are not loopback.
+WowRouter runs only on the local machine. Changes should keep provider keys on disk, and the server should keep refusing addresses that are not loopback.
 
 Do not open a pull request that contains API keys, router keys, database files, or `secret.key`.
 
@@ -35,7 +35,7 @@ The panel is at `http://127.0.0.1:5173`. The router is at `http://127.0.0.1:8787
 
 ```bash
 go test ./apps/server/...
-node --test packages/cli/bin/airoute.test.js
+node --test packages/cli/bin/wowrouter.test.js
 ```
 
 4. If you changed the panel, build it with `npm run build:panel`.

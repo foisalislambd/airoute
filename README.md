@@ -1,6 +1,6 @@
-# AIRoute
+# WowRouter
 
-AIRoute is a local AI router. It runs on your computer, keeps provider keys in a local database, and gives Cursor and other tools one OpenAI-compatible address.
+WowRouter is a local AI router. It runs on your computer, keeps provider keys in a local database, and gives Cursor and other tools one OpenAI-compatible address.
 
 The router listens only on this machine, at `http://127.0.0.1:8787`. Nothing in the app is written to be reached from another computer.
 
@@ -18,24 +18,24 @@ Longer guides for install, the panel, Cursor, the desktop app, the API, and deve
 Node.js 20 or newer is required for the npm package.
 
 ```bash
-npm install -g airoute
-airoute
+npm install -g wowrouter
+wowrouter
 ```
 
-That starts the router and opens the panel in your browser. The same version is also published as `@foisalislambd/airoute` on GitHub Packages.
+`npm install -g airoute` and the `airoute` command are the same program. The same version is also published as `@foisalislambd/wowrouter` and `@foisalislambd/airoute` on GitHub Packages.
 
-Desktop builds are attached to each [GitHub release](https://github.com/foisalislambd/airoute/releases). Unzip the archive for your system and run `AIRoute` (`AIRoute.exe` on Windows). The panel folder in that archive is the page the app serves.
+Desktop builds are attached to each [GitHub release](https://github.com/foisalislambd/airoute/releases). Unzip the archive for your system and run `WowRouter` (`WowRouter.exe` on Windows). The panel folder in that archive is the page the app serves.
 
 Docker uses the same panel and API. The host port stays on this computer:
 
 ```bash
-docker run -d --name airoute \
+docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
-  -v airoute-data:/data \
-  foisalislambd/airoute:latest
+  -v wowrouter-data:/data \
+  foisalislambd/wowrouter:latest
 ```
 
-The image is also `ghcr.io/foisalislambd/airoute`. Details are in [docs/docker.md](docs/docker.md).
+The same image is also `foisalislambd/airoute`, `ghcr.io/foisalislambd/wowrouter`, and `ghcr.io/foisalislambd/airoute`. Details are in [docs/docker.md](docs/docker.md).
 
 ## First setup
 
@@ -45,7 +45,7 @@ The image is also `ghcr.io/foisalislambd/airoute`. Details are in [docs/docker.m
 4. Open **API keys** and create a router key. The secret is shown once and starts with `sk-airoute-`.
 5. In Cursor, or any OpenAI client, set the base URL to `http://127.0.0.1:8787/v1` and the API key to that router key.
 
-A public model id looks like `openai/gpt-4o-mini`: the provider slug, a slash, then the upstream model id. AIRoute rewrites that to the id the provider expects.
+A public model id looks like `openai/gpt-4o-mini`: the provider slug, a slash, then the upstream model id. WowRouter rewrites that to the id the provider expects.
 
 ```bash
 curl http://127.0.0.1:8787/v1/chat/completions \
@@ -76,18 +76,18 @@ Closing the browser tab does not stop the router.
 ## npm commands
 
 ```bash
-airoute                  # start in this terminal and open the panel
-airoute --detach         # start in the background and open the panel
-airoute --no-open        # start without opening a browser
-airoute status
-airoute stop
-airoute --addr 127.0.0.1:8787
-airoute --data /path/to/data
+wowrouter                  # start in this terminal and open the panel
+wowrouter --detach         # start in the background and open the panel
+wowrouter --no-open        # start without opening a browser
+wowrouter status
+wowrouter stop
+wowrouter --addr 127.0.0.1:8787
+wowrouter --data /path/to/data
 ```
 
-If a router is already answering on that address, `airoute` prints the panel and base URL instead of starting a second copy. `airoute stop` asks the local server to shut down. A desktop build from before shutdown support has to be quit from its tray icon.
+`airoute` accepts the same flags. If a router is already answering on that address, `wowrouter` prints the panel and base URL instead of starting a second copy. `wowrouter stop` asks the local server to shut down. A desktop build from before shutdown support has to be quit from its tray icon.
 
-`--data` chooses the folder for the database. When you omit it, AIRoute uses its default folder, described below.
+`--data` chooses the folder for the database. When you omit it, WowRouter uses its default folder, described below.
 
 ## Desktop app
 
@@ -96,8 +96,8 @@ On Windows the default launch starts a background agent and a window.
 - Closing the window leaves the router running.
 - The tray icon can open the window again, turn **Start with Windows** on or off, or quit the router.
 - Opening the app a second time focuses the window that is already open.
-- `AIRoute.exe --agent` starts the router and tray with no window. Windows login uses this when start-with-Windows is on.
-- `AIRoute.exe --ui` opens only the window. If the agent is not running, it reports that AIRoute is not running.
+- `WowRouter.exe --agent` starts the router and tray with no window. Windows login uses this when start-with-Windows is on.
+- `WowRouter.exe --ui` opens only the window. If the agent is not running, it reports that WowRouter is not running.
 
 The Windows setting is also a checkbox on the panel's Settings page. It is stored in the data folder and applied by the running agent.
 
@@ -109,7 +109,7 @@ Clients that speak the OpenAI HTTP API use the base URL above and a router key.
 
 | Method and path | Use |
 | --- | --- |
-| `GET /health` | `{"service":"airoute","status":"ok"}` when this router is up |
+| `GET /health` | `{"service":"wowrouter","status":"ok"}` when this router is up |
 | `GET /v1/models` | Models that are turned on |
 | `POST /v1/chat/completions` | Chat, including streaming |
 | `POST /v1/images/generations` | Image models |
@@ -163,7 +163,7 @@ npm run dev:desktop
 | `packages/cli` | npm package that launches the server and opens the panel |
 | `packages/sse` | Parser for OpenAI server-sent chat streams |
 
-The version in the root `package.json` is the release version. Pushing `main` with a higher version builds the desktop archives, publishes `airoute` to npm and `@foisalislambd/airoute` to GitHub Packages, and creates the GitHub release. A commit message that contains `skip release` skips that.
+The version in the root `package.json` is the release version. Pushing `main` with a higher version builds the desktop archives, publishes `wowrouter` and `airoute` to npm, publishes `@foisalislambd/wowrouter` and `@foisalislambd/airoute` to GitHub Packages, pushes the Docker image under both names, and creates the GitHub release. A commit message that contains `skip release` skips that.
 
 ## Contributing
 
@@ -171,4 +171,4 @@ Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) be
 
 ## License
 
-AIRoute is [MIT](LICENSE) licensed. Copyright 2026 foisalislambd.
+WowRouter is [MIT](LICENSE) licensed. Copyright 2026 foisalislambd.

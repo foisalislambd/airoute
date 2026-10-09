@@ -25,8 +25,8 @@ func setTrayStart(on bool) {
 func runTray(startWithWindows bool, onOpen func() error, onStart func(bool), onQuit func(), errs <-chan error) {
 	systray.Run(func() {
 		systray.SetIcon(trayIcon())
-		systray.SetTooltip("AIRoute is running in the background")
-		openItem := systray.AddMenuItem("Open", "Open the AIRoute window")
+		systray.SetTooltip("WowRouter is running in the background")
+		openItem := systray.AddMenuItem("Open", "Open the WowRouter window")
 		startItem := systray.AddMenuItemCheckbox("Start with Windows", "Run the router at login", startWithWindows)
 		quitItem := systray.AddMenuItem("Quit", "Stop the router")
 		trayMu.Lock()

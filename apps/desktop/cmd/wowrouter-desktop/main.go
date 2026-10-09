@@ -31,7 +31,7 @@ func main() {
 	switch mode {
 	case "ui":
 		if !app.Probe(address) {
-			err = errors.New("AIRoute is not running.")
+			err = errors.New("WowRouter is not running.")
 			break
 		}
 		err = openWindow("http://" + address)
@@ -51,8 +51,10 @@ func main() {
 }
 
 func listenAddr() string {
-	if value := strings.TrimSpace(os.Getenv("AIROUTE_ADDR")); value != "" {
-		return value
+	for _, key := range []string{"WOWROUTER_ADDR", "AIROUTE_ADDR"} {
+		if value := strings.TrimSpace(os.Getenv(key)); value != "" {
+			return value
+		}
 	}
 	return "127.0.0.1:8787"
 }
@@ -95,7 +97,7 @@ func runAgent(address string, openUI bool) error {
 			return nil
 		}
 		if !waitReady(address) {
-			return errors.New("AIRoute is already starting, but it did not become ready.")
+			return errors.New("WowRouter is already starting, but it did not become ready.")
 		}
 		return openWindow("http://" + address)
 	}

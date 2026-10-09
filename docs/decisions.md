@@ -64,7 +64,7 @@ The response is shown as text on the page.
 | Upstage Solar Decide | System One. The router adds `/systemone` to the base URL |
 | Inception Mercury Decide | System One |
 | Respan, Jared Palmer | No public base URL is built in. Paste a System One base URL on the provider page |
-| Together Tev | Not System One. AIRoute turns one question into a short chat call and reads a single option letter back |
+| Together Tev | Not System One. WowRouter turns one question into a short chat call and reads a single option letter back |
 
 Tev accepts one question per request, with 2 to 24 options. A yes/no question becomes yes and no. Tev returns the letter it chose. It does not return a calibrated probability. If the reply names two different known letters, the answer is left empty.
 

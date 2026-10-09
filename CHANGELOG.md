@@ -2,9 +2,14 @@
 
 Versions follow the `version` field in the root `package.json`. Releases are published from `main`.
 
+## Unreleased
+
+- The product name is WowRouter. npm, Docker Hub, and GitHub Packages still publish `airoute`, and they also publish `wowrouter`.
+- Existing data stays in the `airoute-router` folder, in `airoute.db`. Router keys still start with `sk-airoute-`.
+
 ## 1.1.2
 
-- Run AIRoute with Docker. The image is `foisalislambd/airoute` on Docker Hub and `ghcr.io/foisalislambd/airoute` on GitHub.
+- Run WowRouter with Docker. The image is `foisalislambd/airoute` on Docker Hub and `ghcr.io/foisalislambd/airoute` on GitHub.
 - The container listens on port 8787. Data is stored in `/data`.
 
 ## 1.1.0

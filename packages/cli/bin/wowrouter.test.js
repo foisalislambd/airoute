@@ -1,6 +1,6 @@
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { parseArgs, urls } = require("./airoute.js");
+const { parseArgs, urls } = require("./wowrouter.js");
 
 test("default command starts and opens the panel", () => {
   const opts = parseArgs([]);

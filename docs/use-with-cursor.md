@@ -1,10 +1,10 @@
 # Use with Cursor
 
-Cursor talks to AIRoute the same way it talks to OpenAI. You change two settings. The models themselves still come from the providers you turned on in the panel.
+Cursor talks to WowRouter the same way it talks to OpenAI. You change two settings. The models themselves still come from the providers you turned on in the panel.
 
 ## Before you open Cursor
 
-1. AIRoute is running. `http://127.0.0.1:8787/health` shows `"service": "airoute"`.
+1. WowRouter is running. `http://127.0.0.1:8787/health` shows `"service": "wowrouter"`.
 2. The provider key is saved and the model is on. Confirm that in the [panel](panel.md).
 3. You have a router key from **API keys**. It starts with `sk-airoute-`.
 
@@ -18,7 +18,7 @@ Cursor talks to AIRoute the same way it talks to OpenAI. You change two settings
 
 The base URL includes `/v1`. Cursor adds `/chat/completions` itself. If you paste only `http://127.0.0.1:8787`, chat calls miss the router.
 
-Use the provider's key only inside the AIRoute panel. Cursor should hold the router key, not the OpenAI or Anthropic key.
+Use the provider's key only inside the WowRouter panel. Cursor should hold the router key, not the OpenAI or Anthropic key.
 
 ## Model ids
 
@@ -59,7 +59,7 @@ Image and video models use their own paths too. Those are listed in the [API](ap
 
 ## When Cursor says the request failed
 
-- Connection refused: AIRoute is stopped. Start it with `airoute` or the desktop app.
+- Connection refused: WowRouter is stopped. Start it with `wowrouter` or the desktop app.
 - Unauthorized: the router key is missing, wrong, or deleted. Create a new one on **API keys**.
 - Model not found: the id is wrong, or that model is off.
 - Provider error: the provider rejected its own key. Open the provider page and test the connection.

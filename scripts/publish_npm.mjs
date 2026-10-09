@@ -17,8 +17,8 @@ if (!owner || !repo || !token) {
 
 const pkg = JSON.parse(readFileSync(path.join(cli, "package.json"), "utf8"));
 const version = pkg.version;
-if (pkg.name !== "airoute") {
-  console.error(`packages/cli must publish as airoute, got ${pkg.name}`);
+if (pkg.name !== "wowrouter") {
+  console.error(`packages/cli must publish as wowrouter, got ${pkg.name}`);
   process.exit(1);
 }
 if (!existsSync(path.join(cli, "panel", "index.html"))) {
@@ -42,7 +42,7 @@ function runInherit(args, cwd, env) {
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 
-async function npmToken() {
+async function npmToken(packageName) {
   const requestUrl = process.env.ACTIONS_ID_TOKEN_REQUEST_URL || "";
   const requestToken = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || "";
   if (!requestUrl || !requestToken) {
@@ -59,7 +59,7 @@ async function npmToken() {
     console.error(`GitHub refused the OIDC token (${idResponse.status}).`);
     process.exit(1);
   }
-  const exchange = await fetch("https://registry.npmjs.org/-/npm/v1/oidc/token/exchange/package/airoute", {
+  const exchange = await fetch(`https://registry.npmjs.org/-/npm/v1/oidc/token/exchange/package/${packageName}`, {
     method: "POST",
     headers: { Accept: "application/json", Authorization: `Bearer ${idBody.value}` },
   });
@@ -67,7 +67,7 @@ async function npmToken() {
   if (!exchange.ok) {
     console.error(`npm trusted publisher rejected the release (${exchange.status}).`);
     console.error(text.slice(0, 500));
-    console.error("On https://www.npmjs.com/package/airoute/access add Trusted Publisher: user foisalislambd, repository airoute, workflow filename release.yml, environment blank, allowed action npm publish.");
+    console.error(`On https://www.npmjs.com/package/${packageName}/access add Trusted Publisher: user foisalislambd, repository airoute, workflow filename release.yml, environment blank, allowed action npm publish.`);
     process.exit(1);
   }
   const payload = JSON.parse(text);
@@ -97,57 +97,83 @@ function missing(spec, registry, env) {
   fail(result);
 }
 
-if (missing(`airoute@${version}`, "https://registry.npmjs.org", publicEnv)) {
-  const tokenFile = path.join(tmpdir(), `airoute-npm-${process.pid}.npmrc`);
-  const publishToken = await npmToken();
+async function publishNpm(packageName, cwd) {
+  if (!missing(`${packageName}@${version}`, "https://registry.npmjs.org", publicEnv)) {
+    console.log(`${packageName}@${version} is already on npm`);
+    return;
+  }
+  const tokenFile = path.join(tmpdir(), `${packageName}-npm-${process.pid}.npmrc`);
+  const publishToken = await npmToken(packageName);
   writeFileSync(tokenFile, `//registry.npmjs.org/:_authToken=${publishToken}\n`);
   try {
-    runInherit(["publish", "--access", "public"], cli, {
+    runInherit(["publish", "--access", "public"], cwd, {
       ...publicEnv,
       NPM_CONFIG_USERCONFIG: tokenFile,
     });
   } finally {
     rmSync(tokenFile, { force: true });
   }
-  console.log(`published airoute@${version} to npm`);
-} else {
-  console.log(`airoute@${version} is already on npm`);
+  console.log(`published ${packageName}@${version} to npm`);
 }
 
-const stage = mkdtempSync(path.join(tmpdir(), "airoute-gh-"));
-try {
+function stagePackage(packageName) {
+  const stage = mkdtempSync(path.join(tmpdir(), `${packageName}-npm-`));
   cpSync(cli, stage, {
     recursive: true,
     filter: (src) => path.basename(src) !== "node_modules",
   });
   const stagedPath = path.join(stage, "package.json");
   const staged = JSON.parse(readFileSync(stagedPath, "utf8"));
-  staged.name = `@${owner}/airoute`;
-  staged.repository = {
-    type: "git",
-    url: `https://github.com/${repo}.git`,
-  };
-  staged.publishConfig = {
-    registry: "https://npm.pkg.github.com",
-    access: "public",
-  };
+  staged.name = packageName;
   writeFileSync(stagedPath, `${JSON.stringify(staged, null, 2)}\n`);
-  writeFileSync(
-    path.join(stage, ".npmrc"),
-    `@${owner}:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}\n`,
-  );
-  const ghEnv = {
-    ...process.env,
-    NODE_AUTH_TOKEN: token,
-    NPM_CONFIG_USERCONFIG: path.join(stage, ".npmrc"),
-  };
-  const spec = `@${owner}/airoute@${version}`;
-  if (missing(spec, "https://npm.pkg.github.com", ghEnv)) {
-    runInherit(["publish", "--access", "public"], stage, ghEnv);
-    console.log(`published ${spec} to GitHub Packages`);
-  } else {
-    console.log(`${spec} is already on GitHub Packages`);
-  }
+  return stage;
+}
+
+await publishNpm("wowrouter", cli);
+
+const airouteStage = stagePackage("airoute");
+try {
+  await publishNpm("airoute", airouteStage);
 } finally {
-  rmSync(stage, { recursive: true, force: true });
+  rmSync(airouteStage, { recursive: true, force: true });
+}
+
+for (const packageName of ["wowrouter", "airoute"]) {
+  const stage = mkdtempSync(path.join(tmpdir(), `${packageName}-gh-`));
+  try {
+    cpSync(cli, stage, {
+      recursive: true,
+      filter: (src) => path.basename(src) !== "node_modules",
+    });
+    const stagedPath = path.join(stage, "package.json");
+    const staged = JSON.parse(readFileSync(stagedPath, "utf8"));
+    staged.name = `@${owner}/${packageName}`;
+    staged.repository = {
+      type: "git",
+      url: `https://github.com/${repo}.git`,
+    };
+    staged.publishConfig = {
+      registry: "https://npm.pkg.github.com",
+      access: "public",
+    };
+    writeFileSync(stagedPath, `${JSON.stringify(staged, null, 2)}\n`);
+    writeFileSync(
+      path.join(stage, ".npmrc"),
+      `@${owner}:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}\n`,
+    );
+    const ghEnv = {
+      ...process.env,
+      NODE_AUTH_TOKEN: token,
+      NPM_CONFIG_USERCONFIG: path.join(stage, ".npmrc"),
+    };
+    const spec = `@${owner}/${packageName}@${version}`;
+    if (missing(spec, "https://npm.pkg.github.com", ghEnv)) {
+      runInherit(["publish", "--access", "public"], stage, ghEnv);
+      console.log(`published ${spec} to GitHub Packages`);
+    } else {
+      console.log(`${spec} is already on GitHub Packages`);
+    }
+  } finally {
+    rmSync(stage, { recursive: true, force: true });
+  }
 }

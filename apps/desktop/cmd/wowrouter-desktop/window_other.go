@@ -24,6 +24,6 @@ func openWindow(url string) error {
 	if err := cmd.Start(); err != nil {
 		return err
 	}
-	fmt.Println("AIRoute is open at", url)
+	fmt.Println("WowRouter is open at", url)
 	select {}
 }

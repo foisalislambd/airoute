@@ -1,6 +1,6 @@
 services:
-  airoute:
-    image: airoute:local
+  wowrouter:
+    image: wowrouter:local
     build: .
     ports:
       - "127.0.0.1:8787:8787"

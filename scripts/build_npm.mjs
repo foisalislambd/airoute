@@ -16,10 +16,10 @@ const panel = spawnSync(npm, ["run", "build:panel"], { cwd: root, stdio: "inheri
 if (panel.status !== 0) process.exit(panel.status ?? 1);
 
 const targets = [
-  ["windows", "amd64", "win32-x64", "airoute.exe"],
-  ["linux", "amd64", "linux-x64", "airoute"],
-  ["darwin", "amd64", "darwin-x64", "airoute"],
-  ["darwin", "arm64", "darwin-arm64", "airoute"],
+  ["windows", "amd64", "win32-x64", "wowrouter.exe"],
+  ["linux", "amd64", "linux-x64", "wowrouter"],
+  ["darwin", "amd64", "darwin-x64", "wowrouter"],
+  ["darwin", "arm64", "darwin-arm64", "wowrouter"],
 ];
 
 const vendor = path.join(pkgDir, "vendor");
@@ -28,7 +28,7 @@ for (const [goos, goarch, folder, name] of targets) {
   const dir = path.join(vendor, folder);
   mkdirSync(dir, { recursive: true });
   const out = path.join(dir, name);
-  const build = spawnSync("go", ["build", "-trimpath", "-ldflags", "-s -w", "-o", out, "./apps/server/cmd/airoute"], {
+  const build = spawnSync("go", ["build", "-trimpath", "-ldflags", "-s -w", "-o", out, "./apps/server/cmd/wowrouter"], {
     cwd: root,
     stdio: "inherit",
     env: { ...process.env, CGO_ENABLED: "0", GOOS: goos, GOARCH: goarch },
@@ -40,4 +40,4 @@ for (const [goos, goarch, folder, name] of targets) {
 const panelOut = path.join(pkgDir, "panel");
 rmSync(panelOut, { recursive: true, force: true });
 cpSync(path.join(root, "apps", "panel", "dist"), panelOut, { recursive: true });
-console.log(`airoute npm package ${version} is in packages/cli`);
+console.log(`wowrouter npm package ${version} is in packages/cli`);

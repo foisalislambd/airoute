@@ -9,7 +9,7 @@ Authorization: Bearer sk-airoute-...
 
 Create the bearer key in the panel under **API keys**. Provider keys stay in the panel. Do not send those to this API.
 
-`GET /health` is the exception. It needs no key. It answers `{"service":"airoute","status":"ok"}` when this process is AIRoute.
+`GET /health` is the exception. It needs no key. It answers `{"service":"wowrouter","status":"ok"}` when this process is WowRouter. An older process may still answer `"service":"airoute"`.
 
 ## List models
 
@@ -65,7 +65,7 @@ Decision models do not use chat completions. They use `POST /v1/systemone`. The 
 
 | What you see | What to do |
 | --- | --- |
-| Connection refused | Start AIRoute |
+| Connection refused | Start WowRouter |
 | 401 unauthorized | Send a current `sk-airoute-` key |
 | Model not found, or not active | Turn the model on, and check the public id |
 | Wrong endpoint, mentions `/v1/systemone` | This model is a decision model |

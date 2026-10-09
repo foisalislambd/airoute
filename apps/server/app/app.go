@@ -71,7 +71,7 @@ func Run(ctx context.Context, opt Options) error {
 	if err != nil {
 		return err
 	}
-	log.Printf("AIRoute listening on http://%s", opt.Addr)
+	log.Printf("WowRouter listening on http://%s", opt.Addr)
 	log.Printf("data directory: %s", opt.DataDir)
 	if webDir == "" {
 		log.Printf("panel build not found; API is up, UI will come from the Vite dev server")
@@ -109,7 +109,7 @@ func validateListenAddr(addr string) error {
 	if strings.EqualFold(host, "localhost") {
 		return nil
 	}
-	if os.Getenv("AIROUTE_IN_DOCKER") == "1" && (host == "0.0.0.0" || host == "::") {
+	if (os.Getenv("WOWROUTER_IN_DOCKER") == "1" || os.Getenv("AIROUTE_IN_DOCKER") == "1") && (host == "0.0.0.0" || host == "::") {
 		return nil
 	}
 	ip := net.ParseIP(host)
@@ -168,5 +168,5 @@ func WaitHealthy(addr string) error {
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
-	return fmt.Errorf("AIRoute did not start on %s", addr)
+	return fmt.Errorf("WowRouter did not start on %s", addr)
 }

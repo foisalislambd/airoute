@@ -28,7 +28,7 @@ export function PanelSidebar() {
       className={`fixed top-0 left-0 z-50 flex h-dvh flex-col border-r border-gray-200 bg-white transition-[width,transform] duration-300 ease-in-out dark:border-gray-800 dark:bg-gray-900 ${
         isMobileOpen ? "translate-x-0" : "-translate-x-full"
       } lg:translate-x-0`}
-      aria-label="AIRoute navigation"
+      aria-label="WowRouter navigation"
       aria-hidden={mobileClosed || undefined}
       inert={mobileClosed || undefined}
     >

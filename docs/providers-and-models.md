@@ -1,6 +1,6 @@
 # Providers and models
 
-A provider is an account you already have: OpenAI, Anthropic, a gateway, a local server, and so on. A model is one entry under that provider. AIRoute does not sell model access. It forwards a call after you save the provider's key and turn the model on.
+A provider is an account you already have: OpenAI, Anthropic, a gateway, a local server, and so on. A model is one entry under that provider. WowRouter does not sell model access. It forwards a call after you save the provider's key and turn the model on.
 
 ## Turn a model on
 
@@ -39,7 +39,7 @@ Examples:
 | `openai/gpt-4o-mini` | OpenAI's GPT-4o mini |
 | `anthropic/claude-...` | that Claude model, if it is in the catalog and turned on |
 
-The slug is the last part of the provider page address, `/providers/openai`. The upstream id is the name the provider itself uses. The panel shows both. AIRoute strips the slug before it calls the provider.
+The slug is the last part of the provider page address, `/providers/openai`. The upstream id is the name the provider itself uses. The panel shows both. WowRouter strips the slug before it calls the provider.
 
 ## Empty lists
 
@@ -68,7 +68,7 @@ Some providers are listed but marked unsupported. Those rows are there so you ca
 
 ## Fallback
 
-**Fallback** is a named chain of chat models. The public id looks like `fallback/your-name`. If the first model fails, AIRoute tries the next.
+**Fallback** is a named chain of chat models. The public id looks like `fallback/your-name`. If the first model fails, WowRouter tries the next.
 
 Every step in a fallback has to be an OpenAI-style chat model. Image, video, and decision models cannot sit in the chain. The panel will say so if you add one.
 

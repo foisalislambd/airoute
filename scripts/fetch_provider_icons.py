@@ -94,7 +94,7 @@ def domain(website: str) -> str:
 
 
 def fetch(url: str) -> bytes:
-    request = urllib.request.Request(url, headers={"User-Agent": "AIRoute icon fetch"})
+    request = urllib.request.Request(url, headers={"User-Agent": "WowRouter icon fetch"})
     with urllib.request.urlopen(request, timeout=12, context=CTX) as response:
         data = response.read(1_500_000)
         kind = response.headers.get_content_type()

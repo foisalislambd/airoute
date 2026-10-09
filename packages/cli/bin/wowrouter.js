@@ -38,7 +38,7 @@ function urls(addr) {
 }
 
 function binaryPath() {
-  const name = process.platform === "win32" ? "airoute.exe" : "airoute";
+  const name = process.platform === "win32" ? "wowrouter.exe" : "wowrouter";
   const candidate = path.join(root, "vendor", `${process.platform}-${process.arch}`, name);
   return fs.existsSync(candidate) ? candidate : "";
 }
@@ -49,7 +49,7 @@ async function probe(addr) {
   try {
     const res = await fetch(`http://${addr}/health`, { signal: ctrl.signal });
     const body = await res.json();
-    return res.ok && body.service === "airoute";
+    return res.ok && (body.service === "wowrouter" || body.service === "airoute");
   } catch {
     return false;
   } finally {
@@ -59,7 +59,7 @@ async function probe(addr) {
 
 function printUrls(addr, already) {
   const link = urls(addr);
-  if (already) console.log("AIRoute is already running.");
+  if (already) console.log("WowRouter is already running.");
   console.log(`Panel    ${link.panel}`);
   console.log(`Base URL ${link.api}`);
 }
@@ -74,33 +74,34 @@ function openPanel(panel) {
 }
 
 function help() {
-  console.log(`airoute starts the local router and opens its web panel.
+  console.log(`wowrouter starts the local router and opens its web panel.
+  airoute is the same command.
 
-  airoute                Start and open the panel
-  airoute status         Show whether it is running
-  airoute stop           Stop the router
-  airoute --detach       Start in the background
-  airoute --no-open      Start without opening the browser
-  airoute --addr HOST:PORT
-  airoute --data DIR
+  wowrouter                Start and open the panel
+  wowrouter status         Show whether it is running
+  wowrouter stop           Stop the router
+  wowrouter --detach       Start in the background
+  wowrouter --no-open      Start without opening the browser
+  wowrouter --addr HOST:PORT
+  wowrouter --data DIR
 
 Cursor and other OpenAI clients use the printed base URL.`);
 }
 
 async function stop(addr) {
   if (!(await probe(addr))) {
-    console.log("AIRoute is not running.");
+    console.log("WowRouter is not running.");
     return;
   }
   const res = await fetch(`http://${addr}/api/shutdown`, { method: "POST" });
   if (res.status === 204) {
-    console.log("AIRoute stopped.");
+    console.log("WowRouter stopped.");
     return;
   }
   if (res.status === 404) {
-    throw new Error("This AIRoute is already running, but it cannot be stopped from npm. Quit it from the tray icon.");
+    throw new Error("This WowRouter is already running, but it cannot be stopped from npm. Quit it from the tray icon.");
   }
-  throw new Error(`Could not stop AIRoute (HTTP ${res.status}).`);
+  throw new Error(`Could not stop WowRouter (HTTP ${res.status}).`);
 }
 
 async function start(opts) {
@@ -111,7 +112,7 @@ async function start(opts) {
   }
   const bin = binaryPath();
   if (!bin) {
-    throw new Error(`No AIRoute program is packaged for ${process.platform}-${process.arch}.`);
+    throw new Error(`No WowRouter program is packaged for ${process.platform}-${process.arch}.`);
   }
   const panel = path.join(root, "panel");
   if (!fs.existsSync(path.join(panel, "index.html"))) {
@@ -130,7 +131,7 @@ async function start(opts) {
   ]);
   if (started !== "ready") {
     if (child.exitCode == null) child.kill();
-    throw new Error("AIRoute did not start.");
+    throw new Error("WowRouter did not start.");
   }
   printUrls(opts.addr, false);
   if (opts.open) openPanel(urls(opts.addr).panel);
@@ -140,7 +141,7 @@ async function start(opts) {
   }
   await new Promise((resolve, reject) => {
     child.on("exit", (code) => {
-      if (code) reject(new Error(`AIRoute exited with code ${code}.`));
+      if (code) reject(new Error(`WowRouter exited with code ${code}.`));
       else resolve();
     });
   });
@@ -172,7 +173,7 @@ async function main(argv) {
   }
   if (opts.command === "status") {
     if (await probe(opts.addr)) printUrls(opts.addr, true);
-    else console.log("AIRoute is not running.");
+    else console.log("WowRouter is not running.");
     return;
   }
   if (opts.command === "stop") {

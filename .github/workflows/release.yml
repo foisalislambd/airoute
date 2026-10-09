@@ -88,8 +88,12 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
+            foisalislambd/wowrouter:latest
+            foisalislambd/wowrouter:${{ steps.plan.outputs.version }}
             foisalislambd/airoute:latest
             foisalislambd/airoute:${{ steps.plan.outputs.version }}
+            ghcr.io/foisalislambd/wowrouter:latest
+            ghcr.io/foisalislambd/wowrouter:${{ steps.plan.outputs.version }}
             ghcr.io/foisalislambd/airoute:latest
             ghcr.io/foisalislambd/airoute:${{ steps.plan.outputs.version }}
           labels: |
@@ -115,6 +119,6 @@ jobs:
         run: |
           gh release create "$TAG" \
             --target "$GITHUB_SHA" \
-            --title "AIRoute $TAG" \
+            --title "WowRouter $TAG" \
             --notes-file dist/release/notes.md \
-            dist/release/AIRoute-*.zip
+            dist/release/WowRouter-*.zip

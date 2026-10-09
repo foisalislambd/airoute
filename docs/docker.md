@@ -1,23 +1,23 @@
 # Docker
 
-The Docker image is this router and the web panel. It is published as [foisalislambd/airoute](https://hub.docker.com/r/foisalislambd/airoute) and as `ghcr.io/foisalislambd/airoute`.
+The Docker image is this router and the web panel. It is published as [foisalislambd/wowrouter](https://hub.docker.com/r/foisalislambd/wowrouter) and as `ghcr.io/foisalislambd/wowrouter`. The same image is also [foisalislambd/airoute](https://hub.docker.com/r/foisalislambd/airoute) and `ghcr.io/foisalislambd/airoute`.
 
 The older image on that Docker Hub page used port `20128` and a separate `latest-web` tag. This image listens on port `8787`. There is no browser or cookie image. Use `latest` or a version tag such as `1.1.2`.
 
 ## Start
 
 ```bash
-docker run -d --name airoute \
+docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
-  -v airoute-data:/data \
-  foisalislambd/airoute:latest
+  -v wowrouter-data:/data \
+  foisalislambd/wowrouter:latest
 ```
 
-Open `http://127.0.0.1:8787`. Point Cursor at `http://127.0.0.1:8787/v1`.
+`foisalislambd/airoute:latest` is the same image. Open `http://127.0.0.1:8787`. Point Cursor at `http://127.0.0.1:8787/v1`.
 
 `127.0.0.1:8787:8787` means only this computer can open the panel. Inside the container the server listens on all interfaces, which is what Docker needs in order to publish the port. Do not publish it as `8787:8787` unless you want every machine on your network to reach the panel. The panel has no login.
 
-From the repo, Compose builds the local source and names that image `airoute:local`. It does not pull the published `latest` tag.
+From the repo, Compose builds the local source and names that image `wowrouter:local`. It does not pull the published `latest` tag. The Compose volume stays `airoute-data`, so a stack you already started keeps its keys.
 
 ```bash
 docker compose up -d --build
@@ -28,32 +28,32 @@ docker compose up -d --build
 The volume `/data` holds `airoute.db` and `secret.key`. It is not the same folder as `%AppData%\airoute-router`. Keys you saved in the desktop app are not inside the container until you copy those two files into the volume.
 
 ```bash
-docker stop airoute
-docker rm airoute
+docker stop wowrouter
+docker rm wowrouter
 ```
 
-Removing the container does not delete the volume. `docker volume rm airoute-data` does.
+Removing the container does not delete the volume. `docker volume rm wowrouter-data` does. A volume created earlier under the name `airoute-data` is still there until you remove it.
 
 ## Updates
 
 ```bash
-docker pull foisalislambd/airoute:latest
-docker rm -f airoute
-docker run -d --name airoute \
+docker pull foisalislambd/wowrouter:latest
+docker rm -f wowrouter
+docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
   -v airoute-data:/data \
-  foisalislambd/airoute:latest
+  foisalislambd/wowrouter:latest
 ```
 
-Keep the same volume name so the keys stay.
+Use the volume the container already has. An install that started with `airoute-data` must keep `airoute-data`. A new volume name is empty, so the panel looks like a first run even though the old keys are still in the old volume.
 
 ## GitHub's copy
 
 ```bash
-docker pull ghcr.io/foisalislambd/airoute:latest
+docker pull ghcr.io/foisalislambd/wowrouter:latest
 ```
 
-Pulling from GitHub Container Registry can ask you to log in even when the image is public. Docker Hub does not.
+`ghcr.io/foisalislambd/airoute` is the same image. Pulling from GitHub Container Registry can ask you to log in even when the image is public. Docker Hub does not.
 
 ## Tags
 

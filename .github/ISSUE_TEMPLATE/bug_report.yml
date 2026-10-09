@@ -1,5 +1,5 @@
 name: Bug report
-description: Something in AIRoute failed
+description: Something in WowRouter failed
 title: "[Bug] "
 labels: ["bug"]
 body:
@@ -20,7 +20,7 @@ body:
     attributes:
       label: Steps to repeat it
       placeholder: |
-        1. Start AIRoute
+        1. Start WowRouter
         2. Open the panel
         3. ...
     validations:
@@ -28,8 +28,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: AIRoute version
-      description: The version from package.json, the release, or `npm list -g airoute`.
+      label: WowRouter version
+      description: The version from package.json, the release, or `npm list -g wowrouter`.
       placeholder: 1.1.0
     validations:
       required: true

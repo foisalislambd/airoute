@@ -1,6 +1,6 @@
 # Your data
 
-AIRoute keeps everything it needs in one folder on your computer. Provider keys, the router-key hashes, the call log, and desktop settings are in that folder. They are not uploaded by the app.
+WowRouter keeps everything it needs in one folder on your computer. Provider keys, the router-key hashes, the call log, and desktop settings are in that folder. They are not uploaded by the app.
 
 ## Where the folder is
 
@@ -12,7 +12,7 @@ AIRoute keeps everything it needs in one folder on your computer. Provider keys,
 
 On Windows you can paste `%AppData%\airoute-router` into Explorer. The panel's Settings page also shows the path.
 
-The npm command and the desktop app share this folder when you do not pass another one. That means keys you save in the desktop app are the keys the `airoute` command uses, and the other way around.
+The npm command and the desktop app share this folder when you do not pass another one. That means keys you save in the desktop app are the keys the `wowrouter` command uses, and the other way around. `airoute` uses this folder too.
 
 ## Files
 
@@ -30,7 +30,7 @@ Provider keys can be decrypted only with the `secret.key` that was present when 
 ## Choose a different folder
 
 ```bash
-airoute --data D:\airoute-data
+wowrouter --data D:\airoute-data
 ```
 
 The desktop app uses the default folder. A custom `--data` folder is a separate router: its own keys, its own log.
@@ -39,7 +39,7 @@ The desktop app uses the default folder. A custom `--data` folder is a separate 
 
 Stopping the router and deleting the folder wipes keys, logs, and the Windows startup preference. Export or copy the folder first if you still want those keys.
 
-Moving the folder is safe when `airoute.db` and `secret.key` move together, and you then start AIRoute with `--data` pointed at the new folder. The desktop app will keep using the default location until you copy the files back there.
+Moving the folder is safe when `airoute.db` and `secret.key` move together, and you then start WowRouter with `--data` pointed at the new folder. The desktop app will keep using the default location until you copy the files back there.
 
 ## What stays on this computer
 

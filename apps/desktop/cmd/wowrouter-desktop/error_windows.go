@@ -19,7 +19,7 @@ func showError(err error) {
 	}
 	log.Print(err)
 	text, textErr := syscall.UTF16PtrFromString(err.Error())
-	title, titleErr := syscall.UTF16PtrFromString("AIRoute")
+	title, titleErr := syscall.UTF16PtrFromString("WowRouter")
 	if textErr != nil || titleErr != nil {
 		return
 	}

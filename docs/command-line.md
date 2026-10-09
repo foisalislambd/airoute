@@ -1,9 +1,9 @@
 # Command line
 
-The `airoute` command comes from `npm install -g airoute`. It starts the local router and can open the panel in your browser.
+The `wowrouter` command comes from `npm install -g wowrouter`. `airoute` is the same command from the `airoute` package. It starts the local router and can open the panel in your browser.
 
 ```bash
-airoute
+wowrouter
 ```
 
 You should see two lines:
@@ -19,31 +19,31 @@ The panel is for you. The base URL is for Cursor and scripts.
 
 | Command | What happens |
 | --- | --- |
-| `airoute` | Start in this terminal and open the panel |
-| `airoute --detach` | Start in the background and open the panel |
-| `airoute --no-open` | Start, and leave the browser alone |
-| `airoute status` | Print the URLs if it is running, or say it is not |
-| `airoute stop` | Shut the local router down |
-| `airoute --help` | Print the short command list |
+| `wowrouter` | Start in this terminal and open the panel |
+| `wowrouter --detach` | Start in the background and open the panel |
+| `wowrouter --no-open` | Start, and leave the browser alone |
+| `wowrouter status` | Print the URLs if it is running, or say it is not |
+| `wowrouter stop` | Shut the local router down |
+| `wowrouter --help` | Print the short command list |
 
 You can combine flags:
 
 ```bash
-airoute --detach --no-open
-airoute status --addr 127.0.0.1:8787
+wowrouter --detach --no-open
+wowrouter status --addr 127.0.0.1:8787
 ```
 
 ## Already running
 
-If something is already answering on that port and it is AIRoute, the command does not start a second copy. It prints the URLs. With the default start command, it also opens the panel.
+If something is already answering on that port and it is WowRouter, the command does not start a second copy. It prints the URLs. With the default start command, it also opens the panel. A process that still reports `"service":"airoute"` counts as the same router.
 
-`airoute stop` works on a router started by this npm package. If you are running an older desktop build that has no shutdown button in the API, quit that one from the tray icon instead. See [Desktop](desktop.md).
+`wowrouter stop` works on a router started by this npm package. If you are running an older desktop build that has no shutdown button in the API, quit that one from the tray icon instead. See [Desktop](desktop.md).
 
 ## Another port or folder
 
 ```bash
-airoute --addr 127.0.0.1:8790
-airoute --data D:\airoute-data
+wowrouter --addr 127.0.0.1:8790
+wowrouter --data D:\airoute-data
 ```
 
 `--addr` must stay on this computer. `127.0.0.1`, `localhost`, and `::1` are accepted. A LAN address is rejected.
