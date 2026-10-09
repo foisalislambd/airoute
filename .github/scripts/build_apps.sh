@@ -53,5 +53,5 @@ The app listens on \`127.0.0.1:8787\`. Data stays in the local airoute-router fo
 
 Install the same version from npm with \`npm install -g wowrouter\`, then run \`wowrouter\`. \`npm install -g airoute\` and the \`airoute\` command are the same program. GitHub Packages has \`@foisalislambd/wowrouter\` and \`@foisalislambd/airoute\`.
 
-Docker: \`docker run -d --name wowrouter -p 127.0.0.1:8787:8787 -v wowrouter-data:/data foisalislambd/wowrouter:latest\`. The same image is \`foisalislambd/airoute\`, \`ghcr.io/foisalislambd/wowrouter\`, and \`ghcr.io/foisalislambd/airoute\`. The panel is at http://127.0.0.1:8787.
+Docker: \`docker run -d --name wowrouter -p 127.0.0.1:8787:8787 -v wowrouter:/data foisalislambd/wowrouter:latest\`. The same image is \`foisalislambd/airoute\`, \`ghcr.io/foisalislambd/wowrouter\`, and \`ghcr.io/foisalislambd/airoute\`. The panel is at http://127.0.0.1:8787.
 EOF

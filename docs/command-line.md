@@ -43,7 +43,7 @@ If something is already answering on that port and it is WowRouter, the command 
 
 ```bash
 wowrouter --addr 127.0.0.1:8790
-wowrouter --data D:\airoute-data
+wowrouter --data D:\wowrouter
 ```
 
 `--addr` must stay on this computer. `127.0.0.1`, `localhost`, and `::1` are accepted. A LAN address is rejected.

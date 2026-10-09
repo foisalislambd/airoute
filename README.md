@@ -31,7 +31,7 @@ Docker uses the same panel and API. The host port stays on this computer:
 ```bash
 docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
-  -v wowrouter-data:/data \
+  -v wowrouter:/data \
   foisalislambd/wowrouter:latest
 ```
 

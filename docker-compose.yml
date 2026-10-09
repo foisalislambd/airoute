@@ -5,8 +5,8 @@ services:
     ports:
       - "127.0.0.1:8787:8787"
     volumes:
-      - airoute-data:/data
+      - wowrouter:/data
     restart: unless-stopped
 
 volumes:
-  airoute-data:
+  wowrouter:

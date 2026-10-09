@@ -9,7 +9,7 @@ The older image on that Docker Hub page used port `20128` and a separate `latest
 ```bash
 docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
-  -v wowrouter-data:/data \
+  -v wowrouter:/data \
   foisalislambd/wowrouter:latest
 ```
 
@@ -17,7 +17,7 @@ docker run -d --name wowrouter \
 
 `127.0.0.1:8787:8787` means only this computer can open the panel. Inside the container the server listens on all interfaces, which is what Docker needs in order to publish the port. Do not publish it as `8787:8787` unless you want every machine on your network to reach the panel. The panel has no login.
 
-From the repo, Compose builds the local source and names that image `wowrouter:local`. It does not pull the published `latest` tag. The Compose volume stays `airoute-data`, so a stack you already started keeps its keys.
+From the repo, Compose builds the local source and names that image `wowrouter:local`. It does not pull the published `latest` tag. The Compose volume is `wowrouter`.
 
 ```bash
 docker compose up -d --build
@@ -32,7 +32,7 @@ docker stop wowrouter
 docker rm wowrouter
 ```
 
-Removing the container does not delete the volume. `docker volume rm wowrouter-data` does. A volume created earlier under the name `airoute-data` is still there until you remove it.
+Removing the container does not delete the volume. `docker volume rm wowrouter` does.
 
 ## Updates
 
@@ -41,11 +41,11 @@ docker pull foisalislambd/wowrouter:latest
 docker rm -f wowrouter
 docker run -d --name wowrouter \
   -p 127.0.0.1:8787:8787 \
-  -v airoute-data:/data \
+  -v wowrouter:/data \
   foisalislambd/wowrouter:latest
 ```
 
-Use the volume the container already has. An install that started with `airoute-data` must keep `airoute-data`. A new volume name is empty, so the panel looks like a first run even though the old keys are still in the old volume.
+Keep the volume name `wowrouter` so the keys stay.
 
 ## GitHub's copy
 

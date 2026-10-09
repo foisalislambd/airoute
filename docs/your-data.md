@@ -30,7 +30,7 @@ Provider keys can be decrypted only with the `secret.key` that was present when 
 ## Choose a different folder
 
 ```bash
-wowrouter --data D:\airoute-data
+wowrouter --data D:\wowrouter
 ```
 
 The desktop app uses the default folder. A custom `--data` folder is a separate router: its own keys, its own log.
